@@ -1,4 +1,4 @@
-### Hi there 👋
+StacksBoard tools and reports for the Stacks (STX) ecosystem
 
 <!--
 **StacksBoard/StacksBoard** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
