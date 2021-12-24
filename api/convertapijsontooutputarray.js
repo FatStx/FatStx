@@ -12,29 +12,32 @@ async function convertJsonToOutputArray(json,walletId)
 
 async function addOutputArrayRowsForXactn(outputArray,xactn,walletId)
 {
-    let outputArrayRow=await getOutputArrayRowsSTXIn(xactn,walletId);
-    if (outputArrayRow!=null)
-    {
-        await outputArray.push(outputArrayRow);
-    }
+    let outputArrayRow=await getOutputArrayRowsSTX(xactn,walletId);
+    outputArray=await pushStacksBoardXactnToArray(outputArray,outputArrayRow);
+
+    //outputArrayRow=await getOutputArrayRowsSTXOut(xactn,walletId);
+    //outputArray=await pushStacksBoardXactnToArray(outputArray,outputArrayRow);
+
     return outputArray;
 }
 
-async function getOutputArrayRowsSTXIn(xactn,walletId)
+async function getOutputArrayRowsSTX(xactn,walletId)
 {
     let outputArrayRow=null;
-    if(xactn.stx_received>0)
+    if(xactn.stx_received>0 || xactn.stx_sent>0)
     {
         outputArrayRow=
         {
             burnDate: xactn.tx.burn_block_time_iso,
-            xactnDirection: "in",
-            coinSymbol: 'STX',
-            xactnId: xactn.tx.tx_id,
-            coinQuantity:xactn.stx_received,
-            coinPrice: getSTXCoinPrice('STX',xactn.tx.burn_block_time_iso),
-            xactnType: "stacking income", //TODO: Not hardcoded
-            xactnFee: await getXactnFee(xactn,walletId)
+            inSymbol: 'STX',
+            inAmount:xactn.stx_received,
+            outSymbol: 'STX',
+            outAmount: xactn.stx_sent,
+            xactnFee: await getXactnFee(xactn,walletId),
+            inCoinPrice: await getSTXCoinPrice('STX',xactn.tx.burn_block_time_iso),
+            outCoinPrice: await getSTXCoinPrice('STX',xactn.tx.burn_block_time_iso),
+            xactnType: 'TBD',
+            xactnId: xactn.tx.tx_id
         };
     };
     return outputArrayRow;
@@ -50,11 +53,11 @@ async function getOutputArrayRowsSTXOut(xactn,walletId)
             burnDate: xactn.tx.burn_block_time_iso,
             xactnDirection: "out",
             coinSymbol: 'STX',
-            xactnId: xactn.tx.tx_id,
             coinQuantity:xactn.stx_sent,
             coinPrice: await getSTXCoinPrice('STX',xactn.tx.burn_block_time_iso),
             xactnType: await getXactnType(xactn,"out"),
-            xactnFee: await getXactnFee(xactn,walletId)
+            xactnFee: await getXactnFee(xactn,walletId),
+            xactnId: xactn.tx.tx_id
         };
     };
     return outputArrayRow;
@@ -65,6 +68,14 @@ async function getXactnType(xactn,xactnDirection)
     if (xactn.stx_sent===xactn.tx.fee_rate)
     {
         return "Xactn Fee";
+    }
+    else if (xactnDirection=="out")
+    {
+        return "Send";
+    }
+    else
+    {
+        return "Receive";
     }
 }
 
@@ -94,6 +105,15 @@ async function getXactnFee(xactn,walletId)
         xactnFee=parseInt(xactn.tx.fee_rate)/1000000;
     }
     return xactnFee;
+}
+
+async function pushStacksBoardXactnToArray(outputArray,outputArrayRow)
+{
+    if (outputArrayRow!=null)
+    {
+        await outputArray.push(outputArrayRow);
+    }
+    return outputArray;
 }
 
 //**************Just used by us to get coin history data, not real time.
