@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import './index.css';
-import Dashboard from './views/Dashboard';
+import StacksBoard from './views/StacksBoard';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Dashboard />
+    <StacksBoard />
   </React.StrictMode>,
   document.getElementById('root')
 );

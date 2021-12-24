@@ -12,7 +12,7 @@ export const mainListItems = (
       <ListItemIcon>
         <MonetizationOnIcon />
       </ListItemIcon>
-      <ListItemText primary="Taxes" />
+      <ListItemText primary="Transactions" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>

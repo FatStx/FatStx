@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Route } from 'react-router-dom';
 
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,18 +11,16 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 
 import { mainListItems } from '../components/LeftMenu';
-import Orders from '../components/Orders';
 
-
+import Routes from '../components/Routes';
+import LeftMenu from '../components/LeftMenu'
+import TxReport from './TxReport'
+import StackingReport from './StackingReport'
+import WenBlok from './WenBlok'
 
 const drawerWidth = 240;
 
@@ -106,10 +105,11 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              STAXES
+              StacksBoard
             </Typography>
           </Toolbar>
         </AppBar>
+        
         <Drawer variant="permanent" open={open}>
           <Toolbar
             sx={{
@@ -126,6 +126,7 @@ function DashboardContent() {
           <Divider />
           <List>{mainListItems}</List>
         </Drawer>
+
         <Box
           component="main"
           sx={{
@@ -139,50 +140,7 @@ function DashboardContent() {
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-
-              {/* Wallet Input */}
-              <Grid item xs={12} md={12} lg={12}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 100,
-                  }}
-                >
-
-                  <Box
-                    component="form"
-                    sx={{
-                      '& .MuiTextField-root': { m: 1, width: '90%' },
-                    }}
-                    noValidate
-                    autoComplete="off"
-                  >
-                    <div>
-                      <TextField
-                        required
-                        id="fullWidth"
-                        label="Wallet Address"
-                        defaultValue="JNF9LKENHIWKEFKN8KLENFWEKNFKWEFKJBWHELBF"
-                      />
-
-                      <Button sx={{mt: 2, ml:2}} variant="contained">Go</Button>
-                    </div>
-                  </Box>
-                </Paper>
-              </Grid>
-
-              {/* Transactions*/}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
-                </Paper>
-              </Grid>
-            </Grid>
-          </Container>
+          <TxReport />
         </Box>
       </Box>
     </ThemeProvider>

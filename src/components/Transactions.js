@@ -64,7 +64,7 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function Orders() {
+export default function Transactions() {
   return (
     <React.Fragment>
       <Title>Transactions</Title>
