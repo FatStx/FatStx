@@ -12,13 +12,55 @@ async function convertJsonToOutputArray(json,walletId)
 
 async function addOutputArrayRowsForXactn(outputArray,xactn,walletId)
 {
+    await getNumberOfRowsForXactn(xactn,walletId);
     let outputArrayRow=await getOutputArrayRowsSTX(xactn,walletId);
     outputArray=await pushStacksBoardXactnToArray(outputArray,outputArrayRow);
 
-    //outputArrayRow=await getOutputArrayRowsSTXOut(xactn,walletId);
-    //outputArray=await pushStacksBoardXactnToArray(outputArray,outputArrayRow);
-
     return outputArray;
+}
+
+async function getNumberOfRowsForXactn(xactn,walletId)
+{
+    //TODO: NFTs IN and OUT
+    await console.log(xactn);
+    //XACTN FEE 
+    let xactnFee=xactn.tx.sender_address==walletId?xactn.tx.fee_rate:0;
+    await console.log(xactnFee);
+
+    //IN
+    let inCtr=0;
+    if (xactn.stx_received>0) inCtr+=1;
+    let numFtCoins= await getNumberOfUniqueFtCoinsForXactn(xactn,walletId,true);
+    inCtr+=numFtCoins;
+    await console.log(inCtr);
+
+    //OUT
+    //TODO: handle when the only STX out is a xactn fee
+    let outCtr=0;
+    if (xactn.stx_sent>0) outCtr+=1;
+    numFtCoins= await getNumberOfUniqueFtCoinsForXactn(xactn,walletId,false);
+    outCtr+=numFtCoins;
+    //If another coin going out besides STX and STX xactn fee is the only STX out, the STX out should not be added to the counter
+    if (outCtr>1 && xactnFee>0 && xactn.stx_sent==xactnFee) outCtr=outCtr-1;
+    await console.log(outCtr);
+
+}
+
+async function getNumberOfUniqueFtCoinsForXactn(xactn,walletId,isIncoming)
+{
+    //Exclude WSTX and only look at transactions for the passed direction
+    let ftTransfers=xactn.ft_transfers.filter(function(item){
+        return (!item.asset_identifier.includes('::wstx') 
+                && item.recipient==(isIncoming?walletId:item.recipient)
+                && item.sender==(isIncoming?item.sender:walletId)
+                );
+    });
+    //Convert the filtered array to just an array of assetIdentifier
+    let uniqueFtCoins=ftTransfers.map(function (obj)
+    {
+        return obj.asset_identifier;
+    })
+    return new Set(uniqueFtCoins).size;
 }
 
 async function getOutputArrayRowsSTX(xactn,walletId)
@@ -37,26 +79,6 @@ async function getOutputArrayRowsSTX(xactn,walletId)
             inCoinPrice: await getSTXCoinPrice('STX',xactn.tx.burn_block_time_iso),
             outCoinPrice: await getSTXCoinPrice('STX',xactn.tx.burn_block_time_iso),
             xactnType: 'TBD',
-            xactnId: xactn.tx.tx_id
-        };
-    };
-    return outputArrayRow;
-}
-
-async function getOutputArrayRowsSTXOut(xactn,walletId)
-{
-    let outputArrayRow=null;
-    if(xactn.stx_sent>0)
-    {
-        outputArrayRow=
-        {
-            burnDate: xactn.tx.burn_block_time_iso,
-            xactnDirection: "out",
-            coinSymbol: 'STX',
-            coinQuantity:xactn.stx_sent,
-            coinPrice: await getSTXCoinPrice('STX',xactn.tx.burn_block_time_iso),
-            xactnType: await getXactnType(xactn,"out"),
-            xactnFee: await getXactnFee(xactn,walletId),
             xactnId: xactn.tx.tx_id
         };
     };
