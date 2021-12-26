@@ -54,6 +54,7 @@ async function getOutputRowsForXactn(xactn,walletId)
 async function getFtCoinTransfersForXactn(xactn,walletId,isIncoming)
 {
     //Exclude WSTX and only look at transactions for the passed direction
+    //NOTE that there *might* be times we have to not exclude WSTX in the future
     let ftTransfers=xactn.ft_transfers.filter(function(item){
 
         return (item.asset_identifier !='SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.wrapped-stx-token::wstx'
@@ -88,9 +89,9 @@ async function getOutputArrayRowSTX(xactn,xactnFee,transferIn,transferOut)
             outSymbol: outSymbol,
             outAmount: transferOut==undefined?0:transferOut.amount,
             xactnFee: xactnFee,
-            inCoinPrice:  "",//transferIn.asset_identifier==undefined? await getSTXCoinPrice('STX',xactn.tx.burn_block_time_iso):'NA',
-            outCoinPrice: "",//transferOut.asset_identifier==undefined? await getSTXCoinPrice('STX',xactn.tx.burn_block_time_iso):'NA',
-            xactnFeeCoinPrice: "",//transferOut.asset_identifier==undefined? await getSTXCoinPrice('STX',xactn.tx.burn_block_time_iso):'NA',
+            inCoinPrice:  '',//transferIn.asset_identifier==undefined? await getSTXCoinPrice('STX',xactn.tx.burn_block_time_iso):'NA',
+            outCoinPrice: '',//transferOut.asset_identifier==undefined? await getSTXCoinPrice('STX',xactn.tx.burn_block_time_iso):'NA',
+            xactnFeeCoinPrice: '',//transferOut.asset_identifier==undefined? await getSTXCoinPrice('STX',xactn.tx.burn_block_time_iso):'NA',
             xactnType: 'TBD',
             xactnId: xactn.tx.tx_id
     };
@@ -102,13 +103,19 @@ async function getTransferSymbol(transferRow)
     let symbol='';
     if (transferRow != undefined){
         if (transferRow.asset_identifier !=undefined){
-            //TODO: correct coin enum if exists
-            symbol=transferRow.asset_identifier
+            let matchingToken= Token.tokens.filter(function(token){return (token.contract==transferRow.asset_identifier)});
+            if (matchingToken.length>0)
+            {
+                symbol=matchingToken[0].symbol;
+            }
+            else
+            {
+                symbol=transferRow.asset_identifier;
+            }
         }
         else
         {
-            //TODO: enum
-            symbol='STX'
+            symbol=STX;
         }
     }
     return symbol;
