@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { Link } from "react-router-dom";
+
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -8,19 +10,19 @@ import TableRowsIcon from '@mui/icons-material/TableRows';
 
 export const mainListItems = (
   <div>
-    <ListItem button>
+    <ListItem button component={Link} to="/">
       <ListItemIcon>
         <MonetizationOnIcon />
       </ListItemIcon>
       <ListItemText primary="Transactions" />
     </ListItem>
-    <ListItem button>
+    <ListItem button component={Link} to="stacking">
       <ListItemIcon>
         <TableRowsIcon />
       </ListItemIcon>
       <ListItemText primary="Stacking" />
     </ListItem>
-    <ListItem button>
+    <ListItem button component={Link} to="wenblok">
       <ListItemIcon>
         <AccessTimeIcon />
       </ListItemIcon>

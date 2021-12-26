@@ -7,7 +7,9 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <StacksBoard />
+    <BrowserRouter>
+      <StacksBoard />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

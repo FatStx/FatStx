@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
 import Transactions from '../components/Transactions';
-import Routes from '../components/Routes';
 
 export default function TxReport() {
   return (

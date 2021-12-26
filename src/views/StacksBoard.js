@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,8 +16,6 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 import { mainListItems } from '../components/LeftMenu';
 
-import Routes from '../components/Routes';
-import LeftMenu from '../components/LeftMenu'
 import TxReport from './TxReport'
 import StackingReport from './StackingReport'
 import WenBlok from './WenBlok'
@@ -140,7 +138,13 @@ function DashboardContent() {
           }}
         >
           <Toolbar />
-          <TxReport />
+          <Routes>
+              <Route path="transactions" element={<TxReport />} />
+              <Route path="stacking" element={<StackingReport />} />
+              <Route path="wenblok" element={<WenBlok />} />
+              <Route path="*" element={<TxReport />} />
+          </Routes>
+
         </Box>
       </Box>
     </ThemeProvider>
