@@ -11,6 +11,7 @@ export default async function convertJsonToOutputArray(json,walletId)
             outputArray=await addOutputArrayRowsForXactn(outputArray,xactn,walletId);
         }
     }
+    outputArray=await populateRowId(outputArray);
     return outputArray;
 }
 
@@ -19,7 +20,7 @@ async function addOutputArrayRowsForXactn(outputArray,xactn,walletId)
     let outputRowRawData= await getOutputRowsForXactn(xactn,walletId);
     await console.log(xactn);
     for (var ctr = 0; ctr < outputRowRawData.rowCount; ctr+=1) {
-        let outputRow=await getOutputArrayRowSTX(
+        let outputRow=await getOutputArrayRow(
             xactn,
             ctr==0?outputRowRawData.xactnFee:0,
             outputRowRawData.transfersIn[ctr],
@@ -77,7 +78,7 @@ async function getSTXTransfersForXactn(xactn,walletId,isIncoming)
     return ftTransfers;
 }
 
-async function getOutputArrayRowSTX(xactn,xactnFee,transferIn,transferOut)
+async function getOutputArrayRow(xactn,xactnFee,transferIn,transferOut)
 {
     let outputArrayRow=null;
     let inSymbol=await getTransferSymbol(transferIn);
@@ -86,6 +87,7 @@ async function getOutputArrayRowSTX(xactn,xactnFee,transferIn,transferOut)
     outputArrayRow=
     {
         burnDate: xactn.tx.burn_block_time_iso,
+            rowId: 0,
             inSymbol: inSymbol,
             inAmount: transferIn==undefined?0:transferIn.amount,
             outSymbol: outSymbol,
@@ -148,7 +150,16 @@ async function getSTXCoinPrice(coin,priceDate)
     return price;
 }
 
-
+async function populateRowId(outputArray)
+{
+    let ctr=1;
+    for (const arrayRow of outputArray)
+    {
+        arrayRow.rowId=ctr;
+        ctr+=1;
+    }
+    return outputArray;
+}
 
 
 //**************Just used by us to get coin history data, not real time.
