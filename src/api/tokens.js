@@ -1,4 +1,4 @@
-class Token {
+export class Token {
     static tokens = [
       {symbol:'DIKO',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-token::diko'},
       {symbol:'USDA',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.usda-token::usda'},
