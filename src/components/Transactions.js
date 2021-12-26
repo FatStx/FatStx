@@ -26,7 +26,7 @@ export default function Transactions({txnData}) {
         </TableHead>
         <TableBody>
           {txnData.map((row) => (
-            <TableRow key={row.id}>
+            <TableRow key={row.rowId}>
               <TableCell>{row.burnDate}</TableCell>
               <TableCell>{row.direction}</TableCell>
               <TableCell>{row.inSymbol}</TableCell>
