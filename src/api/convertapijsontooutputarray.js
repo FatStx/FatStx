@@ -1,4 +1,6 @@
 import { stxPrices } from "./stxprices";
+import { Token } from "./tokens"
+import { STX } from "./stxprices"
 
 export default async function convertJsonToOutputArray(json,walletId)
 {
@@ -102,9 +104,9 @@ async function getTransferSymbol(transferRow)
 {
     let symbol='';
     if (transferRow != undefined){
-        if (transferRow.asset_identifier !=undefined){
-            let matchingToken= Token.tokens.filter(function(token){return (token.contract==transferRow.asset_identifier)});
-            if (matchingToken.length>0)
+        if (transferRow.asset_identifier != undefined){
+            let matchingToken = Token?.tokens?.filter(function(token){return (token.contract==transferRow.asset_identifier)});
+            if (matchingToken?.length>0)
             {
                 symbol=matchingToken[0].symbol;
             }
