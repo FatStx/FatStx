@@ -1,4 +1,6 @@
-async function convertJsonToOutputArray(json,walletId)
+import { stxPrices } from "./stxprices";
+
+export default async function convertJsonToOutputArray(json,walletId)
 {
     let outputArray=[];
     for (const xactn of json) {
@@ -146,7 +148,7 @@ async function utilityGetCoinFromCoinGecko(coin,priceDate)
     const baseUrl = "https://api.coingecko.com/api/v3/coins/blockstack/history?localization=false&date=";
     var now = new Date(2021,11,22);
     var daysOfYear = [];
-    for (var thisDate = new Date(2021, 11, 01); thisDate <= now; thisDate.setDate(thisDate.getDate() + 1)) {
+    for (var thisDate = new Date(2021, 11, 1); thisDate <= now; thisDate.setDate(thisDate.getDate() + 1)) {
         var dateForCG=await getDateForCoinGecko(thisDate)
         let url = baseUrl+dateForCG;
         let response = await fetch(url);

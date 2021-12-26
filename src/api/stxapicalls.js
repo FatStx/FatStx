@@ -1,8 +1,8 @@
 //TODO: Proper Error handling, possibly chain then and catch to the fetch
 //Process All API Pages
-async function processAllXactnWithTransfersApiPages(walletId)
+export default async function processAllXactnWithTransfersApiPages(walletId)
 {
-    await console.log(Date.now()+" ===Process All Api Pages===");
+    console.log(Date.now()+" ===Process All Api Pages===");
     
     let apiResult=await processOneXactnWithTransfersApiPage(0,walletId);
     let totalTransactions=apiResult[1].total;
@@ -23,7 +23,7 @@ async function processAllXactnWithTransfersApiPages(walletId)
 //Fully process one 50 xactn call/page from the asset API
 async function processOneXactnWithTransfersApiPage(offset,walletId,stackingList)
 {
-    await console.log(Date.now()+" ===Process Api Page,Offset " + offset + "===");
+    console.log(Date.now()+" ===Process Api Page,Offset " + offset + "===");
     const baseUrl = "https://stacks-node-api.mainnet.stacks.co/extended/v1/address/" + walletId + "/transactions_with_transfers?limit=50&unanchored=false&offset="
    
     let url = baseUrl+offset;
@@ -40,5 +40,5 @@ async function getCurrentBlock(){
     let url = "https://stacks-node-api.mainnet.stacks.co/extended/v1/block?limit=1";
     const response = await fetch(url);
     let json=await response.json();
-    return currentBlock=json.results[0].height;
+    return json.results[0].height;
 }
