@@ -23,6 +23,5 @@ Any changes made to code will be auto reloaded in the browser
 * set execution policy to allow you to run scripts: Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 * run yarn --version to confirm execution policy has changed and yarn installed successfully
 * cd to where your local clone of the repo is
-* run npm install react-router-dom --save
-* run yarn install
-* run npm start to launch the browser with the app. It will launch at http://localhost:3000
+* run `yarn install`
+* run `yarn start` to launch the browser with the app. It will launch at http://localhost:3000
