@@ -7,12 +7,28 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import Tooltip from '@mui/material/Tooltip';
+import Snackbar from '@mui/material/Snackbar';
+
 import Title from './Title';
 
 
 export default function Transactions({txnData}) {
 
   console.log(txnData)
+
+  const [textCopiedAlertVisible, setTextCopiedAlertVisible] = React.useState(false);
+
+  const handleCopyClick = () => {
+    setTextCopiedAlertVisible(true);
+  };
+
+  const handleCopyClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setTextCopiedAlertVisible(false);
+  };
 
   const wordifyTransaction = (row) => {
 
@@ -42,6 +58,13 @@ export default function Transactions({txnData}) {
 
   return (
     <React.Fragment>
+      <Snackbar
+        open={textCopiedAlertVisible}
+        autoHideDuration={1000}
+        onClose={handleCopyClose}
+        message="Transaction Id copied to clipboard"
+      />
+
       <Title>Transactions</Title>
       <Table size="small">
         <TableHead>
@@ -49,7 +72,8 @@ export default function Transactions({txnData}) {
             <TableCell>Date</TableCell>
             <TableCell>Transaction</TableCell>
             <TableCell>TxID</TableCell>
-            <TableCell>In Price</TableCell>
+            <TableCell align="right">Fee</TableCell>
+            <TableCell align="right">In Price</TableCell>
             <TableCell align="right">Out Price</TableCell>
           </TableRow>
         </TableHead>
@@ -65,17 +89,36 @@ export default function Transactions({txnData}) {
 
               <TableCell>{wordifyTransaction(row)}</TableCell>
 
-              <TableCell>
+              <TableCell sx={{ fontFamily: 'Monospace' }}>
                 <a 
                   href = {"https://explorer.stacks.co/txid/" + row.xactnId + "?chain=mainnet"}
                 >
-                  {row.xactnId.substring(0, 4) + '...' + row.xactnId.slice(-6) }
+                  {row.xactnId.substring(0, 4) + '…' + row.xactnId.slice(-3) }
                 </a>
-                <ContentCopyIcon />
+                <ContentCopyIcon 
+                  sx={{ 
+                    ml:1, 
+                    fontSize: '12px', 
+                    color: '#AAA' 
+                  }}
+                  onClick={() => {
+                    
+                    handleCopyClick()
+                    // Copy Txid to clipbpoard
+                    navigator.clipboard.writeText(
+                      txnData.filter(obj => {
+                        return obj.rowId === row.rowId
+                      })[0].xactnId
+                    )}
+
+                    //TODO show notification
+                  }
+                />
               </TableCell>
 
-              <TableCell align="right">{`$${row.inCoinPrice}`}</TableCell>
-              <TableCell align="right">{`$${row.outCoinPrice}`}</TableCell>
+              <TableCell align="right">{'STX fee'}</TableCell>
+              <TableCell align="right">{`$in${row.inCoinPrice}`}</TableCell>
+              <TableCell align="right">{`$out${row.outCoinPrice}`}</TableCell>
 
             </TableRow>
           ))}
