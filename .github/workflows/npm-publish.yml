@@ -1,0 +1,25 @@
+name: Publish site to https://stacksboard.github.io/
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish-site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          registry-url: https://registry.yarnpkg.com/
+      - name: install packages
+        run: yarn install
+      - name: check linting
+        run: yarn lint
+      - name: test
+        run: yarn test
+      - name: deploy
+        run: yarn deploy
