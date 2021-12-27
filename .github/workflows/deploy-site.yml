@@ -17,9 +17,5 @@ jobs:
           registry-url: https://registry.yarnpkg.com/
       - name: install packages
         run: yarn install
-      - name: check linting
-        run: yarn lint
-      - name: test
-        run: yarn test
       - name: deploy
         run: yarn deploy
