@@ -30,7 +30,13 @@ export default function Transactions({txnData}) {
               <TableCell>{row.burnDate}</TableCell>
               <TableCell>{row.direction}</TableCell>
               <TableCell>{row.inSymbol}</TableCell>
-              <TableCell>{row.xactnId}</TableCell>
+              <TableCell>
+                <a 
+                  href = {"https://explorer.stacks.co/txid/" + row.xactnId + "?chain=mainnet"}
+                >
+                  {row.xactnId.substring(0, 4) + '...' + row.xactnId.slice(-6) }
+                </a>
+              </TableCell>
               <TableCell>{row.inAmount}</TableCell>
               <TableCell align="right">{`$${row.inCoinPrice}`}</TableCell>
             </TableRow>
