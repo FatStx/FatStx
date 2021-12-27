@@ -76,9 +76,8 @@ async function getWalletData() {
 
     let json= await processAllXactnWithTransfersApiPages(walletId);
     let outputArray=await convertJsonToOutputArray(json,walletId);
-    await console.log(outputArray);
+    console.log(outputArray);
     return;
-
 
 }
 </script>
