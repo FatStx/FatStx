@@ -86,17 +86,36 @@ async function getOutputArrayRow(xactn, xactnFee, transferIn, transferOut) {
         burnDate: xactn.tx.burn_block_time_iso,
         rowId: 0,
         inSymbol: inSymbol,
-        inAmount: transferIn === undefined ? 0 : transferIn.amount,
+        inAmount: transferIn === undefined ? 0 : await convertAmount(inSymbol,transferIn.amount),
         outSymbol: outSymbol,
-        outAmount: transferOut === undefined ? 0 : transferOut.amount,
-        xactnFee: xactnFee,
+        outAmount: transferOut === undefined ? 0 : await convertAmount(outSymbol,transferOut.amount),
+        xactnFee: xactnFee / 1000000,
         inCoinPrice: '', //transferIn.asset_identifier==undefined? await getSTXCoinPrice('STX',xactn.tx.burn_block_time_iso):'NA',
         outCoinPrice: '', //transferOut.asset_identifier==undefined? await getSTXCoinPrice('STX',xactn.tx.burn_block_time_iso):'NA',
         xactnFeeCoinPrice: '', //transferOut.asset_identifier==undefined? await getSTXCoinPrice('STX',xactn.tx.burn_block_time_iso):'NA',
         xactnType: 'TBD',
-        xactnId: xactn.tx.tx_id
+        xactnId: xactn.tx.tx_id,
+        inAmountRaw: transferIn === undefined ? 0 : transferIn.amount,
+        outAmountRaw: transferOut === undefined ? 0 : transferOut.amount,
+        xactnFeeRaw: xactnFee,
     };
     return outputArrayRow;
+}
+
+async function convertAmount(symbol,amount,assetIdentifier)
+{
+    let convertedAmount=amount;
+    if (symbol==='STX') {
+        convertedAmount=amount/1000000;
+    } else {
+        let matchingToken = Token?.tokens?.filter(function(token) {
+            return (token.symbol === symbol)
+        });
+        if (matchingToken?.length > 0) {
+            convertedAmount = amount / matchingToken[0].conversionFactor;
+        }
+    }
+    return convertedAmount;
 }
 
 async function getTransferSymbol(transferRow) {
