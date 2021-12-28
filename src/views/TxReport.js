@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 import Transactions from '../components/Transactions';
 import convertJsonToOutputArray from '../api/convertapijsontooutputarray'
@@ -42,36 +42,30 @@ export default function TxReport() {
 
         {/* Wallet Input */}
         <Grid item xs={12} md={12} lg={12}>
-          <Paper
-            sx={{
-              p: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              height: 100,
-            }}
-          >
+          <Paper sx={{p: 2}}>
 
-            <Box
-              component="form"
-              sx={{
-                '& .MuiTextField-root': { m: 1, width: '90%' },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <div>
-                <TextField
-                  required
-                  id="fullWidth"
-                  label="Wallet Address"
-                  onChange={ handleWalletIdChange }
-                />
+              <Grid container alignItems="center"> 
+                <Grid item xs={10}>
+                  <TextField
+                    fullWidth
+                    component="form"
+                    autoComplete="on"
+                    required
+                    label="Wallet Address"
+                    onChange={ handleWalletIdChange }
+                  />
+                </Grid>
 
-                <Button sx={{mt: 2, ml:2}} variant="contained" onClick={ getWalletTxData }>
-                  Go
-                </Button>
-              </div>
-            </Box>
+                <Grid item xs={2}>
+                  <Button 
+                    sx={{ float: "right", minWidth: 100 }} 
+                    variant="contained" 
+                    onClick={ getWalletTxData }
+                  >
+                    GO <PlayArrowIcon />
+                  </Button>
+                </Grid>
+              </Grid>
           </Paper>
         </Grid>
 

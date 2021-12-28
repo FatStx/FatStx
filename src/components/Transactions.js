@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Link from '@mui/material/Link';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,6 +7,8 @@ import TableRow from '@mui/material/TableRow';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import Tooltip from '@mui/material/Tooltip';
 import Snackbar from '@mui/material/Snackbar';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid';
 
 import Title from './Title';
 
@@ -39,7 +40,7 @@ export default function Transactions({txnData}) {
     }
 
     if ( row.inAmount > 0 ) {
-      transactionInWords += transactionInWords.length != 0? ', ' : ''
+      transactionInWords += transactionInWords.length !== 0? ', ' : ''
       transactionInWords += row.inAmount + ' ' + row.inSymbol + ' IN'
     }
 
@@ -65,7 +66,14 @@ export default function Transactions({txnData}) {
         message="Transaction Id copied to clipboard"
       />
 
-      <Title>Transactions</Title>
+      <Grid container >
+        <Grid item xs={9}>
+          <Title>Transactions</Title>
+        </Grid>
+        <Grid item xs={3}>
+          <Button variant="contained" sx={{ float: "right", minWidth: 100}}> Export </Button>
+        </Grid>
+      </Grid>
       <Table size="small">
         <TableHead>
           <TableRow>
@@ -124,9 +132,6 @@ export default function Transactions({txnData}) {
           ))}
         </TableBody>
       </Table>
-      <Link color="primary" href="#" sx={{ mt: 3 }}>
-        Export to CSV
-      </Link>
     </React.Fragment>
   );
 }

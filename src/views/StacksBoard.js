@@ -20,7 +20,7 @@ import TxReport from './TxReport'
 import StackingReport from './StackingReport'
 import WenBlok from './WenBlok'
 
-const drawerWidth = 240;
+const drawerWidth = 190;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
