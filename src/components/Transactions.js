@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useRef } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -9,6 +9,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Snackbar from '@mui/material/Snackbar';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import { CSVLink } from "react-csv";
 
 import Title from './Title';
 
@@ -17,7 +18,8 @@ export default function Transactions({txnData}) {
 
   console.log(txnData)
 
-  const [textCopiedAlertVisible, setTextCopiedAlertVisible] = React.useState(false);
+  const [textCopiedAlertVisible, setTextCopiedAlertVisible] = useState(false);
+  const csvLink = useRef()
 
   const handleCopyClick = () => {
     setTextCopiedAlertVisible(true);
@@ -29,6 +31,12 @@ export default function Transactions({txnData}) {
     }
 
     setTextCopiedAlertVisible(false);
+  };
+
+  const handleExport = (event, reason) => {
+    if (txnData.length !== 0 ) {
+      csvLink.current.link.click()
+    }
   };
 
   const wordifyTransaction = (row) => {
@@ -71,7 +79,11 @@ export default function Transactions({txnData}) {
           <Title>Transactions</Title>
         </Grid>
         <Grid item xs={3}>
-          <Button variant="contained" sx={{ float: "right", minWidth: 100}}> Export </Button>
+          <Button 
+            variant="contained" 
+            sx={{ float: "right", minWidth: 100}}
+            onClick={handleExport}
+          > Export </Button>
         </Grid>
       </Grid>
       <Table size="small">
@@ -132,6 +144,15 @@ export default function Transactions({txnData}) {
           ))}
         </TableBody>
       </Table>
+
+      <div>
+        <CSVLink
+            data={txnData}
+            filename="transactions.csv"
+            className="hidden"
+            ref={csvLink}
+            target="_blank"/>
+      </div>
     </React.Fragment>
   );
 }
