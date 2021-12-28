@@ -57,7 +57,10 @@ export default function Transactions({txnData}) {
 
   const toDateString = (dateString) => {
     var d = new Date (dateString)
-    return d.toDateString();
+    return d.toISOString().slice(0,10).replaceAll('-','/')
+      + '  ' 
+      + d.toISOString().slice(11,16) 
+      + ' UTC';
   }
 
   const toUTCString = (dateString) => {
