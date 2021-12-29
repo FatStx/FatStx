@@ -10,6 +10,11 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 
 
@@ -19,7 +24,7 @@ export default function StackingReport() {
 
     const [coin, setCoin] = React.useState('');
     const [walletId, setWalletId] = useState('');
-
+    const [stackData, setStackData] = useState([]);
 
     const handleCoinChange = (event) => {
         setCoin(event.target.value);
@@ -42,6 +47,7 @@ export default function StackingReport() {
             return;
         }
 
+        setStackData([])
 
     };
 
@@ -98,7 +104,40 @@ export default function StackingReport() {
             {/* Transactions*/}
             <Grid item xs={12}>
               <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                {/* <Transactions txnData = {txnData} /> */}
+              <Table size="small">
+
+                <colgroup>
+                  <col style={{width:'15%'}}/>
+                  <col style={{width:'15%'}}/>
+                  <col style={{width:'15%'}}/>
+                  <col style={{width:'15%'}}/>
+                  <col style={{width:'15%'}}/>
+                  <col style={{width:'25%'}}/>
+                </colgroup>
+
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Cycle</TableCell>
+                    <TableCell>Starting Block</TableCell>
+                    <TableCell>Ending Block</TableCell>
+                    <TableCell>Stacked Amount</TableCell>
+                    <TableCell>STX Claimed</TableCell>
+                    <TableCell>Claim Date</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {stackData.map((row) => (
+                    <TableRow key={row.rowId}>
+                      <TableCell>Cycle</TableCell>
+                      <TableCell>Starting Block</TableCell>
+                      <TableCell>Ending Block</TableCell>
+                      <TableCell>Stacked Amount</TableCell>
+                      <TableCell>STX Claimed</TableCell>
+                      <TableCell>Claim Date</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+                </Table>
               </Paper>
             </Grid>
           </Grid>
