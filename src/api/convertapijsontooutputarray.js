@@ -80,22 +80,24 @@ async function getOutputArrayRow(xactn, xactnFee, transferIn, transferOut) {
     let outputArrayRow = null;
     let inSymbol = await getTransferSymbol(transferIn);
     let outSymbol = await getTransferSymbol(transferOut);
+    let inAmountRaw = transferIn === undefined ? 0 : transferIn.amount;
+    let outAmountRaw = transferOut === undefined ? 0 : transferOut.amount;
 
     outputArrayRow = {
         burnDate: xactn.tx.burn_block_time_iso,
         rowId: 0,
         inSymbol: inSymbol,
-        inAmount: transferIn === undefined ? 0 : await convertAmount(inSymbol,transferIn.amount),
+        inAmount: await convertAmount(outSymbol,inAmountRaw),
         outSymbol: outSymbol,
-        outAmount: transferOut === undefined ? 0 : await convertAmount(outSymbol,transferOut.amount),
+        outAmount: await convertAmount(outSymbol,outAmountRaw),
         xactnFee: xactnFee / 1000000,
         inCoinPrice: await getCoinPrice(inSymbol,xactn.tx.burn_block_time_iso),
         outCoinPrice: await getCoinPrice(outSymbol,xactn.tx.burn_block_time_iso),
-        xactnFeeCoinPrice: await getCoinPrice('STX',xactn.tx.burn_block_time_iso),
+        xactnFeeCoinPrice: await getCoinPrice(xactnFee>0?'STX':'',xactn.tx.burn_block_time_iso),
         xactnType: 'TBD',
         xactnId: xactn.tx.tx_id,
-        inAmountRaw: transferIn === undefined ? 0 : transferIn.amount,
-        outAmountRaw: transferOut === undefined ? 0 : transferOut.amount,
+        inAmountRaw: inAmountRaw,
+        outAmountRaw: outAmountRaw,
         xactnFeeRaw: xactnFee,
     };
     return outputArrayRow;
@@ -136,6 +138,34 @@ async function getTransferSymbol(transferRow) {
     return symbol;
 }
 
+async function getCoinPrice(symbol, priceDate) {
+    let price = '';
+
+    if (symbol !=='') {
+        price = 'N/A';
+        //Obtain the Object Array with prices for the symbol, if one exists
+        let coinPriceObject=await getCoinPriceObject(symbol);
+        if (coinPriceObject!==undefined) {
+        let matchingPrice = coinPriceObject.filter(function(item) {
+            return (new Date(item.date).getTime() >= new Date(priceDate).getTime());
+        });
+        //If a match in historical prices, use that price
+        if (matchingPrice.length>0) {
+            price = matchingPrice[0].price
+            let intPrice=parseInt(price)
+            if (!Number.isNaN(intPrice)) {
+                price=intPrice.toFixed(2);
+            }
+        } else {
+            //otherwise call CoinGeckoAPI
+            price=await getPriceFromCoinGecko(symbol,priceDate);
+        }
+    }
+}
+
+    return price;
+}
+
 async function getCoinPriceObject(symbol) {
     let coinPriceObject;
     if (symbol==='STX') {
@@ -143,31 +173,6 @@ async function getCoinPriceObject(symbol) {
     }
     
     return coinPriceObject;
-}
-
-async function getCoinPrice(symbol, priceDate) {
-    let price = 'N/A';
-
-    //Obtain the Object Array with prices for the symbol, if one exists
-    let coinPriceObject=await getCoinPriceObject(symbol);
-    if (coinPriceObject!==undefined) {
-       let matchingPrice = coinPriceObject.filter(function(item) {
-           return (new Date(item.date).getTime() >= new Date(priceDate).getTime());
-       });
-       //If a match in historical prices, use that price
-       if (matchingPrice.length>0) {
-           price = matchingPrice[0].price
-           let intPrice=parseInt(price)
-           if (!Number.isNaN(intPrice)) {
-               price=intPrice.toFixed(2);
-           }
-       } else {
-           //otherwise call CoinGeckoAPI
-           price=await getPriceFromCoinGecko(symbol,priceDate);
-       }
-    }
-
-    return price;
 }
 
 async function getPriceFromCoinGecko(symbol, priceDate) {
