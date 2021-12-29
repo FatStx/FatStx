@@ -1,6 +1,8 @@
 import { Token } from "./tokens"
 import { STXPrice } from "./coinprices/stxprices" 
 import { DIKOPrice } from "./coinprices/dikoprices" 
+import { MIAPrice } from "./coinprices/miaprices" 
+import { XBTCPrice } from "./coinprices/xbtcprices" 
 
 export default async function convertJsonToOutputArray(json, walletId) {
 //await utilityGetCoinFromCoinGecko('DIKO');
@@ -11,6 +13,7 @@ export default async function convertJsonToOutputArray(json, walletId) {
         }
     }
     outputArray = await populateRowId(outputArray);
+    console.log(outputArray);
     return outputArray;
 }
 
@@ -89,9 +92,9 @@ async function getOutputArrayRow(xactn, xactnFee, transferIn, transferOut) {
         burnDate: xactn.tx.burn_block_time_iso,
         rowId: 0,
         inSymbol: inSymbol,
-        inAmount: await convertAmount(inSymbol,inAmountRaw),
+        inAmount: await formatAmount(inSymbol,inAmountRaw),
         outSymbol: outSymbol,
-        outAmount: await convertAmount(outSymbol,outAmountRaw),
+        outAmount: await formatAmount(outSymbol,outAmountRaw),
         xactnFee: xactnFee / 1000000,
         inCoinPrice: await getCoinPrice(inSymbol,xactn.tx.burn_block_time_iso),
         outCoinPrice: await getCoinPrice(outSymbol,xactn.tx.burn_block_time_iso),
@@ -105,19 +108,19 @@ async function getOutputArrayRow(xactn, xactnFee, transferIn, transferOut) {
     return outputArrayRow;
 }
 
-async function convertAmount(symbol,amount,assetIdentifier)
+async function formatAmount(symbol,amount)
 {
     let convertedAmount=amount;
-    if (symbol==='STX') {
-        convertedAmount=amount/1000000;
-    } else {
-        let matchingToken = Token?.tokens?.filter(function(token) {
-            return (token.symbol === symbol)
-        });
-        if (matchingToken?.length > 0) {
-            convertedAmount = amount / matchingToken[0].conversionFactor;
-        }
+    
+    let matchingToken = Token?.tokens?.filter(function(token) {
+        return (token.symbol === symbol)
+    });
+
+    if (matchingToken?.length > 0) {
+        convertedAmount = amount / matchingToken[0].conversionFactor;
+        convertedAmount = convertedAmount.toFixed(matchingToken[0].amountDecimals);
     }
+    
     return convertedAmount;
 }
 
@@ -154,14 +157,14 @@ async function getCoinPrice(symbol, priceDate) {
             //There should always be a matching record if the array of historical prices was created correctly
             if (matchingPrice.length>0) {
                 price = matchingPrice[matchingPrice.length-1].price
-                let decPrice=parseFloat(price)
-
-                //If we have a valid price in our historical array
-                if (!Number.isNaN(decPrice)) {
-                    price=decPrice.toFixed(2);
-                } else {
+                let decPrice=await formatPrice(price,symbol);
+                //If we do not have a valid price in our historical array
+                if (decPrice==0) {
                     //otherwise call CoinGeckoAPI
-                    price=await getPriceFromCoinGecko(symbol,priceDate);
+                    decPrice=await getPriceFromCoinGecko(symbol,priceDate);
+                    price=await formatPrice(decPrice,symbol);
+                } else {
+                    price=decPrice;
                 }
             }
         }
@@ -169,12 +172,19 @@ async function getCoinPrice(symbol, priceDate) {
     return price;
 }
 
+//As we add assets which have either historical prices or prices available from coingecko,
+//js files should be created with the objects and price arrays and should be added here
+//In theory this should be done with some sort of inheritance structure in future
 async function getCoinPriceObject(symbol) {
     let coinPriceObject;
     if (symbol==='STX') {
         coinPriceObject=STXPrice.stxPrices;
     } else if (symbol==='DIKO') {
         coinPriceObject=DIKOPrice.dikoPrices;
+    } else if (symbol==='MIA') {
+        coinPriceObject=MIAPrice.miaPrices;
+    } else if (symbol==='xBTC') {
+        coinPriceObject=XBTCPrice.xbtcPrices;
     }
     
     return coinPriceObject;
@@ -192,10 +202,7 @@ async function getPriceFromCoinGecko(symbol, priceDate) {
         if (response.status === 200) {
             let json = await response.json();
             if (json.market_data !== undefined) {
-                let decPrice=parseFloat(json.market_data.current_price.usd);
-                if (!Number.isNaN(decPrice)) {
-                    price=decPrice.toFixed(2);
-                }
+                    price=json.market_data.current_price.usd;
             }
         }
     }
@@ -222,6 +229,23 @@ async function getDateForCoinGecko(thisDate) {
     let workingDate=new Date(thisDate);
     let returnDate = workingDate.getUTCDate() + "-" + (parseInt(workingDate.getUTCMonth())+1) + "-" + workingDate.getUTCFullYear();
     return returnDate;
+}
+
+async function formatPrice(price,symbol) {
+    let workingPrice=0;
+    let decPrice=parseFloat(price);
+    if (!Number.isNaN(decPrice)) {
+        let matchingToken = Token?.tokens?.filter(function(token) {
+            return (token.symbol === symbol);
+        });
+        if (matchingToken?.length > 0) {
+            workingPrice =decPrice.toFixed(matchingToken[0].priceDecimals);
+        } else {
+            console.log(symbol + 'fixed');
+            workingPrice=decPrice.toFixed(2); //default is 2
+        }
+    }
+    return workingPrice;
 }
 
 async function populateRowId(outputArray) {
