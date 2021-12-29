@@ -4,6 +4,10 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import StacksBoard from './views/StacksBoard';
 import reportWebVitals from './reportWebVitals';
+import ReactGA from "react-ga4";
+
+ReactGA.initialize('G-GDKN4EEKX6');
+ReactGA.send("Homepage");
 
 ReactDOM.render(
   <React.StrictMode>

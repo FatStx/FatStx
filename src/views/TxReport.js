@@ -1,3 +1,4 @@
+import ReactGA from "react-ga4";
 import React, { useState } from "react";
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
@@ -21,7 +22,7 @@ export default function TxReport() {
 
   async function getWalletTxData() {
 
-    console.log(walletId);
+    ReactGA.send("transactions");
   
     if (walletId.length<5) // TODO: need a more robust check - perhaps against explorer API?
     {
