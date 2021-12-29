@@ -74,9 +74,25 @@ export default function Transactions({txnData}) {
         </Grid>
       </Grid>
       <Table size="small">
+
+      <colgroup>
+        <col style={{width:'15%'}}/>
+        <col style={{width:'10%'}}/>
+        <col style={{width:'10%'}}/>
+        <col style={{width:'10%'}}/>
+        <col style={{width:'10%'}}/>
+        <col style={{width:'10%'}}/>
+        <col style={{width:'35%'}}/>
+      </colgroup>
+
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
+            <TableCell>TxID</TableCell>
+            <TableCell align="right">Fee</TableCell>
+            <TableCell align="right">In Price</TableCell>
+            <TableCell align="right">Out Price</TableCell>
+            <TableCell align="right">Fee Price</TableCell>
             <TableCell>
               <Grid container direction="row" alignItems="center">
                 <Grid item xs align='right'> IN</Grid>
@@ -84,11 +100,6 @@ export default function Transactions({txnData}) {
                 <Grid item xs> OUT </Grid>
               </Grid>
             </TableCell>
-            <TableCell>TxID</TableCell>
-            <TableCell align="right">Fee</TableCell>
-            <TableCell align="right">In Price</TableCell>
-            <TableCell align="right">Out Price</TableCell>
-            <TableCell align="right">Fee Price</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -100,15 +111,6 @@ export default function Transactions({txnData}) {
                   {toDateString(row.burnDate)}
                 </TableCell>
               </Tooltip>
-
-              <TableCell>
-                <Tx 
-                  inAmount={row.inAmount} 
-                  inSymbol={row.inSymbol} 
-                  outAmount={row.outAmount} 
-                  outSymbol={row.outSymbol}
-                />
-              </TableCell>
 
               <TableCell sx={{ fontFamily: 'Monospace' }}>
                 <a 
@@ -140,6 +142,15 @@ export default function Transactions({txnData}) {
               <TableCell align="right">{`${row.inCoinPrice === '' ? '-' : '$' +  row.inCoinPrice}`}</TableCell>
               <TableCell align="right">{`${row.outCoinPrice === '' ? '-' : '$' +  row.outCoinPrice}`}</TableCell>
               <TableCell align="right">{`${row.xactnFeeCoinPrice === '' ? '-' : '$' +  row.xactnFeeCoinPrice}`}</TableCell>
+
+              <TableCell>
+                <Tx 
+                  inAmount={row.inAmount} 
+                  inSymbol={row.inSymbol} 
+                  outAmount={row.outAmount} 
+                  outSymbol={row.outSymbol}
+                />
+              </TableCell>
 
             </TableRow>
           ))}
