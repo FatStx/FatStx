@@ -41,22 +41,6 @@ export default function Transactions({txnData}) {
     }
   };
 
-  const wordifyTransaction = (row) => {
-
-    var transactionInWords = ''
-
-    if ( row.outAmount > 0 ) {
-      transactionInWords += row.outAmount + ' ' + row.outSymbol + ' OUT'
-    }
-
-    if ( row.inAmount > 0 ) {
-      transactionInWords += transactionInWords.length !== 0? ', ' : ''
-      transactionInWords += row.inAmount + ' ' + row.inSymbol + ' IN'
-    }
-
-    return transactionInWords
-  };
-
   const toDateString = (dateString) => {
     var d = new Date (dateString)
     return d.toISOString().slice(0,10).replaceAll('-','/')
