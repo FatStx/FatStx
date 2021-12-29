@@ -61,14 +61,14 @@ export default function Transactions({txnData}) {
         message="Transaction Id copied to clipboard"
       />
 
-      <Grid container >
-        <Grid item xs={9}>
+      <Grid container spacing={2}>
+        <Grid item xs={11}>
           <Title>Transactions</Title>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={1}>
           <Button 
+            fullWidth
             variant="contained" 
-            sx={{ float: "right", minWidth: 100}}
             onClick={handleExport}
           > Export </Button>
         </Grid>

@@ -38,15 +38,15 @@ export default function TxReport() {
   }
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+    <Container maxWidth={false} sx={{ mt: 4, mb: 4}}>
       <Grid container spacing={3}>
 
         {/* Wallet Input */}
         <Grid item xs={12} md={12} lg={12}>
           <Paper sx={{p: 2}}>
 
-              <Grid container alignItems="center"> 
-                <Grid item xs={10}>
+              <Grid container alignItems="center" spacing={2}> 
+                <Grid item xs={11}>
                   <TextField
                     fullWidth
                     component="form"
@@ -57,9 +57,10 @@ export default function TxReport() {
                   />
                 </Grid>
 
-                <Grid item xs={2}>
+                <Grid item xs={1}>
                   <Button 
-                    sx={{ float: "right", minWidth: 100 }} 
+                    fullWidth
+                    sx={{ float: "right"}} 
                     variant="contained" 
                     onClick={ getWalletTxData }
                   >
