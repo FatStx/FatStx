@@ -18,8 +18,6 @@ import Tx from './Tx';
 
 export default function Transactions({txnData}) {
 
-  console.log(txnData)
-
   const [textCopiedAlertVisible, setTextCopiedAlertVisible] = useState(false);
   const csvLink = useRef()
 
