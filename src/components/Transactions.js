@@ -106,6 +106,7 @@ export default function Transactions({txnData}) {
             <TableCell align="right">Fee</TableCell>
             <TableCell align="right">In Price</TableCell>
             <TableCell align="right">Out Price</TableCell>
+            <TableCell align="right">Fee Price</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -119,13 +120,13 @@ export default function Transactions({txnData}) {
               </Tooltip>
 
               <TableCell>
-                  <Tx 
-                    inAmount={parseFloat(row.inAmount).toFixed(2)} 
-                    inSymbol={row.inSymbol} 
-                    outAmount={parseFloat(row.outAmount).toFixed(2)} 
-                    outSymbol={row.outSymbol}
-                  />
-                </TableCell>
+                <Tx 
+                  inAmount={parseFloat(row.inAmount).toFixed(2)} 
+                  inSymbol={row.inSymbol} 
+                  outAmount={parseFloat(row.outAmount).toFixed(2)} 
+                  outSymbol={row.outSymbol}
+                />
+              </TableCell>
 
               <TableCell sx={{ fontFamily: 'Monospace' }}>
                 <a 
@@ -153,9 +154,10 @@ export default function Transactions({txnData}) {
                 />
               </TableCell>
 
-              <TableCell align="right">STX 0.00</TableCell>
-              <TableCell align="right">{`$ 0.00${row.inCoinPrice}`}</TableCell>
-              <TableCell align="right">{`$ 0.00${row.outCoinPrice}`}</TableCell>
+              <TableCell align="right">{`STX ${parseFloat(row.xactnFee).toFixed(2)}`}</TableCell>
+              <TableCell align="right">{`$${row.inCoinPrice}`}</TableCell>
+              <TableCell align="right">{`$${row.outCoinPrice}`}</TableCell>
+              <TableCell align="right">{`$${row.xactnFeeCoinPrice}`}</TableCell>
 
             </TableRow>
           ))}
