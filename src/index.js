@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import ReactGA from "react-ga4";
 
 ReactGA.initialize('G-GDKN4EEKX6');
-ReactGA.send("Homepage");
+ReactGA.send({ hitType: "pageview", page: "/" });
 
 ReactDOM.render(
   <React.StrictMode>
