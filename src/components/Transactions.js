@@ -9,10 +9,12 @@ import Tooltip from '@mui/material/Tooltip';
 import Snackbar from '@mui/material/Snackbar';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import Divider from '@mui/material/Divider';
+
 import { CSVLink } from "react-csv";
 
 import Title from './Title';
-
+import Tx from './Tx';
 
 export default function Transactions({txnData}) {
 
@@ -93,7 +95,13 @@ export default function Transactions({txnData}) {
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell>Transaction</TableCell>
+            <TableCell>
+              <Grid container direction="row" alignItems="center">
+                <Grid item xs align='right'> IN</Grid>
+                <Divider orientation="vertical" flexItem> </Divider>
+                <Grid item xs> OUT </Grid>
+              </Grid>
+            </TableCell>
             <TableCell>TxID</TableCell>
             <TableCell align="right">Fee</TableCell>
             <TableCell align="right">In Price</TableCell>
@@ -110,7 +118,14 @@ export default function Transactions({txnData}) {
                 </TableCell>
               </Tooltip>
 
-              <TableCell>{wordifyTransaction(row)}</TableCell>
+              <TableCell>
+                  <Tx 
+                    inAmount={parseFloat(row.inAmount).toFixed(2)} 
+                    inSymbol={row.inSymbol} 
+                    outAmount={parseFloat(row.outAmount).toFixed(2)} 
+                    outSymbol={row.outSymbol}
+                  />
+                </TableCell>
 
               <TableCell sx={{ fontFamily: 'Monospace' }}>
                 <a 
@@ -121,7 +136,7 @@ export default function Transactions({txnData}) {
                 <ContentCopyIcon 
                   sx={{ 
                     ml:1, 
-                    fontSize: '12px', 
+                    fontSize: '16px', 
                     color: '#AAA' 
                   }}
                   onClick={() => {
@@ -134,14 +149,13 @@ export default function Transactions({txnData}) {
                       })[0].xactnId
                     )}
 
-                    //TODO show notification
                   }
                 />
               </TableCell>
 
-              <TableCell align="right">{'STX fee'}</TableCell>
-              <TableCell align="right">{`$in${row.inCoinPrice}`}</TableCell>
-              <TableCell align="right">{`$out${row.outCoinPrice}`}</TableCell>
+              <TableCell align="right">STX 0.00</TableCell>
+              <TableCell align="right">{`$ 0.00${row.inCoinPrice}`}</TableCell>
+              <TableCell align="right">{`$ 0.00${row.outCoinPrice}`}</TableCell>
 
             </TableRow>
           ))}
