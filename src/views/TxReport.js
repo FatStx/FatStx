@@ -54,6 +54,7 @@ export default function TxReport() {
                     required
                     label="Wallet Address"
                     onChange={ handleWalletIdChange }
+                    value={walletId}
                   />
                 </Grid>
 

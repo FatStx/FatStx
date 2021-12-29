@@ -29,7 +29,7 @@ export const mainListItems = (
       <ListItemIcon>
         <AccessTimeIcon />
       </ListItemIcon>
-      <ListItemText primary="Wenblok?!" />
+      <ListItemText primary="Wenblok" />
     </ListItem>
 
     <Divider />
