@@ -103,9 +103,9 @@ export default function Transactions({txnData}) {
 
               <TableCell>
                 <Tx 
-                  inAmount={parseFloat(row.inAmount).toFixed(2)} 
+                  inAmount={row.inAmount} 
                   inSymbol={row.inSymbol} 
-                  outAmount={parseFloat(row.outAmount).toFixed(2)} 
+                  outAmount={row.outAmount} 
                   outSymbol={row.outSymbol}
                 />
               </TableCell>
@@ -136,7 +136,7 @@ export default function Transactions({txnData}) {
                 />
               </TableCell>
 
-              <TableCell align="right">{`Ӿ ${parseFloat(row.xactnFee).toFixed(2)}`}</TableCell>
+              <TableCell align="right">{`Ӿ ${row.xactnFee}`}</TableCell>
               <TableCell align="right">{`${row.inCoinPrice === '' ? '-' : '$' +  row.inCoinPrice}`}</TableCell>
               <TableCell align="right">{`${row.outCoinPrice === '' ? '-' : '$' +  row.outCoinPrice}`}</TableCell>
               <TableCell align="right">{`${row.xactnFeeCoinPrice === '' ? '-' : '$' +  row.xactnFeeCoinPrice}`}</TableCell>
