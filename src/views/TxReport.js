@@ -22,7 +22,7 @@ export default function TxReport() {
 
   async function getWalletTxData() {
 
-    ReactGA.send("transactions");
+    ReactGA.send({ hitType: "pageview", page: "/transactions" });
   
     if (walletId.length<5) // TODO: need a more robust check - perhaps against explorer API?
     {
