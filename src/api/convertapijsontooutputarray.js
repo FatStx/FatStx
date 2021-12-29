@@ -184,7 +184,6 @@ async function getPriceFromCoinGecko(symbol, priceDate) {
     if (apiSymbol !=='')
     {
         let dateForCG = await getDateForCoinGecko(new Date(priceDate))
-        console.log(dateForCG);
         let url=baseUrl+apiSymbol+'/history?localization=false&date=' + dateForCG;
         let response = await fetch(url);
         if (response.status === 200) {
