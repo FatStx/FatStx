@@ -136,7 +136,7 @@ export default function Transactions({txnData}) {
                 />
               </TableCell>
 
-              <TableCell align="right">{`STX ${parseFloat(row.xactnFee).toFixed(2)}`}</TableCell>
+              <TableCell align="right">{`Ӿ ${parseFloat(row.xactnFee).toFixed(2)}`}</TableCell>
               <TableCell align="right">{`${row.inCoinPrice === '' ? '-' : '$' +  row.inCoinPrice}`}</TableCell>
               <TableCell align="right">{`${row.outCoinPrice === '' ? '-' : '$' +  row.outCoinPrice}`}</TableCell>
               <TableCell align="right">{`${row.xactnFeeCoinPrice === '' ? '-' : '$' +  row.xactnFeeCoinPrice}`}</TableCell>
