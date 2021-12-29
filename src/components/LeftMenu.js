@@ -7,6 +7,9 @@ import ListItemText from '@mui/material/ListItemText';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import TableRowsIcon from '@mui/icons-material/TableRows';
+import InfoIcon from '@mui/icons-material/Info';
+import Divider from '@mui/material/Divider';
+
 
 export const mainListItems = (
   <div>
@@ -27,6 +30,21 @@ export const mainListItems = (
         <AccessTimeIcon />
       </ListItemIcon>
       <ListItemText primary="Wenblok?!" />
+    </ListItem>
+
+    <Divider />
+
+    <ListItem button component={Link} to="disclaimer">
+      <ListItemIcon>
+        <InfoIcon />
+      </ListItemIcon>
+      <ListItemText primary="Disclaimers" />
+    </ListItem>
+    <ListItem button component={Link} to="about">
+      <ListItemIcon>
+        <InfoIcon />
+      </ListItemIcon>
+      <ListItemText primary="About" />
     </ListItem>
   </div>
 );
