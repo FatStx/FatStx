@@ -3,6 +3,7 @@ import { STXPrice } from "./coinprices/stxprices"
 import { DIKOPrice } from "./coinprices/dikoprices" 
 
 export default async function convertJsonToOutputArray(json, walletId) {
+//await utilityGetCoinFromCoinGecko('DIKO');
     let outputArray = [];
     for (const xactn of json) {
         if (xactn.tx.tx_status === "success") {
@@ -172,6 +173,8 @@ async function getCoinPriceObject(symbol) {
     let coinPriceObject;
     if (symbol==='STX') {
         coinPriceObject=STXPrice.stxPrices;
+    } else if (symbol==='DIKO') {
+        coinPriceObject=DIKOPrice.dikoPrices;
     }
     
     return coinPriceObject;
@@ -231,11 +234,10 @@ async function populateRowId(outputArray) {
 }
 
 // async function utilityGetCoinFromCoinGecko(coin) {
-//     var now = new Date(2021, 12, 29);
-//     for (var thisDate = new Date(2021, 12, 20); thisDate <= now; thisDate.setDate(thisDate.getDate() + 1)) {
-//         let price=await getPriceFromCoinGecko('STX',thisDate)
-//         console.log(price);
-//         //console.log("{ date: '" + thisDate.toISOString() + "', coin: 'DIKO', price: '" + json.market_data.current_price.usd + "'},");
+//     var now = new Date(2021, 11, 29);
+//     for (var thisDate = new Date(2021, 11, 20); thisDate <= now; thisDate.setDate(thisDate.getDate() + 1)) {
+//         let price=await getPriceFromCoinGecko(coin,thisDate.toISOString())
+//         console.log("{ date: '" + thisDate.toISOString() + "', coin: '" + coin + "', price: '" + price + "'},");
 
 //     }
 // }
