@@ -1,5 +1,6 @@
 import { Token } from "./tokens"
-import { STXPrice } from "./stxprices" 
+import { STXPrice } from "./coinprices/stxprices" 
+import { DIKOPrice } from "./coinprices/dikoprices" 
 
 export default async function convertJsonToOutputArray(json, walletId) {
     let outputArray = [];
@@ -87,7 +88,7 @@ async function getOutputArrayRow(xactn, xactnFee, transferIn, transferOut) {
         burnDate: xactn.tx.burn_block_time_iso,
         rowId: 0,
         inSymbol: inSymbol,
-        inAmount: await convertAmount(outSymbol,inAmountRaw),
+        inAmount: await convertAmount(inSymbol,inAmountRaw),
         outSymbol: outSymbol,
         outAmount: await convertAmount(outSymbol,outAmountRaw),
         xactnFee: xactnFee / 1000000,
@@ -146,23 +147,24 @@ async function getCoinPrice(symbol, priceDate) {
         //Obtain the Object Array with prices for the symbol, if one exists
         let coinPriceObject=await getCoinPriceObject(symbol);
         if (coinPriceObject!==undefined) {
-        let matchingPrice = coinPriceObject.filter(function(item) {
-            return (new Date(item.date).getTime() >= new Date(priceDate).getTime());
-        });
-        //If a match in historical prices, use that price
-        if (matchingPrice.length>0) {
-            price = matchingPrice[0].price
-            let intPrice=parseInt(price)
-            if (!Number.isNaN(intPrice)) {
-                price=intPrice.toFixed(2);
+            let matchingPrice = coinPriceObject.filter(function(item) {
+                return (new Date(item.date).getTime() <= new Date(priceDate).getTime());
+            });
+            //There should always be a matching record if the array of historical prices was created correctly
+            if (matchingPrice.length>0) {
+                price = matchingPrice[matchingPrice.length-1].price
+                let decPrice=parseFloat(price)
+
+                //If we have a valid price in our historical array
+                if (!Number.isNaN(decPrice)) {
+                    price=decPrice.toFixed(2);
+                } else {
+                    //otherwise call CoinGeckoAPI
+                    price=await getPriceFromCoinGecko(symbol,priceDate);
+                }
             }
-        } else {
-            //otherwise call CoinGeckoAPI
-            price=await getPriceFromCoinGecko(symbol,priceDate);
         }
     }
-}
-
     return price;
 }
 
@@ -182,14 +184,16 @@ async function getPriceFromCoinGecko(symbol, priceDate) {
     if (apiSymbol !=='')
     {
         let dateForCG = await getDateForCoinGecko(new Date(priceDate))
+        console.log(dateForCG);
         let url=baseUrl+apiSymbol+'/history?localization=false&date=' + dateForCG;
         let response = await fetch(url);
-        let json = null;
         if (response.status === 200) {
-            json = await response.json();
-            let intPrice=parseInt(json.market_data.current_price.usd);
-            if (!Number.isNaN(intPrice)) {
-                price=intPrice.toFixed(2);
+            let json = await response.json();
+            if (json.market_data !== undefined) {
+                let decPrice=parseFloat(json.market_data.current_price.usd);
+                if (!Number.isNaN(decPrice)) {
+                    price=decPrice.toFixed(2);
+                }
             }
         }
     }
@@ -205,7 +209,7 @@ async function getCoinPriceAPISymbol(symbol) {
             return (token.symbol === symbol);
         });
         if (matchingToken?.length > 0) {
-            apiSymbol = matchingToken[0].symbol;
+            apiSymbol = matchingToken[0].apiSymbol;
         } 
     }
 
@@ -213,7 +217,8 @@ async function getCoinPriceAPISymbol(symbol) {
 }
 
 async function getDateForCoinGecko(thisDate) {
-    let returnDate = ("0" + thisDate.getDate()).slice(-2) + "-" + ("0" + (thisDate.getMonth() + 1)).slice(-2) + "-" + thisDate.getFullYear();
+    let workingDate=new Date(thisDate);
+    let returnDate = workingDate.getUTCDate() + "-" + (parseInt(workingDate.getUTCMonth())+1) + "-" + workingDate.getUTCFullYear();
     return returnDate;
 }
 
@@ -226,21 +231,12 @@ async function populateRowId(outputArray) {
     return outputArray;
 }
 
+// async function utilityGetCoinFromCoinGecko(coin) {
+//     var now = new Date(2021, 12, 29);
+//     for (var thisDate = new Date(2021, 12, 20); thisDate <= now; thisDate.setDate(thisDate.getDate() + 1)) {
+//         let price=await getPriceFromCoinGecko('STX',thisDate)
+//         console.log(price);
+//         //console.log("{ date: '" + thisDate.toISOString() + "', coin: 'DIKO', price: '" + json.market_data.current_price.usd + "'},");
 
-//**************Just used by us to get coin history data, not real time.
-// async function utilityGetCoinFromCoinGecko(coin, priceDate) {
-//     const baseUrl = "https://api.coingecko.com/api/v3/coins/blockstack/history?localization=false&date=";
-//     var now = new Date(2021, 11, 29);
-//     var daysOfYear = [];
-//     for (var thisDate = new Date(2021, 11, 22); thisDate <= now; thisDate.setDate(thisDate.getDate() + 1)) {
-//         var dateForCG = await getDateForCoinGecko(thisDate)
-//         let url = baseUrl + dateForCG;
-//         let response = await fetch(url);
-//         let json = null;
-//         if (response.status === 200) {
-//             json = await response.json();
-//             console.log("{ date: '" + thisDate.toISOString() + "', coin: 'STX', price: '" + json.market_data.current_price.usd + "'},");
-//         }
 //     }
-//     //return [response.status,json];
 // }
