@@ -5,7 +5,7 @@ import { MIAPrice } from "./coinprices/miaprices"
 import { XBTCPrice } from "./coinprices/xbtcprices" 
 
 export default async function convertJsonToOutputArray(json, walletId) {
-//await utilityGetCoinFromCoinGecko('DIKO');
+//await utilityGetCoinFromCoinGecko('xBTC');
     let outputArray = [];
     for (const xactn of json) {
         if (xactn.tx.tx_status === "success") {
@@ -202,7 +202,7 @@ async function getPriceFromCoinGecko(symbol, priceDate) {
         if (response.status === 200) {
             let json = await response.json();
             if (json.market_data !== undefined) {
-                    price=json.market_data.current_price.usd;
+                price=json.market_data.current_price.usd;
             }
         }
     }
@@ -232,7 +232,7 @@ async function getDateForCoinGecko(thisDate) {
 }
 
 async function formatPrice(price,symbol) {
-    let workingPrice=0;
+    let workingPrice='N/A';
     let decPrice=parseFloat(price);
     if (!Number.isNaN(decPrice)) {
         let matchingToken = Token?.tokens?.filter(function(token) {
@@ -241,8 +241,7 @@ async function formatPrice(price,symbol) {
         if (matchingToken?.length > 0) {
             workingPrice =decPrice.toFixed(matchingToken[0].priceDecimals);
         } else {
-            console.log(symbol + 'fixed');
-            workingPrice=decPrice.toFixed(2); //default is 2
+             workingPrice=decPrice.toFixed(2); //default is 2
         }
     }
     return workingPrice;
@@ -257,11 +256,11 @@ async function populateRowId(outputArray) {
     return outputArray;
 }
 
-// async function utilityGetCoinFromCoinGecko(coin) {
-//     var now = new Date(2021, 11, 29);
-//     for (var thisDate = new Date(2021, 11, 20); thisDate <= now; thisDate.setDate(thisDate.getDate() + 1)) {
-//         let price=await getPriceFromCoinGecko(coin,thisDate.toISOString())
-//         console.log("{ date: '" + thisDate.toISOString() + "', coin: '" + coin + "', price: '" + price + "'},");
+async function utilityGetCoinFromCoinGecko(coin) {
+    var now = new Date(2021, 11, 29);
+    for (var thisDate = new Date(2021, 11, 20); thisDate <= now; thisDate.setDate(thisDate.getDate() + 1)) {
+        let price=await getPriceFromCoinGecko(coin,thisDate.toISOString())
+        console.log("{ date: '" + thisDate.toISOString() + "', coin: '" + coin + "', price: '" + price + "'},");
 
-//     }
-// }
+    }
+}
