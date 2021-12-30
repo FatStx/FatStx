@@ -52,6 +52,12 @@ export default function Transactions({txnData}) {
     return d.toUTCString();
   }
 
+  const formatPrice = (price) => {
+    if ( price === '' ) { return '-' }
+    else if ( price === 'N/A' ) { return price }
+    else { return '$' + price }
+  }
+
   return (
     <React.Fragment>
       <Snackbar
@@ -138,10 +144,10 @@ export default function Transactions({txnData}) {
                 />
               </TableCell>
 
-              <TableCell align="right">{`Ӿ ${row.xactnFee}`}</TableCell>
-              <TableCell align="right">{`${row.inCoinPrice === '' ? '-' : '$' +  row.inCoinPrice}`}</TableCell>
-              <TableCell align="right">{`${row.outCoinPrice === '' ? '-' : '$' +  row.outCoinPrice}`}</TableCell>
-              <TableCell align="right">{`${row.xactnFeeCoinPrice === '' ? '-' : '$' +  row.xactnFeeCoinPrice}`}</TableCell>
+              <TableCell align="right">{`${row.xactnFee === 0 ? '-' : 'Ӿ ' +  row.xactnFee}`}</TableCell>
+              <TableCell align="right">{formatPrice(row.inCoinPrice)}</TableCell>
+              <TableCell align="right">{formatPrice(row.outCoinPrice)}</TableCell>
+              <TableCell align="right">{formatPrice(row.xactnFeeCoinPrice)}</TableCell>
 
               <TableCell>
                 <Tx 
