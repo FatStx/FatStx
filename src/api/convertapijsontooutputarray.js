@@ -140,6 +140,12 @@ async function getTransferSymbol(transferRow) {
             symbol = 'STX';
         }
     }
+    let doubleColonLoc=symbol.indexOf('::');
+    if (doubleColonLoc>-1) {
+        symbol=symbol.substring(doubleColonLoc+2);
+    }
+
+
     return symbol;
 }
 
