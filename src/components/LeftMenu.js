@@ -9,6 +9,7 @@ import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import InfoIcon from '@mui/icons-material/Info';
 import Divider from '@mui/material/Divider';
+import FeedbackIcon from '@mui/icons-material/Feedback';
 
 
 export const mainListItems = (
@@ -36,7 +37,7 @@ export const mainListItems = (
 
     <ListItem button component={Link} to="disclaimer">
       <ListItemIcon>
-        <InfoIcon />
+        <FeedbackIcon />
       </ListItemIcon>
       <ListItemText primary="Disclaimers" />
     </ListItem>
