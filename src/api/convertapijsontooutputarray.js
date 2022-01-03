@@ -166,8 +166,18 @@ async function getTransferSymbol(transferRow) {
         symbol=symbol.substring(doubleColonLoc+2);
     }
 
+    symbol +=await getNftIdentifier(symbol,transferRow);
 
     return symbol;
+}
+
+async function getNftIdentifier(symbol,transferRow) {
+    let nftIdentifier='';
+    if (transferRow != undefined && transferRow.value != undefined)
+    {
+        nftIdentifier='#' + transferRow.value.repr.substring(1);
+    }
+    return nftIdentifier;
 }
 
 async function getCoinPrice(symbol, priceDate) {
