@@ -41,22 +41,43 @@ async function getOutputRowsForXactn(xactn, walletId) {
     let feeCtr = xactnFee > 0 ? 1 : 0;
 
     //IN
-    let stxTransfersIn = await getSTXTransfersForXactn(xactn, walletId, true);
-    let ftTransfersIn = await getFtCoinTransfersForXactn(xactn, walletId, true);
-    let inCtr = stxTransfersIn.length + ftTransfersIn.length;
+    let stxTransfersIn = await getAssetTransfersForXactn(xactn, walletId,'STX', true);
+    let ftTransfersIn = await getAssetTransfersForXactn(xactn, walletId,'FT', true);
+    let nftTransfersIn = await getAssetTransfersForXactn(xactn, walletId,'NFT', true);
+    let inCtr = stxTransfersIn.length + ftTransfersIn.length + nftTransfersIn.length;
 
     //OUT
-    let stxTransfersOut = await getSTXTransfersForXactn(xactn, walletId, false);
-    let ftTransfersOut = await getFtCoinTransfersForXactn(xactn, walletId, false);
-    let outCtr = stxTransfersOut.length + ftTransfersOut.length;
+    let stxTransfersOut = await getAssetTransfersForXactn(xactn, walletId, 'STX',false);
+    let ftTransfersOut = await getAssetTransfersForXactn(xactn, walletId,'FT', false);
+    let nftTransfersOut = await getAssetTransfersForXactn(xactn, walletId,'NFT', false);
+    let outCtr = stxTransfersOut.length + ftTransfersOut.length + nftTransfersOut.length;
 
     let rowCount = Math.max(feeCtr, inCtr, outCtr);
     return {
         rowCount: rowCount,
         xactnFee: xactnFee,
-        transfersIn: stxTransfersIn.concat(ftTransfersIn),
-        transfersOut: stxTransfersOut.concat(ftTransfersOut)
+        transfersIn: stxTransfersIn.concat(ftTransfersIn).concat(nftTransfersIn),
+        transfersOut: stxTransfersOut.concat(ftTransfersOut).concat(nftTransfersOut)
     };
+}
+
+async function getAssetTransfersForXactn(xactn, walletId, assetType, isIncoming) {
+
+    let transferList = 
+        assetType==='FT'
+        ? xactn.ft_transfers
+        : (assetType==='NFT'
+            ? xactn.nft_transfers
+            : xactn.stx_transfers );
+
+    let assetTransfers = transferList.filter(function(item) {
+        return (item.asset_identifier !== 'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.wrapped-stx-token::wstx' &&
+        item.recipient === (isIncoming ? walletId : item.recipient) &&
+        item.sender === (isIncoming ? item.sender : walletId)
+        );
+    });
+
+    return assetTransfers;
 }
 
 async function getFtCoinTransfersForXactn(xactn, walletId, isIncoming) {
@@ -85,8 +106,8 @@ async function getOutputArrayRow(xactn, xactnFee, transferIn, transferOut) {
     let outputArrayRow = null;
     let inSymbol = await getTransferSymbol(transferIn);
     let outSymbol = await getTransferSymbol(transferOut);
-    let inAmountRaw = transferIn === undefined ? 0 : transferIn.amount;
-    let outAmountRaw = transferOut === undefined ? 0 : transferOut.amount;
+    let inAmountRaw = transferIn === undefined ? 0 : (transferIn.amount === undefined?1:transferIn.amount);
+    let outAmountRaw = transferOut === undefined ? 0 : (transferOut.amount === undefined?1:transferOut.amount);
 
     outputArrayRow = {
         burnDate: xactn.tx.burn_block_time_iso,
