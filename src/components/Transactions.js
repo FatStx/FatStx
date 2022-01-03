@@ -121,6 +121,8 @@ export default function Transactions({txnData}) {
               <TableCell sx={{ fontFamily: 'Monospace' }}>
                 <a 
                   href = {"https://explorer.stacks.co/txid/" + row.xactnId + "?chain=mainnet"}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {row.xactnId.substring(0, 4) + '…' + row.xactnId.slice(-3) }
                 </a>
