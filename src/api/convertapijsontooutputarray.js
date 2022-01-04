@@ -70,7 +70,7 @@ async function getOutputRowsForXactn(xactn, walletId) {
 
 //If an NFT IN, combine any stx or ft transfers out into a single row per coin
 async function convertTransfersToRowHeader(isConcat,transferRows,isNft) {
-    let rowHeaders=new Array();
+    let rowHeaders=[];
     //initial pass through to narrow it down to symbol and amount
     for (const transferRow of transferRows) {
         let symbol = await getTransferSymbol(transferRow);
