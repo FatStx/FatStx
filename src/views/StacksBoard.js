@@ -19,6 +19,7 @@ import { mainListItems } from '../components/LeftMenu';
 import TxReport from './TxReport'
 import StackingReport from './StackingReport'
 import WenBlok from './WenBlok'
+import Disclaimer from './Disclaimer'
 
 const drawerWidth = 190;
 
@@ -143,6 +144,7 @@ function DashboardContent() {
               <Route path="transactions" element={<TxReport />} />
               <Route path="stacking" element={<StackingReport />} />
               <Route path="wenblok" element={<WenBlok />} />
+              <Route path="disclaimer" element={<Disclaimer />} />
               <Route path="*" element={<TxReport />} />
           </Routes>
 
