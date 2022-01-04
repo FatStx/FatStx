@@ -19,7 +19,8 @@ export default async function convertJsonToOutputArray(json, walletId) {
 
 async function addOutputArrayRowsForXactn(outputArray, xactn, walletId) {
     let outputRowRawData = await getOutputRowsForXactn(xactn, walletId);
-    //console.log(xactn);
+    console.log(outputRowRawData);
+
     for (var ctr = 0; ctr < outputRowRawData.rowCount; ctr += 1) {
         let outputRow = await getOutputArrayRow(
             xactn,
@@ -34,8 +35,6 @@ async function addOutputArrayRowsForXactn(outputArray, xactn, walletId) {
 }
 
 async function getOutputRowsForXactn(xactn, walletId) {
-    //TODO: NFTs IN and OUT
-
     //XACTN FEE 
     let xactnFee = xactn.tx.sender_address === walletId ? xactn.tx.fee_rate : 0;
     let feeCtr = xactnFee > 0 ? 1 : 0;
@@ -44,21 +43,72 @@ async function getOutputRowsForXactn(xactn, walletId) {
     let stxTransfersIn = await getAssetTransfersForXactn(xactn, walletId,'STX', true);
     let ftTransfersIn = await getAssetTransfersForXactn(xactn, walletId,'FT', true);
     let nftTransfersIn = await getAssetTransfersForXactn(xactn, walletId,'NFT', true);
-    let inCtr = stxTransfersIn.length + ftTransfersIn.length + nftTransfersIn.length;
 
     //OUT
     let stxTransfersOut = await getAssetTransfersForXactn(xactn, walletId, 'STX',false);
     let ftTransfersOut = await getAssetTransfersForXactn(xactn, walletId,'FT', false);
     let nftTransfersOut = await getAssetTransfersForXactn(xactn, walletId,'NFT', false);
-    let outCtr = stxTransfersOut.length + ftTransfersOut.length + nftTransfersOut.length;
+
+    //Convert to simple header with symbol and amount, including summing by symbol if the other side is an NFT
+    let stxHeadersIn = await convertTransfersToRowHeader(nftTransfersOut.length>0, stxTransfersIn);
+    let ftHeadersIn = await convertTransfersToRowHeader(nftTransfersOut.length>0, ftTransfersIn);
+    let nftHeadersIn = await convertTransfersToRowHeader(false,nftTransfersIn);
+    let stxHeadersOut = await convertTransfersToRowHeader(nftTransfersIn.length>0,stxTransfersOut);
+    let ftHeadersOut = await convertTransfersToRowHeader(nftTransfersIn.length>0,ftTransfersOut);
+    let nftHeadersOut = await convertTransfersToRowHeader(false,nftTransfersOut);
+
+    let inCtr = stxHeadersIn.length + ftHeadersIn.length + nftHeadersIn.length;
+    let outCtr = stxHeadersOut.length + ftHeadersOut.length + nftHeadersOut.length;
 
     let rowCount = Math.max(feeCtr, inCtr, outCtr);
     return {
         rowCount: rowCount,
         xactnFee: xactnFee,
-        transfersIn: stxTransfersIn.concat(ftTransfersIn).concat(nftTransfersIn),
-        transfersOut: stxTransfersOut.concat(ftTransfersOut).concat(nftTransfersOut)
+        transfersIn: stxHeadersIn.concat(ftHeadersIn).concat(nftHeadersIn),
+        transfersOut: stxHeadersOut.concat(ftHeadersOut).concat(nftHeadersOut)
     };
+}
+
+//If an NFT IN, combine any stx or ft transfers out into a single row per coin
+async function convertTransfersToRowHeader(isConcat,transferRows) {
+    let rowHeaders=new Array();
+    //initial pass through to narrow it down to symbol and amount
+    for (const transferRow of transferRows) {
+        let symbol = await getTransferSymbol(transferRow);
+        rowHeaders.push({
+            symbol: symbol,
+            rawAmount: transferRow.amount
+        })
+    }
+    if (isConcat) {
+        let adjustedHeaders=new Array();
+        let symbol='';
+        let newRow;
+        for (const transferRow of rowHeaders.sort((a, b) => a.symbol.localeCompare(b.symbol))){
+            if (transferRow.symbol !=symbol) {
+                symbol=transferRow.symbol;
+                if (newRow !=undefined)
+                {
+                    adjustedHeaders.push(newRow);
+                }
+                newRow = {
+                    symbol: symbol,
+                    rawAmount: transferRow.rawAmount
+                };
+            } else {
+                newRow = {
+                    symbol: transferRow.symbol,
+                    rawAmount: parseFloat(newRow.rawAmount) + parseFloat(transferRow.rawAmount)
+                };
+            }
+        }
+        if (newRow !=undefined)
+        {
+            adjustedHeaders.push(newRow);
+        }
+        return adjustedHeaders;
+    }
+    return rowHeaders;
 }
 
 async function getAssetTransfersForXactn(xactn, walletId, assetType, isIncoming) {
@@ -70,6 +120,8 @@ async function getAssetTransfersForXactn(xactn, walletId, assetType, isIncoming)
             ? xactn.nft_transfers
             : xactn.stx_transfers );
 
+    //Exclude WSTX and only look at transactions for the passed direction
+    //NOTE that there *might* be times we have to not exclude WSTX in the future
     let assetTransfers = transferList.filter(function(item) {
         return (item.asset_identifier !== 'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.wrapped-stx-token::wstx' &&
         item.recipient === (isIncoming ? walletId : item.recipient) &&
@@ -80,34 +132,13 @@ async function getAssetTransfersForXactn(xactn, walletId, assetType, isIncoming)
     return assetTransfers;
 }
 
-async function getFtCoinTransfersForXactn(xactn, walletId, isIncoming) {
-    //Exclude WSTX and only look at transactions for the passed direction
-    //NOTE that there *might* be times we have to not exclude WSTX in the future
-    let ftTransfers = xactn.ft_transfers.filter(function(item) {
-
-        return (item.asset_identifier !== 'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.wrapped-stx-token::wstx' &&
-            item.recipient === (isIncoming ? walletId : item.recipient) &&
-            item.sender === (isIncoming ? item.sender : walletId)
-        );
-    });
-    return ftTransfers;
-}
-
-async function getSTXTransfersForXactn(xactn, walletId, isIncoming) {
-    let ftTransfers = xactn.stx_transfers.filter(function(item) {
-        return (item.recipient === (isIncoming ? walletId : item.recipient) &&
-            item.sender === (isIncoming ? item.sender : walletId)
-        );
-    });
-    return ftTransfers;
-}
 
 async function getOutputArrayRow(xactn, xactnFee, transferIn, transferOut) {
     let outputArrayRow = null;
-    let inSymbol = await getTransferSymbol(transferIn);
-    let outSymbol = await getTransferSymbol(transferOut);
-    let inAmountRaw = transferIn === undefined ? 0 : (transferIn.amount === undefined?1:transferIn.amount);
-    let outAmountRaw = transferOut === undefined ? 0 : (transferOut.amount === undefined?1:transferOut.amount);
+    let inSymbol = transferIn === undefined ? '' : (transferIn.symbol === undefined?'':transferIn.symbol);
+    let outSymbol = transferOut === undefined ? '' : (transferOut.symbol === undefined?'':transferOut.symbol);
+    let inAmountRaw = transferIn === undefined ? 0 : (transferIn.rawAmount === undefined?1:transferIn.rawAmount);
+    let outAmountRaw = transferOut === undefined ? 0 : (transferOut.rawAmount === undefined?1:transferOut.rawAmount);
 
     outputArrayRow = {
         burnDate: xactn.tx.burn_block_time_iso,
