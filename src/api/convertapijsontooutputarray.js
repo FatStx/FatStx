@@ -19,7 +19,6 @@ export default async function convertJsonToOutputArray(json, walletId) {
 
 async function addOutputArrayRowsForXactn(outputArray, xactn, walletId) {
     let outputRowRawData = await getOutputRowsForXactn(xactn, walletId);
-    console.log(outputRowRawData);
 
     for (var ctr = 0; ctr < outputRowRawData.rowCount; ctr += 1) {
         let outputRow = await getOutputArrayRow(
@@ -151,12 +150,13 @@ async function getOutputArrayRow(xactn, xactnFee, transferIn, transferOut) {
         inCoinPrice: await getCoinPrice(inSymbol,xactn.tx.burn_block_time_iso),
         outCoinPrice: await getCoinPrice(outSymbol,xactn.tx.burn_block_time_iso),
         xactnFeeCoinPrice: await getCoinPrice(xactnFee>0?'STX':'',xactn.tx.burn_block_time_iso),
-        xactnType: 'TBD',
+        xactnType: 'Unknown',
         xactnId: xactn.tx.tx_id,
         inAmountRaw: inAmountRaw,
         outAmountRaw: outAmountRaw,
         xactnFeeRaw: xactnFee,
     };
+    outputArrayRow.xactnType = await getXactnType(xactn,outputArrayRow);
     return outputArrayRow;
 }
 
@@ -239,6 +239,24 @@ async function getCoinPrice(symbol, priceDate) {
     }
     return price;
 }
+
+async function getXactnType(xactn,outputArrayRow) {
+    let xactnType='Unknown';
+    if (outputArrayRow.inAmountRaw>0) {
+        if (outputArrayRow.outAmountRaw>0) {
+            xactnType='Trade';
+        } else {
+            xactnType='Receive'
+        }   
+    } else if (outputArrayRow.outAmountRaw>0) {
+        xactnType='Send'
+    } else {
+        xactnType='Xactn Fee'
+    }
+
+    return xactnType;
+}
+
 
 //As we add assets which have either historical prices or prices available from coingecko,
 //js files should be created with the objects and price arrays and should be added here
