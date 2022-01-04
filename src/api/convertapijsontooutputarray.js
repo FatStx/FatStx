@@ -155,6 +155,7 @@ async function getOutputArrayRow(xactn, xactnFee, transferIn, transferOut) {
         outCoinPrice: await getCoinPrice(outSymbol,xactn.tx.burn_block_time_iso),
         xactnFeeCoinPrice: await getCoinPrice(xactnFee>0?'STX':'',xactn.tx.burn_block_time_iso),
         xactnType: 'Unknown',
+        xactnTypeDetail: '',
         xactnId: xactn.tx.tx_id,
         inAmountRaw: inAmountRaw,
         outAmountRaw: outAmountRaw,
