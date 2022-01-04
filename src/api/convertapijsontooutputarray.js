@@ -49,12 +49,12 @@ async function getOutputRowsForXactn(xactn, walletId) {
     let nftTransfersOut = await getAssetTransfersForXactn(xactn, walletId,'NFT', false);
 
     //Convert to simple header with symbol and amount, including summing by symbol if the other side is an NFT
-    let stxHeadersIn = await convertTransfersToRowHeader(nftTransfersOut.length>0, stxTransfersIn);
-    let ftHeadersIn = await convertTransfersToRowHeader(nftTransfersOut.length>0, ftTransfersIn);
-    let nftHeadersIn = await convertTransfersToRowHeader(false,nftTransfersIn);
-    let stxHeadersOut = await convertTransfersToRowHeader(nftTransfersIn.length>0,stxTransfersOut);
-    let ftHeadersOut = await convertTransfersToRowHeader(nftTransfersIn.length>0,ftTransfersOut);
-    let nftHeadersOut = await convertTransfersToRowHeader(false,nftTransfersOut);
+    let stxHeadersIn = await convertTransfersToRowHeader(nftTransfersOut.length>0, stxTransfersIn,false);
+    let ftHeadersIn = await convertTransfersToRowHeader(nftTransfersOut.length>0, ftTransfersIn,false);
+    let nftHeadersIn = await convertTransfersToRowHeader(false,nftTransfersIn,true);
+    let stxHeadersOut = await convertTransfersToRowHeader(nftTransfersIn.length>0,stxTransfersOut,false);
+    let ftHeadersOut = await convertTransfersToRowHeader(nftTransfersIn.length>0,ftTransfersOut,false);
+    let nftHeadersOut = await convertTransfersToRowHeader(false,nftTransfersOut,true);
 
     let inCtr = stxHeadersIn.length + ftHeadersIn.length + nftHeadersIn.length;
     let outCtr = stxHeadersOut.length + ftHeadersOut.length + nftHeadersOut.length;
@@ -69,14 +69,15 @@ async function getOutputRowsForXactn(xactn, walletId) {
 }
 
 //If an NFT IN, combine any stx or ft transfers out into a single row per coin
-async function convertTransfersToRowHeader(isConcat,transferRows) {
+async function convertTransfersToRowHeader(isConcat,transferRows,isNft) {
     let rowHeaders=new Array();
     //initial pass through to narrow it down to symbol and amount
     for (const transferRow of transferRows) {
         let symbol = await getTransferSymbol(transferRow);
         rowHeaders.push({
             symbol: symbol,
-            rawAmount: transferRow.amount
+            rawAmount: transferRow.amount,
+            isNft: isNft
         })
     }
     if (isConcat) {
@@ -92,12 +93,14 @@ async function convertTransfersToRowHeader(isConcat,transferRows) {
                 }
                 newRow = {
                     symbol: symbol,
-                    rawAmount: transferRow.rawAmount
+                    rawAmount: transferRow.rawAmount,
+                    isNft: isNft
                 };
             } else {
                 newRow = {
                     symbol: transferRow.symbol,
-                    rawAmount: parseFloat(newRow.rawAmount) + parseFloat(transferRow.rawAmount)
+                    rawAmount: parseFloat(newRow.rawAmount) + parseFloat(transferRow.rawAmount),
+                    isNft: isNft
                 };
             }
         }
