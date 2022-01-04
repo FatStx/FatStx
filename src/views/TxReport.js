@@ -26,7 +26,7 @@ export default function TxReport() {
 
     ReactGA.send({ hitType: "pageview", page: "/transactions" });
   
-    if (walletId.length !== 41)
+    if (walletId.length<5) // TODO: need a more robust check - perhaps against explorer API?
     {
         alert("Please enter a valid wallet address");
         return;
