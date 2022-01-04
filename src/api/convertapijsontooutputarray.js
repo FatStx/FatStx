@@ -134,13 +134,14 @@ async function getAssetTransfersForXactn(xactn, walletId, assetType, isIncoming)
     return assetTransfers;
 }
 
-
 async function getOutputArrayRow(xactn, xactnFee, transferIn, transferOut) {
     let outputArrayRow = null;
     let inSymbol = transferIn === undefined ? '' : (transferIn.symbol === undefined?'':transferIn.symbol);
     let outSymbol = transferOut === undefined ? '' : (transferOut.symbol === undefined?'':transferOut.symbol);
     let inAmountRaw = transferIn === undefined ? 0 : (transferIn.rawAmount === undefined?1:transferIn.rawAmount);
     let outAmountRaw = transferOut === undefined ? 0 : (transferOut.rawAmount === undefined?1:transferOut.rawAmount);
+    let isNftIn = transferIn === undefined ? '' : (transferIn.isNft === undefined?'':transferIn.isNft);
+    let isNftOut = transferOut === undefined ? '' : (transferOut.isNft === undefined?'':transferOut.isNft);
 
     outputArrayRow = {
         burnDate: xactn.tx.burn_block_time_iso,
@@ -158,6 +159,8 @@ async function getOutputArrayRow(xactn, xactnFee, transferIn, transferOut) {
         inAmountRaw: inAmountRaw,
         outAmountRaw: outAmountRaw,
         xactnFeeRaw: xactnFee,
+        isNftIn: isNftIn,
+        isNftOut: isNftOut
     };
     outputArrayRow.xactnType = await getXactnType(xactn,outputArrayRow);
     return outputArrayRow;
@@ -245,7 +248,15 @@ async function getCoinPrice(symbol, priceDate) {
 
 async function getXactnType(xactn,outputArrayRow) {
     let xactnType='Unknown';
-    if (outputArrayRow.inAmountRaw>0) {
+    if (outputArrayRow.isNftIn) {
+        if (outputArrayRow.isNftOut) {
+            xactnType='Trade NFT';
+        } else {
+            xactnType='Receive NFT';
+        }
+    } else if (outputArrayRow.isNftOut) {
+        xactnType='Send NFT';
+    } else if (outputArrayRow.inAmountRaw>0) {
         if (outputArrayRow.outAmountRaw>0) {
             xactnType='Trade';
         } else {
@@ -254,7 +265,7 @@ async function getXactnType(xactn,outputArrayRow) {
     } else if (outputArrayRow.outAmountRaw>0) {
         xactnType='Send'
     } else {
-        xactnType='Xactn Fee'
+        xactnType='XFee Only'
     }
 
     return xactnType;
