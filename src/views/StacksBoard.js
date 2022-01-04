@@ -144,7 +144,9 @@ function DashboardContent() {
               <Route path="transactions" element={<TxReport />} />
               <Route path="stacking" element={<StackingReport />} />
               <Route path="wenblok" element={<WenBlok />} />
+              
               <Route path="disclaimer" element={<Disclaimer />} />
+              <Route path="about" element={<Disclaimer />} />
               <Route path="*" element={<TxReport />} />
           </Routes>
 

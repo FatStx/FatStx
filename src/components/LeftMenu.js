@@ -35,12 +35,6 @@ export const mainListItems = (
 
     <Divider />
 
-    <ListItem button component={Link} to="disclaimer">
-      <ListItemIcon>
-        <FeedbackIcon />
-      </ListItemIcon>
-      <ListItemText primary="Disclaimers" />
-    </ListItem>
     <ListItem button component={Link} to="about">
       <ListItemIcon>
         <InfoIcon />

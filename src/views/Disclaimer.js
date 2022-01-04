@@ -7,7 +7,7 @@ export default function Disclaimer() {
     ReactGA.send({ hitType: "pageview", page: "/wenblok" });
 
     return(
-        <Container>
+        <Container >
             <h1>Disclaimers</h1>
 
             <ul>
@@ -17,6 +17,10 @@ export default function Disclaimer() {
                 <li>Currently the page only accepts the raw addresses, not .btc addresses.</li>
                 <li>Dates are in the browser time zone. Future dates are estimates and may be off by several days</li>
             </ul>
+
+            <h1>About</h1>
+
+            <p> Built by @eparrot and @foragerr</p>
         </Container>
     )
 }
