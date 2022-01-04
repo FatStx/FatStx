@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
 
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -142,6 +142,7 @@ function DashboardContent() {
           <Toolbar />
           <Routes>
               <Route path="transactions" element={<TxReport />} />
+              <Route path="transactions/:walletInPath" element={<TxReport />} />
               <Route path="stacking" element={<StackingReport />} />
               <Route path="wenblok" element={<WenBlok />} />
               

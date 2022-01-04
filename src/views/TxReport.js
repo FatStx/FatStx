@@ -1,5 +1,6 @@
 import ReactGA from "react-ga4";
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { useParams } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -13,7 +14,8 @@ import processAllXactnWithTransfersApiPages from '../api/stxapicalls'
 
 export default function TxReport() {
 
-  const [walletId, setWalletId] = useState('');
+  const {walletInPath} = useParams();
+  const [walletId, setWalletId] = useState(walletInPath);
   const [txnData, setTxnData] = useState([]);
 
   const handleWalletIdChange = (event) => {
@@ -24,7 +26,7 @@ export default function TxReport() {
 
     ReactGA.send({ hitType: "pageview", page: "/transactions" });
   
-    if (walletId.length<5) // TODO: need a more robust check - perhaps against explorer API?
+    if (walletId.length !== 41)
     {
         alert("Please enter a valid wallet address");
         return;
@@ -36,6 +38,14 @@ export default function TxReport() {
     return;
   
   }
+
+  const intialLoad = useCallback(getWalletTxData, [walletId]);
+
+  useEffect(()=> {
+    if (walletInPath !== '') {
+      intialLoad()
+    }
+  }, [intialLoad, walletInPath])
 
   return (
     <Container maxWidth={false} sx={{ mt: 4, mb: 4}}>
