@@ -81,13 +81,13 @@ async function convertTransfersToRowHeader(isConcat,transferRows,isNft) {
         })
     }
     if (isConcat) {
-        let adjustedHeaders=new Array();
+        let adjustedHeaders = [];
         let symbol='';
         let newRow;
         for (const transferRow of rowHeaders.sort((a, b) => a.symbol.localeCompare(b.symbol))){
-            if (transferRow.symbol !=symbol) {
+            if (transferRow.symbol !== symbol) {
                 symbol=transferRow.symbol;
-                if (newRow !=undefined)
+                if (newRow !== undefined)
                 {
                     adjustedHeaders.push(newRow);
                 }
@@ -104,7 +104,7 @@ async function convertTransfersToRowHeader(isConcat,transferRows,isNft) {
                 };
             }
         }
-        if (newRow !=undefined)
+        if (newRow !== undefined)
         {
             adjustedHeaders.push(newRow);
         }
@@ -207,7 +207,7 @@ async function getTransferSymbol(transferRow) {
 
 async function getNftIdentifier(symbol,transferRow) {
     let nftIdentifier='';
-    if (transferRow != undefined && transferRow.value != undefined)
+    if (transferRow !== undefined && transferRow.value !== undefined)
     {
         nftIdentifier='#' + transferRow.value.repr.substring(1);
     }
@@ -230,7 +230,7 @@ async function getCoinPrice(symbol, priceDate) {
                 price = matchingPrice[matchingPrice.length-1].price
                 let decPrice=await formatPrice(price,symbol);
                 //If we do not have a valid price in our historical array
-                if (decPrice==0) {
+                if (decPrice === 0) {
                     //otherwise call CoinGeckoAPI
                     decPrice=await getPriceFromCoinGecko(symbol,priceDate);
                     price=await formatPrice(decPrice,symbol);
@@ -345,11 +345,11 @@ async function populateRowId(outputArray) {
     return outputArray;
 }
 
-async function utilityGetCoinFromCoinGecko(coin) {
-    var now = new Date(2021, 11, 29);
-    for (var thisDate = new Date(2021, 11, 20); thisDate <= now; thisDate.setDate(thisDate.getDate() + 1)) {
-        let price=await getPriceFromCoinGecko(coin,thisDate.toISOString())
-        console.log("{ date: '" + thisDate.toISOString() + "', coin: '" + coin + "', price: '" + price + "'},");
+// async function utilityGetCoinFromCoinGecko(coin) {
+//     var now = new Date(2021, 11, 29);
+//     for (var thisDate = new Date(2021, 11, 20); thisDate <= now; thisDate.setDate(thisDate.getDate() + 1)) {
+//         let price=await getPriceFromCoinGecko(coin,thisDate.toISOString())
+//         console.log("{ date: '" + thisDate.toISOString() + "', coin: '" + coin + "', price: '" + price + "'},");
 
-    }
-}
+//     }
+// }

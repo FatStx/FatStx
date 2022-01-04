@@ -23,3 +23,5 @@ jobs:
         run: yarn install
       - name: deploy
         run: yarn deploy
+        env:
+          PAT_GHPAGES_PUBLISH: ${{ secrets.PAT_GHPAGES_PUBLISH }}

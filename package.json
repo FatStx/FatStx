@@ -21,11 +21,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build -r 'https://github.com/StacksBoard/StacksBoard.github.io.git' -b main"
+    "deploy": "gh-pages -d build -r \"https://${PAT_GHPAGES_PUBLISH}@github.com/StacksBoard/StacksBoard.github.io.git\" -b main"
   },
   "eslintConfig": {
     "extends": [
