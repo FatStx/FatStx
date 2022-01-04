@@ -84,10 +84,11 @@ export default function Transactions({txnData}) {
         <colgroup>
           <col style={{width:'15%'}}/>
           <col style={{width:'10%'}}/>
-          <col style={{width:'10%'}}/>
-          <col style={{width:'10%'}}/>
-          <col style={{width:'10%'}}/>
-          <col style={{width:'10%'}}/>
+          <col style={{width:'12%'}}/>
+          <col style={{width:'8%'}}/>
+          <col style={{width:'8%'}}/>
+          <col style={{width:'8%'}}/>
+          <col style={{width:'8%'}}/>
           <col style={{width:'35%'}}/>
         </colgroup>
 
@@ -95,6 +96,7 @@ export default function Transactions({txnData}) {
           <TableRow>
             <TableCell>Date</TableCell>
             <TableCell>TxID</TableCell>
+            <TableCell>Type</TableCell>
             <TableCell align="right">Fee</TableCell>
             <TableCell align="right">In Price</TableCell>
             <TableCell align="right">Out Price</TableCell>
@@ -146,6 +148,7 @@ export default function Transactions({txnData}) {
                 />
               </TableCell>
 
+              <TableCell>{row.xactnType}</TableCell>
               <TableCell align="right">{`${row.xactnFee === 0 ? '-' : 'Ӿ ' +  row.xactnFee}`}</TableCell>
               <TableCell align="right">{formatPrice(row.inCoinPrice)}</TableCell>
               <TableCell align="right">{formatPrice(row.outCoinPrice)}</TableCell>
