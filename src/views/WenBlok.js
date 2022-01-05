@@ -1,10 +1,16 @@
 import ReactGA from "react-ga4";
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
+import React from "react";
 import Container from '@mui/material/Container';
 import { Grid } from "@mui/material";
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
+import WenblokCycles from '../components/WenblokCycles'
 
 
 export default function WenBlok() {
@@ -13,61 +19,68 @@ export default function WenBlok() {
 
     return(
       <Container maxWidth={false} sx={{ mt: 4, mb: 4}}>
-        {/* <Stack direction={{ xs: 'column', sm: 'row', md: 'column', lg: 'row' }} spacing={3}> */}
-        <Grid container spacing={3}>
-            <Grid item xs={12} sm={3} md={3}>
-              <Card sx={{ minWidth: 275 }}>
-                <CardContent>
-                  <Typography align="center" sx={{ fontSize: 40, fontWeight: 200}} variant="h5" component="div">
-                    43171
-                  </Typography>
-                  <Typography align="center" sx={{ fontSize: 14, fontWeight: 300}} color="text.secondary" gutterBottom>
-                    Current STX Block
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+        <Grid container spacing={5}>
+          <Grid item sm={12}>
+            <WenblokCycles />
+          </Grid>
 
-            <Grid item xs={12} sm={3} md={3}>
-              <Card sx={{ minWidth: 275 }}>
-                <CardContent>
-                <Typography align="center" sx={{ fontSize: 40, fontWeight: 200}} variant="h5" component="div">
-                    3
-                  </Typography>
-                  <Typography align="center" sx={{ fontSize: 14, fontWeight: 300}} color="text.secondary" gutterBottom>
-                    NYC Cycle
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+        {/* Future Blocks */}
+        <Grid item sm={12}>
+          <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+          <Table size="small">
 
-            <Grid item xs={12} sm={3} md={3}>
-              <Card sx={{ minWidth: 275 }}>
-                <CardContent>
-                <Typography align="center" sx={{ fontSize: 40, fontWeight: 200}} variant="h5" component="div">
-                    8
-                  </Typography>
-                  <Typography align="center" sx={{ fontSize: 14, fontWeight: 300}} color="text.secondary" gutterBottom>
-                    MIA Cycle
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+            <colgroup>
+              <col style={{width:'15%'}}/>
+              <col style={{width:'20%'}}/>
+              <col style={{width:'20%'}}/>
+              <col style={{width:'45%'}}/>
+            </colgroup>
 
-            <Grid item xs={12} sm={3} md={3}>
-              <Card sx={{ minWidth: 275, height:"100%" }}>
-                <CardContent>
-                  <Typography align="center" sx={{ fontSize: 20, fontWeight: 500, pt:2, pb:1 }} variant="h5" component="div">
-                    America/New_York
-                  </Typography>
-                  <Typography align="center" sx={{ fontSize: 14, fontWeight: 300}} color="text.secondary" gutterBottom>
-                    Timezone
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+            <TableHead>
+              <TableRow>
+                <TableCell>Block#</TableCell>
+                <TableCell>Event</TableCell>
+                <TableCell>When</TableCell>
+                <TableCell>Info</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+
+            </TableBody>
+            </Table>
+          </Paper>
         </Grid>
-        {/* </Stack> */}
+
+        {/* Past Blocks */}
+        <Grid item sm={12}>
+          <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+          <Table size="small">
+
+            <colgroup>
+              <col style={{width:'15%'}}/>
+              <col style={{width:'20%'}}/>
+              <col style={{width:'20%'}}/>
+              <col style={{width:'45%'}}/>
+            </colgroup>
+
+            <TableHead>
+              <TableRow>
+                <TableCell>Block#</TableCell>
+                <TableCell>Event</TableCell>
+                <TableCell>When</TableCell>
+                <TableCell>Info</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+
+            </TableBody>
+            </Table>
+          </Paper>
+        </Grid>
+
+      </Grid>
+
+
       </Container>
     )
 }
