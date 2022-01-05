@@ -10,11 +10,14 @@ import Snackbar from '@mui/material/Snackbar';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
+import Stack from '@mui/material/Stack';
+
 
 import { CSVLink } from "react-csv";
 
 import Title from './Title';
 import Tx from './Tx';
+import { Typography } from "@mui/material";
 
 export default function Transactions({txnData}) {
 
@@ -148,7 +151,12 @@ export default function Transactions({txnData}) {
                 />
               </TableCell>
 
-              <TableCell>{row.xactnType} {row.xactnTypeDetail}</TableCell>
+              <TableCell>
+                <Stack>
+                  <Typography sx={{ fontSize: '0.875rem' }} >{row.xactnType} </Typography>
+                  <Typography sx={{ fontSize: '0.675rem' }} color="#888" >{row.xactnTypeDetail}</Typography>
+                </Stack>
+              </TableCell>
               <TableCell align="right">{`${row.xactnFee === 0 ? '-' : 'Ӿ ' +  row.xactnFee}`}</TableCell>
               <TableCell align="right">{formatPrice(row.inCoinPrice)}</TableCell>
               <TableCell align="right">{formatPrice(row.outCoinPrice)}</TableCell>
