@@ -4,8 +4,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Divider from '@mui/material/Divider';
-import Stack from '@mui/material/Stack';
+import { Grid } from "@mui/material";
 
 
 export default function WenBlok() {
@@ -14,77 +13,61 @@ export default function WenBlok() {
 
     return(
       <Container maxWidth={false} sx={{ mt: 4, mb: 4}}>
-        <Stack direction={{ xs: 'column', sm: 'row', md: 'column', lg: 'row' }} spacing={3}>
+        {/* <Stack direction={{ xs: 'column', sm: 'row', md: 'column', lg: 'row' }} spacing={3}> */}
+        <Grid container spacing={3}>
+            <Grid item xs={12} sm={3} md={3}>
+              <Card sx={{ minWidth: 275 }}>
+                <CardContent>
+                  <Typography align="center" sx={{ fontSize: 40, fontWeight: 200}} variant="h5" component="div">
+                    43171
+                  </Typography>
+                  <Typography align="center" sx={{ fontSize: 14, fontWeight: 300}} color="text.secondary" gutterBottom>
+                    Current STX Block
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
 
-            <Card sx={{ minWidth: 275 }}>
-              <CardContent>
-                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                  Current STX Block
-                </Typography>
-                <Typography variant="h5" component="div">
-                   43171
-                </Typography>
-                
-              </CardContent>
-              <div>
-                <Divider/>
-                <Typography variant="body2">
-                    Refreshed from mainnet
-                </Typography>
-              </div>
-            </Card>
+            <Grid item xs={12} sm={3} md={3}>
+              <Card sx={{ minWidth: 275 }}>
+                <CardContent>
+                <Typography align="center" sx={{ fontSize: 40, fontWeight: 200}} variant="h5" component="div">
+                    3
+                  </Typography>
+                  <Typography align="center" sx={{ fontSize: 14, fontWeight: 300}} color="text.secondary" gutterBottom>
+                    NYC Cycle
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
 
-            <Card sx={{ minWidth: 275 }}>
-              <CardContent>
-              <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                Current NYC Cycle
-              </Typography>
-              <Typography variant="h5" component="div">
-                 2
-              </Typography>
-              </CardContent>
-              <div>
-                <Divider/>
-                <Typography variant="body2">
-                    50%
-                </Typography>
-              </div>
-            </Card>
+            <Grid item xs={12} sm={3} md={3}>
+              <Card sx={{ minWidth: 275 }}>
+                <CardContent>
+                <Typography align="center" sx={{ fontSize: 40, fontWeight: 200}} variant="h5" component="div">
+                    8
+                  </Typography>
+                  <Typography align="center" sx={{ fontSize: 14, fontWeight: 300}} color="text.secondary" gutterBottom>
+                    MIA Cycle
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
 
-            <Card sx={{ minWidth: 275 }}>
-              <CardContent>
-              <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                Current MIA Cycle
-              </Typography>
-              <Typography variant="h5" component="div">
-                8
-              </Typography>
-              </CardContent>
-              <div>
-                <Divider/>
-                <Typography variant="body2">
-                    80%
-                </Typography>
-              </div>
-            </Card>
-
-            <Card sx={{ minWidth: 275 }}>
-              <CardContent>
-              <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                Your Timezone
-              </Typography>
-              <Typography variant="h5" component="div">
-                America/New_York
-              </Typography>
-              </CardContent>
-              <div>
-                <Divider/>
-                <Typography variant="body2">
-                    Blah
-                </Typography>
-            </div>
-            </Card>
-        </Stack>
+            <Grid item xs={12} sm={3} md={3}>
+              <Card sx={{ minWidth: 275, height:"100%" }}>
+                <CardContent>
+                  <Typography align="center" sx={{ fontSize: 20, fontWeight: 500, pt:2, pb:1 }} variant="h5" component="div">
+                    America/New_York
+                  </Typography>
+                  <Typography align="center" sx={{ fontSize: 14, fontWeight: 300}} color="text.secondary" gutterBottom>
+                    Timezone
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+        </Grid>
+        {/* </Stack> */}
       </Container>
     )
 }
