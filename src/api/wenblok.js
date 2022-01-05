@@ -1,7 +1,7 @@
 import { Configuration, BlocksApi } from "@stacks/blockchain-api-client";
+import moment from 'moment';
 
 export default async function getBlockInfo() {
-
   var currentBlock = await getCurrentBlock();
   var cycleSize = 2100;
 
@@ -30,7 +30,7 @@ export default async function getBlockInfo() {
     };
 }
 
-async function getCurrentBlock() {
+export async function getCurrentBlock() {
 
   var apiConfig = new Configuration({
     fetchApi: fetch,
@@ -43,6 +43,50 @@ async function getCurrentBlock() {
   const currentBlock = blockList.results[0].height;
 
   return currentBlock
+}
+
+export function whenis(blockheight, currentBlock, now) {
+  var deltaBlocks = blockheight - currentBlock.height;
+  var deltaTime = deltaBlocks * 60 * 10 * 1000;
+  var localUnixTime = currentBlock.burn_block_time * 1000;
+  var date = new Date(localUnixTime + deltaTime)
+  return moment(date).fromNow() + " at " + date.toLocaleString()
+}
+
+export function isPast(blockheight, currentBlock) {
+  return blockheight > currentBlock
+}
+
+export async function getTrackedBlocks() {
+
+  var now = new Date()
+  var currentBlock = await getCurrentBlock()
+  var blocks = await fetch('https://raw.githubusercontent.com/foragerr/wenblok/main/blocks.json')
+  var blocksJson = await blocks.json()
+
+  blocksJson.sort(function(a, b) {
+    return a.blockheight - b.blockheight
+  });
+
+  var futureBlocks = blocksJson.flatMap ( 
+    x => (
+      isPast(x.blockheight, currentBlock) ? { ...x, when: whenis(x.blockheight, currentBlock, now), past: isPast(x.blockheight, currentBlock) }
+      : []
+    )
+  );
+
+  var pastBlocks = blocksJson.flatMap ( 
+    x => (
+      !isPast(x.blockheight, currentBlock) ? { ...x, when: whenis(x.blockheight, currentBlock, now), past: isPast(x.blockheight, currentBlock) }
+      : []
+    )
+  );
+
+  return {
+    "futureBlocks": futureBlocks,
+    "pastBlocks": pastBlocks
+  }
+
 }
 
 

@@ -66,7 +66,6 @@ export default function WenblokCycles() {
         setMiaCyclePercentComplete(blockInfo.miaCyclePercentComplete)
         setMiaDaysLeftInCycle( Math.floor((blockInfo.miaCycleEndBlock - blockInfo.currentBlock) * 10 / 60 / 24) )
 
- 
       })()
     }, [])
 
