@@ -148,7 +148,7 @@ export default function Transactions({txnData}) {
                 />
               </TableCell>
 
-              <TableCell>{row.xactnType}</TableCell>
+              <TableCell>{row.xactnType} {row.xactnTypeDetail}</TableCell>
               <TableCell align="right">{`${row.xactnFee === 0 ? '-' : 'Ӿ ' +  row.xactnFee}`}</TableCell>
               <TableCell align="right">{formatPrice(row.inCoinPrice)}</TableCell>
               <TableCell align="right">{formatPrice(row.outCoinPrice)}</TableCell>
