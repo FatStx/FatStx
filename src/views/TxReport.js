@@ -1,5 +1,5 @@
 import ReactGA from "react-ga4";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 
 import Container from '@mui/material/Container';
@@ -33,8 +33,6 @@ export default function TxReport(props) {
 
   async function getWalletTxData() {
 
-    setSpinnerVisible(true)
-
     ReactGA.send({ hitType: "pageview", page: "/transactions" });
 
     if (walletId === '') {
@@ -44,10 +42,10 @@ export default function TxReport(props) {
     if (walletId.length < 5) // TODO: need a more robust check - perhaps against explorer API?
     {
       alert("Please enter a valid wallet address");
-      setSpinnerVisible(false)
       return;
     }
-  
+    setSpinnerVisible(true)
+
     let json = await processAllXactnWithTransfersApiPages(walletId);
     let outputArray = await convertJsonToOutputArray(json,walletId);
     setTxnData(outputArray)

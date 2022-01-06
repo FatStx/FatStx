@@ -1,5 +1,5 @@
 import ReactGA from "react-ga4";
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 import { useParams } from 'react-router-dom';
 
 import Container from '@mui/material/Container';
