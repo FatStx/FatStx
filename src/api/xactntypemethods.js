@@ -35,7 +35,7 @@ export function getXactnTypeDetail(xactn,outputArrayRow){
 
   if (xactnTypes.length>0 && xactnTypes[0].XactnTypeDetail !=='')
   {
-    xactnTypeDetail=' (' + xactnTypes[0].XactnTypeDetail + ')';
+    xactnTypeDetail = xactnTypes[0].XactnTypeDetail;
   }
   return xactnTypeDetail;
 }
