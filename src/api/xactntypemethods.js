@@ -33,7 +33,7 @@ export function getXactnTypeDetail(xactn,outputArrayRow){
   let xactnTypeDetail='';
   let xactnTypes =filterXactnTypes(xactn,outputArrayRow);
 
-  if (xactnTypes.length>0)
+  if (xactnTypes.length>0 && xactnTypes[0].XactnTypeDetail !=='')
   {
     xactnTypeDetail=' (' + xactnTypes[0].XactnTypeDetail + ')';
   }
