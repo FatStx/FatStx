@@ -35,7 +35,7 @@ async function populateFutureBlockEndDates(outputArray)
     return outputArray;
 }
 
-//TODO: MOve to an api js file
+//TODO: Move to an api js file
 async function getCurrentBlock(){
     let url = "https://stacks-node-api.mainnet.stacks.co/extended/v1/block?limit=1";
     const response = await fetch(url);
