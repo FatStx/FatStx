@@ -13,6 +13,8 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import Link from '@mui/material/Link';
+import Button from '@mui/material/Button';
 
 import { mainListItems } from '../components/LeftMenu';
 
@@ -107,6 +109,52 @@ function DashboardContent() {
             >
               StacksBoard
             </Typography>
+
+            <nav>
+              <Link
+                variant="button"
+                color="inherit"
+                underline="hover"
+                href="transactions"
+                sx={{ my: 1, mx: 1.5 }}
+              >
+                Transactions
+              </Link>
+              <Link
+                variant="button"
+                color="inherit"
+                underline="hover"
+                href="/stacking"
+                sx={{ my: 1, mx: 1.5 }}
+              >
+                Stacking
+              </Link>
+              <Link
+                variant="button"
+                color="inherit"
+                underline="hover"
+                href="/wenblok"
+                sx={{ my: 1, mx: 1.5 }}
+              >
+                Wenblok
+              </Link>
+              <Link
+                variant="button"
+                color="inherit"
+                underline="hover"
+                href="/about"
+                sx={{ my: 1, mx: 1.5 }}
+              >
+                About
+              </Link>
+              <Button 
+                variant="outlined"
+                color="inherit"
+                sx = {{ ml:3}}
+              >
+                  Login
+              </Button>
+            </nav>
           </Toolbar>
         </AppBar>
         
