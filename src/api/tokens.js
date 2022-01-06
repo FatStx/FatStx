@@ -8,7 +8,9 @@ export class Token {
       {symbol:'SXSW',apiSymbol:'',contract:'SP1Z92MPDQEWZXW36VX71Q25HKF5K2EPCJ304F275.stsw-token-v4a::stsw',conversionFactor:1,amountDecimals: 3,priceDecimals: 4},
       {symbol:'xBTC',apiSymbol:'wrapped-bitcoin-stacks',contract:'SP3DX3H4FEYZJZ586MFBS25ZW3HZDMEW92260R2PR.Wrapped-Bitcoin::wrapped-bitcoin',conversionFactor:100000000,amountDecimals: 6,priceDecimals: 0},
       {symbol:'DIKOLP_STX-USDA',apiSymbol:'',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-swap-token-wstx-usda::wstx-usda',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2},
-      {symbol:'DIKOLP_STX-XBTC',apiSymbol:'',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-swap-token-wstx-xbtc::wstx-xbtc',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2}
+      {symbol:'DIKOLP_STX-XBTC',apiSymbol:'',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-swap-token-wstx-xbtc::wstx-xbtc',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2},
+      {symbol:'DIKOLP_XBTC_USDA',apiSymbol:'',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-swap-token-xbtc-usda::xbtc-usda',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2},
+      {symbol:'stDIKO',apiSymbol:'',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-stake-registry-v1-1',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2}
 
     ];
 }
