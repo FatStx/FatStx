@@ -41,7 +41,7 @@ export default function WenBlok() {
     }, [])
 
     return(
-      <Container maxWidth={false} sx={{ mt: 4, mb: 4}}>
+      <Container sx={{ mt: 4, mb: 4}}>
         <Grid container spacing={5}>
           <Grid item sm={12}>
             <WenblokCycles />

@@ -58,7 +58,7 @@ export default function TxReport() {
   }, [intialLoad, walletInPath])
 
   return (
-    <Container maxWidth={false} sx={{ mt: 4, mb: 4}}>
+    <Container sx={{ mt: 4, mb: 4}}>
       <Grid container spacing={3}>
 
         {/* Wallet Input */}
