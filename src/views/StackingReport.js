@@ -1,5 +1,7 @@
 import ReactGA from "react-ga4";
-import React, { useState } from "react";
+import React, { useEffect, useCallback } from "react";
+import { useParams } from 'react-router-dom';
+
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -19,137 +21,158 @@ import TableRow from '@mui/material/TableRow';
 import Title from '../components/Title';
 import getStackingData from '../api/stacking/convertstackingjsontooutputarray'
 
-export default function StackingReport() {
+export default function StackingReport(props) {
 
-    ReactGA.send({ hitType: "pageview", page: "/stacking" });
+  const {walletInPath} = useParams();
 
-    const [coin, setCoin] = React.useState('');
-    const [walletId, setWalletId] = useState('');
-    const [stackData, setStackData] = useState([]);
+  let walletId = props.walletId
+  let setWalletId = props.setWalletId
+  let stackData = props.stackData
+  let setStackData = props.setStackData
+  
+  ReactGA.send({ hitType: "pageview", page: "/stacking" });
 
-    const handleCoinChange = (event) => {
-        setCoin(event.target.value);
-    };
+  const [coin, setCoin] = React.useState('');
 
-    const handleWalletIdChange = (event) => {
-        setWalletId(event.target.value)
+  const handleCoinChange = (event) => {
+      setCoin(event.target.value);
+  };
+
+  const handleWalletIdChange = (event) => {
+      setWalletId(event.target.value)
+  }
+
+  async function handleGoClick() {
+      if (coin === '') 
+      {
+          await setCoin('MIA')
+      }
+
+      console.log(walletId)
+
+      if (walletId === '') {
+        return;
+      }
+
+      if (walletId.length<5) // TODO: need a more robust check - perhaps against explorer API?
+      {
+          alert("Please enter a valid wallet address");
+          return;
+      }
+
+      // TODO Activate spinner
+      ReactGA.send({ hitType: "pageview", page: "/transactions" });
+
+      let outputArray= await getStackingData(walletId);
+      setStackData(outputArray)
+      console.log(outputArray)
+
+  };
+
+  useEffect(()=> {
+    if (walletInPath !== undefined) {
+      setWalletId(walletInPath)
     }
+  }, [walletInPath])
 
+  useEffect(()=> {
+    if (stackData.length === 0){
+      handleGoClick()
+    }
+  }, [walletId])
 
+  return (
+    <Container sx={{ mt: 4, mb: 4}}>
+      <Grid container spacing={3}>
 
-    async function handleGoClick() {
-        if (coin === '') 
-        {
-            alert("Please select Coin");
-            return;
-        }
+        {/* Wallet Input */}
+        <Grid item xs={12} md={12} lg={12}>
+          <Paper sx={{p: 2}}>
 
-        if (walletId.length<5) // TODO: need a more robust check - perhaps against explorer API?
-        {
-            alert("Please enter a valid wallet address");
-            return;
-        }
+              <Grid container alignItems="center" spacing={2}> 
+                <Grid item xs={10}>
+                  <TextField
+                    fullWidth
+                    component="form"
+                    autoComplete="on"
+                    required
+                    label="Wallet Address"
+                    onChange={ handleWalletIdChange }
+                    value={walletId}
+                  />
+                </Grid>
 
-        // TODO Activate spinner
-        ReactGA.send({ hitType: "pageview", page: "/transactions" });
+                <Grid item xs={1} >
+                    <FormControl fullWidth>
+                        <InputLabel id="coin-label">Coin</InputLabel>
+                        <Select
+                            labelId="coin-label"
+                            id="coin-select"
+                            value={coin}
+                            label="Coin"
+                            onChange={handleCoinChange}
+                        >
+                            <MenuItem value={'MIA'}>MIA</MenuItem>
+                            <MenuItem value={'NYC'}>NYC</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>
 
-        let outputArray= await getStackingData(walletId);
-        setStackData(outputArray)
-        console.log(outputArray)
+                <Grid item xs={1}>
+                  <Button 
+                  fullWidth
+                    sx={{ float: "right"}} 
+                    variant="contained" 
+                    onClick={ handleGoClick }
+                  >
+                    GO <PlayArrowIcon />
+                  </Button>
+                </Grid>
+              </Grid>
+          </Paper>
+        </Grid>
 
-    };
+        {/* Transactions*/}
+        <Grid item xs={12}>
+          <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+          <Title>Stacking Report</Title>
+          <Table size="small">
 
-    return (
-        <Container sx={{ mt: 4, mb: 4}}>
-          <Grid container spacing={3}>
-    
-            {/* Wallet Input */}
-            <Grid item xs={12} md={12} lg={12}>
-              <Paper sx={{p: 2}}>
-    
-                  <Grid container alignItems="center" spacing={2}> 
-                    <Grid item xs={10}>
-                      <TextField
-                        fullWidth
-                        component="form"
-                        autoComplete="on"
-                        required
-                        label="Wallet Address"
-                        onChange={ handleWalletIdChange }
-                      />
-                    </Grid>
+            <colgroup>
+              <col style={{width:'5%'}}/>
+              <col style={{width:'15%'}}/>
+              <col style={{width:'15%'}}/>
+              <col style={{width:'15%'}}/>
+              <col style={{width:'15%'}}/>
+              <col style={{width:'25%'}}/>
+            </colgroup>
 
-                    <Grid item xs={1} >
-                        <FormControl fullWidth>
-                            <InputLabel id="coin-label">Coin</InputLabel>
-                            <Select
-                                labelId="coin-label"
-                                id="coin-select"
-                                value={coin}
-                                label="Coin"
-                                onChange={handleCoinChange}
-                            >
-                                <MenuItem value={'MIA'}>MIA</MenuItem>
-                                <MenuItem value={'NYC'}>NYC</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </Grid>
-    
-                    <Grid item xs={1}>
-                      <Button 
-                      fullWidth
-                        sx={{ float: "right"}} 
-                        variant="contained" 
-                        onClick={ handleGoClick }
-                      >
-                        GO <PlayArrowIcon />
-                      </Button>
-                    </Grid>
-                  </Grid>
-              </Paper>
-            </Grid>
-    
-            {/* Transactions*/}
-            <Grid item xs={12}>
-              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-              <Title>Stacking Report</Title>
-              <Table size="small">
-
-                <colgroup>
-                  <col style={{width:'5%'}}/>
-                  <col style={{width:'15%'}}/>
-                  <col style={{width:'15%'}}/>
-                  <col style={{width:'15%'}}/>
-                  <col style={{width:'15%'}}/>
-                  <col style={{width:'25%'}}/>
-                </colgroup>
-
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Cycle</TableCell>
-                    <TableCell>Starting Block</TableCell>
-                    <TableCell>Ending Block</TableCell>
-                    <TableCell>Stacked Amount</TableCell>
-                    <TableCell>Claimed</TableCell>
-                    <TableCell>Claim Date</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {stackData.map((row) => (
-                    <TableRow key={row.round}>
-                      <TableCell>{row.round}</TableCell>
-                      <TableCell>{row.startBlock}</TableCell>
-                      <TableCell>{row.endBlock}</TableCell>
-                      <TableCell>{row.stackedCoins}</TableCell>
-                      <TableCell>{row.claimedRewards}</TableCell>
-                      <TableCell>{row.endBlockDate}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-                </Table>
-              </Paper>
-            </Grid>
-          </Grid>
-        </Container>
-      )
+            <TableHead>
+              <TableRow>
+                <TableCell>Cycle</TableCell>
+                <TableCell>Starting Block</TableCell>
+                <TableCell>Ending Block</TableCell>
+                <TableCell>Stacked Amount</TableCell>
+                <TableCell>Claimed</TableCell>
+                <TableCell>Claim Date</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {stackData.map((row) => (
+                <TableRow key={row.round}>
+                  <TableCell>{row.round}</TableCell>
+                  <TableCell>{row.startBlock}</TableCell>
+                  <TableCell>{row.endBlock}</TableCell>
+                  <TableCell>{row.stackedCoins}</TableCell>
+                  <TableCell>{row.claimedRewards}</TableCell>
+                  <TableCell>{row.endBlockDate}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+            </Table>
+          </Paper>
+        </Grid>
+      </Grid>
+    </Container>
+  )
 }

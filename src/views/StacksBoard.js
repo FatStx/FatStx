@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { useState } from "react";
+import { Route, Routes, Link as RouterLink } from 'react-router-dom';
 
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -18,7 +18,6 @@ import WenBlok from './WenBlok'
 import Disclaimer from './Disclaimer'
 
 const drawerWidth = 190;
-
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
@@ -39,7 +38,11 @@ const AppBar = styled(MuiAppBar, {
 
 const mdTheme = createTheme();
 
-function DashboardContent() {
+function StacksBoard() {
+
+  const [walletId, setWalletId] = useState('');
+  const [txnData, setTxnData] = useState([]);
+  const [stackData, setStackData] = useState([]);
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -64,7 +67,8 @@ function DashboardContent() {
                 variant="button"
                 color="inherit"
                 underline="hover"
-                href="transactions"
+                component={RouterLink}
+                to="/transactions"
                 sx={{ my: 1, mx: 1.5 }}
               >
                 Transactions
@@ -73,7 +77,8 @@ function DashboardContent() {
                 variant="button"
                 color="inherit"
                 underline="hover"
-                href="/stacking"
+                component={RouterLink}
+                to="/stacking"
                 sx={{ my: 1, mx: 1.5 }}
               >
                 Stacking
@@ -82,7 +87,8 @@ function DashboardContent() {
                 variant="button"
                 color="inherit"
                 underline="hover"
-                href="/wenblok"
+                component={RouterLink}
+                to="/wenblok"
                 sx={{ my: 1, mx: 1.5 }}
               >
                 Wenblok
@@ -91,7 +97,8 @@ function DashboardContent() {
                 variant="button"
                 color="inherit"
                 underline="hover"
-                href="/about"
+                component={RouterLink}
+                to="/about"
                 sx={{ my: 1, mx: 1.5 }}
               >
                 About
@@ -121,9 +128,51 @@ function DashboardContent() {
         >
           <Toolbar />
           <Routes>
-              <Route path="transactions" element={<TxReport />} />
-              <Route path="transactions/:walletInPath" element={<TxReport />} />
-              <Route path="stacking" element={<StackingReport />} />
+
+              <Route path="transactions" 
+                element={
+                  <TxReport 
+                    walletId = {walletId}
+                    setWalletId = {setWalletId}
+                    txnData = {txnData} 
+                    setTxnData = {setTxnData}
+                  />
+                } 
+              />
+
+              <Route path="transactions/:walletInPath" 
+                element={
+                  <TxReport 
+                    walletId = {walletId}
+                    setWalletId = {setWalletId}
+                    txnData = {txnData} 
+                    setTxnData = {setTxnData}
+                  />
+                } 
+              />
+              
+              <Route path="stacking" 
+                element={
+                  <StackingReport 
+                    walletId = {walletId}
+                    setWalletId = {setWalletId}
+                    stackData = {stackData} 
+                    setStackData = {setStackData}
+                  />
+                } 
+              />
+
+              <Route path="stacking/:walletInPath" 
+                element={
+                  <StackingReport 
+                    walletId = {walletId}
+                    setWalletId = {setWalletId}
+                    stackData = {stackData} 
+                    setStackData = {setStackData}
+                  />
+                } 
+              />
+
               <Route path="wenblok" element={<WenBlok />} />
               
               <Route path="disclaimer" element={<Disclaimer />} />
@@ -138,5 +187,5 @@ function DashboardContent() {
 }
 
 export default function Dashboard() {
-  return <DashboardContent />;
+  return <StacksBoard />;
 }
