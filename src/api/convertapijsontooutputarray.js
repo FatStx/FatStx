@@ -2,7 +2,8 @@ import { Token } from "./tokens"
 import { STXPrice } from "./coinprices/stxprices" 
 import { DIKOPrice } from "./coinprices/dikoprices" 
 import { MIAPrice } from "./coinprices/miaprices" 
-import { XBTCPrice } from "./coinprices/xbtcprices" 
+import { XBTCPrice } from "./coinprices/xbtcprices"
+import * as getXactnType  from './xactntypemethods'
 
 export default async function convertJsonToOutputArray(json, walletId) {
 //await utilityGetCoinFromCoinGecko('xBTC');
@@ -71,12 +72,14 @@ async function getOutputRowsForXactn(xactn, walletId) {
 //If an NFT IN, combine any stx or ft transfers out into a single row per coin
 async function convertTransfersToRowHeader(isConcat,transferRows,isNft) {
     let rowHeaders=[];
-    //initial pass through to narrow it down to symbol and amount
+    //initial pass through to narrow it down
     for (const transferRow of transferRows) {
         let symbol = await getTransferSymbol(transferRow);
         rowHeaders.push({
             symbol: symbol,
             rawAmount: transferRow.amount,
+            sender: transferRow.sender,
+            recipient: transferRow.recipient,
             isNft: isNft
         })
     }
@@ -94,16 +97,21 @@ async function convertTransfersToRowHeader(isConcat,transferRows,isNft) {
                 newRow = {
                     symbol: symbol,
                     rawAmount: transferRow.rawAmount,
+                    sender: transferRow.sender,
+                    receipient: transferRow.recipient,
                     isNft: isNft
                 };
             } else {
                 newRow = {
                     symbol: transferRow.symbol,
                     rawAmount: parseFloat(newRow.rawAmount) + parseFloat(transferRow.rawAmount),
+                    sender: transferRow.sender,
+                    receipient: transferRow.recipient,
                     isNft: isNft
                 };
             }
         }
+        //TODO: is this necessary?
         if (newRow !== undefined)
         {
             adjustedHeaders.push(newRow);
@@ -142,7 +150,11 @@ async function getOutputArrayRow(xactn, xactnFee, transferIn, transferOut) {
     let outAmountRaw = transferOut === undefined ? 0 : (transferOut.rawAmount === undefined?1:transferOut.rawAmount);
     let isNftIn = transferIn === undefined ? '' : (transferIn.isNft === undefined?'':transferIn.isNft);
     let isNftOut = transferOut === undefined ? '' : (transferOut.isNft === undefined?'':transferOut.isNft);
-
+    let contract = xactn.contract_call === undefined ? '' : xactn.contract_call.contract_id;
+    let contractFunction = xactn.contract_call === undefined ? '' : xactn.contract_call.function_name;
+    let sender = transferIn === undefined ? '' : transferIn.sender;
+    let recipient = transferOut === undefined ? '' : transferOut.recipient;
+        
     outputArrayRow = {
         burnDate: xactn.tx.burn_block_time_iso,
         rowId: 0,
@@ -161,9 +173,15 @@ async function getOutputArrayRow(xactn, xactnFee, transferIn, transferOut) {
         outAmountRaw: outAmountRaw,
         xactnFeeRaw: xactnFee,
         isNftIn: isNftIn,
-        isNftOut: isNftOut
+        isNftOut: isNftOut,
+        contract: contract,
+        contractFunction: contractFunction,
+        sender: sender,
+        recipient: recipient
     };
-    outputArrayRow.xactnType = await getXactnType(xactn,outputArrayRow);
+
+    outputArrayRow.xactnType =  getXactnType.getXactnType(xactn,outputArrayRow);
+    outputArrayRow.xactnTypeDetail =  getXactnType.getXactnTypeDetail(xactn,outputArrayRow);
     return outputArrayRow;
 }
 
@@ -247,30 +265,7 @@ async function getCoinPrice(symbol, priceDate) {
     return price;
 }
 
-async function getXactnType(xactn,outputArrayRow) {
-    let xactnType='Unknown';
-    if (outputArrayRow.isNftIn) {
-        if (outputArrayRow.isNftOut) {
-            xactnType='Trade NFT';
-        } else {
-            xactnType='Receive NFT';
-        }
-    } else if (outputArrayRow.isNftOut) {
-        xactnType='Send NFT';
-    } else if (outputArrayRow.inAmountRaw>0) {
-        if (outputArrayRow.outAmountRaw>0) {
-            xactnType='Trade Coin';
-        } else {
-            xactnType='Receive'
-        }   
-    } else if (outputArrayRow.outAmountRaw>0) {
-        xactnType='Send'
-    } else {
-        xactnType='XFee Only'
-    }
 
-    return xactnType;
-}
 
 
 //As we add assets which have either historical prices or prices available from coingecko,

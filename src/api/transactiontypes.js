@@ -8,8 +8,8 @@ export class XactnType {
       {XactnType:'', XactnTypeDetail:'Ark Swap',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-swap-v2-1',function:'swap-y-for-x',senderAddress:'',recipientAddress:''},
       {XactnType:'', XactnTypeDetail:'Ark Swap',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-swap-v2-1',function:'swap-x-for-y',senderAddress:'',recipientAddress:''},
       //NOTE: Deal with the return of stacked coins somehow
-      {XactnType:'NYC Stacking Rewards', XactnTypeDetail:'',contract:'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1',function:'claim-stacking-reward',senderAddress:'',recipientAddress:''},
-      {XactnType:'', XactnTypeDetail:'OkCoin Transfer',contract:'',function:'',senderAddress:'SP3HXJJMJQ06GNAZ8XWDN1QM48JEDC6PP6W3YZPZJ',recipientAddress:''},
-      {XactnType:'', XactnTypeDetail:'OkCoin Transfer',contract:'',function:'',senderAddress:'',recipientAddress:'SP3HXJJMJQ06GNAZ8XWDN1QM48JEDC6PP6W3YZPZJ'}
+      {XactnType:'NYC Stack Rwds', XactnTypeDetail:'',contract:'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1',function:'claim-stacking-reward',senderAddress:'',recipientAddress:''},
+      {XactnType:'', XactnTypeDetail:'OkCoin Xfer',contract:'',function:'',senderAddress:'SP17H4TSCP2JYBF45HEZGGF3N66VRPXQZW4EBVAAV',recipientAddress:''},
+      {XactnType:'', XactnTypeDetail:'OkCoin Xfer',contract:'',function:'',senderAddress:'',recipientAddress:'SP3HXJJMJQ06GNAZ8XWDN1QM48JEDC6PP6W3YZPZJ'}
     ];
 }
