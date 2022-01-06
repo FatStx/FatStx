@@ -73,12 +73,14 @@ export default function StackingReport(props) {
     if (walletInPath !== undefined) {
       setWalletId(walletInPath)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [walletInPath])
 
   useEffect(()=> {
     if (stackData.length === 0){
       handleGoClick()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [walletId])
 
   return (

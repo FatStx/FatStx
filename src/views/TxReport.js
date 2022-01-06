@@ -59,12 +59,14 @@ export default function TxReport(props) {
     if (walletInPath !== undefined) {
       setWalletId(walletInPath)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [walletInPath])
 
   useEffect(()=> {
     if (txnData.length === 0){
       getWalletTxData()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [walletId])
 
   return (
