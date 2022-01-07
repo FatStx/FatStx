@@ -14,7 +14,7 @@ export default async function convertStackingJsonToOutputArray(json) {
 
     outputArray = await populateFutureBlockEndDates(outputArray);
     return outputArray.filter(function(item){return (item.endBlockDate!=="");}).sort((a) => parseInt(a.endBlock));
-    return outputArray;
+
 }
 
 
