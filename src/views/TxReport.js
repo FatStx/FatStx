@@ -12,7 +12,7 @@ import Backdrop from '@mui/material/Backdrop';
 import DotLoader from "react-spinners/DotLoader";
 
 import Transactions from '../components/Transactions';
-import convertJsonToOutputArray from '../api/convertapijsontooutputarray'
+import convertJsonToOutputArray from '../bl/convertapijsontooutputarray'
 import processAllXactnWithTransfersApiPages from '../api/stxapicalls'
 
 

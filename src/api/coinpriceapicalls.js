@@ -1,4 +1,4 @@
-import { Token } from "./tokens"
+import { Token } from '../bo/tokens'
 
 //TODO: Proper Error handling, possibly chain then and catch to the fetch
 export default async function getPriceFromCoinGecko(symbol, priceDate) {

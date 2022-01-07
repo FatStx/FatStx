@@ -1,5 +1,5 @@
 //import { MIAStackingList } from "./cities/miastackinglist"
-import { NYCStackingList } from "./cities/nycstackinglist"
+import { NYCStackingList } from '../bo/cityarrays/nycstackinglist'
 //import processAllXactnWithTransfersApiPages from '../stxapicalls'
 
 export default async function convertStackingJsonToOutputArray(json) {

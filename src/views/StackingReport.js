@@ -20,7 +20,7 @@ import TableRow from '@mui/material/TableRow';
 
 import Title from '../components/Title';
 import processAllXactnWithTransfersApiPages from '../api/stxapicalls'
-import convertStackingJsonToOutputArray from '../api/stacking/convertstackingjsontooutputarray'
+import convertStackingJsonToOutputArray from '../bl/convertstackingjsontooutputarray'
 
 export default function StackingReport(props) {
 
