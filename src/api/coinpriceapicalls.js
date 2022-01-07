@@ -4,7 +4,7 @@ import { Token } from "./tokens"
 export default async function getPriceFromCoinGecko(symbol, priceDate) {
     let price='N/A';
     //This is just a safety valve to avoid accidentally going back to far and getting throttled by coingecko
-    if (new Date(priceDate).getTime() < new Date(2021,1,5).getTime()) {
+    if (new Date(priceDate).getTime() < new Date(2022,1,5).getTime()) {
         return price;
     }
     const baseUrl = 'https://api.coingecko.com/api/v3/coins/';
