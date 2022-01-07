@@ -1,8 +1,7 @@
 import ReactGA from "react-ga4";
 import React, { useState, useEffect } from "react";
 import Container from '@mui/material/Container';
-import { Grid } from "@mui/material";
-
+import { Grid, Typography } from "@mui/material";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,11 +9,21 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
+import Title from '../components/Title';
 import WenblokCycles from '../components/WenblokCycles'
 import { getTrackedBlocks } from '../api/wenblok'
 
 
 export default function WenBlok() {
+
+    const shorten = function( inString ) {
+      var lengthCap = 40
+      if (inString.length > lengthCap) {
+        return inString.slice(0, lengthCap) + "...";
+      } else {
+        return inString;
+      }
+    }
 
     ReactGA.send({ hitType: "pageview", page: "/wenblok" });
 
@@ -24,12 +33,7 @@ export default function WenBlok() {
     useEffect(() => {
       (async () => {
 
-        const trackedBlocks = await getTrackedBlocks()
-        console.log('Future')
-        console.log(trackedBlocks.futureBlocks)
-        console.log('Past')
-        console.log(trackedBlocks.pastBlocks)
-        
+        const trackedBlocks = await getTrackedBlocks()        
         setFutureBlocks(trackedBlocks.futureBlocks)
         setPastBlocks(trackedBlocks.pastBlocks)
  
@@ -37,7 +41,7 @@ export default function WenBlok() {
     }, [])
 
     return(
-      <Container maxWidth={false} sx={{ mt: 4, mb: 4}}>
+      <Container sx={{ mt: 4, mb: 4}}>
         <Grid container spacing={5}>
           <Grid item sm={12}>
             <WenblokCycles />
@@ -46,35 +50,39 @@ export default function WenBlok() {
         {/* Future Blocks */}
         <Grid item sm={12}>
           <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-          <Table size="small">
+            <Title>Upcoming Events</Title>
+            <Table size="small">
 
-            <colgroup>
-              <col style={{width:'15%'}}/>
-              <col style={{width:'20%'}}/>
-              <col style={{width:'20%'}}/>
-              <col style={{width:'45%'}}/>
-            </colgroup>
+              <colgroup>
+                <col style={{width:'10%'}}/>
+                <col style={{width:'20%'}}/>
+                <col style={{width:'20%'}}/>
+                <col style={{width:'50%'}}/>
+              </colgroup>
 
-            <TableHead>
-              <TableRow>
-                <TableCell>Block#</TableCell>
-                <TableCell>Event</TableCell>
-                <TableCell>When</TableCell>
-                <TableCell>Info</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-
-              {futureBlocks.map((row) => (
-                <TableRow key={row.blockheight}>
-                  <TableCell>{row.blockheight}</TableCell>
-                  <TableCell>{row.event}</TableCell>
-                  <TableCell>{row.when}</TableCell>
-                  <TableCell>{row.link}</TableCell>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Block#</TableCell>
+                  <TableCell>Event</TableCell>
+                  <TableCell>When</TableCell>
+                  <TableCell>Info</TableCell>
                 </TableRow>
-              ))}
+              </TableHead>
+              <TableBody>
 
-            </TableBody>
+                {futureBlocks.map((row) => (
+                  <TableRow key={row.blockheight}>
+                    <TableCell>{row.blockheight}</TableCell>
+                    <TableCell>{row.event}</TableCell>
+                    <TableCell>
+                      <Typography color="common.grey"  sx={{ fontWeight: 500}} >{row.when.delta}</Typography>
+                      <Typography color="common.grey"  sx={{ fontWeight: 300, fontSize: "0.75rem"}}  >{row.when.at}</Typography>
+                    </TableCell>
+                    <TableCell><a href={row.link}target="_blank" rel="noopener noreferrer"> { shorten(row.link) } </a></TableCell>
+                  </TableRow>
+                ))}
+
+              </TableBody>
             </Table>
           </Paper>
         </Grid>
@@ -82,33 +90,37 @@ export default function WenBlok() {
         {/* Past Blocks */}
         <Grid item sm={12}>
           <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-          <Table size="small">
+            <Title>Past Events</Title>
+            <Table size="small">
 
-            <colgroup>
-              <col style={{width:'15%'}}/>
-              <col style={{width:'20%'}}/>
-              <col style={{width:'20%'}}/>
-              <col style={{width:'45%'}}/>
-            </colgroup>
+              <colgroup>
+                <col style={{width:'10%'}}/>
+                <col style={{width:'20%'}}/>
+                <col style={{width:'20%'}}/>
+                <col style={{width:'50%'}}/>
+              </colgroup>
 
-            <TableHead>
-              <TableRow>
-                <TableCell>Block#</TableCell>
-                <TableCell>Event</TableCell>
-                <TableCell>When</TableCell>
-                <TableCell>Info</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {pastBlocks.map((row) => (
-                <TableRow key={row.blockheight}>
-                  <TableCell>{row.blockheight}</TableCell>
-                  <TableCell>{row.event}</TableCell>
-                  <TableCell>{row.when}</TableCell>
-                  <TableCell>{row.link}</TableCell>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Block#</TableCell>
+                  <TableCell>Event</TableCell>
+                  <TableCell>When</TableCell>
+                  <TableCell>Info</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
+              </TableHead>
+              <TableBody>
+                {pastBlocks.map((row) => (
+                  <TableRow key={row.blockheight}>
+                    <TableCell>{row.blockheight}</TableCell>
+                    <TableCell>{row.event}</TableCell>
+                    <TableCell>
+                      <Typography color="common.grey"  sx={{ fontWeight: 500}} >{row.when.delta}</Typography>
+                      <Typography color="common.grey"  sx={{ fontWeight: 300, fontSize: "0.75rem"}}  >{row.when.at}</Typography>
+                    </TableCell>
+                    <TableCell><a href={row.link}target="_blank" rel="noopener noreferrer"> { shorten(row.link) } </a></TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
             </Table>
           </Paper>
         </Grid>

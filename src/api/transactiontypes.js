@@ -12,6 +12,9 @@ export class XactnType {
       {XactnType:'MIA Mining Rwds', XactnTypeDetail:'Syvita Pool',contract:'SP196Q1HN49MJTJFRW08RCRP7YSXY28VE72GQWS0P.syvita-mining-mia-v1',function:'contributor-claim-all-rewards-for-pool',senderAddress:'',recipientAddress:''},
       {XactnType:'NYC Stack Rwds', XactnTypeDetail:'',contract:'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1',function:'claim-stacking-reward',senderAddress:'',recipientAddress:''},
       {XactnType:'', XactnTypeDetail:'OkCoin Xfer',contract:'',function:'',senderAddress:'SP17H4TSCP2JYBF45HEZGGF3N66VRPXQZW4EBVAAV',recipientAddress:''},
+      {XactnType:'', XactnTypeDetail:'OkCoin Xfer',contract:'',function:'',senderAddress:'SP2XFNHB366DQWK7TSPYRPCA5XFA3964W8W6RS5P0',recipientAddress:''},
+      {XactnType:'', XactnTypeDetail:'OkCoin Xfer',contract:'',function:'',senderAddress:'SP3DW8X8CBPSYWT327120KE5N8DEJTTBMYJ2QH68Y',recipientAddress:''},
       {XactnType:'', XactnTypeDetail:'OkCoin Xfer',contract:'',function:'',senderAddress:'',recipientAddress:'SP3HXJJMJQ06GNAZ8XWDN1QM48JEDC6PP6W3YZPZJ'}
+      
     ];
 }

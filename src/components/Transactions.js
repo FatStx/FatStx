@@ -85,14 +85,14 @@ export default function Transactions({txnData}) {
       <Table size="small">
 
         <colgroup>
-          <col style={{width:'15%'}}/>
           <col style={{width:'10%'}}/>
           <col style={{width:'12%'}}/>
-          <col style={{width:'8%'}}/>
-          <col style={{width:'8%'}}/>
-          <col style={{width:'8%'}}/>
-          <col style={{width:'8%'}}/>
-          <col style={{width:'35%'}}/>
+          <col style={{width:'16%'}}/>
+          <col style={{width:'7%'}}/>
+          <col style={{width:'7%'}}/>
+          <col style={{width:'7%'}}/>
+          <col style={{width:'7%'}}/>
+          <col style={{width:'27%'}}/>
         </colgroup>
 
         <TableHead>

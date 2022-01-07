@@ -1,6 +1,7 @@
 import ReactGA from "react-ga4";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
+
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -15,11 +16,15 @@ import convertJsonToOutputArray from '../api/convertapijsontooutputarray'
 import processAllXactnWithTransfersApiPages from '../api/stxapicalls'
 
 
-export default function TxReport() {
+export default function TxReport(props) {
 
   const {walletInPath} = useParams();
-  const [walletId, setWalletId] = useState( walletInPath === undefined ? '' : walletInPath );
-  const [txnData, setTxnData] = useState([]);
+
+  let walletId = props.walletId
+  let setWalletId = props.setWalletId
+  let txnData = props.txnData
+  let setTxnData = props.setTxnData
+  
   const [spinnerVisible, setSpinnerVisible] = useState(false);
 
   const handleWalletIdChange = (event) => {
@@ -28,18 +33,21 @@ export default function TxReport() {
 
   async function getWalletTxData() {
 
-    setSpinnerVisible(true)
-
     ReactGA.send({ hitType: "pageview", page: "/transactions" });
+
+    if (walletId === '') {
+      return;
+    }
   
     if (walletId.length < 5) // TODO: need a more robust check - perhaps against explorer API?
     {
-        alert("Please enter a valid wallet address");
-        return;
+      alert("Please enter a valid wallet address");
+      return;
     }
-  
-    let json= await processAllXactnWithTransfersApiPages(walletId);
-    let outputArray=await convertJsonToOutputArray(json,walletId);
+    setSpinnerVisible(true)
+
+    let json = await processAllXactnWithTransfersApiPages(walletId);
+    let outputArray = await convertJsonToOutputArray(json,walletId);
     setTxnData(outputArray)
 
     setSpinnerVisible(false)
@@ -47,18 +55,22 @@ export default function TxReport() {
   
   }
 
-  const intialLoad = useCallback(getWalletTxData, [walletId]);
-
   useEffect(()=> {
     if (walletInPath !== undefined) {
-      console.log('initial load')
-      console.log(walletInPath)
-      intialLoad()
+      setWalletId(walletInPath)
     }
-  }, [intialLoad, walletInPath])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [walletInPath])
+
+  useEffect(()=> {
+    if (txnData.length === 0){
+      getWalletTxData()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [walletId])
 
   return (
-    <Container maxWidth={false} sx={{ mt: 4, mb: 4}}>
+    <Container sx={{ mt: 4, mb: 4}}>
       <Grid container spacing={3}>
 
         {/* Wallet Input */}

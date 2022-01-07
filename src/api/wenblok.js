@@ -45,12 +45,15 @@ export async function getCurrentBlock() {
   return currentBlock
 }
 
-export function whenis(blockheight, currentBlock, now) {
-  var deltaBlocks = blockheight - currentBlock.height;
+export function whenis(blockheight, currentBlock) {
+  var deltaBlocks = blockheight - currentBlock;
   var deltaTime = deltaBlocks * 60 * 10 * 1000;
-  var localUnixTime = currentBlock.burn_block_time * 1000;
+  var localUnixTime = new Date().getTime();
   var date = new Date(localUnixTime + deltaTime)
-  return moment(date).fromNow() + " at " + date.toLocaleString()
+  return {
+    "delta": moment(date).fromNow(),
+    "at": date.toLocaleString()
+  }
 }
 
 export function isPast(blockheight, currentBlock) {
@@ -59,7 +62,6 @@ export function isPast(blockheight, currentBlock) {
 
 export async function getTrackedBlocks() {
 
-  var now = new Date()
   var currentBlock = await getCurrentBlock()
   var blocks = await fetch('https://raw.githubusercontent.com/foragerr/wenblok/main/blocks.json')
   var blocksJson = await blocks.json()
@@ -70,14 +72,14 @@ export async function getTrackedBlocks() {
 
   var futureBlocks = blocksJson.flatMap ( 
     x => (
-      isPast(x.blockheight, currentBlock) ? { ...x, when: whenis(x.blockheight, currentBlock, now), past: isPast(x.blockheight, currentBlock) }
+      isPast(x.blockheight, currentBlock) ? { ...x, when: whenis(x.blockheight, currentBlock), past: isPast(x.blockheight, currentBlock) }
       : []
     )
   );
 
   var pastBlocks = blocksJson.flatMap ( 
     x => (
-      !isPast(x.blockheight, currentBlock) ? { ...x, when: whenis(x.blockheight, currentBlock, now), past: isPast(x.blockheight, currentBlock) }
+      !isPast(x.blockheight, currentBlock) ? { ...x, when: whenis(x.blockheight, currentBlock), past: isPast(x.blockheight, currentBlock) }
       : []
     )
   );
