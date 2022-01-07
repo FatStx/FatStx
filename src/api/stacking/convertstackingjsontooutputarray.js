@@ -1,8 +1,8 @@
-import { MIAStackingList } from "./cities/miastackinglist"
+//import { MIAStackingList } from "./cities/miastackinglist"
 import { NYCStackingList } from "./cities/nycstackinglist"
 //import processAllXactnWithTransfersApiPages from '../stxapicalls'
 
-export default async function convertStackingJsonToOutputArray(json,walletId) {
+export default async function convertStackingJsonToOutputArray(json) {
     let outputArray = NYCStackingList.stackingList;
 
 //    json=await processAllXactnWithTransfersApiPages(walletId);
@@ -54,7 +54,7 @@ function applyStackTokensTransaction(outputArray,amount,firstCycle,lastCycle){
     for (let i = firstCycle; i <=lastCycle ; i++) {
         outputArray[i].stackedCoins=parseInt(outputArray[i].stackedCoins)+parseInt(amount);
         outputArray[i].canClaimCoin=
-            i===lastCycle || outputArray[i].canClaimCoin=='STX+Coin'
+            i===lastCycle || outputArray[i].canClaimCoin==='STX+Coin'
                 ?'STX+Coin'
                 :'STX Only';
     }
