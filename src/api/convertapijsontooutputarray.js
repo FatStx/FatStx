@@ -8,8 +8,8 @@ import * as getXactnType  from './xactntypemethods'
 
 export default async function convertJsonToOutputArray(json, walletId) {
 //await utilityGetCoinFromCoinGecko('xBTC');
-    //let x = await convertStackingJsonToOutputArray('');
-    //console.log(x);
+//    let x = await convertStackingJsonToOutputArray('','SP1VWZ87JH5QVYB1FZ9274Q597XR1ZAQ99KGCTEFS');
+
     let outputArray = [];
     for (const xactn of json) {
         if (xactn.tx.tx_status === "success") {
