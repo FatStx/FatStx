@@ -237,14 +237,14 @@ async function getCoinPrice(symbol, priceDate) {
             //There should always be a matching record if the array of historical prices was created correctly
             if (matchingPrice.length>0) {
                 price = matchingPrice[matchingPrice.length-1].price
-                let decPrice=formatPrice(price,symbol);
+                let formattedPrice=formatPrice(price,symbol);
                 //If we do not have a valid price in our historical array
-                if (decPrice === 0) {
+                if (formattedPrice === 'N/A') {
                     //otherwise call CoinGeckoAPI
-                    decPrice=await getPriceFromCoinGecko(symbol,priceDate);
-                    price=formatPrice(decPrice,symbol);
+                    formattedPrice=await getPriceFromCoinGecko(symbol,priceDate);
+                    price=formatPrice(formattedPrice,symbol);
                 } else {
-                    price=decPrice;
+                    price=formattedPrice;
                 }
             }
         }
