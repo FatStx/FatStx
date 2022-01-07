@@ -3,6 +3,7 @@ import { STXPrice } from "./coinprices/stxprices"
 import { DIKOPrice } from "./coinprices/dikoprices" 
 import { MIAPrice } from "./coinprices/miaprices" 
 import { XBTCPrice } from "./coinprices/xbtcprices"
+import getPriceFromCoinGecko from './coinpriceapicalls'
 import * as getXactnType  from './xactntypemethods'
 //import convertStackingJsonToOutputArray from './stacking/convertstackingjsontooutputarray'
 
@@ -268,7 +269,6 @@ function formatAmount(symbol,amount)
     return convertedAmount;
 }
 
-
 //As we add assets which have either historical prices or prices available from coingecko,
 //js files should be created with the objects and price arrays and should be added here
 //In theory this should be done with some sort of inheritance structure in future
@@ -285,47 +285,6 @@ function getCoinPriceObject(symbol) {
     }
     
     return coinPriceObject;
-}
-
-async function getPriceFromCoinGecko(symbol, priceDate) {
-    let price='N/A';
-    const baseUrl = 'https://api.coingecko.com/api/v3/coins/';
-    let apiSymbol=getCoinPriceAPISymbol(symbol);
-    if (apiSymbol !=='')
-    {
-        let dateForCG = getDateForCoinGecko(new Date(priceDate))
-        let url=baseUrl+apiSymbol+'/history?localization=false&date=' + dateForCG;
-        let response = await fetch(url);
-        if (response.status === 200) {
-            let json = await response.json();
-            if (json.market_data !== undefined) {
-                price=json.market_data.current_price.usd;
-            }
-        }
-    }
-    return price;
-}
-
-function getCoinPriceAPISymbol(symbol) {
-    let apiSymbol='';
-    if (symbol==='STX'){
-        apiSymbol='blockstack';
-    } else {
-        let matchingToken = Token?.tokens?.filter(function(token) {
-            return (token.symbol === symbol);
-        });
-        if (matchingToken?.length > 0) {
-            apiSymbol = matchingToken[0].apiSymbol;
-        } 
-    }
-
-    return apiSymbol;
-}
-
-function getDateForCoinGecko(thisDate) {
-    let workingDate=new Date(thisDate);
-    let returnDate = workingDate.getUTCDate() + "-" + (parseInt(workingDate.getUTCMonth())+1) + "-" + workingDate.getUTCFullYear();
-    return returnDate;
 }
 
 function formatPrice(price,symbol) {
