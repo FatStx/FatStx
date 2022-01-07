@@ -159,7 +159,17 @@ function StacksBoard() {
               
               <Route path="disclaimer" element={<Disclaimer />} />
               <Route path="about" element={<Disclaimer />} />
-              <Route path="*" element={<TxReport />} />
+              
+              <Route path="*" 
+                element={
+                  <TxReport 
+                    walletId = {walletId}
+                    setWalletId = {setWalletId}
+                    txnData = {txnData} 
+                    setTxnData = {setTxnData}
+                  />
+                } 
+              />
           </Routes>
 
         </Box>
