@@ -46,7 +46,11 @@ function filterXactnTypes(xactn,outputArrayRow)
     return matchContract(item.contract,xactn.tx)
         && matchContractMethod(item.function,xactn.tx)
         && matchSender(item.senderAddress,outputArrayRow.sender)
-        && matchRecipient(item.recipientAddress,outputArrayRow.recipient);
+        && matchRecipient(item.recipientAddress,outputArrayRow.recipient)
+        && matchInSymbol(item.inSymbol,outputArrayRow.inSymbol)
+        && matchNotInSymbol(item.notInSymbol,outputArrayRow.inSymbol)
+        && matchOutSymbol(item.outSymbol,outputArrayRow.outSymbol)
+        && matchNotOutSymbol(item.notOutSymbol,outputArrayRow.outSymbol);
   });
 
   return xactnType;
@@ -58,9 +62,7 @@ function matchContract(filterContract,tx) {
     || (tx.contract_call !== undefined && tx.contract_call.contract_id ===filterContract)
     ) {
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
 }
@@ -70,33 +72,56 @@ function matchContractMethod(filterContractMethod,tx) {
     || (tx.contract_call !== undefined && tx.contract_call.function_name ===filterContractMethod)
     ) {
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
 }
 
 function matchSender(filterSender,sender) {
-  if (filterSender === ''
-    || (sender === filterSender)
-    ) {
+  if (filterSender === '' || sender === filterSender) {
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
 }
 
 function matchRecipient(filterRecipient,recipient) {
-  if (filterRecipient === ''
-    || (recipient === filterRecipient)
-    ) {
+  if (filterRecipient === '' || recipient === filterRecipient) {
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
 }
+
+function matchInSymbol(filterInSymbol,inSymbol) {
+  if (filterInSymbol === '' || inSymbol === filterInSymbol) {
+       return true;
+    } else {
+      return false;
+    }
+}
+
+function matchNotInSymbol(filterNotInSymbol,inSymbol) {
+  if (filterNotInSymbol === '' || inSymbol !== filterNotInSymbol) {
+      return true;
+    } else {
+      return false;
+    }
+}
+
+function matchOutSymbol(filterOutSymbol,outSymbol) {
+  if (filterOutSymbol === '' || outSymbol === filterOutSymbol) {
+       return true;
+    } else {
+      return false;
+    }
+}
+
+function matchNotOutSymbol(filterNotOutSymbol,outSymbol) {
+  if (filterNotOutSymbol === '' || outSymbol !== filterNotOutSymbol) {
+      return true;
+    } else {
+      return false;
+    }
+}
+

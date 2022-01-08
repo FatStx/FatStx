@@ -3,7 +3,6 @@ import { NYCStackingList } from '../bo/cityarrays/nycstackinglist'
 import { getCurrentBlock } from '../api/stxapicalls'
 
 export default async function convertStackingJsonToOutputArray(json,symbol) {
-    console.log(symbol);
     let outputArray = getStackingListArray(symbol);
     let coinContract=getCoinSmartContractAddress(symbol);
 

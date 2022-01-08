@@ -36,7 +36,7 @@ export async function getCurrentBlock() {
 }
 
 //Fully process one 50 xactn call/page from the asset API
-async function processOneXactnWithTransfersApiPage(offset, walletId, stackingList) {
+async function processOneXactnWithTransfersApiPage(offset, walletId) {
     console.log(Date.now() + " ===Process Api Page,Offset " + offset + "===");
     const baseUrl = "https://stacks-node-api.mainnet.stacks.co/extended/v1/address/" + walletId + "/transactions_with_transfers?limit=50&unanchored=false&offset="
 
