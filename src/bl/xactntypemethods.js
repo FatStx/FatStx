@@ -8,12 +8,18 @@ export function getXactnType(xactn,outputArrayRow){
       xactnType=xactnTypes[0].XactnType;
   } else if (outputArrayRow.isNftIn) {
       if (outputArrayRow.isNftOut) {
-          xactnType='Trade NFT';
+          xactnType='Swap NFT for NFT';
+      } else if (outputArrayRow.outAmountRaw>0) {
+          xactnType='Swap Coin for NFT';
       } else {
-          xactnType='Receive NFT';
+        xactnType='Receive NFT';
       }
   } else if (outputArrayRow.isNftOut) {
+    if (outputArrayRow.outAmountRaw>0) {
+      xactnType='Swap NFT for Coin';
+    } else {
       xactnType='Send NFT';
+    }  
   } else if (outputArrayRow.inAmountRaw>0) {
       if (outputArrayRow.outAmountRaw>0) {
           xactnType='Trade Coin';
