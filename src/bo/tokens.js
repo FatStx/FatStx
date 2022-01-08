@@ -10,7 +10,7 @@ export class Token {
       {symbol:'DIKOLP_STX-USDA',apiSymbol:'',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-swap-token-wstx-usda::wstx-usda',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2},
       {symbol:'DIKOLP_STX-XBTC',apiSymbol:'',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-swap-token-wstx-xbtc::wstx-xbtc',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2},
       {symbol:'DIKOLP_XBTC_USDA',apiSymbol:'',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-swap-token-xbtc-usda::xbtc-usda',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2},
-      {symbol:'stDIKO',apiSymbol:'',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-stake-registry-v1-1',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2}
+      {symbol:'stDIKO',apiSymbol:'',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.stdiko-token::stdiko',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2}
 
     ];
 }
