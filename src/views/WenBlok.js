@@ -11,7 +11,7 @@ import Paper from '@mui/material/Paper';
 
 import Title from '../components/Title';
 import WenblokCycles from '../components/WenblokCycles'
-import { getTrackedBlocks } from '../api/wenblok'
+import { getTrackedBlocks } from '../bl/wenblokmethods'
 
 
 export default function WenBlok() {

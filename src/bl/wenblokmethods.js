@@ -1,4 +1,4 @@
-import { Configuration, BlocksApi } from "@stacks/blockchain-api-client";
+import { getCurrentBlock } from '../api/stxapicalls'
 import moment from 'moment';
 
 export default async function getBlockInfo() {
@@ -28,21 +28,6 @@ export default async function getBlockInfo() {
       "nycCycleEndBlock":  nycCycleEndBlock, 
       "nycCyclePercentComplete": nycCyclePercentComplete
     };
-}
-
-export async function getCurrentBlock() {
-
-  var apiConfig = new Configuration({
-    fetchApi: fetch,
-    basePath: process.env.REACT_APP_STX_API_ENDPOINT,
-  });
-
-  var blocksApi = new BlocksApi(apiConfig);
-
-  const blockList = await blocksApi.getBlockList({ offset: 0, limit: 1 });
-  const currentBlock = blockList.results[0].height;
-
-  return currentBlock
 }
 
 export function whenis(blockheight, currentBlock) {
