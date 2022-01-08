@@ -5,11 +5,9 @@ import { MIAPrice } from "../bo/coinprices/miaprices"
 import { XBTCPrice } from "../bo/coinprices/xbtcprices"
 import getPriceFromCoinGecko from '../api/coinpriceapicalls'
 import * as getXactnType  from './xactntypemethods'
-//import convertStackingJsonToOutputArray from './stacking/convertstackingjsontooutputarray'
 
 export default async function convertJsonToOutputArray(json, walletId) {
 //await utilityGetCoinFromCoinGecko('xBTC');
-//    let x = await convertStackingJsonToOutputArray('','SP1VWZ87JH5QVYB1FZ9274Q597XR1ZAQ99KGCTEFS');
 
     let outputArray = [];
     for (const xactn of json) {

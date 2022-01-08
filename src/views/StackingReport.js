@@ -65,7 +65,7 @@ export default function StackingReport(props) {
       ReactGA.send({ hitType: "pageview", page: "/transactions" });
 
       let json = await processAllXactnWithTransfersApiPages(walletId);
-      let outputArray = await convertStackingJsonToOutputArray(json);
+      let outputArray = await convertStackingJsonToOutputArray(json,coin);
       setStackData(outputArray)
       console.log(json, outputArray)
 

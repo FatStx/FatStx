@@ -1,3 +1,5 @@
+import { Configuration, BlocksApi } from "@stacks/blockchain-api-client";
+
 //TODO: Proper Error handling, possibly chain then and catch to the fetch
 //Process All API Pages
 export default async function processAllXactnWithTransfersApiPages(walletId) {
@@ -16,6 +18,21 @@ export default async function processAllXactnWithTransfersApiPages(walletId) {
     }
 
     return runningJson;
+}
+
+export async function getCurrentBlock() {
+
+    var apiConfig = new Configuration({
+      fetchApi: fetch,
+      basePath: process.env.REACT_APP_STX_API_ENDPOINT,
+    });
+  
+    var blocksApi = new BlocksApi(apiConfig);
+  
+    const blockList = await blocksApi.getBlockList({ offset: 0, limit: 1 });
+    const currentBlock = blockList.results[0].height;
+  
+    return currentBlock
 }
 
 //Fully process one 50 xactn call/page from the asset API

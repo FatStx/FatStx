@@ -1,7 +1,8 @@
 
 export class NYCStackingList
 {
-    static stackingList = [
+    static stackingList() {
+        return [
         { round: 0, startBlock: 37449, endBlock: 39548, endBlockDate: "2021-11-28T19:19:59.000Z", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
         { round: 1, startBlock: 39549, endBlock: 41648, endBlockDate: "2021-12-15T22:23:27.000Z", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
         { round: 2, startBlock: 41649, endBlock: 43748, endBlockDate: "2022-01-03T13:03:31.000Z", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
@@ -54,4 +55,5 @@ export class NYCStackingList
         { round: 49, startBlock: 140349, endBlock: 142448, endBlockDate: "", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
         { round: 50, startBlock: 142449, endBlock: 144548, endBlockDate: "", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  }
         ]; 
+    }
 }

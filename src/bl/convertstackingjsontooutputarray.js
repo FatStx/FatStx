@@ -1,14 +1,15 @@
-//import { MIAStackingList } from "./cities/miastackinglist"
+import { MIAStackingList } from "../bo/cityarrays/miastackinglist"
 import { NYCStackingList } from '../bo/cityarrays/nycstackinglist'
-//import processAllXactnWithTransfersApiPages from '../stxapicalls'
+import { getCurrentBlock } from '../api/stxapicalls'
 
-export default async function convertStackingJsonToOutputArray(json) {
-    let outputArray = NYCStackingList.stackingList;
+export default async function convertStackingJsonToOutputArray(json,symbol) {
+    console.log(symbol);
+    let outputArray = getStackingListArray(symbol);
+    let coinContract=getCoinSmartContractAddress(symbol);
 
-//    json=await processAllXactnWithTransfersApiPages(walletId);
     for (const xactn of json) {
-        if (xactn.tx.tx_status === 'success') {
-            outputArray = await processTransactionForStacking(outputArray, xactn);
+        if (xactn.tx.tx_status === 'success' && xactn.tx.contract_call !== undefined && xactn.tx.contract_call.contract_id===coinContract ) {
+            outputArray = processTransactionForStacking(outputArray, xactn);
         }
     }
 
@@ -17,22 +18,43 @@ export default async function convertStackingJsonToOutputArray(json) {
 
 }
 
+function getStackingListArray(symbol) {
+    let stackingListArray;
+    if (symbol==='MIA') {
+        stackingListArray=MIAStackingList.stackingList();
+    } else {
+        stackingListArray=NYCStackingList.stackingList();
+    }    
+
+    return stackingListArray;
+}
+
+function getCoinSmartContractAddress(symbol)
+{
+    let coinContract;
+    if (symbol==='MIA') {      
+        coinContract = "SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1";
+    } else {
+        coinContract = "SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1";
+    }
+    return coinContract;
+}
 
 function processTransactionForStacking(outputArray,xactn) {
     const functionName=xactn.tx.contract_call===undefined?'':xactn.tx.contract_call.function_name;
     const blockHeight=xactn.tx.block_height;
 
     if (functionName==='stack-tokens') {
-        outputArray=processStackTokensTransaction(xactn,outputArray,blockHeight);
+        outputArray=processStackTokensTransaction(outputArray,xactn,blockHeight);
     } else if (functionName==="claim-stacking-reward") {
-        outputArray=processClaimTransaction(xactn,outputArray,blockHeight);
+        outputArray=processClaimTransaction(outputArray,xactn,blockHeight);
     } 
-    
+
     return outputArray;
 }
 
 //Process a stack-tokens transaction
-function processStackTokensTransaction(xactn,outputArray,blockHeight){
+function processStackTokensTransaction(outputArray,xactn,blockHeight){
 
     let cycleCount=xactn.tx.contract_call.function_args[1].repr.substring(1);
     let firstCycleListRow=outputArray.filter(function(item){
@@ -63,24 +85,18 @@ function applyStackTokensTransaction(outputArray,amount,firstCycle,lastCycle){
 
 //Process a claim-stacking-reward transaction, including applying to list
 //Currently only checking STX rewards, not coins being returned
-function processClaimTransaction(xactn,outputArray,blockHeight){
+function processClaimTransaction(outputArray,xactn,blockHeight){
 
     const rewardsCycle=xactn.tx.contract_call.function_args[0].repr.substring(1);
-    for (const event of xactn.tx.events) {
-        if (event.event_type==='stx_asset')
-        {
-            const rewardsAmount= parseInt(event.asset.amount)/1000000;
+    const rawAmount=xactn.tx.post_conditions[0].amount;
+
+    const rewardsAmount= parseInt(rawAmount)/1000000;
             outputArray[rewardsCycle].claimedRewards=rewardsAmount;
             outputArray[rewardsCycle].claimDate=blockHeight;
             console.log(Date.now()+' Claimed ' + rewardsAmount + 'STX from this cycle');
-            break;
-        }
-    }
+
     return outputArray;
 }
-
-
-
 
 //this populates up to three future block end dates, plus any past block end dates which aren't hard coded yet
 async function populateFutureBlockEndDates(outputArray)
@@ -88,32 +104,19 @@ async function populateFutureBlockEndDates(outputArray)
     const currentBlock=await getCurrentBlock();
     const currentDate = new Date().toISOString();
     let ctr=0;
-    for (const stackingRound of outputArray.filter(function(item){return (item.endBlockDate==="");}).sort((a) => parseInt(a.endBlock)))
-    {
-        if (parseInt(stackingRound.endBlock)>parseInt(currentBlock))
-        {
+    for (const stackingRound of outputArray.filter(function(item){return (item.endBlockDate==='');}).sort((a) => parseInt(a.endBlock))) {
+        if (parseInt(stackingRound.endBlock)>parseInt(currentBlock)) {
             ctr+=1
-            let minutestoAdd=await parseInt(stackingRound.endBlock-currentBlock)*10;
-            let blockTime=await new Date((new Date(currentDate)).getTime() + (minutestoAdd* 60 * 1000));
+            let minutestoAdd=parseInt(stackingRound.endBlock-currentBlock)*10;
+            let blockTime=new Date((new Date(currentDate)).getTime() + (minutestoAdd* 60 * 1000));
 
             stackingRound.endBlockDate=blockTime.toISOString();
         }
-
         
-        if (ctr>2)
-        {
+        if (ctr>2) {
             break;
         }
     }
 
     return outputArray;
-}
-
-//TODO: MOve to an api js file / merge with the one form the react
-async function getCurrentBlock(){
-    let url = "https://stacks-node-api.mainnet.stacks.co/extended/v1/block?limit=1";
-    const response = await fetch(url);
-    let json=await response.json();
-    return json.results[0].height;
-
 }

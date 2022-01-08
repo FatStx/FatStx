@@ -1,10 +1,11 @@
 
 export class MIAStackingList
 {
-    static localStackingList = [
+    static stackingList() {
+        return [
         { round: 0, startBlock: 24497, endBlock: 26596, endBlockDate: "2021-08-20T05:03:09.000Z", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
-        { round: 1, startBlock: 26597, endBlock: 28696, endBlockDate: "2021-09-05T14:52:42.000Z", stackedCoins: 0, claimedRewards: 50, claimDate: "", canClaimCoin: ""  },
-        { round: 2, startBlock: 28697, endBlock: 30796, endBlockDate: "2021-09-21T22:18:03.000Z", stackedCoins: 0, claimedRewards: 62, claimDate: "", canClaimCoin: ""  },
+        { round: 1, startBlock: 26597, endBlock: 28696, endBlockDate: "2021-09-05T14:52:42.000Z", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
+        { round: 2, startBlock: 28697, endBlock: 30796, endBlockDate: "2021-09-21T22:18:03.000Z", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
         { round: 3, startBlock: 30797, endBlock: 32896, endBlockDate: "2021-10-07T22:23:47.000Z", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
         { round: 4, startBlock: 32897, endBlock: 34996, endBlockDate: "2021-10-24T09:22:47.000Z", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
         { round: 5, startBlock: 34997, endBlock: 37096, endBlockDate: "2021-11-09T02:17:56.000Z", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
@@ -64,4 +65,5 @@ export class MIAStackingList
         { round: 59, startBlock: 148397, endBlock: 150496, endBlockDate: "", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
         { round: 60, startBlock: 150497, endBlock: 152596, endBlockDate: "", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  }
         ]; 
+    }
 }
