@@ -1,10 +1,10 @@
 import { MIAStackingList } from "../bo/cityarrays/miastackinglist"
 import { NYCStackingList } from '../bo/cityarrays/nycstackinglist'
 import { getCurrentBlock } from '../api/stxapicalls'
-//import  getDIKOPricesInUSDT  from './PopulateCoinPrices'
+//import  getPricesInUSDT  from './PopulateCoinPrices'
 
 export default async function convertStackingJsonToOutputArray(json,symbol) {
-    //getDIKOPricesInUSDT();
+    //getPricesInUSDT('USDA',true);
     let outputArray = getStackingListArray(symbol);
     let coinContract=getCoinSmartContractAddress(symbol);
 

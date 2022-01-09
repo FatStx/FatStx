@@ -4,47 +4,42 @@ import USDA_USDT from "../bo/workingprices/USDA_USDT"
 import DIKO_USDA from "../bo/workingprices/DIKO_USDA"
 import { Decimal } from 'decimal.js'
 
-export function getUSDAPricesInUSDT() {
+export default function getPricesInUSDT(symbol,isOutputUnixDate=false) {
+    let sourcePricingArray;
+    let targetPricingArray;
+    if (symbol === 'USDA')
+    {
+        sourcePricingArray=STX_USDT.stxPricesInUSDT();
+        targetPricingArray=USDA_STX.usdaPricesInStx();
+    } else if (symbol ==='DIKO') {
+        sourcePricingArray=USDA_USDT.usdaPricesInUsdt();
+        targetPricingArray=DIKO_USDA.dikoPricesInUSDA();
+    }
+    calculatePricesInUSDT(symbol,sourcePricingArray,targetPricingArray,isOutputUnixDate);
+
+}
+
+function calculatePricesInUSDT(symbol,sourcePricingArray,targetPricingArray,isOutputUnixDate) {
 
     let finalOutput=[];
-    let convertedPrices=convertPriceFromSourceToTarget(USDA_STX.usdaPricesInStx(),STX_USDT.stxPricesInUSDT());
+    let convertedPrices=convertPriceFromSourceToTarget(sourcePricingArray,targetPricingArray);
     let currentDate=convertedPrices[0].unixDate;
     let priceArray=[];
     for (const priceRow of convertedPrices) {
         if (currentDate !== priceRow.unixDate)
         {
-            let outputRow=generateCoinOutputRow('USDA',currentDate,priceArray);
+            let outputRow=generateCoinOutputRow(symbol,currentDate,priceArray,isOutputUnixDate);
             finalOutput.push(outputRow);
             currentDate=priceRow.unixDate;
             priceArray=[];
         }
         priceArray.push(priceRow.price);
     }
-    let outputRow=generateCoinOutputRow('USDA',currentDate,priceArray);
+    let outputRow=generateCoinOutputRow(symbol,currentDate,priceArray,isOutputUnixDate);
     finalOutput.push(outputRow);
 }
 
-export default function getDIKOPricesInUSDT() {
-
-    let finalOutput=[];
-    let convertedPrices=convertPriceFromSourceToTarget(DIKO_USDA.dikoPricesInUSDA(),USDA_USDT.usdaPricesInUsdt());
-    let currentDate=convertedPrices[0].unixDate;
-    let priceArray=[];
-    for (const priceRow of convertedPrices) {
-        if (currentDate !== priceRow.unixDate)
-        {
-            let outputRow=generateCoinOutputRow('DIKO',currentDate,priceArray);
-            finalOutput.push(outputRow);
-            currentDate=priceRow.unixDate;
-            priceArray=[];
-        }
-        priceArray.push(priceRow.price);
-    }
-    let outputRow=generateCoinOutputRow('DIKO',currentDate,priceArray);
-    finalOutput.push(outputRow);
-}
-
-function convertPriceFromSourceToTarget(targetPricingArray,sourcePricingArray)
+function convertPriceFromSourceToTarget(sourcePricingArray,targetPricingArray)
 {
     let convertedPrices=[];
     for (const priceRow of targetPricingArray) {
@@ -64,20 +59,17 @@ function convertPriceFromSourceToTarget(targetPricingArray,sourcePricingArray)
     return convertedPrices;
 }
 
-function generateCoinOutputRow(symbol,currentDate,priceArray,isUnixDate=false) {
+function generateCoinOutputRow(symbol,currentDate,priceArray,isOutputUnixDate) {
     let price=priceArray.reduce((a, b) => a + b, 0);
     price = new Decimal(price) / new Decimal(priceArray.length);
-    let convertedDate=isUnixDate
-                        ? currentDate
-                        : new Date(parseInt(currentDate)).toISOString();
     let outputRow;
-    if (isUnixDate)
+    if (isOutputUnixDate)
     {
-        outputRow={ unixDate: convertedDate, coin: symbol, price: price};
+        outputRow={ unixDate: currentDate, coin: symbol, price: price};
     }
     else
     {
-        outputRow={ date: convertedDate, coin: symbol, price: price};
+        outputRow={ date: new Date(parseInt(currentDate)).toISOString(), coin: symbol, price: price};
     }
     console.log(outputRow);
     return outputRow;
