@@ -7,7 +7,7 @@ import { USDAPrice } from "../bo/coinprices/usdaprices"
 import getPriceFromCoinGecko from '../api/coinpriceapicalls'
 import * as getXactnType  from './xactntypemethods'
 
-export default async function convertJsonToOutputArray(json, walletId) {
+export default async function convertJsonToTxReportArray(json, walletId) {
 //await utilityGetCoinFromCoinGecko('xBTC');
 
     let outputArray = [];
@@ -238,9 +238,8 @@ async function getCoinPrice(symbol, priceDate) {
             if (matchingPrice.length>0) {
                 price = matchingPrice[matchingPrice.length-1].price;
                 let formattedPrice=formatPrice(price,symbol);
-                //If we do not have a valid price in our historical array
-                if (formattedPrice === 'N/A') {
-                    //otherwise call CoinGeckoAPI
+                //If we do not have a valid price in our historical array, call CoinGecko
+                if (formattedPrice === 'N/A' && new Date(priceDate).getTime() >= new Date(2022,0,1).getTime()) {
                     formattedPrice=await getPriceFromCoinGecko(symbol,priceDate);
                     price=formatPrice(formattedPrice,symbol);
                 } else {

@@ -12,7 +12,7 @@ import Backdrop from '@mui/material/Backdrop';
 import DotLoader from "react-spinners/DotLoader";
 
 import Transactions from '../components/Transactions';
-import convertJsonToOutputArray from '../bl/convertapijsontooutputarray'
+import convertJsonToTxReportArray from '../bl/TransactionsBL'
 import processAllXactnWithTransfersApiPages from '../api/stxapicalls'
 
 
@@ -47,7 +47,7 @@ export default function TxReport(props) {
     setSpinnerVisible(true)
 
     let json = await processAllXactnWithTransfersApiPages(walletId);
-    let outputArray = await convertJsonToOutputArray(json,walletId);
+    let outputArray = await convertJsonToTxReportArray(json,walletId);
     setTxnData(outputArray)
 
     setSpinnerVisible(false)
