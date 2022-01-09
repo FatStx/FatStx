@@ -3,6 +3,7 @@ import { STXPrice } from "../bo/coinprices/stxprices"
 import { DIKOPrice } from "../bo/coinprices/dikoprices" 
 import { MIAPrice } from "../bo/coinprices/miaprices" 
 import { XBTCPrice } from "../bo/coinprices/xbtcprices"
+import { USDAPrice } from "../bo/coinprices/usdaprices"
 import getPriceFromCoinGecko from '../api/coinpriceapicalls'
 import * as getXactnType  from './xactntypemethods'
 
@@ -235,7 +236,7 @@ async function getCoinPrice(symbol, priceDate) {
             });
             //There should always be a matching record if the array of historical prices was created correctly
             if (matchingPrice.length>0) {
-                price = matchingPrice[matchingPrice.length-1].price
+                price = matchingPrice[matchingPrice.length-1].price;
                 let formattedPrice=formatPrice(price,symbol);
                 //If we do not have a valid price in our historical array
                 if (formattedPrice === 'N/A') {
@@ -269,7 +270,7 @@ function formatAmount(symbol,amount)
 
 //As we add assets which have either historical prices or prices available from coingecko,
 //js files should be created with the objects and price arrays and should be added here
-//In theory this should be done with some sort of inheritance structure in future
+//In theory this should be done with some sort of inheritance structure in future or actually in a database eventually
 function getCoinPriceObject(symbol) {
     let coinPriceObject;
     if (symbol==='STX') {
@@ -280,6 +281,8 @@ function getCoinPriceObject(symbol) {
         coinPriceObject=MIAPrice.miaPrices;
     } else if (symbol==='xBTC') {
         coinPriceObject=XBTCPrice.xbtcPrices;
+    } else if (symbol==='USDA') {
+        coinPriceObject=USDAPrice.usdaPrices;
     }
     
     return coinPriceObject;
