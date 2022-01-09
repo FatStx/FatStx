@@ -10,7 +10,11 @@ export class Token {
       {symbol:'DIKOLP_STX-USDA',apiSymbol:'',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-swap-token-wstx-usda::wstx-usda',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2},
       {symbol:'DIKOLP_STX-XBTC',apiSymbol:'',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-swap-token-wstx-xbtc::wstx-xbtc',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2},
       {symbol:'DIKOLP_XBTC_USDA',apiSymbol:'',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-swap-token-xbtc-usda::xbtc-usda',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2},
-      {symbol:'stDIKO',apiSymbol:'',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.stdiko-token::stdiko',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2}
+      {symbol:'stDIKO',apiSymbol:'',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.stdiko-token::stdiko',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2},
+      {symbol:'idoALEX',apiSymbol:'',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.lottery-ido-alex::lottery-ido-alex',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2},
+      {symbol:'WELSH',apiSymbol:'',contract:'SP3NE50GEXFG9SZGTT51P40X2CKYSZ5CC4ZTZ7A2G.welshcorgicoin-token::welshcorgicoin',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2},
+      //NFTs
+      {symbol:'BNS Name',apiSymbol:'',contract:'SP000000000000000000002Q6VF78.bns::names',conversionFactor:1,amountDecimals: 0,priceDecimals: 0}
 
     ];
 }

@@ -215,7 +215,7 @@ async function getTransferSymbol(transferRow) {
 
 async function getNftIdentifier(symbol,transferRow) {
     let nftIdentifier='';
-    if (transferRow !== undefined && transferRow.value !== undefined)
+    if (transferRow !== undefined && transferRow.value !== undefined & symbol !=='BNS Name')
     {
         nftIdentifier='#' + transferRow.value.repr.substring(1);
     }
