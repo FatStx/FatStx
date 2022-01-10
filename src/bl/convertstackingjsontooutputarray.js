@@ -4,7 +4,7 @@ import { getCurrentBlock } from '../api/stxapicalls'
 //import  getPricesInUSDT  from './PopulateCoinPrices'
 
 export default async function convertStackingJsonToOutputArray(json,symbol) {
-    //getPricesInUSDT('USDA',true);
+//    getPricesInUSDT('DIKO',true);
     let outputArray = getStackingListArray(symbol);
     let coinContract=getCoinSmartContractAddress(symbol);
 

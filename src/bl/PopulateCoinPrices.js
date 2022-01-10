@@ -7,22 +7,24 @@ import { Decimal } from 'decimal.js'
 export default function getPricesInUSDT(symbol,isOutputUnixDate=false) {
     let sourcePricingArray;
     let targetPricingArray;
+    let isPriceInTarget=false;
     if (symbol === 'USDA')
     {
         sourcePricingArray=STX_USDT.stxPricesInUSDT();
         targetPricingArray=USDA_STX.usdaPricesInStx();
+        isPriceInTarget=true;
     } else if (symbol ==='DIKO') {
         sourcePricingArray=USDA_USDT.usdaPricesInUsdt();
         targetPricingArray=DIKO_USDA.dikoPricesInUSDA();
     }
-    calculatePricesInUSDT(symbol,sourcePricingArray,targetPricingArray,isOutputUnixDate);
+    calculatePricesInUSDT(symbol,sourcePricingArray,targetPricingArray,isPriceInTarget,isOutputUnixDate);
 
 }
 
-function calculatePricesInUSDT(symbol,sourcePricingArray,targetPricingArray,isOutputUnixDate) {
+function calculatePricesInUSDT(symbol,sourcePricingArray,targetPricingArray,isPriceInTarget,isOutputUnixDate) {
 
     let finalOutput=[];
-    let convertedPrices=convertPriceFromSourceToTarget(sourcePricingArray,targetPricingArray);
+    let convertedPrices=convertPriceFromSourceToTarget(sourcePricingArray,targetPricingArray,isPriceInTarget);
     let currentDate=convertedPrices[0].unixDate;
     let priceArray=[];
     for (const priceRow of convertedPrices) {
@@ -39,7 +41,7 @@ function calculatePricesInUSDT(symbol,sourcePricingArray,targetPricingArray,isOu
     finalOutput.push(outputRow);
 }
 
-function convertPriceFromSourceToTarget(sourcePricingArray,targetPricingArray)
+function convertPriceFromSourceToTarget(sourcePricingArray,targetPricingArray,isPriceInTarget)
 {
     let convertedPrices=[];
     for (const priceRow of targetPricingArray) {
@@ -49,7 +51,13 @@ function convertPriceFromSourceToTarget(sourcePricingArray,targetPricingArray)
         let output;
        if (matchingPrice.length>0) {
            let sourcePrice = matchingPrice[matchingPrice.length-1].price;
-           let targetPrice = new Decimal(sourcePrice) / new Decimal(priceRow.price);
+           let targetPrice;
+           if (isPriceInTarget)
+           {
+               targetPrice = new Decimal(sourcePrice) /new Decimal(priceRow.price);
+           } else {
+               targetPrice = new Decimal(priceRow.price) * new Decimal(sourcePrice);
+           }
            output = { unixDate: priceRow.unixDate , price: targetPrice};
        } else {
             output = { unixDate: priceRow.unixDate , price: 'N/A'};
@@ -65,7 +73,8 @@ function generateCoinOutputRow(symbol,currentDate,priceArray,isOutputUnixDate) {
     let outputRow;
     if (isOutputUnixDate)
     {
-        outputRow={ unixDate: currentDate, coin: symbol, price: price};
+        //outputRow={ unixDate: currentDate, coin: symbol, price: price};
+        outputRow=currentDate+','+price;
     }
     else
     {
