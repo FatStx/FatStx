@@ -13,7 +13,7 @@ import DotLoader from "react-spinners/DotLoader";
 
 import Transactions from '../components/Transactions';
 import convertJsonToTxReportArray from '../bl/TransactionsBL'
-import processAllXactnWithTransfersApiPages from '../api/StxApiCalls'
+import processAllXactnWithTransfersApiPages from '../api/StxApi'
 
 
 export default function TxReport(props) {

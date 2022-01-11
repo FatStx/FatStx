@@ -19,7 +19,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 import Title from '../components/Title';
-import processAllXactnWithTransfersApiPages from '../api/StxApiCalls'
+import processAllXactnWithTransfersApiPages from '../api/StxApi'
 import convertJsonToStackingReportArray from '../bl/StackingBL'
 
 export default function StackingReport(props) {

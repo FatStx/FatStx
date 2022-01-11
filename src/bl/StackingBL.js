@@ -1,6 +1,6 @@
-import { MIAStackingList } from "../bo/cityarrays/MiaStackingList"
-import { NYCStackingList } from '../bo/cityarrays/NycStackingList'
-import { getCurrentBlock } from '../api/StxApiCalls'
+import { MIAStackingList } from "../bo/cityarrays/MiaStackingCycles"
+import { NYCStackingList } from '../bo/cityarrays/NycStackingCycles'
+import { getCurrentBlock } from '../api/StxApi'
 //import  getPricesInUSDT  from './PopulateCoinPrices'
 
 export default async function convertJsonToStackingReportArray(json,symbol) {
