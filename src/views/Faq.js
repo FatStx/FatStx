@@ -19,10 +19,6 @@ export default function Faq() {
                     Stacking and WenBlok dates are in your local browser time zone. Future dates are estimates and may be off by several days
                 <li>How do you calculate the coin prices?</li>
             </ul>
-
-            <h2>About</h2>
-
-            <p> Built by @eparrot and @foragerr</p>
         </Container>
     )
 }
