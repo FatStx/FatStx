@@ -16,6 +16,7 @@ import TxReport from './TxReport'
 import StackingReport from './StackingReport'
 import WenBlok from './WenBlok'
 import Disclaimer from './Disclaimer'
+import Faq from './Faq'
 
 
 const mdTheme = createTheme();
@@ -74,6 +75,16 @@ function StacksBoard() {
                 sx={{ my: 1, mx: 1.5 }}
               >
                 Wenblok
+              </Link>
+              <Link
+                variant="button"
+                color="inherit"
+                underline="hover"
+                component={RouterLink}
+                to="/faq"
+                sx={{ my: 1, mx: 1.5 }}
+              >
+                Faq
               </Link>
               <Link
                 variant="button"
@@ -159,6 +170,7 @@ function StacksBoard() {
               
               <Route path="disclaimer" element={<Disclaimer />} />
               <Route path="about" element={<Disclaimer />} />
+              <Route path="faq" element={<Faq />} />
               
               <Route path="*" 
                 element={
