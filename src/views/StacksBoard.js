@@ -8,9 +8,9 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import Button from '@mui/material/Button';
-import Switch from '@mui/material/Switch';
-import Brightness6OutlinedIcon from '@mui/icons-material/Brightness6Outlined';
+// import Button from '@mui/material/Button';
+// import Switch from '@mui/material/Switch';
+// import Brightness6OutlinedIcon from '@mui/icons-material/Brightness6Outlined';
 
 import TxReport from './TxReport'
 import StackingReport from './StackingReport'
@@ -44,8 +44,8 @@ function StacksBoard() {
             </Typography>
 
             <nav>
-              <Brightness6OutlinedIcon sx={{mb:-1}}/>
-              <Switch disabled sx={{mr:3}}/>
+              {/* <Brightness6OutlinedIcon sx={{mb:-1}}/>
+              <Switch disabled sx={{mr:3}}/> */}
               <Link
                 variant="button"
                 color="inherit"
@@ -96,13 +96,13 @@ function StacksBoard() {
               >
                 About
               </Link>
-              <Button 
+              {/* <Button 
                 variant="outlined"
                 color="inherit"
                 sx = {{ ml:3}}
               >
                   Login
-              </Button>
+              </Button> */}
             </nav>
           </Toolbar>
         </AppBar>
