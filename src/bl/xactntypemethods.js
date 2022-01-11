@@ -1,4 +1,4 @@
-import { XactnType } from '../bo/transactiontypes'
+import { XactnType } from '../bo/TransactionTypes'
 
 export function getXactnType(xactn,outputArrayRow){
   let xactnTypes = filterXactnTypes(xactn,outputArrayRow);

@@ -19,8 +19,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 import Title from '../components/Title';
-import processAllXactnWithTransfersApiPages from '../api/stxapicalls'
-import convertStackingJsonToOutputArray from '../bl/convertstackingjsontooutputarray'
+import processAllXactnWithTransfersApiPages from '../api/StxApiCalls'
+import convertJsonToStackingReportArray from '../bl/StackingBL'
 
 export default function StackingReport(props) {
 
@@ -65,7 +65,7 @@ export default function StackingReport(props) {
       ReactGA.send({ hitType: "pageview", page: "/transactions" });
 
       let json = await processAllXactnWithTransfersApiPages(walletId);
-      let outputArray = await convertStackingJsonToOutputArray(json,coin);
+      let outputArray = await convertJsonToStackingReportArray(json,coin);
       setStackData(outputArray)
       console.log(json, outputArray)
 

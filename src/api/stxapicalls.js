@@ -2,7 +2,7 @@ import { Configuration, BlocksApi } from "@stacks/blockchain-api-client";
 
 //TODO: Proper Error handling, possibly chain then and catch to the fetch
 //Process All API Pages
-export default async function processAllXactnWithTransfersApiPages(walletId) {
+export default async function processAllXactnWithTransfersApiPages(walletId,startDate='2021-01-01T00:00:00.000Z',endDate='2023-01-01T00:00:00.000Z') {
     console.log(Date.now() + " ===Process All Api Pages===");
 
     let apiResult = await processOneXactnWithTransfersApiPage(0, walletId);

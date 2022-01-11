@@ -72,6 +72,8 @@ export class XactnType {
       {id:350,XactnType:'', XactnTypeDetail:'CoineX Xfer',contract:'',function:'',senderAddress:'',recipientAddress:'SP36AQJD5A92TM5WS0ZEC4GSZPY5B2CPQD6TX35PP',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       //NFTs
       {id:1000,XactnType:'', XactnTypeDetail:'stacks-art-market',contract:'SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.stacks-art-market',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:1002,XactnType:'', XactnTypeDetail:'stacks-pops',contract:'SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.stacks-pops',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''}
+      {id:1001,XactnType:'', XactnTypeDetail:'stacks-pops',contract:'SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.stacks-pops',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1002,XactnType:'', XactnTypeDetail:'Stacks Degens',contract:'SP1SCEXE6PMGPAC6B4N5P2MDKX8V4GF9QDE1FNNGJ.nyc-degens',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1003,XactnType:'', XactnTypeDetail:'Stacks Degens',contract:'SP1SCEXE6PMGPAC6B4N5P2MDKX8V4GF9QDE1FNNGJ.miami-degens',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''}
     ];
 }

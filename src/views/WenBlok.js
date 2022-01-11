@@ -10,8 +10,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 import Title from '../components/Title';
-import WenblokCycles from '../components/WenblokCycles'
-import { getTrackedBlocks } from '../bl/wenblokmethods'
+import WenblokCycles from '../components/WenBlokCycles'
+import { getTrackedBlocks } from '../bl/WenBlokMethods'
 
 
 export default function WenBlok() {

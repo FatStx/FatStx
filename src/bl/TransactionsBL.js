@@ -1,12 +1,13 @@
-import { Token } from "../bo/tokens"
-import { STXPrice } from "../bo/coinprices/stxprices" 
-import { DIKOPrice } from "../bo/coinprices/dikoprices" 
-import { MIAPrice } from "../bo/coinprices/miaprices" 
-import { XBTCPrice } from "../bo/coinprices/xbtcprices"
-import { USDAPrice } from "../bo/coinprices/usdaprices"
-import getPriceFromCoinGecko from '../api/coinpriceapicalls'
-import * as getXactnType  from './xactntypemethods'
+import { Token } from "../bo/Tokens"
+import { STXPrice } from "../bo/coinprices/StxPrices" 
+import { DIKOPrice } from "../bo/coinprices/DikoPrices" 
+import { MIAPrice } from "../bo/coinprices/MiaPrices" 
+import { XBTCPrice } from "../bo/coinprices/XbtcPrices"
+import { USDAPrice } from "../bo/coinprices/UsdaPrices"
+import getPriceFromCoinGecko from '../api/CoinPriceApiCalls'
+import * as getXactnType  from './XactnTypeMethods'
 
+//Primary function called by the front end
 export default async function convertJsonToTxReportArray(json, walletId) {
 //await utilityGetCoinFromCoinGecko('xBTC');
 

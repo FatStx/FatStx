@@ -1,4 +1,4 @@
-import { getCurrentBlock } from '../api/stxapicalls'
+import { getCurrentBlock } from '../api/StxApiCalls'
 import moment from 'moment';
 
 export default async function getBlockInfo() {

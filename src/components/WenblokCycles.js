@@ -10,7 +10,7 @@ import { Grid } from "@mui/material";
 
 import PropTypes from 'prop-types';
 
-import getBlockInfo from '../bl/wenblokmethods'
+import getBlockInfo from '../bl/WenBlokMethods'
 
 
 function LinearProgressWithLabel(props) {
