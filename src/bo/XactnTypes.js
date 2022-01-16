@@ -35,11 +35,12 @@ export class XactnType {
       {id:101,XactnType:'', XactnTypeDetail:'Stackswap Swap',contract:'SP1Z92MPDQEWZXW36VX71Q25HKF5K2EPCJ304F275.stackswap-swap-v5k',function:'swap-x-for-y',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       //Syvita
       {id:150,XactnType:'Dispose', XactnTypeDetail:'Syvita Pool - NYC',contract:'',function:'',senderAddress:'',recipientAddress:'SP18XC4F27VQ8P2QGKZ5P6KR41GK77ZVFWV468P1',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
-      {id:28,XactnType:'Dispose', XactnTypeDetail:'Syvita Pool - NYC',contract:'',function:'',senderAddress:'',recipientAddress:'SP2ST741GVK200RYK9NKTYP6CJH1AG4ZPV4A5WG4M',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
-      {id:29,XactnType:'Dispose', XactnTypeDetail:'Syvita Pool - NYC',contract:'',function:'',senderAddress:'',recipientAddress:'SP1C6WQ9KTV3769S8X8YNAWBXKDG2Y65P5EEDRWR6',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
-      {id:30,XactnType:'Dispose', XactnTypeDetail:'Syvita Pool - NYC',contract:'',function:'',senderAddress:'',recipientAddress:'SP2BE8YZF117DZX8FTZQ0072GQ8VET2PPPQC58YFJ',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
-      {id:31,XactnType:'Dispose', XactnTypeDetail:'Syvita Pool - NYC',contract:'',function:'',senderAddress:'',recipientAddress:'SPYABDY1GR8RPQVNK1VFD1CQP6MZT2GF4Q9QB19F',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
-      {id:32,XactnType:'Dispose', XactnTypeDetail:'Syvita Pool - MIA',contract:'',function:'',senderAddress:'',recipientAddress:'SPRK96DVHVA9KZ9EQ8PQQ110GW8HH4TQ5DGMRMVD',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
+      {id:151,XactnType:'Dispose', XactnTypeDetail:'Syvita Pool - NYC',contract:'',function:'',senderAddress:'',recipientAddress:'SP2ST741GVK200RYK9NKTYP6CJH1AG4ZPV4A5WG4M',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
+      {id:152,XactnType:'Dispose', XactnTypeDetail:'Syvita Pool - NYC',contract:'',function:'',senderAddress:'',recipientAddress:'SP1C6WQ9KTV3769S8X8YNAWBXKDG2Y65P5EEDRWR6',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
+      {id:153,XactnType:'Dispose', XactnTypeDetail:'Syvita Pool - NYC',contract:'',function:'',senderAddress:'',recipientAddress:'SP2BE8YZF117DZX8FTZQ0072GQ8VET2PPPQC58YFJ',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
+      {id:154,XactnType:'Dispose', XactnTypeDetail:'Syvita Pool - NYC',contract:'',function:'',senderAddress:'',recipientAddress:'SPYABDY1GR8RPQVNK1VFD1CQP6MZT2GF4Q9QB19F',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
+      {id:155,XactnType:'Dispose', XactnTypeDetail:'Syvita Pool - MIA',contract:'',function:'',senderAddress:'',recipientAddress:'SPRK96DVHVA9KZ9EQ8PQQ110GW8HH4TQ5DGMRMVD',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
+      {id:156,XactnType:'Dispose', XactnTypeDetail:'Syvita Pool - NYC',contract:'',function:'',senderAddress:'',recipientAddress:'SP78Q12M26WVN1V9DPQ29HVDTWPKQH6KVR1X0VEW',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
       {id:33,XactnType:'Dispose', XactnTypeDetail:'Syvita Pool - MIA',contract:'SP343J7DNE122AVCSC4HEK4MF871PW470ZSXJ5K66.miamipool-v1',function:'add-funds',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
       {id:34,XactnType:'Dispose', XactnTypeDetail:'Syvita Pool - MIA',contract:'SP196Q1HN49MJTJFRW08RCRP7YSXY28VE72GQWS0P.syvita-mining-mia-v1',function:'contribute',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
       {id:35,XactnType:'Mined', XactnTypeDetail:'Syvita Pool - MIA',contract:'SP343J7DNE122AVCSC4HEK4MF871PW470ZSXJ5K66.miamipool-v1',function:'payout-mia',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
@@ -49,6 +50,7 @@ export class XactnType {
       {id:39,XactnType:'Mined', XactnTypeDetail:'Syvita Pool - NYC',contract:'',function:'',senderAddress:'SP1C6WQ9KTV3769S8X8YNAWBXKDG2Y65P5EEDRWR6',recipientAddress:'',inSymbol:'NYC',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:40,XactnType:'Mined', XactnTypeDetail:'Syvita Pool - NYC',contract:'',function:'',senderAddress:'SP2BE8YZF117DZX8FTZQ0072GQ8VET2PPPQC58YFJ',recipientAddress:'',inSymbol:'NYC',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:41,XactnType:'Mined', XactnTypeDetail:'Syvita Pool - NYC',contract:'',function:'',senderAddress:'SPYABDY1GR8RPQVNK1VFD1CQP6MZT2GF4Q9QB19F',recipientAddress:'',inSymbol:'NYC',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:41,XactnType:'Mined', XactnTypeDetail:'Syvita Pool - NYC',contract:'',function:'',senderAddress:'SP78Q12M26WVN1V9DPQ29HVDTWPKQH6KVR1X0VEW',recipientAddress:'',inSymbol:'NYC',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       //KCV
       {id:200,XactnType:'Dispose', XactnTypeDetail:'KCV Pool - NYC',contract:'SP1W7X92JG1BYPKG15KTS6398XN4D4HJP9TTXMQ38.kcv-pool',function:'join-pool',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
 
