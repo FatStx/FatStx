@@ -13,8 +13,11 @@ export default async function getPriceFromCoinGecko(symbol, priceDate) {
     {
         let dateForCG = getDateForCoinGecko(new Date(priceDate))
         let url=baseUrl+apiSymbol+'/history?localization=false&date=' + dateForCG;
-        let response = await fetch(url);
-        if (response.status === 200) {
+        let response = await fetch(url).catch(error =>
+            {
+                console.log("Error Fetching Coin API Information");
+            });
+        if (response !==undefined && response.status === 200) {
             let json = await response.json();
             if (json.market_data !== undefined) {
                 price=json.market_data.current_price.usd;
