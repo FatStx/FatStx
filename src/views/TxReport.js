@@ -46,7 +46,8 @@ export default function TxReport(props) {
     }
     setSpinnerVisible(true)
 
-    let json = await processAllXactnWithTransfersApiPages(walletId);
+    let apiResults = await processAllXactnWithTransfersApiPages(walletId);
+    let json=apiResults[1];
     let outputArray = await convertJsonToTxReportArray(json,walletId);
     setTxnData(outputArray)
 

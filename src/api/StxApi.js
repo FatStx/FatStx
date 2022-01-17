@@ -1,30 +1,36 @@
 import { Configuration, BlocksApi } from "@stacks/blockchain-api-client";
 
-//TODO: Proper Error handling, possibly chain then and catch to the fetch
 //Process All API Pages
 export default async function processAllXactnWithTransfersApiPages(walletId,startDate='2021-01-01T00:00:00.000Z',endDate='2023-01-01T00:00:00.000Z') {
     console.log(Date.now() + " ===Process All Api Pages===");
 
+    let runningJson=[];
     let apiResult = await processOneXactnWithTransfersApiPage(0, walletId);
-
-    let runningJson = apiResult[1].results;
-    let filterResults=filterDates(runningJson,startDate,endDate);
-    runningJson=filterResults[1];
-    if (!filterResults[0]) {
-        let totalTransactions = apiResult[1].total;
-
-        //Loop Through all results after getting first page
-        for (let i = 50; i <= totalTransactions; i += 50) {
-            apiResult = await processOneXactnWithTransfersApiPage(i, walletId);
-            //TODO: what if apiResult doesn't return what is expected?
-            let filterResults=filterDates(apiResult[1].results,startDate,endDate);
-            runningJson = runningJson.concat(filterResults[1]);
-            if (filterResults[0]) {
-                break;
+    let isApiError= false;
+    if (apiResult[0] === 200) {
+        let filterResults=filterDates(apiResult[1].results,startDate,endDate);
+        runningJson=filterResults[1];
+        if (!filterResults[0]) {
+            let totalTransactions = apiResult[1].total;
+            //Loop Through all results after getting first page
+            for (let i = 50; i <= totalTransactions; i += 50) {
+                apiResult = await processOneXactnWithTransfersApiPage(i, walletId);
+                if (apiResult[0] === 200) {
+                    let filterResults=filterDates(apiResult[1].results,startDate,endDate);
+                    runningJson = runningJson.concat(filterResults[1]);
+                    if (filterResults[0]) {
+                        break;
+                    }
+                } else {
+                    isApiError=true;
+                    break;
+                }
             }
         }
+    } else {
+        isApiError=true;
     }
-    return runningJson;
+    return [isApiError,runningJson];
 }
 
 export async function getCurrentBlock() {
@@ -50,7 +56,13 @@ export async function getCurrentBlock() {
 //Fully process one 50 xactn call/page from the transactions with transfers API
 async function processOneXactnWithTransfersApiPage(offset, walletId) {
     console.log(Date.now() + " ===Process Api Page,Offset " + offset + "===");
-    const baseUrl = "https://stacks-node-api.mainnet.stacks.co/extended/v1/address/" + walletId + "/transactions_with_transfers?limit=50&unanchored=false&offset="
+    let baseUrl = "https://stacks-node-api.mainnet.stacks.co/extended/v1/address/" + walletId + "/transactions_with_transfers?limit=50&unanchored=false&offset="
+    //This is just used for some testing error scenarios
+    // if (offset===0)
+    // {
+    //     baseUrl = "https://stacks-node-api.mainnet.stacks.co/extended/v1/address/" + walletId + "/transactions_with_transfers?limit=50&unanchored=false&offset="
+    // }
+
     let url = baseUrl + offset;
     let ret = await processOneApiPage(url);
     //Commented out because Syvita API missing nft transfer section
@@ -65,12 +77,19 @@ async function processOneXactnWithTransfersApiPage(offset, walletId) {
 
 //Fully process one 50 xactn call/page from the API
 async function processOneApiPage(url) {
-    let response = await fetch(url);
+    let response = await fetch(url).catch(error =>
+        {
+            console.log("Error Fetching API Information",url);
+        });
     let json = null;
-    if (response.status === 200) {
-        json = await response.json();
-    }
-    return [response.status, json];
+    let responseStatus=500;
+    if (response !== undefined) {
+        responseStatus=response.status;
+        if (responseStatus === 200) {
+            json = await response.json();
+        }
+    } 
+    return [responseStatus, json];
 }
 
 function filterDates(json,startDate,endDate) {
