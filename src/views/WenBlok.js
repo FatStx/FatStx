@@ -78,7 +78,7 @@ export default function WenBlok() {
                       <Typography color="common.grey"  sx={{ fontWeight: 500}} >{row.when.delta}</Typography>
                       <Typography color="common.grey"  sx={{ fontWeight: 300, fontSize: "0.75rem"}}  >{row.when.at}</Typography>
                     </TableCell>
-                    <TableCell><a href={row.link}target="_blank" rel="noopener noreferrer"> { shorten(row.link) } </a></TableCell>
+                    <TableCell><a href={row.link} target="_blank" rel="noopener noreferrer"> { shorten(row.link) } </a></TableCell>
                   </TableRow>
                 ))}
 

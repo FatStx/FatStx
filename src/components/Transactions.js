@@ -11,7 +11,8 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
-
+import Paper from "@mui/material/Paper";
+import LinkIcon from "@mui/icons-material/Link";
 
 import { CSVLink } from "react-csv";
 
@@ -23,6 +24,38 @@ export default function Transactions({txnData}) {
 
   const [textCopiedAlertVisible, setTextCopiedAlertVisible] = useState(false);
   const csvLink = useRef()
+
+  const linkRows = (rowId) => {
+
+    let txId = txnData.filter(
+      function(data){ return data.rowId === rowId }
+    )[0].xactnId
+
+    let prevTxId = txnData.filter(
+      function(data){ return data.rowId === (rowId - 1) }
+    )[0]?.xactnId
+
+    if (txId === prevTxId) {
+      return <Tooltip title="Same transaction Id" arrow>
+        <Paper
+          elevation={0}
+          variant="outlined"
+          sx={{
+            background: "#fff8bd",
+            px: 2,
+            py: 1,
+            display: "flex",
+            flexDirection: "column"
+          }}
+        >
+          <LinkIcon />
+        </Paper>
+      </Tooltip>
+    } else {
+      return ''
+    }
+
+  }
 
   const handleCopyClick = () => {
     setTextCopiedAlertVisible(true);
@@ -86,13 +119,14 @@ export default function Transactions({txnData}) {
 
         <colgroup>
           <col style={{width:'10%'}}/>
-          <col style={{width:'12%'}}/>
+          <col style={{width:'10%'}}/>
           <col style={{width:'16%'}}/>
-          <col style={{width:'7%'}}/>
+          <col style={{width:'10%'}}/>
           <col style={{width:'7%'}}/>
           <col style={{width:'7%'}}/>
           <col style={{width:'7%'}}/>
           <col style={{width:'27%'}}/>
+          <col style={{width:'2%'}}/>
         </colgroup>
 
         <TableHead>
@@ -111,6 +145,7 @@ export default function Transactions({txnData}) {
                 <Grid item xs> OUT </Grid>
               </Grid>
             </TableCell>
+            <TableCell></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -129,7 +164,7 @@ export default function Transactions({txnData}) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {row.xactnId.substring(0, 4) + '…' + row.xactnId.slice(-3) }
+                  {'…' + row.xactnId.slice(-4) }
                 </a>
                 <ContentCopyIcon 
                   sx={{ 
@@ -169,6 +204,13 @@ export default function Transactions({txnData}) {
                   outAmount={row.outAmount} 
                   outSymbol={row.outSymbol}
                 />
+              </TableCell>
+
+              <TableCell
+                sx={{ transform: "translate(0px, -30px)  rotate(90deg)" }}
+                align="right"
+              >
+                {linkRows(row.rowId)}
               </TableCell>
 
             </TableRow>
