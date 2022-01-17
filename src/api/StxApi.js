@@ -19,7 +19,7 @@ export default async function processAllXactnWithTransfersApiPages(walletId,star
             //TODO: what if apiResult doesn't return what is expected?
             let filteredArray=filterDates(apiResult[1].results,startDate,endDate);
             runningJson = runningJson.concat(filteredArray);
-            if (filteredArray.length !=50) {
+            if (filteredArray.length !== 50) {
                 break;
             }
         }
