@@ -52,7 +52,6 @@ export default function TxReport(props) {
     if (apiResults[0]) {
       setSpinnerVisible(false)
       alert("There have been one or more errors connecting to Stacks to obtain your data. Normally this is due to problems with either the network or the APIs. Please try again in a few minutes.");
-      return;
     } else {
       let json=apiResults[1];
       let outputArray = await convertJsonToTxReportArray(json,walletId);
@@ -60,6 +59,7 @@ export default function TxReport(props) {
 
       setSpinnerVisible(false)
     }
+
     return;
   
   }

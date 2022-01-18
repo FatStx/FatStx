@@ -19,7 +19,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 import Title from '../components/Title';
-import processAllXactnWithTransfersApiPages from '../api/StxApi'
+import processAllXactnWithTransfersApiPages, { isValidWallet } from '../api/StxApi'
 import convertJsonToStackingReportArray from '../bl/StackingBL'
 
 export default function StackingReport(props) {
@@ -54,22 +54,28 @@ export default function StackingReport(props) {
       if (walletId === '') {
         return;
       }
+      let isAValidWallet=await isValidWallet(walletId);
 
-      if (walletId.length<5) // TODO: need a more robust check - perhaps against explorer API?
+      if (!isAValidWallet)
       {
-          alert("Please enter a valid wallet address");
-          return;
+        alert("Please enter a valid wallet address");
+        return;
       }
 
       // TODO Activate spinner
       ReactGA.send({ hitType: "pageview", page: "/transactions" });
 
       let apiResults = await processAllXactnWithTransfersApiPages(walletId);
-      let json=apiResults[1];
-      let outputArray = await convertJsonToStackingReportArray(json,coin);
-      setStackData(outputArray)
-      console.log(json, outputArray)
+      if (apiResults[0]) {
+        alert("There have been one or more errors connecting to Stacks to obtain your data. Normally this is due to problems with either the network or the APIs. Please try again in a few minutes.");
+      } else {
+        let json=apiResults[1];
+        let outputArray = await convertJsonToStackingReportArray(json,coin);
+        setStackData(outputArray)
+        console.log(json, outputArray)
+      }
 
+      return;
   };
 
   useEffect(()=> {
