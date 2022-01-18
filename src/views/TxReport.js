@@ -13,8 +13,7 @@ import DotLoader from "react-spinners/DotLoader";
 
 import Transactions from '../components/Transactions';
 import convertJsonToTxReportArray from '../bl/TransactionsBL'
-import processAllXactnWithTransfersApiPages from '../api/StxApi'
-
+import processAllXactnWithTransfersApiPages, { isValidWallet } from '../api/StxApi'
 
 export default function TxReport(props) {
 
@@ -35,11 +34,14 @@ export default function TxReport(props) {
 
     ReactGA.send({ hitType: "pageview", page: "/transactions" });
 
-    if (walletId === '') {
+    if (walletId === '')
+    {
       return;
     }
-  
-    if (walletId.length < 5) // TODO: need a more robust check - perhaps against explorer API?
+
+    let isAValidWallet=await isValidWallet(walletId);
+
+    if (!isAValidWallet)
     {
       alert("Please enter a valid wallet address");
       return;
@@ -47,11 +49,17 @@ export default function TxReport(props) {
     setSpinnerVisible(true)
 
     let apiResults = await processAllXactnWithTransfersApiPages(walletId);
-    let json=apiResults[1];
-    let outputArray = await convertJsonToTxReportArray(json,walletId);
-    setTxnData(outputArray)
+    if (apiResults[0]) {
+      setSpinnerVisible(false)
+      alert("There have been one or more errors connecting to Stacks to obtain your data. Normally this is due to problems with either the network or the APIs. Please try again in a few minutes.");
+      return;
+    } else {
+      let json=apiResults[1];
+      let outputArray = await convertJsonToTxReportArray(json,walletId);
+      setTxnData(outputArray)
 
-    setSpinnerVisible(false)
+      setSpinnerVisible(false)
+    }
     return;
   
   }

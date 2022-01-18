@@ -48,10 +48,29 @@ export async function getCurrentBlock() {
     return currentBlock
 }
 
-// function validateDates(results) {
+export async function isValidWallet(walletId) {
+    //Not calling this one because it is far too slow for some reason
+    //let baseUrl = "https://stacks-node-api.mainnet.stacks.co/v2/accounts/" + walletId;
+    let baseUrl = 'https://stacks-node-api.mainnet.stacks.co/extended/v1/address/' + walletId + '/balances'
+    let ret = await processOneApiPage(baseUrl);
+    if (ret[0]===200 && ret[1].error === undefined)
+    {
+        return true;
+    } else {
+        return false;
+    }
+}
 
-
-// }
+export async function getBlockTime(blockHeight) {
+    let baseUrl = 'https://stacks-node-api.mainnet.stacks.co/extended/v1/block/by_height/' + blockHeight;
+    let ret = await processOneApiPage(baseUrl);
+    if (ret[0]===200 && ret[1].burn_block_time_iso !==undefined)
+    {
+        return ret[1].burn_block_time_iso;
+    } else {
+        return '';
+    }
+}
 
 //Fully process one 50 xactn call/page from the transactions with transfers API
 async function processOneXactnWithTransfersApiPage(offset, walletId) {
@@ -74,6 +93,7 @@ async function processOneXactnWithTransfersApiPage(offset, walletId) {
     // }
     return ret;
 }
+
 
 //Fully process one 50 xactn call/page from the API
 async function processOneApiPage(url) {

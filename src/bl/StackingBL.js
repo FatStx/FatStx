@@ -1,6 +1,6 @@
 import { MIAStackingList } from "../bo/cityarrays/MiaStackingCycles"
 import { NYCStackingList } from '../bo/cityarrays/NycStackingCycles'
-import { getCurrentBlock } from '../api/StxApi'
+import { getCurrentBlock, getBlockTime} from '../api/StxApi'
 //import  getPricesInUSDT  from './PopulateCoinPrices'
 
 export default async function convertJsonToStackingReportArray(json,symbol) {
@@ -111,6 +111,10 @@ async function populateFutureBlockEndDates(outputArray)
             let minutestoAdd=parseInt(stackingRound.endBlock-currentBlock)*10;
             let blockTime=new Date((new Date(currentDate)).getTime() + (minutestoAdd* 60 * 1000));
 
+            stackingRound.endBlockDate=blockTime.toISOString();
+        } else {
+            let blockDate=await getBlockTime(stackingRound.endBlock);
+            let blockTime=new Date(blockDate);
             stackingRound.endBlockDate=blockTime.toISOString();
         }
         
