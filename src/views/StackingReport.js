@@ -101,7 +101,7 @@ export default function StackingReport(props) {
           <Paper sx={{p: 2}}>
 
               <Grid container alignItems="center" spacing={2}> 
-                <Grid item xs={10}>
+                <Grid item xs={9}>
                   <TextField
                     fullWidth
                     component="form"
@@ -113,7 +113,7 @@ export default function StackingReport(props) {
                   />
                 </Grid>
 
-                <Grid item xs={1} >
+                <Grid item xs={2} >
                     <FormControl fullWidth>
                         <InputLabel id="coin-label">Coin</InputLabel>
                         <Select

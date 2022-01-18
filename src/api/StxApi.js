@@ -1,7 +1,11 @@
 import { Configuration, BlocksApi } from "@stacks/blockchain-api-client";
 
 //Process All API Pages
-export default async function processAllXactnWithTransfersApiPages(walletId,startDate='2021-01-01T00:00:00.000Z',endDate='2023-01-01T00:00:00.000Z') {
+export default async function processAllXactnWithTransfersApiPages(walletId, year='2021') {
+
+    let startDate = year + '-01-01T00:00:00.000Z';
+    let endDate = (parseInt(year) + 1).toString() + '-01-01T00:00:00.000Z';
+
     console.log(Date.now() + " ===Process All Api Pages===");
 
     let runningJson=[];
