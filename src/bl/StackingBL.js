@@ -1,4 +1,4 @@
-import { MIAStackingList } from "../bo/cityarrays/MiaStackingCycles"
+import { MIAStackingList } from '../bo/cityarrays/MiaStackingCycles'
 import { NYCStackingList } from '../bo/cityarrays/NycStackingCycles'
 import { getCurrentBlock, getBlockTime} from '../api/StxApi'
 //import  getPricesInUSDT  from './PopulateCoinPrices'
@@ -15,7 +15,8 @@ export default async function convertJsonToStackingReportArray(json,symbol) {
     }
 
     outputArray = await populateFutureBlockEndDates(outputArray);
-    return outputArray.filter(function(item){return (item.endBlockDate!=="");}).sort((a) => parseInt(a.endBlock));
+    outputArray = await filterStackingResultsForOutput(outputArray);
+    return outputArray;
 
 }
 
@@ -34,9 +35,9 @@ function getCoinSmartContractAddress(symbol)
 {
     let coinContract;
     if (symbol==='MIA') {      
-        coinContract = "SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1";
+        coinContract = 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1';
     } else {
-        coinContract = "SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1";
+        coinContract = 'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1';
     }
     return coinContract;
 }
@@ -99,15 +100,13 @@ function processClaimTransaction(outputArray,xactn,blockHeight){
     return outputArray;
 }
 
-//this populates up to three future block end dates, plus any past block end dates which aren't hard coded yet
+//this populates future block end dates, plus any past block end dates which aren't hard coded yet
 async function populateFutureBlockEndDates(outputArray)
 {
     const currentBlock=await getCurrentBlock();
     const currentDate = new Date().toISOString();
-    let ctr=0;
     for (const stackingRound of outputArray.filter(function(item){return (item.endBlockDate==='');}).sort((a) => parseInt(a.endBlock))) {
         if (parseInt(stackingRound.endBlock)>parseInt(currentBlock)) {
-            ctr+=1
             let minutestoAdd=parseInt(stackingRound.endBlock-currentBlock)*10;
             let blockTime=new Date((new Date(currentDate)).getTime() + (minutestoAdd* 60 * 1000));
 
@@ -117,11 +116,11 @@ async function populateFutureBlockEndDates(outputArray)
             let blockTime=new Date(blockDate);
             stackingRound.endBlockDate=blockTime.toISOString();
         }
-        
-        if (ctr>2) {
-            break;
-        }
     }
 
     return outputArray;
+}
+
+async function filterStackingResultsForOutput(outputArray) {
+    return outputArray.filter(function(item){return (item.stackedCoins>0);}).sort((a) => parseInt(a.endBlock))
 }
