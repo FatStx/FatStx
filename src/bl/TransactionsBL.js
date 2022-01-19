@@ -22,6 +22,34 @@ export default async function convertJsonToTxReportArray(json, walletId) {
     return outputArray;
 }
 
+export async function convertTxReportArrayToTxCSVArray(rptArray) {
+
+        let outputArray = [];
+        for (const arrayRow of rptArray) {
+            let outputArrayRow = {
+                burnDate: arrayRow.burnDate,
+                inSymbol: arrayRow.inSymbol,
+                inAmount: arrayRow.inAmount,
+                outSymbol: arrayRow.outSymbol,
+                outAmount: arrayRow.outAmount,
+                xactnFee: arrayRow.xactnFee,
+                inCoinPrice: arrayRow.inCoinPrice,
+                outCoinPrice: arrayRow.outCoinPrice,
+                xactnFeeCoinPrice: arrayRow.xactnFeeCoinPrice,
+                xactnType: arrayRow.xactnType,
+                xactnTypeDetail: arrayRow.xactnTypeDetail,
+                xactnId: arrayRow.xactnId,
+                inAmountRaw: arrayRow.inAmountRaw,
+                outAmountRaw: arrayRow.outAmountRaw,
+                xactnFeeRaw: arrayRow.xactnFeeRaw
+            };
+            outputArrayRow.push(outputArrayRow);
+        }
+
+        console.log(outputArray);
+        return outputArray;
+    }
+
 async function addOutputArrayRowsForXactn(outputArray, xactn, walletId) {
     let outputRowRawData = await getOutputRowsForXactn(xactn, walletId);
 

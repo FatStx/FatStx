@@ -19,11 +19,16 @@ import { CSVLink } from "react-csv";
 import Title from './Title';
 import Tx from './Tx';
 import { Typography } from "@mui/material";
+import convertTxReportArrayToTxCSVArray from '../bl/TransactionCsvBL'
 
 export default function Transactions({txnData}) {
 
   const [textCopiedAlertVisible, setTextCopiedAlertVisible] = useState(false);
-  const csvLink = useRef()
+  const csvLink = useRef();
+  let csvArray = [];
+  if (txnData.length) {
+    csvArray=convertTxReportArrayToTxCSVArray(txnData);
+  }
 
   const linkRows = (rowId) => {
 
@@ -220,7 +225,7 @@ export default function Transactions({txnData}) {
 
       <div>
         <CSVLink
-            data={txnData}
+            data={csvArray}
             filename="transactions.csv"
             className="hidden"
             ref={csvLink}
