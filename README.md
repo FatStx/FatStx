@@ -2,7 +2,7 @@
 
 StacksBoard tools and reports for the Stacks (STX) ecosystem
 
-View the site at : https://stacksboard.github.io/
+View the site at : https://fatstx.github.io/
 
 ### Development Instructions
 
