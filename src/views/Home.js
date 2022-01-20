@@ -38,9 +38,19 @@ function StacksBoard() {
               variant="h6"
               color="inherit"
               noWrap
-              sx={{ flexGrow: 1 }}
+              sx={{ fontWeight: 'bold', fontSize: '2rem',  letterSpacing: 4 }}
             >
-              FatStx
+              FAT
+            </Typography>
+
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              sx={{ fontWeight: 'light', fontSize: '2rem', letterSpacing: 4 , flexGrow: 1 }}
+            >
+              STX
             </Typography>
 
             <nav>

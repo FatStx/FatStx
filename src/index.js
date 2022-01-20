@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
-import StacksBoard from './views/StacksBoard';
+import Home from './views/Home';
 import reportWebVitals from './reportWebVitals';
 import ReactGA from "react-ga4";
 
@@ -12,7 +12,7 @@ ReactGA.send({ hitType: "pageview", page: "/" });
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <StacksBoard />
+      <Home />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
