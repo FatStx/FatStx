@@ -40,7 +40,7 @@ function StacksBoard() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              StacksBoard
+              FatStx
             </Typography>
 
             <nav>
