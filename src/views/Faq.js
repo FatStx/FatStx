@@ -8,7 +8,7 @@ export default function Faq() {
 
     return(
         <Container >
-            <h1>StacksBoard FAQ</h1>
+            <h1>FatStx FAQ</h1>
                 <h2>The site is taking forever to load, what do I do?</h2>
                 Stacks API calls are slow sometimes! If it takes more than 30 seconds, close and try again a minute later. Do not keep spamming the refresh button.
                 <h2>I put in a valid wallet address and it doesn't work</h2>

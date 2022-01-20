@@ -21,7 +21,7 @@ import Faq from './Faq'
 
 const mdTheme = createTheme();
 
-function StacksBoard() {
+function Fatstx() {
 
   const [walletId, setWalletId] = useState('');
   const [txnData, setTxnData] = useState([]);
@@ -201,5 +201,5 @@ function StacksBoard() {
 }
 
 export default function Dashboard() {
-  return <StacksBoard />;
+  return <FatStx />;
 }

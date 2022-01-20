@@ -1,4 +1,4 @@
-name: Publish site to https://stacksboard.github.io/
+name: Publish site to https://fatstx.github.io/
 
 on:
   workflow_dispatch:
