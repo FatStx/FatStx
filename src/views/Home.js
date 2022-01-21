@@ -21,7 +21,7 @@ import Faq from './Faq'
 
 const mdTheme = createTheme();
 
-function Fatstx() {
+function FatStx() {
 
   const [walletId, setWalletId] = useState('');
   const [txnData, setTxnData] = useState([]);
