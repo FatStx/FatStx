@@ -27,8 +27,9 @@ export default function TxReport(props) {
   let setWalletId = props.setWalletId
   let txnData = props.txnData
   let setTxnData = props.setTxnData
+  let year = props.year
+  let setYear = props.setYear
   
-  const [year, setYear] = React.useState('2021');
   const [spinnerVisible, setSpinnerVisible] = useState(false);
 
   const handleYearChange = (event) => {

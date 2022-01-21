@@ -26,6 +26,8 @@ function Home() {
   const [walletId, setWalletId] = useState('');
   const [txnData, setTxnData] = useState([]);
   const [stackData, setStackData] = useState([]);
+  const [coin, setCoin] = useState('');
+  const [year, setYear] = React.useState('2021');
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -139,6 +141,8 @@ function Home() {
                     setWalletId = {setWalletId}
                     txnData = {txnData} 
                     setTxnData = {setTxnData}
+                    year = {year}
+                    setYear = {setYear}
                   />
                 } 
               />
@@ -150,6 +154,8 @@ function Home() {
                     setWalletId = {setWalletId}
                     txnData = {txnData} 
                     setTxnData = {setTxnData}
+                    year = {year}
+                    setYear = {setYear}
                   />
                 } 
               />
@@ -161,6 +167,8 @@ function Home() {
                     setWalletId = {setWalletId}
                     stackData = {stackData} 
                     setStackData = {setStackData}
+                    coin = {coin}
+                    setCoin = {setCoin}
                   />
                 } 
               />
@@ -172,12 +180,13 @@ function Home() {
                     setWalletId = {setWalletId}
                     stackData = {stackData} 
                     setStackData = {setStackData}
+                    coin = {coin}
+                    setCoin = {setCoin}
                   />
                 } 
               />
 
               <Route path="wenblok" element={<WenBlok />} />
-              
               <Route path="disclaimer" element={<Disclaimer />} />
               <Route path="about" element={<Disclaimer />} />
               <Route path="faq" element={<Faq />} />
@@ -189,6 +198,8 @@ function Home() {
                     setWalletId = {setWalletId}
                     txnData = {txnData} 
                     setTxnData = {setTxnData}
+                    year = {year}
+                    setYear = {setYear}
                   />
                 } 
               />

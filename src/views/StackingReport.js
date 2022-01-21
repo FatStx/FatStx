@@ -32,10 +32,11 @@ export default function StackingReport(props) {
   let setWalletId = props.setWalletId
   let stackData = props.stackData
   let setStackData = props.setStackData
+  let coin = props.coin
+  let setCoin = props.setCoin
   
   ReactGA.send({ hitType: "pageview", page: "/stacking" });
 
-  const [coin, setCoin] = useState('');
   const [spinnerVisible, setSpinnerVisible] = useState(false);
 
   const handleCoinChange = (event) => {
