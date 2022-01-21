@@ -1,5 +1,5 @@
 import ReactGA from "react-ga4";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 
 import Container from '@mui/material/Container';
@@ -17,6 +17,8 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Backdrop from '@mui/material/Backdrop';
+import DotLoader from "react-spinners/DotLoader";
 
 import Title from '../components/Title';
 import processAllXactnWithTransfersApiPages, { isValidWallet } from '../api/StxApi'
@@ -33,7 +35,8 @@ export default function StackingReport(props) {
   
   ReactGA.send({ hitType: "pageview", page: "/stacking" });
 
-  const [coin, setCoin] = React.useState('');
+  const [coin, setCoin] = useState('');
+  const [spinnerVisible, setSpinnerVisible] = useState(false);
 
   const handleCoinChange = (event) => {
       setCoin(event.target.value);
@@ -63,7 +66,8 @@ export default function StackingReport(props) {
         return;
       }
 
-      // TODO Activate spinner
+      setSpinnerVisible(true)
+
       ReactGA.send({ hitType: "pageview", page: "/transactions" });
 
       let apiResults = await processAllXactnWithTransfersApiPages(walletId);
@@ -75,6 +79,8 @@ export default function StackingReport(props) {
         setStackData(outputArray)
         console.log(json, outputArray)
       }
+
+      setSpinnerVisible(false)
 
       return;
   };
@@ -140,6 +146,10 @@ export default function StackingReport(props) {
         {/* Transactions*/}
         <Grid item xs={12}>
           <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+
+          <Backdrop open={spinnerVisible}>
+            <DotLoader  color="#ffffff" loading={true}  size={120} />
+          </Backdrop>
           <Title>Stacking Report</Title>
           <Table size="small">
 
