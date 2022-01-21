@@ -79,13 +79,6 @@ export default function TxReport(props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [walletInPath])
 
-  useEffect(()=> {
-    if (txnData.length === 0){
-      getWalletTxData()
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [walletId])
-
   return (
     <Container sx={{ mt: 4, mb: 4}}>
       <Grid container spacing={3}>

@@ -46,7 +46,8 @@ export default function StackingReport(props) {
   async function handleGoClick() {
       if (coin === '') 
       {
-          await setCoin('MIA')
+        alert("Please select a coin");
+        return;
       }
 
       console.log(walletId)
@@ -84,13 +85,6 @@ export default function StackingReport(props) {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [walletInPath])
-
-  useEffect(()=> {
-    if (stackData.length === 0){
-      handleGoClick()
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [walletId])
 
   return (
     <Container sx={{ mt: 4, mb: 4}}>
