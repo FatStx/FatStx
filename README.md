@@ -1,6 +1,6 @@
-# StacksBoard
+# FatStx
 
-StacksBoard tools and reports for the Stacks (STX) ecosystem
+Tools and reports for the Stacks (STX) ecosystem
 
 View the site at : https://fatstx.github.io/
 

@@ -1,7 +1,7 @@
 {
-  "name": "stacksboard",
+  "name": "fatstx",
   "version": "0.1.0",
-  "homepage": "https://stacksboard.github.io/",
+  "homepage": "https://fatstx.github.io/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.1",
@@ -29,7 +29,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d build -r \"https://${PAT_GHPAGES_PUBLISH}@github.com/StacksBoard/StacksBoard.github.io.git\" -b main"
+    "deploy": "gh-pages -d build -r \"https://${PAT_GHPAGES_PUBLISH}@github.com/fatstx/fatstx.github.io.git\" -b main"
   },
   "eslintConfig": {
     "extends": [
