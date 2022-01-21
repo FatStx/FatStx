@@ -21,7 +21,7 @@ import Faq from './Faq'
 
 const mdTheme = createTheme();
 
-function FatStx() {
+function Home() {
 
   const [walletId, setWalletId] = useState('');
   const [txnData, setTxnData] = useState([]);
@@ -201,5 +201,5 @@ function FatStx() {
 }
 
 export default function Dashboard() {
-  return <FatStx />;
+  return <Home />;
 }
