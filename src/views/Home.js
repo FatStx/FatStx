@@ -8,7 +8,10 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-// import Button from '@mui/material/Button';
+import Button from '@mui/material/Button';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Popover from '@mui/material/Popover';
+
 // import Switch from '@mui/material/Switch';
 // import Brightness6OutlinedIcon from '@mui/icons-material/Brightness6Outlined';
 
@@ -27,7 +30,19 @@ function Home() {
   const [txnData, setTxnData] = useState([]);
   const [stackData, setStackData] = useState([]);
   const [coin, setCoin] = useState('');
-  const [year, setYear] = React.useState('2021');
+  const [year, setYear] = useState('2021');
+  const [supportShow, setSupportShow] = useState(null);
+
+  const handleSupportClick = (event) => {
+    setSupportShow(event.currentTarget);
+  };
+
+  const handleSupportClose = () => {
+    setSupportShow(null);
+  };
+
+  const open = Boolean(supportShow);
+  const id = open ? 'simple-popover' : undefined;
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -58,6 +73,32 @@ function Home() {
             <nav>
               {/* <Brightness6OutlinedIcon sx={{mb:-1}}/>
               <Switch disabled sx={{mr:3}}/> */}
+              <Button 
+                variant="outlined" 
+                color="inherit"
+                endIcon={<FavoriteIcon />}
+                sx = {{ mr:2 }}
+                onClick = {handleSupportClick}
+              >
+                Support Us
+              </Button>
+              <Popover
+                id={id}
+                open={open}
+                anchorEl={supportShow}
+                onClose={handleSupportClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'center',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
+              >
+                <Typography sx={{ p: 2 }}>If you'd like to buy us a cup of coffee</Typography>
+                <Typography sx={{ p: 2 }}>send stuff to FOO :copy icon:</Typography>
+              </Popover>
               <Link
                 variant="button"
                 color="inherit"

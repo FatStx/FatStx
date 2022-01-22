@@ -55,8 +55,7 @@ export default function Faq() {
                     <AccordionDetails>
                     <Divider />
                     <Typography sx={{ 
-                        mx:"2rem", 
-                        mt:"2rem",
+                        m:"2rem",
                         fontWeight: "light"
                     }}>
                         {row.a}
@@ -81,8 +80,7 @@ export default function Faq() {
                     <AccordionDetails>
                     <Divider />
                     <Typography sx={{ 
-                        mx:"2rem", 
-                        mt:"2rem",
+                        m:"2rem",
                         fontWeight: "light"
                     }}>
                         The Stacks ecosystem is new enough that aside from the price of STX it can be difficult to determine accurate coin prices.
