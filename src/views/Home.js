@@ -11,6 +11,10 @@ import Link from '@mui/material/Link';
 import Button from '@mui/material/Button';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Popover from '@mui/material/Popover';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CoffeeIcon from '@mui/icons-material/Coffee';
 
 // import Switch from '@mui/material/Switch';
 // import Brightness6OutlinedIcon from '@mui/icons-material/Brightness6Outlined';
@@ -20,6 +24,7 @@ import StackingReport from './StackingReport'
 import WenBlok from './WenBlok'
 import Disclaimer from './Disclaimer'
 import Faq from './Faq'
+import { Stack } from "@mui/material";
 
 
 const mdTheme = createTheme();
@@ -96,8 +101,22 @@ function Home() {
                   horizontal: 'center',
                 }}
               >
-                <Typography sx={{ p: 2 }}>If you'd like to buy us a cup of coffee</Typography>
-                <Typography sx={{ p: 2 }}>send stuff to FOO :copy icon:</Typography>
+                <Card sx={{ maxWidth: 395 }}>
+                  <CardContent>
+                    <Stack direction="row" spacing={2} sx={{ py:3 }} >
+                      <CoffeeIcon sx={{ mt:"5px", color:"#777777"}} />
+                      <Typography gutterBottom variant="h5" component="div">
+                        Buy us a Coffee!
+                      </Typography>
+                    </Stack>
+                    <Typography variant="body2" color="text.secondary">
+                      We hope you're enjoying fatstx! If you'd like to support it's continued development feel free to send some fatstx our way!
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small"  sx={{ py:3 }} >INSERTSTXADDRESSHEREINSERTSTXADDRESSHERE1</Button>
+                  </CardActions>
+                </Card>
               </Popover>
               <Link
                 variant="button"
