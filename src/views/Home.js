@@ -114,7 +114,7 @@ function Home() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small"  sx={{ py:3 }} >Support Wallet Address coming soon</Button>
+                    <Button size="small" fullWidth sx={{ py:3 }} >Support Wallet Address coming soon</Button>
                   </CardActions>
                 </Card>
               </Popover>
