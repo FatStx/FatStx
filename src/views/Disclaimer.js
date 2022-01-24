@@ -8,20 +8,22 @@ export default function Disclaimer() {
 
     return(
         <Container >
-            <h1>Disclaimers</h1>
-            <h2>Affiliation</h2>
+            <h2>Disclaimers</h2>
+            <h3>Affiliation</h3>
             <ul>
                 <li>This page is not officially affiliated with CityCoins or Stacks</li>
             </ul>
-            <h2>Best efforts</h2>
+            <h3>Best efforts</h3>
             <ul>
             <li>This site represents the best efforts of the developers to convert the raw data from the Stacks blockchain and API into a user-friendly transaction report.
                 With a constantly changing and nearly limitless number of transaction variations, mistakes are possible and even probable. The developers will not be held responsible
                 for any issues, financial or otherwise, arising from the use of this site or errors within it.</li>
             </ul>
-            <h2>USA Taxation</h2>
+            <h3>USA Taxation</h3>
             <ul><li>The transaction report and exported CSVs may be useful in filling out US Income tax returns. 
                 Notes about the possible treatment of transactions are intended solely for discussion and do not constitute tax or legal advice.</li></ul>
+            <h2>Problems/Questions</h2>
+            <p>You can often find @eparrot and @foragerr in the Syvita Guild discord, or you can submit issues on gihub here: <a href="https://github.com/FatStx/FatStx.github.io/issues" target="_new">https://github.com/FatStx/FatStx.github.io/issues</a></p>
             <h2>About</h2>
             <p> Built by @eparrot and @foragerr</p>
             <h2>License</h2>

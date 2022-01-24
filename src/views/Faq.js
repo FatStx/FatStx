@@ -31,6 +31,10 @@ export default function Faq() {
             "q": "How about the Stacking dates and WenBlok dates?",
             "a": "Stacking and WenBlok dates are in your local browser time zone. Future dates are estimates and may be off by several days"
         },
+        {
+            "q": "What do I do if I have a question or problem with the site?",
+            "a": "You can often find @eparrot and @foragerr in the Syvita Guild discord, or you can submit issues on gihub here: https://github.com/FatStx/FatStx.github.io/issues"
+        },
     ]
 
     return(
