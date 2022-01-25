@@ -15,6 +15,8 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CoffeeIcon from '@mui/icons-material/Coffee';
+import Chip from '@mui/material/Chip';
+
 
 // import Switch from '@mui/material/Switch';
 // import Brightness6OutlinedIcon from '@mui/icons-material/Brightness6Outlined';
@@ -54,26 +56,30 @@ function Home() {
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar position="absolute">
-          <Toolbar>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ fontWeight: 'bold', fontSize: '2rem',  letterSpacing: 4 }}
-            >
-              FAT
-            </Typography>
+          <Toolbar >
+              <Typography
+                component="h1"
+                variant="h6"
+                color="inherit"
+                noWrap
+                sx={{ fontWeight: 'bold', fontSize: '2rem',  letterSpacing: 4 }}
+              >
+                FAT
+              </Typography>
 
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ fontWeight: 'light', fontSize: '2rem', letterSpacing: 4 , flexGrow: 1 }}
-            >
-              STX
-            </Typography>
+              <Typography
+                component="h1"
+                variant="h6"
+                color="inherit"
+                noWrap
+                sx={{ fontWeight: 'light', fontSize: '2rem', letterSpacing: 4  }}
+              >
+                STX
+              </Typography>
+
+              <Chip label="BETA" variant="outlined" size="small" sx={{fontSize: "0.6rem", ml:"0.4rem", mt:"0.5rem", alignSelf:"flex-start", color: "#ffffff"}} />
+
+              <Box sx={{ display: 'flex', flexGrow: 1 }}></Box>
 
             <nav>
               {/* <Brightness6OutlinedIcon sx={{mb:-1}}/>
