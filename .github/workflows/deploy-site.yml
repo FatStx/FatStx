@@ -2,9 +2,6 @@ name: Publish site to https://fatstx.github.io/
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
 
 jobs:
   publish-site:
