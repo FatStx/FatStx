@@ -335,7 +335,7 @@ function formatPrice(price,symbol) {
 function populateRowId(outputArray) {
     let ctr = 1;
     for (const arrayRow of outputArray) {
-        arrayRow.rowId = ctr;
+        arrayRow.id = ctr;
         ctr += 1;
     }
     return outputArray;

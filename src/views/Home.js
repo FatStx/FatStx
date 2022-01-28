@@ -213,6 +213,19 @@ function Home() {
                 } 
               />
 
+              <Route path="transactionsv" 
+                element={
+                  <TxReport
+                    walletId = {walletId}
+                    setWalletId = {setWalletId}
+                    txnData = {txnData} 
+                    setTxnData = {setTxnData}
+                    year = {year}
+                    setYear = {setYear}
+                  />
+                } 
+              />
+
               <Route path="transactions/:walletInPath" 
                 element={
                   <TxReport 

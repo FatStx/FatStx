@@ -1,5 +1,6 @@
 import ReactGA from "react-ga4";
 import React, { useState, useEffect } from "react";
+import { Route, Routes } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 import Container from '@mui/material/Container';
@@ -16,6 +17,7 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 
 import Transactions from '../components/Transactions';
+import Transactionsv2 from '../components/Transactionsv2';
 import convertJsonToTxReportArray from '../bl/TransactionsBL'
 import processAllXactnWithTransfersApiPages, { isValidWallet } from '../api/StxApi'
 
@@ -139,7 +141,10 @@ export default function TxReport(props) {
                 <DotLoader  color="#ffffff" loading={true}  size={120} />
             </Backdrop>
 
-            <Transactions txnData = {txnData} />
+            <Routes>
+              <Route path="" element={<Transactions txnData = {txnData} />}> </Route>
+              <Route path="transactionsv/2" element={<Transactionsv2 txnData = {txnData} />}> </Route>
+            </Routes>
             
           </Paper>
         </Grid>
