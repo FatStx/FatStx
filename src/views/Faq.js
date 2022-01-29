@@ -26,7 +26,7 @@ export default function Faq() {
             "a": "Currently the page only accepts the raw addresses, not .btc addresses."
         },
         {
-            "q": "Tell me about the Transaction dates",
+            "q": "Tell me all about the Transaction dates",
             "a": "Transaction Dates are in UTC time, which is the standard time that many tax sites require. In the csv file, the dates are specifically in the ISO time format"
         },
         {
