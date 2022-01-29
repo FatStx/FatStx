@@ -1,4 +1,4 @@
-name: Publish site to https://fatstx.github.io/FatStx/
+name: Publish site to Staging
 
 on:
   workflow_dispatch:
