@@ -1,0 +1,12 @@
+.DS_Store
+node_modules
+/build
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+packages
+.dtbcache.v2
+.futdcache.v1
+project-colors.json
