@@ -6,7 +6,7 @@ export class NYCStackingList
         { round: 0, startBlock: 37449, endBlock: 39548, endBlockDate: "2021-11-28T19:19:59.000Z", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
         { round: 1, startBlock: 39549, endBlock: 41648, endBlockDate: "2021-12-15T22:23:27.000Z", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
         { round: 2, startBlock: 41649, endBlock: 43748, endBlockDate: "2022-01-03T13:03:31.000Z", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
-        { round: 3, startBlock: 43749, endBlock: 45848, endBlockDate: "", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
+        { round: 3, startBlock: 43749, endBlock: 45848, endBlockDate: "2022-01-20T18:17:42.000Z", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
         { round: 4, startBlock: 45849, endBlock: 47948, endBlockDate: "", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
         { round: 5, startBlock: 47949, endBlock: 50048, endBlockDate: "", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
         { round: 6, startBlock: 50049, endBlock: 52148, endBlockDate: "", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
