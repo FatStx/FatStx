@@ -131,6 +131,31 @@ export default function Faq() {
                 </AccordionDetails>
             </Accordion>
 
+            <Accordion>
+                <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                >
+                <Typography sx={{ 
+                    m: "1rem", 
+                    fontSize: "1.5rem"
+                }}>
+                    Why does the site not include cost basis?
+                </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                <Divider />
+                <Typography sx={{ 
+                    m:"2rem",
+                    fontWeight: "light"
+                }}>
+                    <p>Calculating cost basis is a complicated endeavor, even beyond the fact that if you purchased STX for dollars and/or via an exchange the system has no way of knowing that. The main purpose of FatStx is to provide you with information which you can supplement with basis and other info as needed and/or upload to one of the crypto tax software sites which will do a lot more robust calculations than we are able to do.</p>
+                    <p>The information on the screen is intended primarily for visually reviewing your transactions in a user friendly manner, while the CSV export gets you a more complete set of data which you can make minor adjustments to in order to upload to tax sites. Those sites will figure out the cost basis for you if the information exists in what you upload. For situations where the cost basis comes from a transaction on an exchange, you'd upload transactions from that exchange or possibly connect directly from the crypto tax site in question.</p>
+                </Typography>
+                </AccordionDetails>
+            </Accordion>
+
         </Container>
     )
 }
