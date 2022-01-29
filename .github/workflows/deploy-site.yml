@@ -1,4 +1,4 @@
-name: Publish site to https://fatstx.github.io/
+name: Publish site to Production
 
 on:
   workflow_dispatch:
@@ -16,9 +16,21 @@ jobs:
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
+      - name: Find and Replace homepage in packages.json
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "[HomePage]"
+          replace: "https://fatstx.github.io/"
+          regex: false
+          include: "package.json"
       - name: install packages
         run: yarn install
+      - name: build
+        run: yarn build
       - name: deploy
-        run: yarn deploy
-        env:
-          PAT_GHPAGES_PUBLISH: ${{ secrets.PAT_GHPAGES_PUBLISH }}
+        uses: JamesIves/github-pages-deploy-action@v4.2.2
+        with:
+            branch: main
+            folder: build
+            token: ${{ secrets.PAT_GHPAGES_PUBLISH }}
+            repository-name: "FatStx/FatStx.github.io"
