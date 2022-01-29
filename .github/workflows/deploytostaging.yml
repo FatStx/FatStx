@@ -18,7 +18,14 @@ jobs:
           git config user.email "<>"
       - name: install packages
         run: yarn install
+      - name: build
+        run: yarn build
       - name: deploy
-        run: yarn deploy
-        env:
-          PAT_GHPAGES_PUBLISH: ${{ secrets.PAT_GHPAGES_PUBLISH }}
+        uses: JamesIves/github-pages-deploy-action@v4.2.2
+        with:
+            branch: gh-pages
+            folder: .
+            token: ${{ secrets.PAT_GHPAGES_PUBLISH }}
+            repository-name: "FatStx/FatStx"
+        # run: yarn deploy
+        # env:  PAT_GHPAGES_PUBLISH: ${{ secrets.PAT_GHPAGES_PUBLISH }}
