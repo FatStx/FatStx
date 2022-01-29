@@ -110,7 +110,7 @@ export default function Transactions({txnData}) {
 
       <Grid container spacing={2}>
         <Grid item xs={11}>
-          <Title>Transactions</Title>
+          <Title>Transactionsx</Title>
         </Grid>
         <Grid item xs={1}>
           <Button 
