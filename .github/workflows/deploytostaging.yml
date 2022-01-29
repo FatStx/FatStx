@@ -24,7 +24,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.2.2
         with:
             branch: gh-pages
-            folder: .
+            folder: build
             token: ${{ secrets.PAT_GHPAGES_PUBLISH }}
             repository-name: "FatStx/FatStx"
         # run: yarn deploy
