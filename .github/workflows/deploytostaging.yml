@@ -16,6 +16,13 @@ jobs:
         run: |
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
+      - name: Find and Replace homepage in packages.json
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+          find: "[HomePage]"
+          replace: "https://fatstx.github.io/FatStx/"
+          regex: false
+          include: "package.json"
       - name: install packages
         run: yarn install
       - name: build
