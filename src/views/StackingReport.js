@@ -156,21 +156,23 @@ export default function StackingReport(props) {
 
             <colgroup>
               <col style={{width:'5%'}}/>
+              <col style={{width:'10%'}}/>
+              <col style={{width:'10%'}}/>
               <col style={{width:'15%'}}/>
               <col style={{width:'15%'}}/>
               <col style={{width:'15%'}}/>
-              <col style={{width:'15%'}}/>
-              <col style={{width:'25%'}}/>
+              <col style={{width:'20%'}}/>
             </colgroup>
 
             <TableHead>
               <TableRow>
                 <TableCell>Cycle</TableCell>
-                <TableCell>Starting Block</TableCell>
-                <TableCell>Ending Block</TableCell>
-                <TableCell>Stacked Amount</TableCell>
-                <TableCell>Claimed</TableCell>
-                <TableCell>Claim Date</TableCell>
+                <TableCell>Start Block</TableCell>
+                <TableCell>End Block</TableCell>
+                <TableCell>End Block Dt</TableCell>
+                <TableCell>Stacked Amt</TableCell>
+                <TableCell>STX Claimed</TableCell>
+                <TableCell>Claim Date/Time</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -179,9 +181,10 @@ export default function StackingReport(props) {
                   <TableCell>{row.round}</TableCell>
                   <TableCell>{row.startBlock}</TableCell>
                   <TableCell>{row.endBlock}</TableCell>
+                  <TableCell>{row.endBlockDate}</TableCell>
                   <TableCell>{row.stackedCoins}</TableCell>
                   <TableCell>{row.claimedRewards}</TableCell>
-                  <TableCell>{row.endBlockDate}</TableCell>
+                  <TableCell>{row.claimDate}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

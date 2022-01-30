@@ -15,7 +15,8 @@ export default async function convertJsonToStackingReportArray(json,symbol) {
     }
 
     outputArray = await populateFutureBlockEndDates(outputArray);
-    outputArray = await filterStackingResultsForOutput(outputArray);
+    outputArray = filterStackingResultsForOutput(outputArray);
+    outputArray = formatStackingResultsForOutput(outputArray);
     return outputArray;
 
 }
@@ -94,7 +95,7 @@ function processClaimTransaction(outputArray,xactn,blockHeight){
 
     const rewardsAmount= parseInt(rawAmount)/1000000;
             outputArray[rewardsCycle].claimedRewards=rewardsAmount;
-            outputArray[rewardsCycle].claimDate=blockHeight;
+            outputArray[rewardsCycle].claimDate=xactn.tx.burn_block_time_iso;
             console.log(Date.now()+' Claimed ' + rewardsAmount + 'STX from this cycle');
 
     return outputArray;
@@ -121,6 +122,20 @@ async function populateFutureBlockEndDates(outputArray)
     return outputArray;
 }
 
-async function filterStackingResultsForOutput(outputArray) {
+function filterStackingResultsForOutput(outputArray) {
     return outputArray.filter(function(item){return (item.stackedCoins>0);}).sort((a) => parseInt(a.endBlock))
+}
+
+function formatStackingResultsForOutput(outputArray) {
+    for (var stackingRound of outputArray) {
+        if(stackingRound.claimDate!=='')
+        {
+            stackingRound.claimDate=new Date(stackingRound.claimDate).toLocaleString([],{year: "numeric", month: "2-digit", day: "2-digit",hour: "2-digit", minute:"2-digit"});
+        }
+        if(stackingRound.endBlockDate!=='')
+        {
+            stackingRound.endBlockDate=new Date(stackingRound.endBlockDate).toLocaleString([],{year: "numeric", month: "2-digit", day: "2-digit"});
+        }
+    }
+    return outputArray
 }
