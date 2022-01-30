@@ -20,7 +20,7 @@ export default function Faq() {
         {
             "id": "faqaccordion1",
             "q": "The site is taking forever to load!",
-            "a": "Stacks API calls are slow sometimes! If it takes more than 30 seconds, close and try again a minute later. Do not keep spamming the refresh button."
+            "a": "Stacks API calls are slow sometimes! If it takes more than 30 seconds, close and try again a minute later. Do not keep spamming the refresh button. If you have a wallet with over 1000 Transactions, you can also expect it to take longer to load."
         },
         {
             "id": "faqaccordion2",
