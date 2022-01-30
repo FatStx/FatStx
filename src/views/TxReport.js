@@ -111,7 +111,9 @@ export default function TxReport(props) {
                             label="Year"
                             onChange={handleYearChange}
                         >
-                            <MenuItem value={'2021'}>2021</MenuItem>
+                            <MenuItem value={'2019'}>2019</MenuItem>
+                            <MenuItem value={'2020'}>2020</MenuItem>
+                            <MenuItem selected={true} value={'2021'}>2021</MenuItem>
                             <MenuItem value={'2022'}>2022</MenuItem>
                         </Select>
                     </FormControl>
