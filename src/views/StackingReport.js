@@ -183,7 +183,7 @@ export default function StackingReport(props) {
                   <TableCell>{row.endBlock}</TableCell>
                   <TableCell>{row.endBlockDate}</TableCell>
                   <TableCell>{row.stackedCoins}</TableCell>
-                  <TableCell>{row.claimedRewards}</TableCell>
+                  <TableCell>{row.claimedRewards>0?row.claimedRewards:row.canClaimCoin}</TableCell>
                   <TableCell>{row.claimDate}</TableCell>
                 </TableRow>
               ))}
