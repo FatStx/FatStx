@@ -89,7 +89,7 @@ export default function TxReport(props) {
           <Paper sx={{p: 2}}>
 
               <Grid container alignItems="center" spacing={2}> 
-                <Grid item xs={9}>
+                <Grid item xs={12} s={12} md >
                   <TextField
                     fullWidth
                     component="form"
@@ -101,7 +101,7 @@ export default function TxReport(props) {
                   />
                 </Grid>
 
-                <Grid item xs={2} >
+                <Grid item xs={12} s={12} md={2} >
                     <FormControl fullWidth>
                         <InputLabel id="Year">Year</InputLabel>
                         <Select
@@ -119,7 +119,7 @@ export default function TxReport(props) {
                     </FormControl>
                 </Grid>
 
-                <Grid item xs={1}>
+                <Grid item  xs={12} sm={12} md={1}>
                   <Button 
                     fullWidth
                     sx={{ float: "right"}} 
