@@ -18,7 +18,7 @@ import { CSVLink } from "react-csv";
 
 import Title from './Title';
 import Tx from './Tx';
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import convertTxReportArrayToTxCSVArray from '../bl/TransactionCsvBL'
 
 export default function Transactions({txnData}) {
@@ -108,16 +108,17 @@ export default function Transactions({txnData}) {
         message="Transaction Id copied to clipboard"
       />
 
-      <Grid container spacing={2}>
-        <Grid item xs={11}>
+      <Grid container spacing={2} justifyContent="center">
+        <Grid item xs={6}>
           <Title>Transactions</Title>
         </Grid>
-        <Grid item xs={1}>
-          <Button 
-            fullWidth
-            variant="contained" 
-            onClick={handleExport}
-          > Export </Button>
+        <Grid item xs={6} >
+          <Box display="flex" justifyContent="flex-end">
+            <Button 
+              variant="contained" 
+              onClick={handleExport}
+            > Export </Button>
+          </Box>
         </Grid>
       </Grid>
       <Table size="small">
