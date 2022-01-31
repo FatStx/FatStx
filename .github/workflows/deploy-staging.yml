@@ -2,6 +2,9 @@ name: Publish site to Staging
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   publish-site:
