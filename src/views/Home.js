@@ -98,9 +98,8 @@ function Home() {
                 </Grid>
 
                 <Grid item xs={12} sm={12} md={12} lg={2} >
-                  <Stack justifyContent="center">
+                  <Stack justifyContent="flex-end">
                     <Button 
-                      variant="outlined" 
                       color="inherit"
                       endIcon={<FavoriteIcon />}
                       sx = {{ mr:2 }}
