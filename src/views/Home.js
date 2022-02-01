@@ -86,7 +86,7 @@ function Home() {
                     >
                       STX
                     </Typography>
-                    <Chip label="BETA" variant="outlined" size="small" sx={{fontSize: "0.6rem", ml:"0.4rem", mt:"0.5rem", alignSelf:"flex-start", color: "#ffffff"}} />
+                    {/* <Chip label="BETA" variant="outlined" size="small" sx={{fontSize: "0.6rem", ml:"0.4rem", mt:"0.5rem", alignSelf:"flex-start", color: "#ffffff"}} /> */}
                   </Stack>
                 </Grid>
 
