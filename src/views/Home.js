@@ -15,7 +15,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CoffeeIcon from '@mui/icons-material/Coffee';
-// import Chip from '@mui/material/Chip';
+import Snackbar from '@mui/material/Snackbar';
 import Grid from '@mui/material/Grid';
 
 import TxReport from './TxReport'
@@ -35,6 +35,8 @@ function Home() {
   const [coin, setCoin] = useState('');
   const [year, setYear] = useState('2021');
   const [supportShow, setSupportShow] = useState(null);
+  const [textCopiedAlertVisible, setTextCopiedAlertVisible] = useState(false);
+
 
   const handleSupportClick = (event) => {
     setSupportShow(event.currentTarget);
@@ -51,6 +53,12 @@ function Home() {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex'}} >
         <CssBaseline />
+          <Snackbar
+            open={textCopiedAlertVisible}
+            autoHideDuration={1000}
+            onClose={() => { setTextCopiedAlertVisible(false) }}
+            message="Wallet address copied to clipboard"
+          />
           <Box
             component="main"
             sx={{
@@ -86,7 +94,6 @@ function Home() {
                     >
                       STX
                     </Typography>
-                    {/* <Chip label="BETA" variant="outlined" size="small" sx={{fontSize: "0.6rem", ml:"0.4rem", mt:"0.5rem", alignSelf:"flex-start", color: "#ffffff"}} /> */}
                   </Stack>
                 </Grid>
 
@@ -128,7 +135,17 @@ function Home() {
                           </Typography>
                         </CardContent>
                         <CardActions>
-                          <Button size="small" fullWidth sx={{ py:3 }} >SP07VQYYWJZ421DSBST3J4N5RTXV1S66XWTPTCG8</Button>
+                          <Button 
+                            size="small" 
+                            fullWidth 
+                            sx={{ py:3 }} 
+                            onClick={() => { 
+                              navigator.clipboard.writeText('SP07VQYYWJZ421DSBST3J4N5RTXV1S66XWTPTCG8') 
+                              setTextCopiedAlertVisible(true)
+                            }}
+                          >
+                              SP07VQYYWJZ421DSBST3J4N5RTXV1S66XWTPTCG8
+                          </Button>
                         </CardActions>
                       </Card>
                     </Popover>
