@@ -124,11 +124,11 @@ function Home() {
                             </Typography>
                           </Stack>
                           <Typography variant="body2" color="text.secondary">
-                            We hope you're enjoying fatstx! If you'd like to support it's continued development feel free to send some fatstx our way!
+                            We hope you're enjoying fatstx! If you'd like to support its continued development feel free to send some fatstx or other stx tokens our way!
                           </Typography>
                         </CardContent>
                         <CardActions>
-                          <Button size="small" fullWidth sx={{ py:3 }} >Support Wallet Address coming soon</Button>
+                          <Button size="small" fullWidth sx={{ py:3 }} >SP07VQYYWJZ421DSBST3J4N5RTXV1S66XWTPTCG8</Button>
                         </CardActions>
                       </Card>
                     </Popover>
