@@ -62,23 +62,25 @@ export default function WenBlok() {
           </Grid>
 
           <Grid item xs={12}>
-            <Autocomplete
-              multiple
-              id="tags-outlined"
-              options={tagList}
-              getOptionLabel={(option) => option}
-              filterSelectedOptions
-              value={selectedTags}
-              onChange={(event, newValue) => {
-                setSelectedTags(newValue);
-              }}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Filter Labels"
-                />
-              )}
-            />
+            <Paper sx={{px:2, py:3}}>
+              <Autocomplete
+                multiple
+                id="tags-outlined"
+                options={tagList}
+                getOptionLabel={(option) => option}
+                filterSelectedOptions
+                value={selectedTags}
+                onChange={(event, newValue) => {
+                  setSelectedTags(newValue);
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Filter Labels"
+                  />
+                )}
+              />
+            </Paper>
           </Grid>
 
         {/* Future Blocks */}
