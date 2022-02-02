@@ -1,17 +1,20 @@
 import ReactGA from "react-ga4";
 import React, { useState, useEffect } from "react";
 import Container from '@mui/material/Container';
-import { Grid, Typography } from "@mui/material";
+import { Chip, Grid, Stack, Typography } from "@mui/material";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
 
 import Title from '../components/Title';
 import WenblokCycles from '../components/WenBlokCycles'
 import { getTrackedBlocks } from '../bl/WenBlokMethods'
+
 
 
 export default function WenBlok() {
@@ -29,6 +32,8 @@ export default function WenBlok() {
 
     const [ futureBlocks , setFutureBlocks ] = useState([]);
     const [ pastBlocks, setPastBlocks ] = useState([]);
+    const [ tagList, setTagList ] = useState([]);
+    const [ selectedTags, setSelectedTags] = useState([]);
 
     useEffect(() => {
       (async () => {
@@ -36,15 +41,44 @@ export default function WenBlok() {
         const trackedBlocks = await getTrackedBlocks()        
         setFutureBlocks(trackedBlocks.futureBlocks)
         setPastBlocks(trackedBlocks.pastBlocks)
+        setTagList([...new Set([
+          ...trackedBlocks.futureBlocks.flatMap(a => a.tags),
+          ...trackedBlocks.pastBlocks.flatMap(a => a.tags),
+        ])])
+
  
       })()
     }, [])
+
+    useEffect(() => {
+      setSelectedTags(tagList)
+    }, [tagList])
 
     return(
       <Container sx={{ mt: 4, mb: 4}}>
         <Grid container spacing={5}>
           <Grid item sm={12}>
             <WenblokCycles />
+          </Grid>
+
+          <Grid item xs={12}>
+            <Autocomplete
+              multiple
+              id="tags-outlined"
+              options={tagList}
+              getOptionLabel={(option) => option}
+              filterSelectedOptions
+              value={selectedTags}
+              onChange={(event, newValue) => {
+                setSelectedTags(newValue);
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Filter Labels"
+                />
+              )}
+            />
           </Grid>
 
         {/* Future Blocks */}
@@ -57,7 +91,8 @@ export default function WenBlok() {
                 <col style={{width:'10%'}}/>
                 <col style={{width:'20%'}}/>
                 <col style={{width:'20%'}}/>
-                <col style={{width:'50%'}}/>
+                <col style={{width:'35%'}}/>
+                <col style={{width:'15%'}}/>
               </colgroup>
 
               <TableHead>
@@ -66,12 +101,17 @@ export default function WenBlok() {
                   <TableCell>Event</TableCell>
                   <TableCell>When</TableCell>
                   <TableCell>Info</TableCell>
+                  <TableCell>Labels</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
 
-                {futureBlocks.map((row) => (
-                  <TableRow key={row.blockheight}>
+                {futureBlocks
+                  .filter(
+                    row => row.tags.filter(tag => selectedTags.includes(tag)).length > 0
+                  )
+                  .map((row, key) => (
+                  <TableRow key={key}>
                     <TableCell>{row.blockheight}</TableCell>
                     <TableCell>{row.event}</TableCell>
                     <TableCell>
@@ -79,6 +119,13 @@ export default function WenBlok() {
                       <Typography color="common.grey"  sx={{ fontWeight: 300, fontSize: "0.75rem"}}  >{row.when.at}</Typography>
                     </TableCell>
                     <TableCell><a href={row.link} target="_blank" rel="noopener noreferrer"> { shorten(row.link) } </a></TableCell>
+                    <TableCell>
+                      <Stack spacing={2} direction="row">
+                        {row.tags.map((tag, key) => (
+                          <Chip key={key} label={tag} size="small" />
+                        ))}
+                      </Stack>
+                    </TableCell>
                   </TableRow>
                 ))}
 
@@ -97,7 +144,8 @@ export default function WenBlok() {
                 <col style={{width:'10%'}}/>
                 <col style={{width:'20%'}}/>
                 <col style={{width:'20%'}}/>
-                <col style={{width:'50%'}}/>
+                <col style={{width:'35%'}}/>
+                <col style={{width:'15%'}}/>
               </colgroup>
 
               <TableHead>
@@ -106,11 +154,16 @@ export default function WenBlok() {
                   <TableCell>Event</TableCell>
                   <TableCell>When</TableCell>
                   <TableCell>Info</TableCell>
+                  <TableCell>Labels</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {pastBlocks.map((row) => (
-                  <TableRow key={row.blockheight}>
+                {pastBlocks
+                  .filter(
+                    row => row.tags.filter(tag => selectedTags.includes(tag)).length > 0
+                  )
+                  .map((row, key) => (
+                  <TableRow key={key}>
                     <TableCell>{row.blockheight}</TableCell>
                     <TableCell>{row.event}</TableCell>
                     <TableCell>
@@ -118,6 +171,13 @@ export default function WenBlok() {
                       <Typography color="common.grey"  sx={{ fontWeight: 300, fontSize: "0.75rem"}}  >{row.when.at}</Typography>
                     </TableCell>
                     <TableCell><a href={row.link}target="_blank" rel="noopener noreferrer"> { shorten(row.link) } </a></TableCell>
+                    <TableCell>
+                      <Stack spacing={2} direction="row">
+                        {row.tags.map((tag, key) => (
+                          <Chip key={key} label={tag} size="small" />
+                        ))}
+                      </Stack>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
