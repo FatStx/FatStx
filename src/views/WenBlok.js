@@ -33,7 +33,9 @@ export default function WenBlok() {
     const [ futureBlocks , setFutureBlocks ] = useState([]);
     const [ pastBlocks, setPastBlocks ] = useState([]);
     const [ tagList, setTagList ] = useState([]);
-    const [ selectedTags, setSelectedTags] = useState([]);
+    const [ includedTags, setIncludedTags] = useState([]);
+    const [ excludedTags, setExcludedTags] = useState([]);
+
 
     useEffect(() => {
       (async () => {
@@ -51,7 +53,7 @@ export default function WenBlok() {
     }, [])
 
     useEffect(() => {
-      setSelectedTags(tagList)
+      setIncludedTags(tagList)
     }, [tagList])
 
     return(
@@ -62,24 +64,47 @@ export default function WenBlok() {
           </Grid>
 
           <Grid item xs={12}>
-            <Paper sx={{px:2, py:3}}>
-              <Autocomplete
-                multiple
-                id="tags-outlined"
-                options={tagList}
-                getOptionLabel={(option) => option}
-                filterSelectedOptions
-                value={selectedTags}
-                onChange={(event, newValue) => {
-                  setSelectedTags(newValue);
-                }}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Filter Labels"
-                  />
-                )}
-              />
+              <Paper sx={{px:2, py:3}}>
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <Autocomplete
+                      multiple
+                      id="tags-outlined"
+                      options={tagList}
+                      getOptionLabel={(option) => option}
+                      filterSelectedOptions
+                      value={includedTags}
+                      onChange={(event, newValue) => {
+                        setIncludedTags(newValue);
+                      }}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Include Labels"
+                        />
+                      )}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Autocomplete
+                      multiple
+                      id="tags-outlined"
+                      options={tagList}
+                      getOptionLabel={(option) => option}
+                      filterSelectedOptions
+                      value={excludedTags}
+                      onChange={(event, newValue) => {
+                        setExcludedTags(newValue);
+                      }}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          label="Exclude Labels"
+                        />
+                      )}
+                    />
+                  </Grid>
+              </Grid>
             </Paper>
           </Grid>
 
@@ -110,7 +135,10 @@ export default function WenBlok() {
 
                 {futureBlocks
                   .filter(
-                    row => row.tags.filter(tag => selectedTags.includes(tag)).length > 0
+                    row => row.tags.filter(tag => includedTags.includes(tag)).length > 0
+                  )
+                  .filter(
+                    row => row.tags.filter(tag => excludedTags.includes(tag)).length === 0
                   )
                   .map((row, key) => (
                   <TableRow key={key}>
@@ -162,7 +190,10 @@ export default function WenBlok() {
               <TableBody>
                 {pastBlocks
                   .filter(
-                    row => row.tags.filter(tag => selectedTags.includes(tag)).length > 0
+                    row => row.tags.filter(tag => includedTags.includes(tag)).length > 0
+                  )
+                  .filter(
+                    row => row.tags.filter(tag => excludedTags.includes(tag)).length === 0
                   )
                   .map((row, key) => (
                   <TableRow key={key}>
