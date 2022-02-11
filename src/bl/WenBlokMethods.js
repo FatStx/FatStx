@@ -51,10 +51,6 @@ export async function getTrackedBlocks() {
   var blocks = await fetch('https://raw.githubusercontent.com/foragerr/wenblok/main/blocks.json')
   var blocksJson = await blocks.json()
 
-  blocksJson.sort(function(a, b) {
-    return a.blockheight - b.blockheight
-  });
-
   var futureBlocks = blocksJson.flatMap ( 
     x => (
       isPast(x.blockheight, currentBlock) ? { ...x, when: whenis(x.blockheight, currentBlock), past: isPast(x.blockheight, currentBlock) }
@@ -62,12 +58,20 @@ export async function getTrackedBlocks() {
     )
   );
 
+  futureBlocks.sort(function(a, b) {
+    return a.blockheight - b.blockheight
+  });
+
   var pastBlocks = blocksJson.flatMap ( 
     x => (
       !isPast(x.blockheight, currentBlock) ? { ...x, when: whenis(x.blockheight, currentBlock), past: isPast(x.blockheight, currentBlock) }
       : []
     )
   );
+
+  pastBlocks.sort(function(a, b) {
+    return  b.blockheight - a.blockheight
+  });
 
   return {
     "futureBlocks": futureBlocks,
