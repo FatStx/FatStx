@@ -31,13 +31,22 @@ export class XactnType {
       {id:25,XactnType:'', XactnTypeDetail:'Aradiko DIKO Rewards',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-stake-lp-rewards',function:'stake-rewards',senderAddress:'',recipientAddress:'',inSymbol:'DIKO',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       //Alex
       {id:50,XactnType:'', XactnTypeDetail:'ALEX Mint idoALEX',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.lottery-ido-alex',function:'mint-many',senderAddress:'',recipientAddress:'',inSymbol:'idoALEX',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:51,XactnType:'', XactnTypeDetail:'ALEX Add Liquidity',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.fixed-weight-pool-v1-01',function:'add-to-position',senderAddress:'',recipientAddress:'',inSymbol:'idoALEX',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:52,XactnType:'', XactnTypeDetail:'ALEX Claim Staking Reward',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.staking-helper',function:'claim-staking-reward',senderAddress:'',recipientAddress:'',inSymbol:'idoALEX',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:53,XactnType:'', XactnTypeDetail:'ALEX Stake',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.alex-reserve-pool',function:'stake-tokens',senderAddress:'',recipientAddress:'',inSymbol:'idoALEX',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-
+      {id:51,XactnType:'', XactnTypeDetail:'ALEX Add Liquidity',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.fixed-weight-pool-v1-01',function:'add-to-position',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:52,XactnType:'', XactnTypeDetail:'ALEX Swap',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.fixed-weight-pool-v1-01',function:'swap-helper',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:53,XactnType:'', XactnTypeDetail:'ALEX Claim Staking Reward',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.staking-helper',function:'claim-staking-reward',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:54,XactnType:'', XactnTypeDetail:'ALEX Stake',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.alex-reserve-pool',function:'stake-tokens',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:55,XactnType:'', XactnTypeDetail:'ALEX Launchpad Claim',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.alex-launchpad',function:'claim',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:56,XactnType:'', XactnTypeDetail:'ALEX Mint APower',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.token-apower',function:'mint-fixed-many',senderAddress:'',recipientAddress:'',inSymbol:'APOWER',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:57,XactnType:'', XactnTypeDetail:'ALEX Launchpad Register',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.alex-launchpad',function:'register',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:58,XactnType:'', XactnTypeDetail:'ALEX Add Liquidity',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.fixed-weight-pool',function:'add-to-position',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:59,XactnType:'', XactnTypeDetail:'ALEX Reduce Liquidity',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.fixed-weight-pool',function:'reduce-position',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      
       //Stackswap
       {id:100,XactnType:'', XactnTypeDetail:'Stackswap Swap',contract:'SP1Z92MPDQEWZXW36VX71Q25HKF5K2EPCJ304F275.stackswap-swap-v5k',function:'swap-y-for-x',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:101,XactnType:'', XactnTypeDetail:'Stackswap Swap',contract:'SP1Z92MPDQEWZXW36VX71Q25HKF5K2EPCJ304F275.stackswap-swap-v5k',function:'swap-x-for-y',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:102,XactnType:'', XactnTypeDetail:'Stackswap Add Liquidity',contract:'SP1Z92MPDQEWZXW36VX71Q25HKF5K2EPCJ304F275.stackswap-swap-v5k',function:'add-to-position',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:103,XactnType:'', XactnTypeDetail:'Stackswap Stake',contract:'SP1Z92MPDQEWZXW36VX71Q25HKF5K2EPCJ304F275.stackswap-farming-v1l',function:'stake-tokens',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+
       //Syvita
       {id:150,XactnType:'Dispose', XactnTypeDetail:'Syvita Pool - NYC',contract:'',function:'',senderAddress:'',recipientAddress:'SP18XC4F27VQ8P2QGKZ5P6KR41GK77ZVFWV468P1',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
       {id:151,XactnType:'Dispose', XactnTypeDetail:'Syvita Pool - NYC',contract:'',function:'',senderAddress:'',recipientAddress:'SP2ST741GVK200RYK9NKTYP6CJH1AG4ZPV4A5WG4M',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
@@ -59,6 +68,9 @@ export class XactnType {
       {id:41,XactnType:'Mined', XactnTypeDetail:'Syvita Pool - NYC',contract:'',function:'',senderAddress:'SP78Q12M26WVN1V9DPQ29HVDTWPKQH6KVR1X0VEW',recipientAddress:'',inSymbol:'NYC',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       //KCV
       {id:200,XactnType:'Dispose', XactnTypeDetail:'KCV Pool - NYC',contract:'SP1W7X92JG1BYPKG15KTS6398XN4D4HJP9TTXMQ38.kcv-pool',function:'join-pool',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
+      {id:201,XactnType:'Mined', XactnTypeDetail:'KCV Pool - NYC',contract:'',function:'',senderAddress:'SP2W1JBT5C10JWH2H7G0GASBFG4YXW8QGN1HQJM9F',recipientAddress:'',inSymbol:'NYC',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:202,XactnType:'Mined', XactnTypeDetail:'KCV Pool - NYC',contract:'',function:'',senderAddress:'SPQ12PNJA1842CBG68H1JEHWW4MVJ2NX3ZESMYRT',recipientAddress:'',inSymbol:'NYC',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:203,XactnType:'Mined', XactnTypeDetail:'KCV Pool - NYC',contract:'',function:'',senderAddress:'SP1D8PR8F7BDFT1Q9DJFN3DJEGTXD6EFSFPEPQMBV',recipientAddress:'',inSymbol:'NYC',notInSymbol:'',outSymbol:'',notOutSymbol:''},
 
       //CityCoins
       {id:250,XactnType:'Dispose', XactnTypeDetail:'NYC Mining Commitment',contract:'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1',function:'mine-many',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
@@ -92,6 +104,7 @@ export class XactnType {
       {id:1003,XactnType:'', XactnTypeDetail:'Stacks Degens',contract:'SP1SCEXE6PMGPAC6B4N5P2MDKX8V4GF9QDE1FNNGJ.miami-degens',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:1004,XactnType:'', XactnTypeDetail:'Project Indigo Act 1',contract:'SP176ZMV706NZGDDX8VSQRGMB7QN33BBDVZ6BMNHD.project-indigo-act1',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:1004,XactnType:'', XactnTypeDetail:'Stacks Parrots 3D',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.stacks-parrots-3d::stacks-parrots-3d',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1004,XactnType:'', XactnTypeDetail:'Wasteland Apes',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.wasteland-apes-nft-mint',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       
       //BitCoin Monkeys
       {id:1100,XactnType:'', XactnTypeDetail:'BitCoin Monkey Mutants',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.bitcoin-monkeys-labs',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
