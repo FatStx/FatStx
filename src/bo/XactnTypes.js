@@ -31,6 +31,10 @@ export class XactnType {
       {id:25,XactnType:'', XactnTypeDetail:'Aradiko DIKO Rewards',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-stake-lp-rewards',function:'stake-rewards',senderAddress:'',recipientAddress:'',inSymbol:'DIKO',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       //Alex
       {id:50,XactnType:'', XactnTypeDetail:'ALEX Mint idoALEX',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.lottery-ido-alex',function:'mint-many',senderAddress:'',recipientAddress:'',inSymbol:'idoALEX',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:51,XactnType:'', XactnTypeDetail:'ALEX Add Liquidity',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.fixed-weight-pool-v1-01',function:'add-to-position',senderAddress:'',recipientAddress:'',inSymbol:'idoALEX',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:52,XactnType:'', XactnTypeDetail:'ALEX Claim Staking Reward',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.staking-helper',function:'claim-staking-reward',senderAddress:'',recipientAddress:'',inSymbol:'idoALEX',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:53,XactnType:'', XactnTypeDetail:'ALEX Stake',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.alex-reserve-pool',function:'stake-tokens',senderAddress:'',recipientAddress:'',inSymbol:'idoALEX',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+
       //Stackswap
       {id:100,XactnType:'', XactnTypeDetail:'Stackswap Swap',contract:'SP1Z92MPDQEWZXW36VX71Q25HKF5K2EPCJ304F275.stackswap-swap-v5k',function:'swap-y-for-x',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:101,XactnType:'', XactnTypeDetail:'Stackswap Swap',contract:'SP1Z92MPDQEWZXW36VX71Q25HKF5K2EPCJ304F275.stackswap-swap-v5k',function:'swap-x-for-y',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
@@ -58,26 +62,40 @@ export class XactnType {
 
       //CityCoins
       {id:250,XactnType:'Dispose', XactnTypeDetail:'NYC Mining Commitment',contract:'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1',function:'mine-many',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
-      {id:17,XactnType:'Mined', XactnTypeDetail:'NYC Mining Reward',contract:'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1',function:'claim-mining-reward',senderAddress:'',recipientAddress:'',inSymbol:'NYC',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:17,XactnType:'Reward', XactnTypeDetail:'NYC Stacking Reward',contract:'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1',function:'claim-stacking-reward',senderAddress:'',recipientAddress:'',inSymbol:'STX',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:17,XactnType:'', XactnTypeDetail:'Return of Stacked NYC',contract:'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1',function:'claim-stacking-reward',senderAddress:'',recipientAddress:'',inSymbol:'NYC',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:17,XactnType:'Reward', XactnTypeDetail:'MIA Stacking Reward',contract:'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1',function:'claim-stacking-reward',senderAddress:'',recipientAddress:'',inSymbol:'STX',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:17,XactnType:'', XactnTypeDetail:'Return of Stacked MIA',contract:'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1',function:'claim-stacking-reward',senderAddress:'',recipientAddress:'',inSymbol:'MIA',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:17,XactnType:'', XactnTypeDetail:'Stack NYC Coins',contract:'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1',function:'stack-tokens',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:17,XactnType:'', XactnTypeDetail:'Stack MIA Coins',contract:'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1',function:'stack-tokens',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:251,XactnType:'Mined', XactnTypeDetail:'NYC Mining Reward',contract:'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1',function:'claim-mining-reward',senderAddress:'',recipientAddress:'',inSymbol:'NYC',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:252,XactnType:'Reward', XactnTypeDetail:'NYC Stacking Reward',contract:'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1',function:'claim-stacking-reward',senderAddress:'',recipientAddress:'',inSymbol:'STX',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:253,XactnType:'', XactnTypeDetail:'Return of Stacked NYC',contract:'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1',function:'claim-stacking-reward',senderAddress:'',recipientAddress:'',inSymbol:'NYC',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:254,XactnType:'Reward', XactnTypeDetail:'MIA Stacking Reward',contract:'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1',function:'claim-stacking-reward',senderAddress:'',recipientAddress:'',inSymbol:'STX',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:255,XactnType:'', XactnTypeDetail:'Return of Stacked MIA',contract:'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1',function:'claim-stacking-reward',senderAddress:'',recipientAddress:'',inSymbol:'MIA',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:256,XactnType:'', XactnTypeDetail:'Stack NYC Coins',contract:'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1',function:'stack-tokens',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:257,XactnType:'', XactnTypeDetail:'Stack MIA Coins',contract:'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1',function:'stack-tokens',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       //OkCoin
       {id:300,XactnType:'', XactnTypeDetail:'OkCoin Xfer',contract:'',function:'',senderAddress:'SP17H4TSCP2JYBF45HEZGGF3N66VRPXQZW4EBVAAV',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:19,XactnType:'', XactnTypeDetail:'OkCoin Xfer',contract:'',function:'',senderAddress:'SP2XFNHB366DQWK7TSPYRPCA5XFA3964W8W6RS5P0',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:20,XactnType:'', XactnTypeDetail:'OkCoin Xfer',contract:'',function:'',senderAddress:'SP3DW8X8CBPSYWT327120KE5N8DEJTTBMYJ2QH68Y',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:20,XactnType:'', XactnTypeDetail:'OkCoin Xfer',contract:'',function:'',senderAddress:'SP3HXJJMJQ06GNAZ8XWDN1QM48JEDC6PP6W3YZPZJ',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:21,XactnType:'', XactnTypeDetail:'OkCoin Xfer',contract:'',function:'',senderAddress:'',recipientAddress:'SP3HXJJMJQ06GNAZ8XWDN1QM48JEDC6PP6W3YZPZJ',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:301,XactnType:'', XactnTypeDetail:'OkCoin Xfer',contract:'',function:'',senderAddress:'SP2XFNHB366DQWK7TSPYRPCA5XFA3964W8W6RS5P0',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:302,XactnType:'', XactnTypeDetail:'OkCoin Xfer',contract:'',function:'',senderAddress:'SP3DW8X8CBPSYWT327120KE5N8DEJTTBMYJ2QH68Y',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:303,XactnType:'', XactnTypeDetail:'OkCoin Xfer',contract:'',function:'',senderAddress:'SP3HXJJMJQ06GNAZ8XWDN1QM48JEDC6PP6W3YZPZJ',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:304,XactnType:'', XactnTypeDetail:'OkCoin Xfer',contract:'',function:'',senderAddress:'',recipientAddress:'SP3HXJJMJQ06GNAZ8XWDN1QM48JEDC6PP6W3YZPZJ',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       //CoinEx
       {id:350,XactnType:'', XactnTypeDetail:'CoineX Xfer',contract:'',function:'',senderAddress:'SP36AQJD5A92TM5WS0ZEC4GSZPY5B2CPQD6TX35PP',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:350,XactnType:'', XactnTypeDetail:'CoineX Xfer',contract:'',function:'',senderAddress:'',recipientAddress:'SP36AQJD5A92TM5WS0ZEC4GSZPY5B2CPQD6TX35PP',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:351,XactnType:'', XactnTypeDetail:'CoineX Xfer',contract:'',function:'',senderAddress:'',recipientAddress:'SP36AQJD5A92TM5WS0ZEC4GSZPY5B2CPQD6TX35PP',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      //Coinbase
+      {id:351,XactnType:'', XactnTypeDetail:'Coinbase Xfer',contract:'',function:'',senderAddress:'SP1FNEJ21BMJCJYEJM2F73QT6WD2MN9MB2J92FZBN',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:352,XactnType:'', XactnTypeDetail:'Coinbase Xfer',contract:'',function:'',senderAddress:'SPC3T2E3MXHA15Q1TRQJDH57QX6X1D5D7Y9XTXXJ',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+
       //NFTs
       {id:1000,XactnType:'', XactnTypeDetail:'stacks-art-market',contract:'SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.stacks-art-market',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:1001,XactnType:'', XactnTypeDetail:'stacks-pops',contract:'SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.stacks-pops',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1000,XactnType:'', XactnTypeDetail:'Byzantion Buy Item',contract:'SP1BX0P4MZ5A3A5JCH0E10YNS170QFR2VQ6TT4NRH.byzantion-market-v6',function:'buy-item',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1000,XactnType:'', XactnTypeDetail:'Byzantion Withdraw Bid',contract:'SP1BX0P4MZ5A3A5JCH0E10YNS170QFR2VQ6TT4NRH.byzantion-market-v6',function:'withdraw-bid',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1000,XactnType:'', XactnTypeDetail:'Byzantion Bid Item',contract:'SP1BX0P4MZ5A3A5JCH0E10YNS170QFR2VQ6TT4NRH.byzantion-market-v6',function:'bid-item',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:1002,XactnType:'', XactnTypeDetail:'Stacks Degens',contract:'SP1SCEXE6PMGPAC6B4N5P2MDKX8V4GF9QDE1FNNGJ.nyc-degens',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:1003,XactnType:'', XactnTypeDetail:'Stacks Degens',contract:'SP1SCEXE6PMGPAC6B4N5P2MDKX8V4GF9QDE1FNNGJ.miami-degens',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''}
+      {id:1003,XactnType:'', XactnTypeDetail:'Stacks Degens',contract:'SP1SCEXE6PMGPAC6B4N5P2MDKX8V4GF9QDE1FNNGJ.miami-degens',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1004,XactnType:'', XactnTypeDetail:'Project Indigo Act 1',contract:'SP176ZMV706NZGDDX8VSQRGMB7QN33BBDVZ6BMNHD.project-indigo-act1',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1004,XactnType:'', XactnTypeDetail:'Stacks Parrots 3D',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.stacks-parrots-3d::stacks-parrots-3d',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      
+      //BitCoin Monkeys
+      {id:1100,XactnType:'', XactnTypeDetail:'BitCoin Monkey Mutants',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.bitcoin-monkeys-labs',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1101,XactnType:'', XactnTypeDetail:'Harvest $BAN',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.btc-monkeys-staking',function:'harvest',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1101,XactnType:'', XactnTypeDetail:'Stake Bitcoin Monkey',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.btc-monkeys-staking',function:'stake',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
     ];
 }

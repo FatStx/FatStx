@@ -13,6 +13,12 @@ export class Token {
       {symbol:'stDIKO',apiSymbol:'',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.stdiko-token::stdiko',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2},
       {symbol:'idoALEX',apiSymbol:'',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.lottery-ido-alex::lottery-ido-alex',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2},
       {symbol:'WELSH',apiSymbol:'',contract:'SP3NE50GEXFG9SZGTT51P40X2CKYSZ5CC4ZTZ7A2G.welshcorgicoin-token::welshcorgicoin',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2},
+      {symbol:'BAN',apiSymbol:'',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.btc-monkeys-bananas::BANANA',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 2},
+      {symbol:'ALEX',apiSymbol:'',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.age000-governance-token::alex',conversionFactor:100000000,amountDecimals: 3,priceDecimals: 2},
+      {symbol:'APOWER',apiSymbol:'',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.token-apower::apower',conversionFactor:100000000,amountDecimals: 3,priceDecimals: 2},
+      {symbol:'ALEXLP_STX-ALEX',apiSymbol:'',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.fwp-wstx-alex-50-50-v1-01::fwp-wstx-alex-50-50-v1-01',conversionFactor:100000000,amountDecimals: 3,priceDecimals: 2},
+      {symbol:'ALEXLP_STX-XBTC',apiSymbol:'',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.fwp-wstx-wbtc-50-50-v1-01::fwp-wstx-wbtc-50-50-v1-01',conversionFactor:100000000,amountDecimals: 3,priceDecimals: 2},
+
       //NFTs
       {symbol:'BNS Name',apiSymbol:'',contract:'SP000000000000000000002Q6VF78.bns::names',conversionFactor:1,amountDecimals: 0,priceDecimals: 0}
 
