@@ -93,6 +93,9 @@ export class XactnType {
       //Coinbase
       {id:351,XactnType:'', XactnTypeDetail:'Coinbase Xfer',contract:'',function:'',senderAddress:'SP1FNEJ21BMJCJYEJM2F73QT6WD2MN9MB2J92FZBN',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:352,XactnType:'', XactnTypeDetail:'Coinbase Xfer',contract:'',function:'',senderAddress:'SPC3T2E3MXHA15Q1TRQJDH57QX6X1D5D7Y9XTXXJ',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      //Binance
+      //NOTE: I *think* this wallet is Binance based on some comments in Arkadiko discord
+      {id:400,XactnType:'', XactnTypeDetail:'Binance Xfer',contract:'',function:'',senderAddress:'SP1P72Z3704VMT3DMHPP2CB8TGQWGDBHD3RPR9GZS',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
 
       //NFTs
       {id:1000,XactnType:'', XactnTypeDetail:'stacks-art-market',contract:'SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.stacks-art-market',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
