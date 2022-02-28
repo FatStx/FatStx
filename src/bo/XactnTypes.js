@@ -74,7 +74,9 @@ export class XactnType {
 
       //CityCoins
       {id:250,XactnType:'Dispose', XactnTypeDetail:'NYC Mining Commitment',contract:'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1',function:'mine-many',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
+      {id:250,XactnType:'Dispose', XactnTypeDetail:'NYC Mining Commitment',contract:'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1',function:'mine-tokens',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
       {id:250,XactnType:'Dispose', XactnTypeDetail:'MIA Mining Commitment',contract:'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1',function:'mine-many',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
+      {id:250,XactnType:'Dispose', XactnTypeDetail:'MIA Mining Commitment',contract:'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1',function:'mine-tokens',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
       {id:251,XactnType:'Mined', XactnTypeDetail:'NYC Mining Reward',contract:'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1',function:'claim-mining-reward',senderAddress:'',recipientAddress:'',inSymbol:'NYC',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:251,XactnType:'Mined', XactnTypeDetail:'MIA Mining Reward',contract:'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1',function:'claim-mining-reward',senderAddress:'',recipientAddress:'',inSymbol:'MIA',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:252,XactnType:'Reward', XactnTypeDetail:'NYC Stacking Reward',contract:'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1',function:'claim-stacking-reward',senderAddress:'',recipientAddress:'',inSymbol:'STX',notInSymbol:'',outSymbol:'',notOutSymbol:''},
