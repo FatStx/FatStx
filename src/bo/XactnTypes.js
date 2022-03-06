@@ -97,25 +97,32 @@ export class XactnType {
       //Coinbase
       {id:351,XactnType:'', XactnTypeDetail:'Coinbase Xfer',contract:'',function:'',senderAddress:'SP1FNEJ21BMJCJYEJM2F73QT6WD2MN9MB2J92FZBN',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:352,XactnType:'', XactnTypeDetail:'Coinbase Xfer',contract:'',function:'',senderAddress:'SPC3T2E3MXHA15Q1TRQJDH57QX6X1D5D7Y9XTXXJ',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:353,XactnType:'', XactnTypeDetail:'Coinbase Xfer',contract:'',function:'',senderAddress:'SP1PJWKS5V3X7JR300J3W291DDNCKD6M6XKJFYPAC',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       //Binance
       //NOTE: I *think* this wallet is Binance based on some comments in Arkadiko discord
       {id:400,XactnType:'', XactnTypeDetail:'Binance Xfer',contract:'',function:'',senderAddress:'SP1P72Z3704VMT3DMHPP2CB8TGQWGDBHD3RPR9GZS',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
 
-      //NFTs
+      //NFTs GENERAL 
       {id:1000,XactnType:'', XactnTypeDetail:'stacks-art-market',contract:'SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.stacks-art-market',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:1001,XactnType:'', XactnTypeDetail:'stacks-pops',contract:'SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.stacks-pops',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:1002,XactnType:'', XactnTypeDetail:'Byzantion Buy Item',contract:'SP1BX0P4MZ5A3A5JCH0E10YNS170QFR2VQ6TT4NRH.byzantion-market-v6',function:'buy-item',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:1003,XactnType:'', XactnTypeDetail:'Byzantion Withdraw Bid',contract:'SP1BX0P4MZ5A3A5JCH0E10YNS170QFR2VQ6TT4NRH.byzantion-market-v6',function:'withdraw-bid',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:1004,XactnType:'', XactnTypeDetail:'Byzantion Bid Item',contract:'SP1BX0P4MZ5A3A5JCH0E10YNS170QFR2VQ6TT4NRH.byzantion-market-v6',function:'bid-item',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:1005,XactnType:'', XactnTypeDetail:'Stacks Degens',contract:'SP1SCEXE6PMGPAC6B4N5P2MDKX8V4GF9QDE1FNNGJ.nyc-degens',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:1006,XactnType:'', XactnTypeDetail:'Stacks Degens',contract:'SP1SCEXE6PMGPAC6B4N5P2MDKX8V4GF9QDE1FNNGJ.miami-degens',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:1007,XactnType:'', XactnTypeDetail:'Project Indigo Act 1',contract:'SP176ZMV706NZGDDX8VSQRGMB7QN33BBDVZ6BMNHD.project-indigo-act1',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:1008,XactnType:'', XactnTypeDetail:'Stacks Parrots 3D',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.stacks-parrots-3d::stacks-parrots-3d',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:1009,XactnType:'', XactnTypeDetail:'Wasteland Apes',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.wasteland-apes-nft-mint',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1008,XactnType:'', XactnTypeDetail:'Stacks Degens',contract:'SP1SCEXE6PMGPAC6B4N5P2MDKX8V4GF9QDE1FNNGJ.nyc-degens',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1009,XactnType:'', XactnTypeDetail:'Stacks Degens',contract:'SP1SCEXE6PMGPAC6B4N5P2MDKX8V4GF9QDE1FNNGJ.miami-degens',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1010,XactnType:'', XactnTypeDetail:'Project Indigo Act 1',contract:'SP176ZMV706NZGDDX8VSQRGMB7QN33BBDVZ6BMNHD.project-indigo-act1',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1011,XactnType:'', XactnTypeDetail:'Stacks Parrots 3D',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.stacks-parrots-3d::stacks-parrots-3d',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1012,XactnType:'', XactnTypeDetail:'Wasteland Apes',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.wasteland-apes-nft-mint',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       
+      //Byzantion
+      {id:1100,XactnType:'', XactnTypeDetail:'Byzantion Buy Item',contract:'SP1BX0P4MZ5A3A5JCH0E10YNS170QFR2VQ6TT4NRH.byzantion-market-v6',function:'buy-item',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1101,XactnType:'', XactnTypeDetail:'Byzantion Bid Accepted',contract:'SP1BX0P4MZ5A3A5JCH0E10YNS170QFR2VQ6TT4NRH.byzantion-market-v6',function:'accept-collection-bid',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1102,XactnType:'', XactnTypeDetail:'Byzantion Bid Accepted',contract:'SP1BX0P4MZ5A3A5JCH0E10YNS170QFR2VQ6TT4NRH.byzantion-market-v6',function:'accept-bid',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1103,XactnType:'', XactnTypeDetail:'Byzantion Withdraw Bid',contract:'SP1BX0P4MZ5A3A5JCH0E10YNS170QFR2VQ6TT4NRH.byzantion-market-v6',function:'withdraw-bid',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1104,XactnType:'', XactnTypeDetail:'Byzantion Bid Item',contract:'SP1BX0P4MZ5A3A5JCH0E10YNS170QFR2VQ6TT4NRH.byzantion-market-v6',function:'bid-item',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1105,XactnType:'', XactnTypeDetail:'Byzantion Collection Bid',contract:'SP1BX0P4MZ5A3A5JCH0E10YNS170QFR2VQ6TT4NRH.byzantion-market-v6',function:'collection-bid',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1106,XactnType:'', XactnTypeDetail:'Byzantion Withdraw Bid',contract:'SP1BX0P4MZ5A3A5JCH0E10YNS170QFR2VQ6TT4NRH.byzantion-market-v6',function:'withdraw-collection-bid',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},      
+
       //BitCoin Monkeys
-      {id:1100,XactnType:'', XactnTypeDetail:'BitCoin Monkey Mutants',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.bitcoin-monkeys-labs',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:1101,XactnType:'', XactnTypeDetail:'Harvest $BAN',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.btc-monkeys-staking',function:'harvest',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:1102,XactnType:'', XactnTypeDetail:'Stake Bitcoin Monkey',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.btc-monkeys-staking',function:'stake',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''}
+      {id:2000,XactnType:'', XactnTypeDetail:'BitCoin Monkey Mutants',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.bitcoin-monkeys-labs',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:2001,XactnType:'', XactnTypeDetail:'Harvest $BAN',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.btc-monkeys-staking',function:'harvest',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:2002,XactnType:'', XactnTypeDetail:'Stake Bitcoin Monkey',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.btc-monkeys-staking',function:'stake',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''}
     ];
 }
