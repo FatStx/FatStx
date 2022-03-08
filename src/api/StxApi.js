@@ -1,6 +1,6 @@
 import { Configuration, BlocksApi } from "@stacks/blockchain-api-client";
-import { callReadOnlyFunction } from '@stacks/transactions';
-import { StacksMainnet } from '@stacks/network';
+// import { callReadOnlyFunction } from '@stacks/transactions';
+// import { StacksMainnet } from '@stacks/network';
 
 //Process All API Pages
 export default async function processAllXactnWithTransfersApiPages(walletId, year='All') {
@@ -51,21 +51,21 @@ export async function processXactnWithTransfersApiPagesForDateRange(walletId, st
     return [isApiError,runningJson];
 }
 
-export async function makeReadOnlyContractCall(contractAddress,contractName,functionName,functionArgs)
-{
-    const options = {
-    contractAddress: contractAddress,
-    contractName: contractName,
-    functionName: functionName,
-    functionArgs: functionArgs,
-    network: new StacksMainnet(),
-    senderAddress: 'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.btc-monkeys-staking',
-    };
-    const ret = await callReadOnlyFunction(options);
-    return ret;
+// export async function makeReadOnlyContractCall(contractAddress,contractName,functionName,functionArgs)
+// {
+//     const options = {
+//     contractAddress: contractAddress,
+//     contractName: contractName,
+//     functionName: functionName,
+//     functionArgs: functionArgs,
+//     network: new StacksMainnet(),
+//     senderAddress: 'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.btc-monkeys-staking',
+//     };
+//     const ret = await callReadOnlyFunction(options);
+//     return ret;
     
 
-}
+// }
 
 export async function getCurrentBlock() {
 
