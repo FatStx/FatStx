@@ -1,4 +1,6 @@
-import { Configuration, BlocksApi } from "@stacks/blockchain-api-client";
+import { Configuration, BlocksApi, AccountsApi } from "@stacks/blockchain-api-client";
+import { callReadOnlyFunction } from '@stacks/transactions';
+import { StacksMainnet } from '@stacks/network';
 
 //Process All API Pages
 export default async function processAllXactnWithTransfersApiPages(walletId, year='All') {
@@ -9,6 +11,13 @@ export default async function processAllXactnWithTransfersApiPages(walletId, yea
     let endDate = year === 'All'
                     ? '2023-01-01T00:00:00.000Z'
                     : (parseInt(year) + 1).toString() + '-01-01T00:00:00.000Z';
+
+    var ret=await processXactnWithTransfersApiPagesForDateRange(walletId,startDate,endDate);
+    return ret;
+
+}
+
+export async function processXactnWithTransfersApiPagesForDateRange(walletId, startDate,endDate) {
 
     console.log(Date.now() + " ===Process All Api Pages===");
 
@@ -38,7 +47,24 @@ export default async function processAllXactnWithTransfersApiPages(walletId, yea
     } else {
         isApiError=true;
     }
+
     return [isApiError,runningJson];
+}
+
+export async function makeReadOnlyContractCall(contractAddress,contractName,functionName,functionArgs)
+{
+    const options = {
+    contractAddress: contractAddress,
+    contractName: contractName,
+    functionName: functionName,
+    functionArgs: functionArgs,
+    network: new StacksMainnet(),
+    senderAddress: 'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.btc-monkeys-staking',
+    };
+    const ret = await callReadOnlyFunction(options);
+    return ret;
+    
+
 }
 
 export async function getCurrentBlock() {
@@ -49,7 +75,7 @@ export async function getCurrentBlock() {
     });
   
     var blocksApi = new BlocksApi(apiConfig);
-  
+
     const blockList = await blocksApi.getBlockList({ offset: 0, limit: 1 });
     const currentBlock = blockList.results[0].height;
   

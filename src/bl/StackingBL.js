@@ -2,12 +2,14 @@ import { MIAStackingList } from '../bo/cityarrays/MiaStackingCycles'
 import { NYCStackingList } from '../bo/cityarrays/NycStackingCycles'
 import { getCurrentBlock, getBlockTime} from '../api/StxApi'
 //import  getPricesInUSDT  from './PopulateCoinPrices'
+//import { getBananasPendingHarvest } from './MonkeyBL';
 
 export default async function convertJsonToStackingReportArray(json,symbol) {
 //    getPricesInUSDT('DIKO',true);
     let outputArray = getStackingListArray(symbol);
     let coinContract=getCoinSmartContractAddress(symbol);
-
+    //let runningTotal=await getBananasPendingHarvest();
+    //console.log(runningTotal);
     for (const xactn of json) {
         if (xactn.tx.tx_status === 'success' && xactn.tx.contract_call !== undefined && xactn.tx.contract_call.contract_id===coinContract ) {
             outputArray = processTransactionForStacking(outputArray, xactn);
@@ -20,6 +22,7 @@ export default async function convertJsonToStackingReportArray(json,symbol) {
     return outputArray;
 
 }
+
 
 function getStackingListArray(symbol) {
     let stackingListArray;

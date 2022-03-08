@@ -54,8 +54,6 @@ export default function StackingReport(props) {
         return;
       }
 
-      console.log(walletId)
-
       if (walletId === '') {
         return;
       }
