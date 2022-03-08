@@ -1,4 +1,4 @@
-import { Configuration, BlocksApi, AccountsApi } from "@stacks/blockchain-api-client";
+import { Configuration, BlocksApi } from "@stacks/blockchain-api-client";
 import { callReadOnlyFunction } from '@stacks/transactions';
 import { StacksMainnet } from '@stacks/network';
 
