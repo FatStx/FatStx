@@ -94,7 +94,8 @@ function applyStackTokensTransaction(outputArray,amount,firstCycle,lastCycle){
 function processClaimTransaction(outputArray,xactn,blockHeight){
 
     const rewardsCycle=xactn.tx.contract_call.function_args[0].repr.substring(1);
-    const rawAmount=xactn.tx.post_conditions[0].amount;
+    console.log(xactn);
+    const rawAmount=xactn.stx_received;
 
     const rewardsAmount= parseInt(rawAmount)/1000000;
             outputArray[rewardsCycle].claimedRewards=rewardsAmount;
