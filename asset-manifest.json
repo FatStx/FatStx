@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/FatStx/static/css/main.4efb37a3.css",
-    "main.js": "/FatStx/static/js/main.fcc27ec4.js",
+    "main.js": "/FatStx/static/js/main.5c1972f6.js",
     "static/js/27.7c1ed52b.chunk.js": "/FatStx/static/js/27.7c1ed52b.chunk.js",
     "index.html": "/FatStx/index.html"
   },
   "entrypoints": [
     "static/css/main.4efb37a3.css",
-    "static/js/main.fcc27ec4.js"
+    "static/js/main.5c1972f6.js"
   ]
 }
