@@ -14,7 +14,7 @@ export default async function convertJsonToStackingReportArray(json,symbol,isNew
 
         if (xactn.tx.tx_status === 'success' && xactn.tx.contract_call !== undefined && xactn.tx.contract_call.contract_id===coinContract ) {
             console.log("stacking");
-            outputArray = processTransactionForStacking(outputArray, xactn);
+            outputArray = processTransactionForStacking(outputArray, xactn,isNewContract);
         }
     }
 
@@ -48,26 +48,30 @@ function getCoinSmartContractAddress(symbol,isNewContract)
             coinContract = 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1';
         }
     } else {
-        coinContract = 'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1';
+        if (isNewContract===true) {
+            coinContract = 'SPSCWDV3RKV5ZRN1FQD84YE1NQFEDJ9R1F4DYQ11.newyorkcitycoin-core-v2';
+        } else {
+            coinContract = 'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1';
+        }
     }
     return coinContract;
 }
 
-function processTransactionForStacking(outputArray,xactn) {
+function processTransactionForStacking(outputArray,xactn,isNewContract) {
     const functionName=xactn.tx.contract_call===undefined?'':xactn.tx.contract_call.function_name;
     const blockHeight=xactn.tx.block_height;
 
     if (functionName==='stack-tokens') {
-        outputArray=processStackTokensTransaction(outputArray,xactn,blockHeight);
+        outputArray=processStackTokensTransaction(outputArray,xactn,blockHeight,isNewContract);
     } else if (functionName==="claim-stacking-reward") {
-        outputArray=processClaimTransaction(outputArray,xactn,blockHeight);
+        outputArray=processClaimTransaction(outputArray,xactn,blockHeight,isNewContract);
     } 
 
     return outputArray;
 }
 
 //Process a stack-tokens transaction
-function processStackTokensTransaction(outputArray,xactn,blockHeight){
+function processStackTokensTransaction(outputArray,xactn,blockHeight,isNewContract){
 
     let cycleCount=xactn.tx.contract_call.function_args[1].repr.substring(1);
     let firstCycleListRow=outputArray.filter(function(item){
@@ -77,7 +81,11 @@ function processStackTokensTransaction(outputArray,xactn,blockHeight){
     if (firstCycleListRow!==undefined) {
         let firstCycle=firstCycleListRow.round+1;
         let lastCycle=parseInt(firstCycle)+parseInt(cycleCount)-1;
-        const amount=xactn.tx.contract_call.function_args[0].repr.substring(1);
+        let amount=xactn.tx.contract_call.function_args[0].repr.substring(1);
+        if(isNewContract){
+            amount=parseFloat(amount)/1000000;
+        }
+
         console.log(Date.now()+' Stacked ' + amount + ' CityCoins from cycle ' + firstCycle + ' to ' + lastCycle);
         outputArray=applyStackTokensTransaction(outputArray,amount,firstCycle,lastCycle)
     }
@@ -98,7 +106,7 @@ function applyStackTokensTransaction(outputArray,amount,firstCycle,lastCycle){
 
 //Process a claim-stacking-reward transaction, including applying to list
 //Currently only checking STX rewards, not coins being returned
-function processClaimTransaction(outputArray,xactn,blockHeight){
+function processClaimTransaction(outputArray,xactn,blockHeight,isNewContract){
 
     const rewardsCycle=xactn.tx.contract_call.function_args[0].repr.substring(1);
     console.log(xactn);

@@ -5,6 +5,8 @@ export class Token {
       {symbol:'USDA',apiSymbol:'',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.usda-token::usda',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 3},
       {symbol:'MIA',apiSymbol:'miamicoin',contract:'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-token::miamicoin',conversionFactor:1,amountDecimals: 2,priceDecimals: 5},
       {symbol:'NYC',apiSymbol:'',contract:'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-token::newyorkcitycoin',conversionFactor:1,amountDecimals: 2,priceDecimals: 5},
+      {symbol:'MIA',apiSymbol:'',contract:'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-token::miamicoin',conversionFactor:1,amountDecimals: 2,priceDecimals: 5},
+      {symbol:'NYC',apiSymbol:'',contract:'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-token::newyorkcitycoin',conversionFactor:1,amountDecimals: 2,priceDecimals: 5},
       {symbol:'SXSW',apiSymbol:'',contract:'SP1Z92MPDQEWZXW36VX71Q25HKF5K2EPCJ304F275.stsw-token-v4a::stsw',conversionFactor:1,amountDecimals: 3,priceDecimals: 4},
       {symbol:'SXSWLP_STX-NYC',apiSymbol:'',contract:'SP1Z92MPDQEWZXW36VX71Q25HKF5K2EPCJ304F275.liquidity-token-v5kt8k62b86::liquidity-token',conversionFactor:1000000,amountDecimals: 4,priceDecimals: 4},
       {symbol:'SXSWLP_STX-USDA',apiSymbol:'',contract:'SP1Z92MPDQEWZXW36VX71Q25HKF5K2EPCJ304F275.liquidity-token-v5k0yl5ot8l::liquidity-token',conversionFactor:1000000,amountDecimals: 4,priceDecimals: 4},
