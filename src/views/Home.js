@@ -24,6 +24,7 @@ import WenBlok from './WenBlok'
 import Disclaimer from './Disclaimer'
 import Faq from './Faq'
 import { Stack } from "@mui/material";
+import StackingReportNew from "./StackingReportNew";
 
 const mdTheme = createTheme();
 
@@ -32,6 +33,7 @@ function Home() {
   const [walletId, setWalletId] = useState('');
   const [txnData, setTxnData] = useState([]);
   const [stackData, setStackData] = useState([]);
+  const [stackDataNew, setStackDataNew] = useState([]);
   const [coin, setCoin] = useState('');
   const [year, setYear] = useState('2021');
   const [supportShow, setSupportShow] = useState(null);
@@ -171,7 +173,17 @@ function Home() {
                       to="/stacking"
                       sx={{ my: 1, mx: 1.5 }}
                     >
-                      Stacking
+                      Stacking (v1)
+                    </Link>
+                    <Link
+                      variant="button"
+                      color="inherit"
+                      underline="hover"
+                      component={RouterLink}
+                      to="/stackingnew"
+                      sx={{ my: 1, mx: 1.5 }}
+                    >
+                      Stacking (v2)
                     </Link>
                     <Link
                       variant="button"
@@ -257,6 +269,32 @@ function Home() {
                       setWalletId = {setWalletId}
                       stackData = {stackData} 
                       setStackData = {setStackData}
+                      coin = {coin}
+                      setCoin = {setCoin}
+                    />
+                  } 
+                />
+
+                <Route path="stackingnew" 
+                  element={
+                    <StackingReportNew 
+                      walletId = {walletId}
+                      setWalletId = {setWalletId}
+                      stackDataNew = {stackDataNew} 
+                      setStackDataNew = {setStackDataNew}
+                      coin = {coin}
+                      setCoin = {setCoin}
+                    />
+                  } 
+                />
+
+                <Route path="stackingnew/:walletInPath" 
+                  element={
+                    <StackingReportNew 
+                      walletId = {walletId}
+                      setWalletId = {setWalletId}
+                      stackDataNew = {stackDataNew} 
+                      setStackDataNew = {setStackDataNew}
                       coin = {coin}
                       setCoin = {setCoin}
                     />

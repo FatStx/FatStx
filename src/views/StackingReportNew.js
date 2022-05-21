@@ -30,12 +30,12 @@ export default function StackingReportNew(props) {
 
   let walletId = props.walletId
   let setWalletId = props.setWalletId
-  let stackData = props.stackData
-  let setStackData = props.setStackData
+  let stackDataNew = props.stackDataNew
+  let setStackDataNew = props.setStackDataNew
   let coin = props.coin
   let setCoin = props.setCoin
   
-  ReactGA.send({ hitType: "pageview", page: "/stacking" });
+  ReactGA.send({ hitType: "pageview", page: "/stackingnew" });
 
   const [spinnerVisible, setSpinnerVisible] = useState(false);
 
@@ -75,7 +75,7 @@ export default function StackingReportNew(props) {
       } else {
         let json=apiResults[1];
         let outputArray = await convertJsonToStackingReportArray(json,coin,true);
-        setStackData(outputArray)
+        setStackDataNew(outputArray)
         console.log(json, outputArray)
       }
 
@@ -174,7 +174,7 @@ export default function StackingReportNew(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {stackData.map((row) => (
+              {stackDataNew.map((row) => (
                 <TableRow key={row.round}>
                   <TableCell>{row.round}</TableCell>
                   <TableCell>{row.startBlock}</TableCell>
