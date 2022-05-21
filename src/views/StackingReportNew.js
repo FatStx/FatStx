@@ -24,7 +24,7 @@ import Title from '../components/Title';
 import processAllXactnWithTransfersApiPages, { isValidWallet } from '../api/StxApi'
 import convertJsonToStackingReportArray from '../bl/StackingBL'
 
-export default function StackingReport(props) {
+export default function StackingReportNew(props) {
 
   const {walletInPath} = useParams();
 
@@ -74,7 +74,7 @@ export default function StackingReport(props) {
         alert("There have been one or more errors connecting to Stacks to obtain your data. Normally this is due to problems with either the network or the APIs. Please try again in a few minutes.");
       } else {
         let json=apiResults[1];
-        let outputArray = await convertJsonToStackingReportArray(json,coin);
+        let outputArray = await convertJsonToStackingReportArray(json,coin,true);
         setStackData(outputArray)
         console.log(json, outputArray)
       }
@@ -149,7 +149,7 @@ export default function StackingReport(props) {
           <Backdrop open={spinnerVisible}>
             <DotLoader  color="#ffffff" loading={true}  size={120} />
           </Backdrop>
-          <Title>Stacking Report (v1)</Title>
+          <Title>Stacking Report (v2)</Title>
           <Table size="small">
 
             <colgroup>

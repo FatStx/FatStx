@@ -4,14 +4,16 @@ import { getCurrentBlock, getBlockTime} from '../api/StxApi'
 //import  getPricesInUSDT  from './PopulateCoinPrices'
 //import { getBananasPendingHarvest } from './MonkeyBL';
 
-export default async function convertJsonToStackingReportArray(json,symbol) {
+export default async function convertJsonToStackingReportArray(json,symbol,isNewContract) {
 //    getPricesInUSDT('DIKO',true);
     let outputArray = getStackingListArray(symbol);
-    let coinContract=getCoinSmartContractAddress(symbol);
+    let coinContract=getCoinSmartContractAddress(symbol,isNewContract);
     //let runningTotal=await getBananasPendingHarvest();
     //console.log(runningTotal);
     for (const xactn of json) {
+
         if (xactn.tx.tx_status === 'success' && xactn.tx.contract_call !== undefined && xactn.tx.contract_call.contract_id===coinContract ) {
+            console.log("stacking");
             outputArray = processTransactionForStacking(outputArray, xactn);
         }
     }
@@ -35,11 +37,16 @@ function getStackingListArray(symbol) {
     return stackingListArray;
 }
 
-function getCoinSmartContractAddress(symbol)
+function getCoinSmartContractAddress(symbol,isNewContract)
 {
     let coinContract;
-    if (symbol==='MIA') {      
-        coinContract = 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1';
+    if (symbol==='MIA') {
+
+        if (isNewContract===true) {
+            coinContract = 'SP1H1733V5MZ3SZ9XRW9FKYGEZT0JDGEB8Y634C7R.miamicoin-core-v2';
+        } else {
+            coinContract = 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1';
+        }
     } else {
         coinContract = 'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1';
     }
