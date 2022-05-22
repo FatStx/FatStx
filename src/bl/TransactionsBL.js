@@ -4,6 +4,7 @@ import { DIKOPrice } from "../bo/coinprices/DikoPrice"
 import { MIAPrice } from "../bo/coinprices/MiaPrice" 
 import { XBTCPrice } from "../bo/coinprices/XbtcPrice"
 import { USDAPrice } from "../bo/coinprices/UsdaPrice"
+import { ALEXPrice } from "../bo/coinprices/AlexPrice"
 import getPriceFromCoinGecko from '../api/CoinPricesApis'
 import * as getXactnType  from './XactnTypeBL'
 
@@ -311,6 +312,8 @@ function getCoinPriceObject(symbol) {
         coinPriceObject=XBTCPrice.xbtcPrices;
     } else if (symbol==='USDA') {
         coinPriceObject=USDAPrice.usdaPrices;
+    } else if (symbol==='ALEX') {
+        coinPriceObject=ALEXPrice.alexPrices;
     }
     
     return coinPriceObject;
