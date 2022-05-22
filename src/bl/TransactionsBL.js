@@ -187,7 +187,7 @@ async function getOutputArrayRow(xactn, xactnFee, transferIn, transferOut) {
     let contractFunction = xactn.contract_call === undefined ? '' : xactn.contract_call.function_name;
     let sender = transferIn === undefined ? '' : transferIn.sender;
     let recipient = transferOut === undefined ? '' : transferOut.recipient;
-        
+
     outputArrayRow = {
         burnDate: xactn.tx.burn_block_time_iso,
         rowId: 0,

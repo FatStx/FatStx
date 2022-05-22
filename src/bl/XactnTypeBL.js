@@ -16,8 +16,6 @@ export function getXactnType(xactn,outputArrayRow){
       }
   } else if (outputArrayRow.isNftOut) {
     if (outputArrayRow.inAmountRaw>0) {
-      console.log(xactn);
-      console.log(outputArrayRow);
       xactnType='Swap NFT for Coin';
     } else {
       xactnType='Send NFT';
