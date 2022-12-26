@@ -123,14 +123,14 @@ export default function Faq() {
                     As of February 26, 2022 coin prices were determined as follows:
 
                     <ul>
-                        <li><strong>STX: </strong> There are no prices before 1/1/21. Prices after that and before 11/25/21 are the daily prices from CoinGecko. Prices from 11/25/21 through 2/25/22 are the hourly prices from okcoin. Prices after 2/25/22 are the daily prices from CoinGecko</li>
+                        <li><strong>STX: </strong> There are no prices before 1/1/21. Prices after that and before 11/25/21 are the daily prices from CoinGecko. Prices from 11/25/21 through 05/13/22 are the hourly prices from okcoin. Prices from 5/13/22 through 10/26/22 are from hourly Binance historical prices. Prices after 12/24/22 are the daily prices from CoinGecko</li>
                         <li><strong>MIA: </strong>From 8/26/21 to 11/24/21, prices are the the daily prices from CoinGecko. Prices from 11/25/21 through 2/25/22 are the hourly prices from okcoin. Prices after 2/25/22 are the daily prices from CoinGecko</li>
                         <li><strong>USDA: </strong> 2021 Prices are derived from the STX-USDA swap contract on Arkadiko, converting the USDA price in STX to the USDA price in USDT using the hourly Binance historical STX prices.
                         2022 prices will be derived as STX-USDA swap contract info becomes available and each month ends and the Binance prices become available</li>
                         <li><strong>DIKO: </strong> 2021 Prices are derived from the USDA-DIKO swap contract on Arkadiko, converting the DIKO price in USDA to the DIKO price in USDT using the USDA prices mentioned in the previous bullet.
                         2022 prices through 2/25/22 are the hourly prices from okcoin. Prices after 2/25/22 are the daily historical prices from CoinGecko</li>
                         <li><strong>xBTC: </strong> Since xBTC prices are driven by BTC prices - xBTC can be unwrapped and exchanged for BTC - currently BTC prices are the most accurate price to use for xBTC due to the low volume for xBTC.
-                        This is certainly a matter for debate, but that is the approach this site has taken. Prices through 2/25/22 are the hourly prices from okcoin, and prices after 2/25/22 are the daily historical prices from CoinGecko</li>
+                        This is certainly a matter for debate, but that is the approach this site has taken. Prices through 12/24/22 are the hourly prices from okcoin, and prices after 12/24/22 are the daily historical prices from CoinGecko</li>
                     </ul>
                 </Typography>
                 </AccordionDetails>
