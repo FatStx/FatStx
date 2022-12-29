@@ -2,6 +2,7 @@ import { Token } from "../bo/TokenDefinitions"
 import { STXPrice } from "../bo/coinprices/StxPrice" 
 import { DIKOPrice } from "../bo/coinprices/DikoPrice" 
 import { MIAPrice } from "../bo/coinprices/MiaPrice" 
+import { MIAV2Price } from "../bo/coinprices/MiaV2Price" 
 import { XBTCPrice } from "../bo/coinprices/XbtcPrice"
 import { USDAPrice } from "../bo/coinprices/UsdaPrice"
 import { ALEXPrice } from "../bo/coinprices/AlexPrice"
@@ -308,6 +309,8 @@ function getCoinPriceObject(symbol) {
         coinPriceObject=DIKOPrice.dikoPrices;
     } else if (symbol==='MIA') {
         coinPriceObject=MIAPrice.miaPrices;
+    } else if (symbol==='MIAV2') {
+        coinPriceObject=MIAV2Price.miaV2Prices;        
     } else if (symbol==='xBTC') {
         coinPriceObject=XBTCPrice.xbtcPrices;
     } else if (symbol==='USDA') {
