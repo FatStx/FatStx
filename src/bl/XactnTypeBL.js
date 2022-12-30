@@ -1,3 +1,4 @@
+import { hexToAscii } from '../bo/StringUtils';
 import { XactnType } from '../bo/XactnTypes'
 
 export function getXactnType(xactn,outputArrayRow){
@@ -42,6 +43,12 @@ export function getXactnTypeDetail(xactn,outputArrayRow){
   if (xactnTypes.length>0 && xactnTypes[0].XactnTypeDetail !=='')
   {
     xactnTypeDetail = xactnTypes[0].XactnTypeDetail;
+  } else if(xactn?.tx?.token_transfer?.memo ) {
+    let memo = hexToAscii(xactn.tx.token_transfer.memo.substring(2)).trim();
+    xactnTypeDetail = memo.length > 0 ? `"${memo}"`: '';
+    console.log(xactnTypeDetail, memo, xactn.tx.token_transfer.memo)
+  } else if(xactn.tx?.contract_call?.function_name) {
+    xactnTypeDetail = xactn.tx?.contract_call?.function_name;
   }
   return xactnTypeDetail;
 }
