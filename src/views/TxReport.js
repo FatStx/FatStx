@@ -141,7 +141,7 @@ export default function TxReport(props) {
                 <DotLoader  color="#ffffff" loading={true}  size={120} />
             </Backdrop>
 
-            <Transactions txnData = {txnData} />
+            <Transactions txnData = {txnData} name={walletId}/>
             
           </Paper>
         </Grid>
