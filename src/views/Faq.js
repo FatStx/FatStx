@@ -130,7 +130,17 @@ export default function Faq() {
                                 <li>11/25/21 to 2/25/22: OkCoin Hourly prices</li>
                                 <li>2/26/22 to 05/14/22: CoinGecko daily prices</li>
                                 <li>5/15/22 to 06/30/22: CoinMarketCap daily prices</li>
-                                <li>After 06/30/22: Median Hourly Prices from a combination of ALEX-STX Swaps converted to USD via STX Price and OkCoin Hourly. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
+                                <li>After 06/30/22: Median* Hourly Prices from a combination of ALEX MIA-STX Swaps converted to USD via STX Price and OkCoin Hourly. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
+                            </ul>
+                        </li>
+                        <li><strong>NYC: </strong>
+                            <ul>
+                                <li>After 06/10/22: Median* Hourly Prices from a combination of ALEX NYC-STX Swaps converted to USD via STX Price and OkCoin Hourly. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
+                            </ul>
+                        </li>
+                        <li><strong>ALEX: </strong>
+                            <ul>
+                                <li>After 01/27/22: Median* Hourly Prices from ALEX ALEX-STX Swaps converted to USD via STX Price. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
                             </ul>
                         </li>
                         <li><strong>USDA: </strong> 2021 Prices are derived from the STX-USDA swap contract on Arkadiko, converting the USDA price in STX to the USDA price in USDT using the hourly Binance historical STX prices.
