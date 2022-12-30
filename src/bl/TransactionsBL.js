@@ -310,9 +310,9 @@ function getCoinPriceObject(symbol) {
         coinPriceObject=DIKOPrice.dikoPrices;
     } else if (symbol==='MIA') {
         coinPriceObject=MIAPrice.miaPrices;
-    } else if (symbol==='MIAV2') {
+    } else if (symbol==='MIAv2') {
         coinPriceObject=MIAV2Price.miaV2Prices;
-    } else if (symbol==='NYCV2') {
+    } else if (symbol==='NYCv2') {
         coinPriceObject=NYCV2Price.nycV2Prices;        
     } else if (symbol==='xBTC') {
         coinPriceObject=XBTCPrice.xbtcPrices;
