@@ -147,12 +147,12 @@ export default function Faq() {
                         </li>
                         <li><strong>ALEX: </strong>
                             <ul>
-                                <li>After 01/27/22: Median* Hourly Prices from ALEX ALEX-STX Swaps converted to USD via STX Price. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
+                                <li>All Prices (starting Jan 28 2022): Median* Hourly Prices from ALEX ALEX-STX Swaps converted to USD via STX Price. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
                             </ul>
                         </li>
                         <li><strong>USDA: </strong> 
                             <ul>
-                                <li>All Prices: Derived from the STX-USDA swap contract on Arkadiko, converted to USD from the STX price using the hourly Binance historical STX prices. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
+                                <li>All Prices (starting Oct 21 2021): Derived from the STX-USDA swap contract on Arkadiko, converted to USD from the STX price using the hourly Binance historical STX prices. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
                             </ul>                      
                         </li>
                         <li><strong>DIKO: </strong> 2021 Prices are derived from the USDA-DIKO swap contract on Arkadiko, converting the DIKO price in USDA to the DIKO price in USDT using the USDA prices mentioned in the previous bullet.
