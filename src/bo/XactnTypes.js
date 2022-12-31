@@ -135,6 +135,8 @@ export class XactnType {
       {id:1200,XactnType:'', XactnTypeDetail:'Megapont Space Agency (MSA)',contract:'SP3D6PV2ACBPEKYJTCMH7HEN02KP87QSP8KTEH335.megapont-space-agency',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:1201,XactnType:'', XactnTypeDetail:'Megapont Space Agency (MSA)',contract:'SP3D6PV2ACBPEKYJTCMH7HEN02KP87QSP8KTEH335.msa-minter',function:'mint',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:1202,XactnType:'', XactnTypeDetail:'Megapont Space Agency (MSA)',contract:'SP3D6PV2ACBPEKYJTCMH7HEN02KP87QSP8KTEH335.msa-apes-airdrop-4',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1202,XactnType:'', XactnTypeDetail:'Megapont Space Agency (MSA)',contract:'SP3D6PV2ACBPEKYJTCMH7HEN02KP87QSP8KTEH335.msa-airdrop14',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1202,XactnType:'', XactnTypeDetail:'Megapont Space Agency (MSA)',contract:'SP3D6PV2ACBPEKYJTCMH7HEN02KP87QSP8KTEH335.msa-nft',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
 
       //BitCoin Monkeys
       {id:2000,XactnType:'', XactnTypeDetail:'BitCoin Monkeys',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.bitcoin-monkeys',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
