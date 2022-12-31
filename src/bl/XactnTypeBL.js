@@ -73,6 +73,7 @@ function filterXactnTypes(xactn,outputArrayRow)
 function matchContract(filterContract,tx) {
   if (filterContract === ''
     || (tx.contract_call !== undefined && tx.contract_call.contract_id ===filterContract)
+    || (tx.smart_contract !== undefined && tx.smart_contract.contract_id ===filterContract)
     ) {
       return true;
     } else {
