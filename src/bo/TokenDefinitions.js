@@ -25,10 +25,13 @@ export class Token {
       {symbol:'ALEXLP_STX-ALEX',apiSymbol:'',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.fwp-wstx-alex-50-50-v1-01::fwp-wstx-alex-50-50-v1-01',conversionFactor:100000000,amountDecimals: 3,priceDecimals: 2},
       {symbol:'ALEXLP_STX-ALEX',apiSymbol:'',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.fwp-wstx-alex-50-50::fwp-wstx-alex-50-50',conversionFactor:100000000,amountDecimals: 3,priceDecimals: 2},
       {symbol:'ALEXLP_STX-XBTC',apiSymbol:'',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.fwp-wstx-wbtc-50-50-v1-01::fwp-wstx-wbtc-50-50-v1-01',conversionFactor:100000000,amountDecimals: 3,priceDecimals: 2},
-      {symbol:'MEGA',apiSymbol:'',contract:'SP3D6PV2ACBPEKYJTCMH7HEN02KP87QSP8KTEH335.mega',conversionFactor:1,amountDecimals: 3,priceDecimals: 2},
+      {symbol:'MEGA',apiSymbol:'',contract:'SP3D6PV2ACBPEKYJTCMH7HEN02KP87QSP8KTEH335.mega::mega',conversionFactor:1,amountDecimals: 3,priceDecimals: 2},
+      {symbol:'MEGA',apiSymbol:'',contract:'SP3D6PV2ACBPEKYJTCMH7HEN02KP87QSP8KTEH335.kong2',conversionFactor:1,amountDecimals: 3,priceDecimals: 2},
+      {symbol:'FORCE',apiSymbol:'',contract:'SP2P6KSAJ4JVV8PFSNKJ9BNG5PEPR4RT71VXZHWBK.forcecoin::force',conversionFactor:100,amountDecimals: 3,priceDecimals: 2},
 
-      //NFTs
+      //Names
       {symbol:'BNS Name',apiSymbol:'',contract:'SP000000000000000000002Q6VF78.bns::names',conversionFactor:1,amountDecimals: 0,priceDecimals: 0}
+
 
     ];
 }
