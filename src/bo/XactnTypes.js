@@ -99,8 +99,15 @@ export class XactnType {
       {id:352,XactnType:'', XactnTypeDetail:'Coinbase Xfer',contract:'',function:'',senderAddress:'SPC3T2E3MXHA15Q1TRQJDH57QX6X1D5D7Y9XTXXJ',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:353,XactnType:'', XactnTypeDetail:'Coinbase Xfer',contract:'',function:'',senderAddress:'SP1PJWKS5V3X7JR300J3W291DDNCKD6M6XKJFYPAC',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       //Binance
-      //NOTE: I *think* this wallet is Binance based on some comments in Arkadiko discord
       {id:400,XactnType:'', XactnTypeDetail:'Binance Xfer',contract:'',function:'',senderAddress:'SP1P72Z3704VMT3DMHPP2CB8TGQWGDBHD3RPR9GZS',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      //OKex
+      {id:500,XactnType:'', XactnTypeDetail:'OKex Xfer',contract:'',function:'',senderAddress:'SP3RFAZMSH6YA1KTJD7DN997AG2DG54E3Z9ZJWYN8',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:501,XactnType:'', XactnTypeDetail:'OKex Xfer',contract:'',function:'',senderAddress:'',recipientAddress:'SP3RFAZMSH6YA1KTJD7DN997AG2DG54E3Z9ZJWYN8',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      //Kucoin
+      {id:600,XactnType:'', XactnTypeDetail:'Kucoin Xfer',contract:'',function:'',senderAddress:'SPX8T06E8FJQ33CX8YVR9CC6D9DSTF6JE0Y8R7DS',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:601,XactnType:'', XactnTypeDetail:'Kucoin Xfer',contract:'',function:'',senderAddress:'',recipientAddress:'SPX8T06E8FJQ33CX8YVR9CC6D9DSTF6JE0Y8R7DS',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:602,XactnType:'', XactnTypeDetail:'Kucoin Xfer',contract:'',function:'',senderAddress:'SP307BHDXSX759Z2XFAM405REWVFJK05HKG7BWRQB',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:603,XactnType:'', XactnTypeDetail:'Kucoin Xfer',contract:'',function:'',senderAddress:'',recipientAddress:'SP307BHDXSX759Z2XFAM405REWVFJK05HKG7BWRQB',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
 
       //NFTs GENERAL 
       {id:1000,XactnType:'', XactnTypeDetail:'stacks-art-market',contract:'SPJW1XE278YMCEYMXB8ZFGJMH8ZVAAEDP2S2PJYG.stacks-art-market',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
@@ -124,6 +131,9 @@ export class XactnType {
       {id:2000,XactnType:'', XactnTypeDetail:'BitCoin Monkey Mutants',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.bitcoin-monkeys-labs',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:2001,XactnType:'', XactnTypeDetail:'Harvest $BAN',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.btc-monkeys-staking',function:'harvest',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:2002,XactnType:'', XactnTypeDetail:'Stake Bitcoin Monkey',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.btc-monkeys-staking',function:'stake',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:2003,XactnType:'Reward', XactnTypeDetail:'Bitcoin Monkey World Cup Rewards',contract:'SP1GPNZB0JSC9RXJTXVBAMSPQE29WM1SE8V39R6K2.bm-wc-stx-airdrop',function:'',senderAddress:'',recipientAddress:'',inSymbol:'STX',notInSymbol:'',outSymbol:'',notOutSymbol:''}
+      {id:2003,XactnType:'Reward', XactnTypeDetail:'Bitcoin Monkey World Cup Rewards',contract:'SP1GPNZB0JSC9RXJTXVBAMSPQE29WM1SE8V39R6K2.bm-wc-stx-airdrop',function:'',senderAddress:'',recipientAddress:'',inSymbol:'STX',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+
+      // Friedger Pools
+      {id:3000,XactnType:'Stacking Reward', XactnTypeDetail:'Friedger Pool',contract:'',function:'',senderAddress:'SPFP0018FJFD82X3KCKZRGJQZWRCV9793QTGE87M',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
     ];
 }

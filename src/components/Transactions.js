@@ -21,7 +21,7 @@ import Tx from './Tx';
 import { Box, Typography } from "@mui/material";
 import convertTxReportArrayToTxCSVArray from '../bl/TransactionCsvBL'
 
-export default function Transactions({txnData}) {
+export default function Transactions({txnData, name}) {
 
   const [textCopiedAlertVisible, setTextCopiedAlertVisible] = useState(false);
   const csvLink = useRef();
@@ -209,6 +209,8 @@ export default function Transactions({txnData}) {
                   inSymbol={row.inSymbol} 
                   outAmount={row.outAmount} 
                   outSymbol={row.outSymbol}
+                  sender={row.sender}
+                  recipient={row.recipient}
                 />
               </TableCell>
 
@@ -227,7 +229,7 @@ export default function Transactions({txnData}) {
       <div>
         <CSVLink
             data={csvArray}
-            filename="transactions.csv"
+            filename={`transactions-${name}.csv`}
             className="hidden"
             ref={csvLink}
             target="_blank"/>
