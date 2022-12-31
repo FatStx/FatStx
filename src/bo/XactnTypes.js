@@ -92,13 +92,14 @@ export class XactnType {
       {id:303,XactnType:'', XactnTypeDetail:'OkCoin Xfer',contract:'',function:'',senderAddress:'SP3HXJJMJQ06GNAZ8XWDN1QM48JEDC6PP6W3YZPZJ',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:304,XactnType:'', XactnTypeDetail:'OkCoin Xfer',contract:'',function:'',senderAddress:'',recipientAddress:'SP3HXJJMJQ06GNAZ8XWDN1QM48JEDC6PP6W3YZPZJ',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       //CoinEx
-      {id:350,XactnType:'', XactnTypeDetail:'CoineX Xfer',contract:'',function:'',senderAddress:'SP36AQJD5A92TM5WS0ZEC4GSZPY5B2CPQD6TX35PP',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:351,XactnType:'', XactnTypeDetail:'CoineX Xfer',contract:'',function:'',senderAddress:'',recipientAddress:'SP36AQJD5A92TM5WS0ZEC4GSZPY5B2CPQD6TX35PP',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:350,XactnType:'', XactnTypeDetail:'CoinEx Xfer',contract:'',function:'',senderAddress:'SP36AQJD5A92TM5WS0ZEC4GSZPY5B2CPQD6TX35PP',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:351,XactnType:'', XactnTypeDetail:'CoinEx Xfer',contract:'',function:'',senderAddress:'',recipientAddress:'SP36AQJD5A92TM5WS0ZEC4GSZPY5B2CPQD6TX35PP',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       //Coinbase
       {id:351,XactnType:'', XactnTypeDetail:'Coinbase Xfer',contract:'',function:'',senderAddress:'SP1FNEJ21BMJCJYEJM2F73QT6WD2MN9MB2J92FZBN',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:352,XactnType:'', XactnTypeDetail:'Coinbase Xfer',contract:'',function:'',senderAddress:'SPC3T2E3MXHA15Q1TRQJDH57QX6X1D5D7Y9XTXXJ',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:353,XactnType:'', XactnTypeDetail:'Coinbase Xfer',contract:'',function:'',senderAddress:'SP1PJWKS5V3X7JR300J3W291DDNCKD6M6XKJFYPAC',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       //Binance
+      //NOTE: I *think* this wallet is Binance based on some comments in Arkadiko discord
       {id:400,XactnType:'', XactnTypeDetail:'Binance Xfer',contract:'',function:'',senderAddress:'SP1P72Z3704VMT3DMHPP2CB8TGQWGDBHD3RPR9GZS',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       //OKex
       {id:500,XactnType:'', XactnTypeDetail:'OKex Xfer',contract:'',function:'',senderAddress:'SP3RFAZMSH6YA1KTJD7DN997AG2DG54E3Z9ZJWYN8',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
@@ -117,6 +118,8 @@ export class XactnType {
       {id:1010,XactnType:'', XactnTypeDetail:'Project Indigo Act 1',contract:'SP176ZMV706NZGDDX8VSQRGMB7QN33BBDVZ6BMNHD.project-indigo-act1',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:1011,XactnType:'', XactnTypeDetail:'Stacks Parrots 3D',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.stacks-parrots-3d::stacks-parrots-3d',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:1012,XactnType:'', XactnTypeDetail:'Wasteland Apes',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.wasteland-apes-nft-mint',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1013,XactnType:'', XactnTypeDetail:'WCH x Stacks Parrots - Birthday Drop',contract:'SP3B84QWAXRAKB67Z4TB33SY5G0BGGVQC36526QN6.wch-x-stacks-parrots-birthday-drop',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1014,XactnType:'', XactnTypeDetail:'Megapont Space Agency (MSA)',contract:'SP3D6PV2ACBPEKYJTCMH7HEN02KP87QSP8KTEH335.megapont-space-agency',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},      
       
       //Byzantion
       {id:1100,XactnType:'', XactnTypeDetail:'Byzantion Buy Item',contract:'SP1BX0P4MZ5A3A5JCH0E10YNS170QFR2VQ6TT4NRH.byzantion-market-v6',function:'buy-item',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
@@ -128,10 +131,22 @@ export class XactnType {
       {id:1106,XactnType:'', XactnTypeDetail:'Byzantion Withdraw Bid',contract:'SP1BX0P4MZ5A3A5JCH0E10YNS170QFR2VQ6TT4NRH.byzantion-market-v6',function:'withdraw-collection-bid',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},      
 
       //BitCoin Monkeys
-      {id:2000,XactnType:'', XactnTypeDetail:'BitCoin Monkey Mutants',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.bitcoin-monkeys-labs',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:2001,XactnType:'', XactnTypeDetail:'Harvest $BAN',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.btc-monkeys-staking',function:'harvest',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:2002,XactnType:'', XactnTypeDetail:'Stake Bitcoin Monkey',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.btc-monkeys-staking',function:'stake',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:2003,XactnType:'Reward', XactnTypeDetail:'Bitcoin Monkey World Cup Rewards',contract:'SP1GPNZB0JSC9RXJTXVBAMSPQE29WM1SE8V39R6K2.bm-wc-stx-airdrop',function:'',senderAddress:'',recipientAddress:'',inSymbol:'STX',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:2000,XactnType:'', XactnTypeDetail:'BitCoin Monkeys',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.bitcoin-monkeys',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:2001,XactnType:'', XactnTypeDetail:'BitCoin Monkey Mutants',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.bitcoin-monkeys-labs',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:2002,XactnType:'', XactnTypeDetail:'Monkey Kids Treehouse Club (MKTC)',contract:'SPNWZ5V2TPWGQGVDR6T7B6RQ4XMGZ4PXTEE0VQ0S.monkey-kids-nft',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:2003,XactnType:'', XactnTypeDetail:'World Cup Monkeys',contract:'SPNWZ5V2TPWGQGVDR6T7B6RQ4XMGZ4PXTEE0VQ0S.world-cup-monkeys',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:2004,XactnType:'', XactnTypeDetail:'Slime Components & Minions',contract:'SPNWZ5V2TPWGQGVDR6T7B6RQ4XMGZ4PXTEE0VQ0S.slime-components-and-minions',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:2004,XactnType:'', XactnTypeDetail:'Monkey Coins',contract:'SPNWZ5V2TPWGQGVDR6T7B6RQ4XMGZ4PXTEE0VQ0S.monkey-coin',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:2005,XactnType:'', XactnTypeDetail:'The Monkz',contract:'SPMWNPDCQMCXANG6BYK2TJKXA09BTSTES0VVBXVR.the-monkz',function:'stake',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:2010,XactnType:'Reward', XactnTypeDetail:'Harvest $BAN',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.btc-monkeys-staking',function:'harvest',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:2011,XactnType:'', XactnTypeDetail:'Stake Bitcoin Monkey',contract:'SP2KAF9RF86PVX3NEE27DFV1CQX0T4WGR41X3S45C.btc-monkeys-staking',function:'stake',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:2012,XactnType:'Reward', XactnTypeDetail:'Bitcoin Monkey World Cup Rewards',contract:'SP1GPNZB0JSC9RXJTXVBAMSPQE29WM1SE8V39R6K2.bm-wc-stx-airdrop',function:'',senderAddress:'',recipientAddress:'',inSymbol:'STX',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      
+      //BTC Sports
+      {id:2050,XactnType:'', XactnTypeDetail:'BTC Sports VIP Pass',contract:'SP2BE8TZATXEVPGZ8HAFZYE5GKZ02X0YDKAN7ZTGW.btc-sports-vip-pass',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:2052,XactnType:'', XactnTypeDetail:'BTC Sports Flags',contract:'SP2BE8TZATXEVPGZ8HAFZYE5GKZ02X0YDKAN7ZTGW.btc-sports-flags-nft',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:2052,XactnType:'', XactnTypeDetail:'BTC Sports OG Soccer',contract:'SPNWZ5V2TPWGQGVDR6T7B6RQ4XMGZ4PXTEE0VQ0S.og-soccer-airdrop',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},            
+      {id:2053,XactnType:'', XactnTypeDetail:'BTC Sports OG Soccer',contract:'SPNWZ5V2TPWGQGVDR6T7B6RQ4XMGZ4PXTEE0VQ0S.btc-sports-og-soccer',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},            
 
       // Friedger Pools
       {id:3000,XactnType:'Stacking Reward', XactnTypeDetail:'Friedger Pool',contract:'',function:'',senderAddress:'SPFP0018FJFD82X3KCKZRGJQZWRCV9793QTGE87M',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},

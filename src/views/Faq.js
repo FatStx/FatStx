@@ -123,7 +123,13 @@ export default function Faq() {
                     As of February 26, 2022 coin prices were determined as follows:
 
                     <ul>
-                        <li><strong>STX: </strong> There are no prices before 1/1/21. Prices after that and before 11/25/21 are the daily prices from CoinGecko. Prices from 11/25/21 through 05/13/22 are the hourly prices from okcoin. Prices from 1/1/22 through 12/25/22 are from hourly Binance historical prices. Prices after 12/25/22 are the daily prices from CoinGecko</li>
+                        <li><strong>STX: </strong>
+                        <ul>
+                                <li>1/1/21 to 2/28/21: CoinGecko daily prices</li>
+                                <li>3/1/21 to 12/27/22: Binance Historical prices, Hourly median</li>
+                                <li>After 12/27/22: CoinGecko Daily prices  </li>
+                            </ul>                 
+                        </li>                                   
                         <li><strong>MIA: </strong>
                             <ul>
                                 <li>8/26/21 to 11/24/21: CoinGecko daily prices</li>
@@ -135,6 +141,7 @@ export default function Faq() {
                         </li>
                         <li><strong>NYC: </strong>
                             <ul>
+                                <li>Nothing from before 6/10/22. It traded on Stackswap for a while but volume was very low and prices were all over the place. There was reliable trading on OkCoin starting in Feb 2022, but that data does not appear to be available any more.</li>
                                 <li>After 06/10/22: Median* Hourly Prices from a combination of ALEX NYC-STX Swaps converted to USD via STX Price and OkCoin Hourly. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
                             </ul>
                         </li>
@@ -143,8 +150,11 @@ export default function Faq() {
                                 <li>After 01/27/22: Median* Hourly Prices from ALEX ALEX-STX Swaps converted to USD via STX Price. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
                             </ul>
                         </li>
-                        <li><strong>USDA: </strong> 2021 Prices are derived from the STX-USDA swap contract on Arkadiko, converting the USDA price in STX to the USDA price in USDT using the hourly Binance historical STX prices.
-                        2022 prices will be derived as STX-USDA swap contract info becomes available and each month ends and the Binance prices become available</li>
+                        <li><strong>USDA: </strong> 
+                            <ul>
+                                <li>All Prices: Derived from the STX-USDA swap contract on Arkadiko, converted to USD from the STX price using the hourly Binance historical STX prices. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
+                            </ul>                      
+                        </li>
                         <li><strong>DIKO: </strong> 2021 Prices are derived from the USDA-DIKO swap contract on Arkadiko, converting the DIKO price in USDA to the DIKO price in USDT using the USDA prices mentioned in the previous bullet.
                         2022 prices through 2/25/22 are the hourly prices from okcoin. Prices after 2/25/22 are the daily historical prices from CoinGecko</li>
                         <li><strong>xBTC: </strong> Since xBTC prices are driven by BTC prices - xBTC can be unwrapped and exchanged for BTC - currently BTC prices are the most accurate price to use for xBTC due to the low volume for xBTC.
