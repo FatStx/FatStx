@@ -142,7 +142,7 @@ export default function Faq() {
                         <li><strong>NYC: </strong>
                             <ul>
                                 <li>Nothing from before 6/10/22. It traded on Stackswap for a while but volume was very low and prices were all over the place. There was reliable trading on OkCoin starting in Feb 2022, but that data does not appear to be available any more.</li>
-                                <li>After 06/10/22: Median* Hourly Prices from a combination of ALEX NYC-STX Swaps converted to USD via STX Price and OkCoin Hourly. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
+                                <li>After 06/10/22: Median* Hourly Prices from a combination of ALEX NYC-STX Swaps converted to USD via STX Price and OkCoin Hourly where available. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
                             </ul>
                         </li>
                         <li><strong>ALEX: </strong>

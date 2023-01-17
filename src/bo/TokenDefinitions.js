@@ -28,6 +28,7 @@ export class Token {
       {symbol:'MEGA',apiSymbol:'',contract:'SP3D6PV2ACBPEKYJTCMH7HEN02KP87QSP8KTEH335.mega::mega',conversionFactor:1,amountDecimals: 3,priceDecimals: 2},
       {symbol:'MEGA',apiSymbol:'',contract:'SP3D6PV2ACBPEKYJTCMH7HEN02KP87QSP8KTEH335.kong2',conversionFactor:1,amountDecimals: 3,priceDecimals: 2},
       {symbol:'FORCE',apiSymbol:'',contract:'SP2P6KSAJ4JVV8PFSNKJ9BNG5PEPR4RT71VXZHWBK.forcecoin::force',conversionFactor:100,amountDecimals: 3,priceDecimals: 2},
+      {symbol:'MIAv2',apiSymbol:'',contract:'SP27BB1Y2DGSXZHS7G9YHKTSH6KQ6BD3QG0AN3CR9.vibes-token::vibes-token',conversionFactor:100000000,amountDecimals: 2,priceDecimals: 5},
 
       //Names
       {symbol:'BNS Name',apiSymbol:'',contract:'SP000000000000000000002Q6VF78.bns::names',conversionFactor:1,amountDecimals: 0,priceDecimals: 0}
