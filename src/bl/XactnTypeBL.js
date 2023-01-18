@@ -56,7 +56,8 @@ export function getXactnTypeDetail(xactn,outputArrayRow){
 function filterXactnTypes(xactn,outputArrayRow)
 {
   let xactnType = XactnType.xactnTypes.filter(function(item) {
-    return matchContract(item.contract,xactn.tx)
+    return matchTransactionId(item.XactnId,xactn.tx) 
+        && matchContract(item.contract,xactn.tx)
         && matchContractMethod(item.function,xactn.tx)
         && matchSender(item.senderAddress,outputArrayRow.sender)
         && matchRecipient(item.recipientAddress,outputArrayRow.recipient)
@@ -68,6 +69,16 @@ function filterXactnTypes(xactn,outputArrayRow)
 
   return xactnType;
 
+}
+
+function matchTransactionId(filterXactnId,tx) {
+  if (filterXactnId === ''
+    || (tx.tx_id === filterXactnId)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
 }
 
 function matchContract(filterContract,tx) {

@@ -35,7 +35,7 @@ function Home() {
   const [stackData, setStackData] = useState([]);
   const [stackDataNew, setStackDataNew] = useState([]);
   const [coin, setCoin] = useState('');
-  const [year, setYear] = useState('2021');
+  const [year, setYear] = useState('2023');
   const [supportShow, setSupportShow] = useState(null);
   const [textCopiedAlertVisible, setTextCopiedAlertVisible] = useState(false);
 
