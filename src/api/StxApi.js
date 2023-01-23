@@ -4,7 +4,6 @@ import { Configuration, BlocksApi } from "@stacks/blockchain-api-client";
 
 //Process All API Pages
 export default async function processAllXactnWithTransfersApiPages(walletId, year='All') {
-
     let startDate = year === 'All'
                     ? '2021-01-01T00:00:00.000Z'
                     : year + '-01-01T00:00:00.000Z';

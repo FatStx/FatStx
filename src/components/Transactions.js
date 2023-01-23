@@ -21,13 +21,13 @@ import Tx from './Tx';
 import { Box, Typography } from "@mui/material";
 import convertTxReportArrayToTxCSVArray from '../bl/TransactionCsvBL'
 
-export default function Transactions({txnData, name}) {
+export default function Transactions({txnData, name,currency}) {
 
   const [textCopiedAlertVisible, setTextCopiedAlertVisible] = useState(false);
   const csvLink = useRef();
   let csvArray = [];
   if (txnData.length) {
-    csvArray=convertTxReportArrayToTxCSVArray(txnData);
+    csvArray=convertTxReportArrayToTxCSVArray(txnData,currency);
   }
 
   const linkRows = (rowId) => {

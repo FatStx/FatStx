@@ -36,6 +36,7 @@ function Home() {
   const [stackDataNew, setStackDataNew] = useState([]);
   const [coin, setCoin] = useState('');
   const [year, setYear] = useState('2023');
+  const [currency, setCurrency] = useState('USD');
   const [supportShow, setSupportShow] = useState(null);
   const [textCopiedAlertVisible, setTextCopiedAlertVisible] = useState(false);
 
@@ -232,6 +233,8 @@ function Home() {
                       setTxnData = {setTxnData}
                       year = {year}
                       setYear = {setYear}
+                      currency = {currency}
+                      setCurrency = {setCurrency}
                     />
                   } 
                 />
@@ -245,6 +248,8 @@ function Home() {
                       setTxnData = {setTxnData}
                       year = {year}
                       setYear = {setYear}
+                      currency = {currency}
+                      setCurrency = {setCurrency}                      
                     />
                   } 
                 />
@@ -315,6 +320,8 @@ function Home() {
                       setTxnData = {setTxnData}
                       year = {year}
                       setYear = {setYear}
+                      currency = {currency}
+                      setCurrency = {setCurrency}                      
                     />
                   } 
                 />

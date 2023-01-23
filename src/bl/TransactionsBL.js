@@ -7,11 +7,12 @@ import { NYCV2Price } from "../bo/coinprices/NycV2Price"
 import { XBTCPrice } from "../bo/coinprices/XbtcPrice"
 import { USDAPrice } from "../bo/coinprices/UsdaPrice"
 import { ALEXPrice } from "../bo/coinprices/AlexPrice"
+import { EURPrice } from "../bo/fiatprices/EurPrice"
 import getPriceFromCoinGecko from '../api/CoinPricesApis'
 import * as getXactnType  from './XactnTypeBL'
 
 //Primary function called by the front end
-export default async function convertJsonToTxReportArray(json, walletId) {
+export default async function convertJsonToTxReportArray(json, walletId,currency) {
 //await utilityGetCoinFromCoinGecko('xBTC');
 
     let outputArray = [];
@@ -21,37 +22,10 @@ export default async function convertJsonToTxReportArray(json, walletId) {
         }
     }
     outputArray = populateRowId(outputArray);
+    outputArray=await ConvertArrayCurrency(outputArray,currency);
     console.log(outputArray);
     return outputArray;
 }
-
-export async function convertTxReportArrayToTxCSVArray(rptArray) {
-
-        let outputArray = [];
-        for (const arrayRow of rptArray) {
-            let outputArrayRow = {
-                burnDate: arrayRow.burnDate,
-                inSymbol: arrayRow.inSymbol,
-                inAmount: arrayRow.inAmount,
-                outSymbol: arrayRow.outSymbol,
-                outAmount: arrayRow.outAmount,
-                xactnFee: arrayRow.xactnFee,
-                inCoinPrice: arrayRow.inCoinPrice,
-                outCoinPrice: arrayRow.outCoinPrice,
-                xactnFeeCoinPrice: arrayRow.xactnFeeCoinPrice,
-                xactnType: arrayRow.xactnType,
-                xactnTypeDetail: arrayRow.xactnTypeDetail,
-                xactnId: arrayRow.xactnId,
-                inAmountRaw: arrayRow.inAmountRaw,
-                outAmountRaw: arrayRow.outAmountRaw,
-                xactnFeeRaw: arrayRow.xactnFeeRaw
-            };
-            outputArrayRow.push(outputArrayRow);
-        }
-
-        console.log(outputArray);
-        return outputArray;
-    }
 
 async function addOutputArrayRowsForXactn(outputArray, xactn, walletId) {
     let outputRowRawData = await getOutputRowsForXactn(xactn, walletId);
@@ -320,6 +294,8 @@ function getCoinPriceObject(symbol) {
         coinPriceObject=USDAPrice.usdaPrices;
     } else if (symbol==='ALEX') {
         coinPriceObject=ALEXPrice.alexPrices;
+    } else if (symbol==='EUR') {
+        coinPriceObject=EURPrice.eurPrices;        
     }
     
     return coinPriceObject;
@@ -350,6 +326,30 @@ function populateRowId(outputArray) {
     return outputArray;
 }
 
+async function ConvertArrayCurrency(outputArray,currency) {
+    if (currency != 'USD') {
+        for (const arrayRow of outputArray) {
+            arrayRow.inCoinPrice = await ConvertCurrencyAmount(arrayRow.burnDate,currency,arrayRow.inCoinPrice,arrayRow.inSymbol);
+            arrayRow.outCoinPrice = await ConvertCurrencyAmount(arrayRow.burnDate,currency,arrayRow.outCoinPrice,arrayRow.outSymbol);
+            arrayRow.xactnFeeCoinPrice = await ConvertCurrencyAmount(arrayRow.burnDate,currency,arrayRow.xactnFeeCoinPrice,'STX');
+        }
+    }
+    return outputArray;
+}
+
+async function ConvertCurrencyAmount(burnDate,currency,usdPrice,symbol) {
+
+    var currencyPrice= await getCoinPrice(currency,burnDate);
+    var convertedPrice=usdPrice;
+    console.log(burnDate,convertedPrice,currencyPrice);
+    if (convertedPrice !='N/A' && currencyPrice != '' && currencyPrice != 'N/A') {
+
+        convertedPrice=parseFloat(usdPrice)/parseFloat(currencyPrice);
+        convertedPrice=formatPrice(convertedPrice,symbol);
+        console.log(convertedPrice);
+    }
+    return convertedPrice;
+}
 // async function utilityGetCoinFromCoinGecko(coin) {
 //     var now = new Date(2021, 11, 29);
 //     for (var thisDate = new Date(2021, 11, 20); thisDate <= now; thisDate.setDate(thisDate.getDate() + 1)) {

@@ -29,11 +29,16 @@ export default function TxReport(props) {
   let setTxnData = props.setTxnData
   let year = props.year
   let setYear = props.setYear
+  let currency = props.currency
+  let setCurrency = props.setCurrency
   
   const [spinnerVisible, setSpinnerVisible] = useState(false);
 
   const handleYearChange = (event) => {
     setYear(event.target.value);
+  };
+  const handleCurrencyChange = (event) => {
+    setCurrency(event.target.value);
   };
 
   const handleWalletIdChange = (event) => {
@@ -64,7 +69,7 @@ export default function TxReport(props) {
       alert("There have been one or more errors connecting to Stacks to obtain your data. Normally this is due to problems with either the network or the APIs. Please try again in a few minutes.");
     } else {
       let json=apiResults[1];
-      let outputArray = await convertJsonToTxReportArray(json,walletId);
+      let outputArray = await convertJsonToTxReportArray(json,walletId,currency);
       setTxnData(outputArray)
     }
 
@@ -100,7 +105,21 @@ export default function TxReport(props) {
                     value={walletId}
                   />
                 </Grid>
-
+                <Grid item xs={12} s={12} md={2} >
+                    <FormControl fullWidth>
+                        <InputLabel id="Currency">Currency</InputLabel>
+                        <Select
+                            labelId="currency"
+                            id="currency"
+                            value={currency}
+                            label="Currency"
+                            onChange={handleCurrencyChange}
+                        >
+                            <MenuItem selected={true} value={'USD'}>USD</MenuItem>
+                            <MenuItem value={'EUR'}>EUR</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>
                 <Grid item xs={12} s={12} md={2} >
                     <FormControl fullWidth>
                         <InputLabel id="Year">Year</InputLabel>
@@ -142,7 +161,7 @@ export default function TxReport(props) {
                 <DotLoader  color="#ffffff" loading={true}  size={120} />
             </Backdrop>
 
-            <Transactions txnData = {txnData} name={walletId}/>
+            <Transactions txnData = {txnData} name={walletId} currency={currency}/>
             
           </Paper>
         </Grid>

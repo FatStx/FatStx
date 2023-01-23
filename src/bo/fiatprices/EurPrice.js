@@ -1,4 +1,5 @@
-export class EurPrice {
+export class EURPrice {
+// from https://www.ofx.com/en-us/forex-news/historical-exchange-rates/eur/usd/
 static eurPrices = [
     { date: '2000-01-01T00:00:00.000Z', coin: 'EUR', price: 'N/A'},
     { date: '2021-01-01T00:00:00.0000000Z', coin: 'EUR', price: '1.2135'},    
@@ -725,6 +726,27 @@ static eurPrices = [
     { date: '2022-12-30T00:00:00.0000000Z', coin: 'EUR', price: '1.068753'},
     { date: '2022-12-31T00:00:00.0000000Z', coin: 'EUR', price: '1.072674'},
     { date: '2023-01-01T00:00:00.0000000Z', coin: 'EUR', price: '1.072674'},
-    { date: '2023-01-02T00:00:00.000Z', coin: 'EUR', price: 'N/A'}
+    { date: '2023-01-02T00:00:00.0000000Z', coin: 'EUR', price: '1.06553'},
+    { date: '2023-01-03T00:00:00.0000000Z', coin: 'EUR', price: '1.055353'},
+    { date: '2023-01-04T00:00:00.0000000Z', coin: 'EUR', price: '1.062'},
+    { date: '2023-01-05T00:00:00.0000000Z', coin: 'EUR', price: '1.052111'},
+    { date: '2023-01-06T00:00:00.0000000Z', coin: 'EUR', price: '1.061977'},
+    { date: '2023-01-07T00:00:00.0000000Z', coin: 'EUR', price: '1.066382'},
+    { date: '2023-01-08T00:00:00.0000000Z', coin: 'EUR', price: '1.066382'},
+    { date: '2023-01-09T00:00:00.0000000Z', coin: 'EUR', price: '1.075859'},
+    { date: '2023-01-10T00:00:00.0000000Z', coin: 'EUR', price: '1.073169'},
+    { date: '2023-01-11T00:00:00.0000000Z', coin: 'EUR', price: '1.074945'},
+    { date: '2023-01-12T00:00:00.0000000Z', coin: 'EUR', price: '1.081888'},
+    { date: '2023-01-13T00:00:00.0000000Z', coin: 'EUR', price: '1.080882'},
+    { date: '2023-01-14T00:00:00.0000000Z', coin: 'EUR', price: '1.084775'},
+    { date: '2023-01-15T00:00:00.0000000Z', coin: 'EUR', price: '1.084775'},
+    { date: '2023-01-16T00:00:00.0000000Z', coin: 'EUR', price: '1.082497'},
+    { date: '2023-01-17T00:00:00.0000000Z', coin: 'EUR', price: '1.079715'},
+    { date: '2023-01-18T00:00:00.0000000Z', coin: 'EUR', price: '1.08204'},
+    { date: '2023-01-19T00:00:00.0000000Z', coin: 'EUR', price: '1.080439'},
+    { date: '2023-01-20T00:00:00.0000000Z', coin: 'EUR', price: '1.083295'},
+    { date: '2023-01-21T00:00:00.0000000Z', coin: 'EUR', price: '1.087725'},
+    { date: '2023-01-22T00:00:00.0000000Z', coin: 'EUR', price: '1.087725'},    
+    { date: '2023-01-23T00:00:00.000Z', coin: 'EUR', price: 'N/A'}
 ];
 }

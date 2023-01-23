@@ -1,6 +1,6 @@
 export class Token {
     static tokens = [
-      {symbol:'STX',apiSymbol:'blockstack',contract:'',conversionFactor:1000000,amountDecimals: 2,priceDecimals: 3},
+      {symbol:'STX',apiSymbol:'blockstack',contract:'',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 3},
       {symbol:'DIKO',apiSymbol:'arkadiko-protocol',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.arkadiko-token::diko',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 3},
       {symbol:'USDA',apiSymbol:'',contract:'SP2C2YFP12AJZB4MABJBAJ55XECVS7E4PMMZ89YZR.usda-token::usda',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 3},
       {symbol:'MIA',apiSymbol:'miamicoin',contract:'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-token::miamicoin',conversionFactor:1,amountDecimals: 2,priceDecimals: 5},
@@ -30,6 +30,8 @@ export class Token {
       {symbol:'FORCE',apiSymbol:'',contract:'SP2P6KSAJ4JVV8PFSNKJ9BNG5PEPR4RT71VXZHWBK.forcecoin::force',conversionFactor:100,amountDecimals: 3,priceDecimals: 2},
       {symbol:'VIBES',apiSymbol:'',contract:'SP27BB1Y2DGSXZHS7G9YHKTSH6KQ6BD3QG0AN3CR9.vibes-token::vibes-token',conversionFactor:100000000,amountDecimals: 2,priceDecimals: 5},
 
+      //Currencies
+      {symbol:'EUR',apiSymbol:'',contract:'',conversionFactor:1000000,amountDecimals: 5,priceDecimals: 6},      
       //Names
       {symbol:'BNS Name',apiSymbol:'',contract:'SP000000000000000000002Q6VF78.bns::names',conversionFactor:1,amountDecimals: 0,priceDecimals: 0}
 

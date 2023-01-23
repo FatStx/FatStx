@@ -1,8 +1,9 @@
 //Primary function called by the front end
-export default function convertTxReportArrayToTxCSVArray(rptArray) {
+export default function convertTxReportArrayToTxCSVArray(rptArray,currency) {
   let outputArray = [];
   for (const arrayRow of rptArray) {
     let outputArrayRow = {
+      currency: currency,
       burnDate: arrayRow.burnDate,
       inSymbol: arrayRow.inSymbol,
       inAmount: arrayRow.inAmount,
