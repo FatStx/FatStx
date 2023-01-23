@@ -4,7 +4,7 @@ import { Token } from '../bo/TokenDefinitions'
 export default async function getPriceFromCoinGecko(symbol, priceDate) {
     let price='N/A';
     //This is just a safety valve to avoid accidentally going back to far and getting throttled by coingecko
-    if (new Date(priceDate).getTime() < new Date(2022,0,5).getTime()) {
+    if (new Date(priceDate).getTime() < new Date(2022,12,1).getTime()) {
         return price;
     }
     const baseUrl = 'https://api.coingecko.com/api/v3/coins/';
@@ -21,6 +21,32 @@ export default async function getPriceFromCoinGecko(symbol, priceDate) {
             let json = await response.json();
             if (json.market_data !== undefined) {
                 price=json.market_data.current_price.usd;
+            }
+        }
+    }
+    return price;
+}
+
+//TODO: Proper Error handling, possibly chain then and catch to the fetch
+export async function getCurrencyPriceFromExternalApi(symbol, priceDate) {
+    let price='N/A';
+    //This is just a safety valve to avoid accidentally going back to far and getting throttled
+    if (new Date(priceDate).getTime() < new Date(2022,12,1).getTime()) {
+        return price;
+    }
+    const baseUrl = 'https://api.exchangerate.host/';
+    if (symbol !=='')
+    {
+        let dateForApi = getDateForCurrencyApi(new Date(priceDate))
+        let url=baseUrl+symbol+ + dateForApi;
+        let response = await fetch(url).catch(error =>
+            {
+                console.log("Error Fetching Currency API Information");
+            });
+        if (response !==undefined && response.status === 200) {
+            let json = await response.json();
+            if (json.rates !== undefined) {
+                price=json.rates.USD;
             }
         }
     }
@@ -46,5 +72,11 @@ function getCoinPriceAPISymbol(symbol) {
 function getDateForCoinGecko(thisDate) {
     let workingDate=new Date(thisDate);
     let returnDate = workingDate.getUTCDate() + "-" + (parseInt(workingDate.getUTCMonth())+1) + "-" + workingDate.getUTCFullYear();
+    return returnDate;
+}
+
+function getDateForCurrencyApi(thisDate) {
+    let workingDate=new Date(thisDate);
+    let returnDate = workingDate.getUTCFullYear() + "-" + workingDate.getUTCMonth() + "-" + workingDate.getUTCDate();
     return returnDate;
 }

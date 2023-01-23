@@ -9,6 +9,7 @@ import { USDAPrice } from "../bo/coinprices/UsdaPrice"
 import { ALEXPrice } from "../bo/coinprices/AlexPrice"
 import { EURPrice } from "../bo/fiatprices/EurPrice"
 import getPriceFromCoinGecko from '../api/CoinPricesApis'
+import { getCurrencyPriceFromExternalApi} from '../api/CoinPricesApis'
 import * as getXactnType  from './XactnTypeBL'
 
 //Primary function called by the front end
@@ -246,7 +247,11 @@ async function getCoinPrice(symbol, priceDate) {
                 let formattedPrice=formatPrice(price,symbol);
                 //If we do not have a valid price in our historical array, call CoinGecko
                 if (formattedPrice === 'N/A' && new Date(priceDate).getTime() >= new Date(2022,0,1).getTime()) {
-                    formattedPrice=await getPriceFromCoinGecko(symbol,priceDate);
+                    if (symbol==='EUR') {
+                        formattedPrice=await getCurrencyPriceFromExternalApi(symbol,priceDate);
+                    } else {
+                        formattedPrice=await getPriceFromCoinGecko(symbol,priceDate);
+                    }
                     price=formatPrice(formattedPrice,symbol);
                 } else {
                     price=formattedPrice;
@@ -341,12 +346,10 @@ async function ConvertCurrencyAmount(burnDate,currency,usdPrice,symbol) {
 
     var currencyPrice= await getCoinPrice(currency,burnDate);
     var convertedPrice=usdPrice;
-    console.log(burnDate,convertedPrice,currencyPrice);
     if (convertedPrice !=='N/A' && currencyPrice !== '' && currencyPrice !== 'N/A') {
 
         convertedPrice=parseFloat(usdPrice)/parseFloat(currencyPrice);
         convertedPrice=formatPrice(convertedPrice,symbol);
-        console.log(convertedPrice);
     }
     return convertedPrice;
 }
