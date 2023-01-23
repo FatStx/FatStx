@@ -327,7 +327,7 @@ function populateRowId(outputArray) {
 }
 
 async function ConvertArrayCurrency(outputArray,currency) {
-    if (currency != 'USD') {
+    if (currency !== 'USD') {
         for (const arrayRow of outputArray) {
             arrayRow.inCoinPrice = await ConvertCurrencyAmount(arrayRow.burnDate,currency,arrayRow.inCoinPrice,arrayRow.inSymbol);
             arrayRow.outCoinPrice = await ConvertCurrencyAmount(arrayRow.burnDate,currency,arrayRow.outCoinPrice,arrayRow.outSymbol);
@@ -342,7 +342,7 @@ async function ConvertCurrencyAmount(burnDate,currency,usdPrice,symbol) {
     var currencyPrice= await getCoinPrice(currency,burnDate);
     var convertedPrice=usdPrice;
     console.log(burnDate,convertedPrice,currencyPrice);
-    if (convertedPrice !='N/A' && currencyPrice != '' && currencyPrice != 'N/A') {
+    if (convertedPrice !=='N/A' && currencyPrice !== '' && currencyPrice !== 'N/A') {
 
         convertedPrice=parseFloat(usdPrice)/parseFloat(currencyPrice);
         convertedPrice=formatPrice(convertedPrice,symbol);
