@@ -21,6 +21,7 @@ export default function convertTxReportArrayToTxCSVArray(rptArray,currency) {
       xactnFeeRaw: arrayRow.xactnFeeRaw,
       sender: arrayRow.sender,
       recipient: arrayRow.recipient,
+      memo: arrayRow.memo
     };
     outputArray.push(outputArrayRow);
   }

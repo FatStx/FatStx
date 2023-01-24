@@ -1,3 +1,4 @@
+import { hexToAscii } from '../bo/StringUtils';
 import { Token } from "../bo/TokenDefinitions"
 import { STXPrice } from "../bo/coinprices/StxPrice" 
 import { DIKOPrice } from "../bo/coinprices/DikoPrice" 
@@ -164,6 +165,10 @@ async function getOutputArrayRow(xactn, xactnFee, transferIn, transferOut) {
     let contractFunction = xactn.contract_call === undefined ? '' : xactn.contract_call.function_name;
     let sender = transferIn === undefined ? '' : transferIn.sender;
     let recipient = transferOut === undefined ? '' : transferOut.recipient;
+    let memo = xactn?.tx?.token_transfer?.memo ? hexToAscii(xactn.tx.token_transfer.memo.substring(2)).trim():'';
+    if (memo.length <1) {
+        memo='';
+    }
 
     outputArrayRow = {
         burnDate: xactn.tx.burn_block_time_iso,
@@ -187,7 +192,8 @@ async function getOutputArrayRow(xactn, xactnFee, transferIn, transferOut) {
         contract: contract,
         contractFunction: contractFunction,
         sender: sender,
-        recipient: recipient
+        recipient: recipient,
+        memo: memo
     };
 
     outputArrayRow.xactnType =  getXactnType.getXactnType(xactn,outputArrayRow);
