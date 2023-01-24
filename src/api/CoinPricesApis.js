@@ -38,7 +38,7 @@ export async function getCurrencyPriceFromExternalApi(symbol, priceDate) {
     if (symbol !=='')
     {
         let dateForApi = getDateForCurrencyApi(new Date(priceDate))
-        let url=baseUrl+symbol+ + dateForApi;
+        let url=baseUrl+dateForApi+'/?base='+symbol+'&symbols=USD';
         let response = await fetch(url).catch(error =>
             {
                 console.log("Error Fetching Currency API Information");
@@ -77,6 +77,7 @@ function getDateForCoinGecko(thisDate) {
 
 function getDateForCurrencyApi(thisDate) {
     let workingDate=new Date(thisDate);
-    let returnDate = workingDate.getUTCFullYear() + "-" + workingDate.getUTCMonth() + "-" + workingDate.getUTCDate();
+    let monthNumeric=parseInt(workingDate.getUTCMonth())+1;
+    let returnDate = workingDate.getUTCFullYear() + "-" + (monthNumeric<10?'0'+monthNumeric.toString():monthNumeric.toString()) + "-" + workingDate.getUTCDate();
     return returnDate;
 }
