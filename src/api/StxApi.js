@@ -8,7 +8,7 @@ export default async function processAllXactnWithTransfersApiPages(walletId, yea
                     ? '2021-01-01T00:00:00.000Z'
                     : year + '-01-01T00:00:00.000Z';
     let endDate = year === 'All'
-                    ? '2023-01-01T00:00:00.000Z'
+                    ? '2029-01-01T00:00:00.000Z'
                     : (parseInt(year) + 1).toString() + '-01-01T00:00:00.000Z';
 
     var ret=await processXactnWithTransfersApiPagesForDateRange(walletId,startDate,endDate);
