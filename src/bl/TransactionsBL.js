@@ -16,13 +16,13 @@ import * as getXactnType  from './XactnTypeBL'
 //Primary function called by the front end
 export default async function convertJsonToTxReportArray(json, walletId,currency) {
 //await utilityGetCoinFromCoinGecko('xBTC');
-
     let outputArray = [];
     for (const xactn of json) {
         if (xactn.tx.tx_status === "success") {
             outputArray = await addOutputArrayRowsForXactn(outputArray, xactn, walletId);
         }
     }
+
     outputArray = populateRowId(outputArray);
     outputArray=await ConvertArrayCurrency(outputArray,currency);
     console.log(outputArray);
@@ -31,7 +31,6 @@ export default async function convertJsonToTxReportArray(json, walletId,currency
 
 async function addOutputArrayRowsForXactn(outputArray, xactn, walletId) {
     let outputRowRawData = await getOutputRowsForXactn(xactn, walletId);
-
     for (var ctr = 0; ctr < outputRowRawData.rowCount; ctr += 1) {
         let outputRow = await getOutputArrayRow(
             xactn,

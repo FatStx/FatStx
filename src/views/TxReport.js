@@ -17,7 +17,7 @@ import FormControl from '@mui/material/FormControl';
 
 import Transactions from '../components/Transactions';
 import convertJsonToTxReportArray from '../bl/TransactionsBL'
-import processAllXactnWithTransfersApiPages, { isValidWallet } from '../api/StxApi'
+import processAllXactnWithTransfersApiPages, { checkWallet } from '../api/StxApi'
 
 export default function TxReport(props) {
 
@@ -54,18 +54,22 @@ export default function TxReport(props) {
       return;
     }
 
-    let isAValidWallet=await isValidWallet(walletId);
+    let checkWalletResults=await checkWallet(walletId);
 
-    if (!isAValidWallet)
+    if (!checkWalletResults[0])
     {
       alert("Please enter a valid wallet address");
       return;
+    }
+    else
+    {
+      walletId=checkWalletResults[1];
     }
     
     setSpinnerVisible(true)
 
     let apiResults = await processAllXactnWithTransfersApiPages(walletId, year);
-    if (apiResults[0]) {
+        if (apiResults[0]) {
       alert("There have been one or more errors connecting to Stacks to obtain your data. Normally this is due to problems with either the network or the APIs. Please try again in a few minutes.");
     } else {
       let json=apiResults[1];

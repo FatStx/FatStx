@@ -19,7 +19,6 @@ export default async function processAllXactnWithTransfersApiPages(walletId, yea
 export async function processXactnWithTransfersApiPagesForDateRange(walletId, startDate,endDate) {
 
     console.log(Date.now() + " ===Process All Api Pages===");
-
     let runningJson=[];
     let apiResult = await processOneXactnWithTransfersApiPage(0, walletId);
     let isApiError= false;
@@ -81,16 +80,22 @@ export async function getCurrentBlock() {
     return currentBlock
 }
 
-export async function isValidWallet(walletId) {
+export async function checkWallet(walletId) {
     //Not calling this one because it is far too slow for some reason
     //let baseUrl = "https://stacks-node-api.mainnet.stacks.co/v2/accounts/" + walletId;
     let baseUrl = 'https://stacks-node-api.mainnet.stacks.co/extended/v1/address/' + walletId + '/balances'
     let ret = await processOneApiPage(baseUrl);
     if (ret[0]===200 && ret[1].error === undefined)
     {
-        return true;
+        return [true,walletId];
     } else {
-        return false;
+        //Now need to check if it's a BNS address
+        ret = await getWalletForBNSName(walletId);
+        if (ret[0]===200 && ret[1].address !== undefined)
+        {
+            return [true,ret[1].address];
+        }
+        return [false,walletId];
     }
 }
 
@@ -103,6 +108,14 @@ export async function getBlockTime(blockHeight) {
     } else {
         return '';
     }
+}
+
+async function getWalletForBNSName(walletId) {
+    console.log(Date.now() + " ===Check BNS Name:" + walletId + "===");
+    let url = "https://stacks-node-api.mainnet.stacks.co/v1/names/" + walletId; 
+    let ret = await processOneApiPage(url);
+    console.log(ret);
+    return ret;
 }
 
 //Fully process one 50 xactn call/page from the transactions with transfers API

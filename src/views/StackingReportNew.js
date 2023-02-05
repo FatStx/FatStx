@@ -21,7 +21,7 @@ import Backdrop from '@mui/material/Backdrop';
 import DotLoader from "react-spinners/DotLoader";
 
 import Title from '../components/Title';
-import processAllXactnWithTransfersApiPages, { isValidWallet } from '../api/StxApi'
+import processAllXactnWithTransfersApiPages, { checkWallet } from '../api/StxApi'
 import convertJsonToStackingReportArray from '../bl/StackingBL'
 
 export default function StackingReportNew(props) {
@@ -57,12 +57,16 @@ export default function StackingReportNew(props) {
       if (walletId === '') {
         return;
       }
-      let isAValidWallet=await isValidWallet(walletId);
+      let checkWalletResults=await checkWallet(walletId);
 
-      if (!isAValidWallet)
+      if (!checkWalletResults[0])
       {
         alert("Please enter a valid wallet address");
         return;
+      }
+      else
+      {
+        walletId=checkWalletResults[1];
       }
 
       setSpinnerVisible(true)
