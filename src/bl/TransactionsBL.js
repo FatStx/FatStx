@@ -8,6 +8,7 @@ import { NYCV2Price } from "../bo/coinprices/NycV2Price"
 import { XBTCPrice } from "../bo/coinprices/XbtcPrice"
 import { USDAPrice } from "../bo/coinprices/UsdaPrice"
 import { ALEXPrice } from "../bo/coinprices/AlexPrice"
+import { BANPrice } from "../bo/coinprices/BanPrice"
 import { EURPrice } from "../bo/fiatprices/EurPrice"
 import getPriceFromCoinGecko from '../api/CoinPricesApis'
 import { getCurrencyPriceFromExternalApi} from '../api/CoinPricesApis'
@@ -304,6 +305,8 @@ function getCoinPriceObject(symbol) {
         coinPriceObject=USDAPrice.usdaPrices;
     } else if (symbol==='ALEX') {
         coinPriceObject=ALEXPrice.alexPrices;
+    } else if (symbol==='BAN') {
+        coinPriceObject=BANPrice.banPrices;
     } else if (symbol==='EUR') {
         coinPriceObject=EURPrice.eurPrices;        
     }
