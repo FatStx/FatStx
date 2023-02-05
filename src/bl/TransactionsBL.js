@@ -9,6 +9,7 @@ import { XBTCPrice } from "../bo/coinprices/XbtcPrice"
 import { USDAPrice } from "../bo/coinprices/UsdaPrice"
 import { ALEXPrice } from "../bo/coinprices/AlexPrice"
 import { BANPrice } from "../bo/coinprices/BanPrice"
+import { SLIMEPrice } from "../bo/coinprices/SlimePrice"
 import { EURPrice } from "../bo/fiatprices/EurPrice"
 import getPriceFromCoinGecko from '../api/CoinPricesApis'
 import { getCurrencyPriceFromExternalApi} from '../api/CoinPricesApis'
@@ -307,6 +308,8 @@ function getCoinPriceObject(symbol) {
         coinPriceObject=ALEXPrice.alexPrices;
     } else if (symbol==='BAN') {
         coinPriceObject=BANPrice.banPrices;
+    } else if (symbol==='SLIME') {
+        coinPriceObject=SLIMEPrice.slimePrices;        
     } else if (symbol==='EUR') {
         coinPriceObject=EURPrice.eurPrices;        
     }
