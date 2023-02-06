@@ -142,11 +142,11 @@ function Home() {
                             fullWidth 
                             sx={{ py:3 }} 
                             onClick={() => { 
-                              navigator.clipboard.writeText('SP07VQYYWJZ421DSBST3J4N5RTXV1S66XWTPTCG8') 
+                              navigator.clipboard.writeText('fatstx.stacks') 
                               setTextCopiedAlertVisible(true)
                             }}
                           >
-                              SP07VQYYWJZ421DSBST3J4N5RTXV1S66XWTPTCG8
+                              fatstx.stacks
                           </Button>
                         </CardActions>
                       </Card>

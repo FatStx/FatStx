@@ -17,8 +17,8 @@ export default function Disclaimer() {
                     m:"2rem",
                     fontWeight: "light"
                 }}>
-                    Built by <Link href="https://discord.com/users/377856887787356160">@eparrot</Link> and &nbsp;
-                    <Link href="https://discord.com/users/229090169238585345">@foragerr</Link>, Using React, MUI and elbow grease. Source lives here.
+                    Originally Built by <Link href="https://discord.com/users/377856887787356160">@eparrot</Link> and &nbsp;
+                    <Link href="https://discord.com/users/229090169238585345">@foragerr</Link>, Using React, MUI and elbow grease. Now maintained by eparrot.
 
                 </Typography>
             </Paper>
@@ -31,9 +31,7 @@ export default function Disclaimer() {
                 }}>
                     Please raise an issue on <Link href="https://github.com/FatStx/FatStx.github.io/issues">GitHub</Link>.
                     Also, you can often find &nbsp;
-                    <Link href="https://discord.com/users/377856887787356160">@eparrot</Link> and &nbsp;
-                    <Link href="https://discord.com/users/229090169238585345">@foragerr</Link> in the &nbsp;
-                    <Link href="https://discord.gg/syvita">Syvita Guild discord</Link>
+                    <Link href="https://discord.com/users/377856887787356160">@eparrot</Link> in various stacks related discords, including BTC Sports and City Coins Syvita channel
                 </Typography>
             </Paper>
 
@@ -65,7 +63,7 @@ export default function Disclaimer() {
                     m:"2rem",
                     fontWeight: "light"
                 }}>
-                    <h3>Copyright 2022 under an MIT license</h3>
+                    <h3>Copyright 2023 under an MIT license</h3>
                     <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
                     <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
                     <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
