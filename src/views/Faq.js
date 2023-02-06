@@ -152,12 +152,18 @@ export default function Faq() {
                         </li>
                         <li><strong>USDA: </strong> 
                             <ul>
-                                <li>Oct 21 2021 to Dec 31 2022: Derived from the STX-USDA swap contract on Arkadiko, converted to USD from the STX price using the hourly Binance historical STX prices. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
-                                <li>After 12/31/22: Median* Hourly Prices from a combination of ALEX Swaps converted to USD via ALEX Price and Arkadiko swaps converted to USD via STX Price. Hourly where available. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
+                                <li>Oct 21 2021 to Dec 31 2022: Derived from the STX-USDA swap contract on Arkadiko, converted to USD from the STX price using the hourly Binance historical STX prices. When no prints for an hour, median is taken from longer periods in multiples of an hour.</li>
+                                <li>After 12/31/22: Median* Hourly Prices from a combination of ALEX Swaps converted to USD via ALEX Price and Arkadiko swaps converted to USD via STX Price. Hourly where available. When no prints for an hour, median is taken from longer periods in multiples of an hour.</li>
                             </ul>
                         </li>
-                        <li><strong>DIKO: </strong> 2021 Prices are derived from the USDA-DIKO swap contract on Arkadiko, converting the DIKO price in USDA to the DIKO price in USDT using the USDA prices mentioned in the previous bullet.
-                        2022 prices through 2/25/22 are the hourly prices from okcoin. Prices after 2/25/22 are the daily historical prices from CoinGecko</li>
+                        <li><strong>DIKO: </strong> 
+                            <ul>
+                                <li>Median* Hourly Prices are derived from the USDA-DIKO swap contracts on Arkadiko, converting the DIKO price in USDA or STX to the DIKO price in USDT using the USDA or STX prices mentioned in previous bullets.
+                                    When no prints for an hour, median is taken from longer periods in multiples of an hour.
+                                </li>
+                            </ul>
+                        </li>
+                        
                         <li><strong>BAN: </strong>
                             <ul>
                                 <li>All Prices (starting Mar 28 2022): Median* Daily Prices from ALEX Swaps converted to USD via ALEX Price. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
@@ -168,8 +174,14 @@ export default function Faq() {
                                 <li>All Prices (starting Apr 18 2022): Median* Daily Prices from ALEX Swaps converted to USD via ALEX Price. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
                             </ul>
                         </li>                                             
-                        <li><strong>xBTC: </strong> Since xBTC prices are driven by BTC prices - xBTC can be unwrapped and exchanged for BTC - currently BTC prices are the most accurate price to use for xBTC due to the low volume for xBTC.
-                        This is certainly a matter for debate, but that is the approach this site has taken. Prices are a mix of prices from Binance, OkCoin, and CoinGecko</li>
+                        <li><strong>xBTC: </strong>
+                            <ul>
+                                <li>Since xBTC prices are driven by BTC prices - xBTC can be unwrapped and exchanged for BTC - currently BTC prices are the most accurate price to use for xBTC due to the low volume for xBTC.
+                                This is certainly a matter for debate, but that is the approach this site has taken. Prices are a mix of prices from Binance, OkCoin, and CoinGecko
+                                </li>
+                            </ul>
+                        
+                        </li>
                     </ul>
                 </Typography>
                 </AccordionDetails>
