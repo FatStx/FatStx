@@ -120,7 +120,7 @@ export default function Faq() {
                 component={'div'}>
                     The Stacks ecosystem is new enough that aside from the price of STX it can be difficult to determine accurate coin prices.
                     Sourcing of coin prices is likely something which will be changing regularly as more accurate sources become available.
-                    As of February 26, 2022 coin prices were determined as follows:
+                    As of February 1, 2023 coin prices were determined as follows:
 
                     <ul>
                         <li><strong>STX: </strong>
