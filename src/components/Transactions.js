@@ -93,11 +93,20 @@ export default function Transactions({txnData, name,currency}) {
     return d.toUTCString();
   }
 
+
   const formatPrice = (price) => {
     if ( price === '' ) { return '-' }
-    else if ( price === 'N/A' ) { return price }
-    else { return '$' + price }
+    return price;
   }
+
+  const outputCurrencySymbol = (currency,price) => {
+    if (price === '' || price === 'N/A') return null;
+    if(currency === 'EUR') { 
+      return (<span>&#x20AC;</span>);
+    }
+    return (<span>$</span>);
+ }
+
 
   return (
     <React.Fragment>
@@ -199,9 +208,9 @@ export default function Transactions({txnData, name,currency}) {
                 </Stack>
               </TableCell>
               <TableCell align="right">{`${row.xactnFee === 0 ? '-' : 'Ӿ ' +  row.xactnFee}`}</TableCell>
-              <TableCell align="right">{formatPrice(row.inCoinPrice)}</TableCell>
-              <TableCell align="right">{formatPrice(row.outCoinPrice)}</TableCell>
-              <TableCell align="right">{formatPrice(row.xactnFeeCoinPrice)}</TableCell>
+              <TableCell align="right">{outputCurrencySymbol(currency,row.inCoinPrice)}{formatPrice(row.inCoinPrice)}</TableCell>
+              <TableCell align="right">{outputCurrencySymbol(currency,row.outCoinPrice)}{formatPrice(row.outCoinPrice)}</TableCell>
+              <TableCell align="right">{outputCurrencySymbol(currency,row.xactnFeeCoinPrice)}{formatPrice(row.xactnFeeCoinPrice)}</TableCell>
 
               <TableCell>
                 <Tx 
