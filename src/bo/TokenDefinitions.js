@@ -29,6 +29,7 @@ export class Token {
       {symbol:'MEGA',apiSymbol:'',contract:'SP3D6PV2ACBPEKYJTCMH7HEN02KP87QSP8KTEH335.kong2',conversionFactor:1,amountDecimals: 3,priceDecimals: 2},
       {symbol:'FORCE',apiSymbol:'',contract:'SP2P6KSAJ4JVV8PFSNKJ9BNG5PEPR4RT71VXZHWBK.forcecoin::force',conversionFactor:100,amountDecimals: 3,priceDecimals: 2},
       {symbol:'VIBES',apiSymbol:'',contract:'SP27BB1Y2DGSXZHS7G9YHKTSH6KQ6BD3QG0AN3CR9.vibes-token::vibes-token',conversionFactor:100000000,amountDecimals: 2,priceDecimals: 5},
+      {symbol:'xUSD',apiSymbol:'',contract:'SP2TZK01NKDC89J6TA56SA47SDF7RTHYEQ79AAB9A.Wrapped-USD::wrapped-usd',conversionFactor:100000000,amountDecimals: 3,priceDecimals: 3},
 
       //Currencies
       {symbol:'EUR',apiSymbol:'',contract:'',conversionFactor:1000000,amountDecimals: 5,priceDecimals: 6},      
