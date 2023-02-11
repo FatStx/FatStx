@@ -199,6 +199,36 @@ async function getOutputArrayRow(xactn, xactnFee, transferIn, transferOut) {
 
     outputArrayRow.xactnType =  getXactnType.getXactnType(xactn,outputArrayRow);
     outputArrayRow.xactnTypeDetail =  getXactnType.getXactnTypeDetail(xactn,outputArrayRow);
+    outputArrayRow=processIndexerXactns(outputArrayRow,xactn);
+
+    return outputArrayRow;
+}
+
+function processIndexerXactns(outputArrayRow,xactn) {
+    if (outputArrayRow.xactnType === 'List NFT (Indexer)') {
+        outputArrayRow.outAmount='';
+        outputArrayRow.outSymbol='';
+        outputArrayRow.isNftOut=false;
+    } else if (outputArrayRow.xactnType === 'UnList NFT (Indexer)') {
+        outputArrayRow.inAmount='';
+        outputArrayRow.inSymbol='';
+        outputArrayRow.isNftIn=false;
+    } else if (outputArrayRow.xactnType === 'Buy/Sell (Indexer)') {
+        if (!outputArrayRow.isNftIn) {
+            let nftContractName=xactn.tx.contract_call.function_args[0].repr;
+            let nftItemNumber='#'+xactn.tx.contract_call.function_args[1].repr.substring(1);
+            let periodLoc=nftContractName.indexOf('.');
+            outputArrayRow.xactnType='Swap NFT for Coin';
+            outputArrayRow.outAmount=1;
+            outputArrayRow.outSymbol=nftContractName.substring(periodLoc+1)+nftItemNumber;
+            outputArrayRow.isNftOut=true;
+        } else {
+            outputArrayRow.xactnType='Swap Coin for NFT';
+        }
+
+
+        //console.log(nftContractName.substring(periodLoc+1)+nftItemNumber,isNftIn);
+    }
     return outputArrayRow;
 }
 

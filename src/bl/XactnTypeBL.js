@@ -40,9 +40,14 @@ export function getXactnTypeDetail(xactn,outputArrayRow){
   let xactnTypeDetail='';
   let xactnTypes =filterXactnTypes(xactn,outputArrayRow);
 
-  if (xactnTypes.length>0 && xactnTypes[0].XactnTypeDetail !=='')
-  {
+  if (xactnTypes.length>0 && xactnTypes[0].XactnTypeDetail !==''){
     xactnTypeDetail = xactnTypes[0].XactnTypeDetail;
+     //This is for NFT Listings which leave the wallet, like Indexer
+     if (xactnTypeDetail === 'List NFT on Indexer') {
+       xactnTypeDetail=outputArrayRow.outSymbol;
+     } else if (xactnTypeDetail === 'UnList NFT on Indexer') {
+      xactnTypeDetail=outputArrayRow.inSymbol;
+     }
   } else if(xactn?.tx?.token_transfer?.memo ) {
     let memo = hexToAscii(xactn.tx.token_transfer.memo.substring(2)).trim();
     xactnTypeDetail = memo.length > 0 ? `'${memo}'`: '';
@@ -148,4 +153,3 @@ function matchNotOutSymbol(filterNotOutSymbol,outSymbol) {
       return false;
     }
 }
-
