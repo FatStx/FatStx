@@ -199,6 +199,10 @@ export class XactnType {
       {id:2103,XactnId:'0x7bee065f66c15d5821db5af94bc1aa8b3e969b7ec688d6fb5706c31b379800da',XactnType:'', XactnTypeDetail:'BTC Sports Flag Payout France',contract:'',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},      
       {id:2104,XactnId:'0x350d139053637f5972a484ac3724e019f23ea7d54864f0dd8b404ac4b70413f5',XactnType:'', XactnTypeDetail:'BTC Sports Flag Payout Croatia',contract:'',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
 
+      //Satoshibles
+      {id:2200,XactnId:'',XactnType:'', XactnTypeDetail:'Satoshibles',contract:'SP6P4EJF0VG8V0RB3TQQKJBHDQKEF6NVRD1KZE3C.satoshibles',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:2201,XactnId:'',XactnType:'', XactnTypeDetail:'Satoshibles Monsters',contract:'SP6P4EJF0VG8V0RB3TQQKJBHDQKEF6NVRD1KZE3C.monster-satoshibles',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+
       // Friedger Pools
       {id:3000,XactnId:'',XactnType:'Stacking Reward', XactnTypeDetail:'Friedger Pool',contract:'',function:'',senderAddress:'SPFP0018FJFD82X3KCKZRGJQZWRCV9793QTGE87M',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
     ];
