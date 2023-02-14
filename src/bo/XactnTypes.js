@@ -92,6 +92,12 @@ export class XactnType {
       {id:261,XactnId:'',XactnType:'', XactnTypeDetail:'MIA Stack Coins',contract:'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1',function:'stack-tokens',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:262,XactnId:'',XactnType:'Convert CC to V2', XactnTypeDetail:'MIAMI Coin',contract:'SP1H1733V5MZ3SZ9XRW9FKYGEZT0JDGEB8Y634C7R.miamicoin-token-v2',function:'convert-to-v2',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:263,XactnId:'',XactnType:'Convert CC to V2', XactnTypeDetail:'NYC Coin',contract:'SPSCWDV3RKV5ZRN1FQD84YE1NQFEDJ9R1F4DYQ11.newyorkcitycoin-token-v2',function:'convert-to-v2',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},      
+      {id:264,XactnId:'',XactnType:'Mined', XactnTypeDetail:'NYC Mining Reward',contract:'SPSCWDV3RKV5ZRN1FQD84YE1NQFEDJ9R1F4DYQ11.newyorkcitycoin-core-v2',function:'claim-mining-reward',senderAddress:'',recipientAddress:'',inSymbol:'NYCv2',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:265,XactnId:'',XactnType:'Mined', XactnTypeDetail:'MIA Mining Reward',contract:'SP1H1733V5MZ3SZ9XRW9FKYGEZT0JDGEB8Y634C7R.miamicoin-core-v2',function:'claim-mining-reward',senderAddress:'',recipientAddress:'',inSymbol:'MIAv2',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:250,XactnId:'',XactnType:'Dispose', XactnTypeDetail:'NYC Mining Commitment',contract:'SPSCWDV3RKV5ZRN1FQD84YE1NQFEDJ9R1F4DYQ11.newyorkcitycoin-core-v2',function:'mine-many',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
+      {id:251,XactnId:'',XactnType:'Dispose', XactnTypeDetail:'NYC Mining Commitment',contract:'SPSCWDV3RKV5ZRN1FQD84YE1NQFEDJ9R1F4DYQ11.newyorkcitycoin-core-v2',function:'mine-tokens',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
+      {id:252,XactnId:'',XactnType:'Dispose', XactnTypeDetail:'MIA Mining Commitment',contract:'SP1H1733V5MZ3SZ9XRW9FKYGEZT0JDGEB8Y634C7R.miamicoin-core-v2',function:'mine-many',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
+      {id:253,XactnId:'',XactnType:'Dispose', XactnTypeDetail:'MIA Mining Commitment',contract:'SP1H1733V5MZ3SZ9XRW9FKYGEZT0JDGEB8Y634C7R.miamicoin-core-v2',function:'mine-tokens',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'STX',notOutSymbol:''},
 
       //OkCoin
       {id:300,XactnId:'',XactnType:'', XactnTypeDetail:'OkCoin Xfer',contract:'',function:'',senderAddress:'SP17H4TSCP2JYBF45HEZGGF3N66VRPXQZW4EBVAAV',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
@@ -120,6 +126,8 @@ export class XactnType {
       //Misc
       {id:650,XactnId:'',XactnType:'Refund', XactnTypeDetail:'Ryder',contract:'SPC0KWNBJ61BDZRPF3W2GHGK3G3GKS8WZ7ND33PS.support-refunds-v1',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:651,XactnId:'',XactnType:'PreOrder Name', XactnTypeDetail:'Ryder',contract:'SPC0KWNBJ61BDZRPF3W2GHGK3G3GKS8WZ7ND33PS.ryder-handles-controller-v1',function:'name-preorder',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:652,XactnId:'',XactnType:'Pre-Order BNS Name', XactnTypeDetail:'',contract:'SP000000000000000000002Q6VF78.bns',function:'name-preorder',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:652,XactnId:'',XactnType:'Register BNS Name', XactnTypeDetail:'',contract:'SP000000000000000000002Q6VF78.bns',function:'name-register',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},            
 
 
       //NFTs GENERAL 
@@ -128,7 +136,8 @@ export class XactnType {
       {id:1002,XactnId:'',XactnType:'', XactnTypeDetail:'New York Degens',contract:'SP1SCEXE6PMGPAC6B4N5P2MDKX8V4GF9QDE1FNNGJ.nyc-degens',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:1003,XactnId:'',XactnType:'', XactnTypeDetail:'Miami Degens',contract:'SP1SCEXE6PMGPAC6B4N5P2MDKX8V4GF9QDE1FNNGJ.miami-degens',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:1004,XactnId:'',XactnType:'', XactnTypeDetail:'Project Indigo Act 1',contract:'SP176ZMV706NZGDDX8VSQRGMB7QN33BBDVZ6BMNHD.project-indigo-act1',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
-      {id:1005,XactnId:'',XactnType:'', XactnTypeDetail:'Vaping Apes',contract:'SP2RFR92YDK6JBZQ9FTKYBYSQWEW447N9N6SZKFSV.vaping-ape',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},      
+      {id:1005,XactnId:'',XactnType:'', XactnTypeDetail:'Vaping Apes',contract:'SP2RFR92YDK6JBZQ9FTKYBYSQWEW447N9N6SZKFSV.vaping-ape',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:1006,XactnId:'',XactnType:'List NFT', XactnTypeDetail:'',contract:'',function:'list-in-ustx',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},      
       
       
       //Stacks Parrots
