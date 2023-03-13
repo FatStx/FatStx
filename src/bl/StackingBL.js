@@ -1,20 +1,19 @@
 import { MIAStackingList } from '../bo/cityarrays/MiaStackingCycles'
 import { NYCStackingList } from '../bo/cityarrays/NycStackingCycles'
 import { getCurrentBlock, getBlockTime} from '../api/StxApi'
-//import  getPricesInUSDT  from './PopulateCoinPrices'
-//import { getBananasPendingHarvest } from './MonkeyBL';
+import { getUserIdForPrincipal,getStackerForUserId} from '../api/CityCoinsProtocolApi'
+import { getLatestBitcoinBlock} from '../api/MiscApis'
+const FIRST_STACKING_BLOCK = 666050;
+const REWARD_CYCLE_LENGTH = 2100;
 
-export default async function convertJsonToStackingReportArray(json,symbol,isNewContract) {
-//    getPricesInUSDT('DIKO',true);
+export default async function convertJsonToStackingReportArray(json,symbol,version) {
     let outputArray = getStackingListArray(symbol);
-    let coinContract=getCoinSmartContractAddress(symbol,isNewContract);
-    //let runningTotal=await getBananasPendingHarvest();
-    //console.log(runningTotal);
+    let coinContract=getCoinSmartContractAddress(symbol,version);
+
     for (const xactn of json) {
 
         if (xactn.tx.tx_status === 'success' && xactn.tx.contract_call !== undefined && xactn.tx.contract_call.contract_id===coinContract ) {
-            console.log("stacking");
-            outputArray = processTransactionForStacking(outputArray, xactn,isNewContract);
+            outputArray = processTransactionForStacking(outputArray, xactn,version);
         }
     }
 
@@ -23,6 +22,54 @@ export default async function convertJsonToStackingReportArray(json,symbol,isNew
     outputArray = formatStackingResultsForOutput(outputArray);
     return outputArray;
 
+}
+
+export async function getStackingReportArrayV3(walletId,symbol) {
+    let outputArray=[];
+    const userId=1 //await getUserIdForPrincipal(walletId);
+    //TODO: Need to communicate that the user has no stacking
+    if (userId === null) {
+        return outputArray;
+    }
+
+    // const latestBitcoinBlock= await getLatestBitcoinBlock();
+    // if (latestBitcoinBlock === null) {
+    //     return outputArray;
+    // }
+    const latestBitcoinBlock= 780500;
+    let cycle=54;
+    while(cycle<55) {
+        const stackingInfo=await getStackerForUserId(1,cycle,userId);
+        if (stackingInfo === null) break;
+        const startBlock=await getStartBlockForRewardCycle(cycle);
+        const endBlock=await getEndBlockForRewardCycle(cycle);
+        const stackedCoins=parseFloat(stackingInfo.stacked)/1000000;
+        const canClaimCoin=(stackingInfo.claimable ===0)?"No":"Yes";
+        let outputRow={ round: cycle, startBlock: startBlock, endBlock: endBlock, endBlockDate: "", stackedCoins: stackedCoins, claimedRewards: 0, claimDate: "", canClaimCoin: canClaimCoin  };
+        outputArray.push(outputRow);
+        cycle+=1;
+    }
+
+    console.log(outputArray);
+    return outputArray;
+
+}
+
+async function getCurrentRewardCycle(currentBitCoinBlock) {
+    if (!currentBitCoinBlock) {
+        currentBitCoinBlock= await getLatestBitcoinBlock();
+    }
+    const ret = Math.floor((currentBitCoinBlock-FIRST_STACKING_BLOCK)/REWARD_CYCLE_LENGTH)
+    return(ret);
+}
+
+async function getStartBlockForRewardCycle(targetCycle) {
+    return (FIRST_STACKING_BLOCK+(REWARD_CYCLE_LENGTH*targetCycle));
+}
+
+async function getEndBlockForRewardCycle(targetCycle) {
+    const res= await getStartBlockForRewardCycle(targetCycle+1)-1;
+    return res;
 }
 
 
@@ -37,18 +84,20 @@ function getStackingListArray(symbol) {
     return stackingListArray;
 }
 
-function getCoinSmartContractAddress(symbol,isNewContract)
+function getCoinSmartContractAddress(symbol,version)
 {
     let coinContract;
-    if (symbol==='MIA') {
+    if (version === 'v3') {
+        coinContract ='SP8A9HZ3PKST0S42VM9523Z9NV42SZ026V4K39WH.ccd007-citycoin-stacking'
+    } else if (symbol==='MIA') {
 
-        if (isNewContract===true) {
+        if (version==='v2') {
             coinContract = 'SP1H1733V5MZ3SZ9XRW9FKYGEZT0JDGEB8Y634C7R.miamicoin-core-v2';
         } else {
             coinContract = 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1';
         }
     } else {
-        if (isNewContract===true) {
+        if (version==='v2') {
             coinContract = 'SPSCWDV3RKV5ZRN1FQD84YE1NQFEDJ9R1F4DYQ11.newyorkcitycoin-core-v2';
         } else {
             coinContract = 'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1';
@@ -57,21 +106,21 @@ function getCoinSmartContractAddress(symbol,isNewContract)
     return coinContract;
 }
 
-function processTransactionForStacking(outputArray,xactn,isNewContract) {
+function processTransactionForStacking(outputArray,xactn,version) {
     const functionName=xactn.tx.contract_call===undefined?'':xactn.tx.contract_call.function_name;
     const blockHeight=xactn.tx.block_height;
 
-    if (functionName==='stack-tokens') {
-        outputArray=processStackTokensTransaction(outputArray,xactn,blockHeight,isNewContract);
+    if (functionName==='stack-tokens' || functionName==='stack') {
+        outputArray=processStackTokensTransaction(outputArray,xactn,blockHeight,version);
     } else if (functionName==="claim-stacking-reward") {
-        outputArray=processClaimTransaction(outputArray,xactn,blockHeight,isNewContract);
+        outputArray=processClaimTransaction(outputArray,xactn,blockHeight,version);
     } 
 
     return outputArray;
 }
 
 //Process a stack-tokens transaction
-function processStackTokensTransaction(outputArray,xactn,blockHeight,isNewContract){
+function processStackTokensTransaction(outputArray,xactn,blockHeight,version){
 
     let cycleCount=xactn.tx.contract_call.function_args[1].repr.substring(1);
     let firstCycleListRow=outputArray.filter(function(item){
@@ -82,7 +131,7 @@ function processStackTokensTransaction(outputArray,xactn,blockHeight,isNewContra
         let firstCycle=firstCycleListRow.round+1;
         let lastCycle=parseInt(firstCycle)+parseInt(cycleCount)-1;
         let amount=xactn.tx.contract_call.function_args[0].repr.substring(1);
-        if(isNewContract){
+        if(!(version === 'v1')){
             amount=parseFloat(amount)/1000000;
         }
 
@@ -106,7 +155,7 @@ function applyStackTokensTransaction(outputArray,amount,firstCycle,lastCycle){
 
 //Process a claim-stacking-reward transaction, including applying to list
 //Currently only checking STX rewards, not coins being returned
-function processClaimTransaction(outputArray,xactn,blockHeight,isNewContract){
+function processClaimTransaction(outputArray,xactn){
 
     const rewardsCycle=xactn.tx.contract_call.function_args[0].repr.substring(1);
     console.log(xactn);

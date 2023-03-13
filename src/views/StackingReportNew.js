@@ -78,7 +78,7 @@ export default function StackingReportNew(props) {
         alert("There have been one or more errors connecting to Stacks to obtain your data. Normally this is due to problems with either the network or the APIs. Please try again in a few minutes.");
       } else {
         let json=apiResults[1];
-        let outputArray = await convertJsonToStackingReportArray(json,coin,true);
+        let outputArray = await convertJsonToStackingReportArray(json,coin,'v2');
         setStackDataNew(outputArray)
         console.log(json, outputArray)
       }
