@@ -19,6 +19,7 @@ import Snackbar from '@mui/material/Snackbar';
 import Grid from '@mui/material/Grid';
 
 import TxReport from './TxReport'
+import StackingReportV3 from './StackingReportv3'
 import StackingReport from './StackingReport'
 import WenBlok from './WenBlok'
 import Disclaimer from './Disclaimer'
@@ -34,6 +35,7 @@ function Home() {
   const [txnData, setTxnData] = useState([]);
   const [stackData, setStackData] = useState([]);
   const [stackDataNew, setStackDataNew] = useState([]);
+  const [stackDataV3, setStackDataV3] = useState([]);
   const [coin, setCoin] = useState('');
   const [year, setYear] = useState('2023');
   const [currency, setCurrency] = useState('USD');
@@ -191,6 +193,16 @@ function Home() {
                       color="inherit"
                       underline="hover"
                       component={RouterLink}
+                      to="/stackingv3"
+                      sx={{ my: 1, mx: 1.5 }}
+                    >
+                      Stacking (v3)
+                    </Link>                    
+                    <Link
+                      variant="button"
+                      color="inherit"
+                      underline="hover"
+                      component={RouterLink}
                       to="/wenblok"
                       sx={{ my: 1, mx: 1.5 }}
                     >
@@ -305,8 +317,33 @@ function Home() {
                     />
                   } 
                 />
+                <Route path="stackingv3" 
+                  element={
+                    <StackingReportV3 
+                      walletId = {walletId}
+                      setWalletId = {setWalletId}
+                      stackDataV3 = {stackDataV3} 
+                      setStackDataV3 = {setStackDataV3}
+                      coin = {coin}
+                      setCoin = {setCoin}
+                    />
+                  } 
+                />
 
-                <Route path="wenblok" element={<WenBlok />} />
+                <Route path="stackingv3/:walletInPath" 
+                  element={
+                    <StackingReportV3 
+                      walletId = {walletId}
+                      setWalletId = {setWalletId}
+                      stackDataV3 = {stackDataV3} 
+                      setStackDataV3 = {setStackDataV3}
+                      coin = {coin}
+                      setCoin = {setCoin}
+                    />
+                  } 
+                />
+
+                <Route path="wenblok" element={<WenBlok />} />                
                 <Route path="disclaimer" element={<Disclaimer />} />
                 <Route path="about" element={<Disclaimer />} />
                 <Route path="faq" element={<Faq />} />

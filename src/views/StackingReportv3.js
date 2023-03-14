@@ -21,21 +21,22 @@ import Backdrop from '@mui/material/Backdrop';
 import DotLoader from "react-spinners/DotLoader";
 
 import Title from '../components/Title';
-import processAllXactnWithTransfersApiPages, { checkWallet } from '../api/StxApi'
-import convertJsonToStackingReportArray from '../bl/StackingBL'
+import Stacking from '../components/Stacking';
+import {checkWallet} from '../api/StxApi'
+import getStackingReportArrayV3 from '../bl/StackingV3BL'
 
-export default function StackingReport(props) {
+export default function StackingReportV3(props) {
 
   const {walletInPath} = useParams();
 
   let walletId = props.walletId
   let setWalletId = props.setWalletId
-  let stackData = props.stackData
-  let setStackData = props.setStackData
+  let stackDataV3 = props.stackDataV3
+  let setStackDataV3 = props.setStackDataV3
   let coin = props.coin
   let setCoin = props.setCoin
   
-  ReactGA.send({ hitType: "pageview", page: "/stacking" });
+  ReactGA.send({ hitType: "pageview", page: "/stackingnew" });
 
   const [spinnerVisible, setSpinnerVisible] = useState(false);
 
@@ -73,15 +74,8 @@ export default function StackingReport(props) {
 
       ReactGA.send({ hitType: "pageview", page: "/transactions" });
 
-      let apiResults = await processAllXactnWithTransfersApiPages(walletId);
-      if (apiResults[0]) {
-        alert("There have been one or more errors connecting to Stacks to obtain your data. Normally this is due to problems with either the network or the APIs. Please try again in a few minutes.");
-      } else {
-        let json=apiResults[1];
-        let outputArray = await convertJsonToStackingReportArray(json,coin,'v1');
-        setStackData(outputArray)
-        console.log(json, outputArray)
-      }
+      let outputArray = await getStackingReportArrayV3(walletId,coin);
+      setStackDataV3(outputArray)
 
       setSpinnerVisible(false)
 
@@ -145,55 +139,8 @@ export default function StackingReport(props) {
               </Grid>
           </Paper>
         </Grid>
-
-        {/* Transactions*/}
-        <Grid item xs={12}>
-          <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-
-          <Backdrop open={spinnerVisible}>
-            <DotLoader  color="#ffffff" loading={true}  size={120} />
-          </Backdrop>
-          <Title>Stacking Report (v1)</Title>
-          <Table size="small">
-
-            <colgroup>
-              <col style={{width:'5%'}}/>
-              <col style={{width:'10%'}}/>
-              <col style={{width:'10%'}}/>
-              <col style={{width:'15%'}}/>
-              <col style={{width:'15%'}}/>
-              <col style={{width:'15%'}}/>
-              <col style={{width:'20%'}}/>
-            </colgroup>
-
-            <TableHead>
-              <TableRow>
-                <TableCell>Cycle</TableCell>
-                <TableCell>Start Block</TableCell>
-                <TableCell>End Block</TableCell>
-                <TableCell>End Block Dt</TableCell>
-                <TableCell>Stacked Amt</TableCell>
-                <TableCell>STX Claimed</TableCell>
-                <TableCell>Claim Date/Time</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {stackData.map((row) => (
-                <TableRow key={row.round}>
-                  <TableCell>{row.round}</TableCell>
-                  <TableCell>{row.startBlock}</TableCell>
-                  <TableCell>{row.endBlock}</TableCell>
-                  <TableCell>{row.endBlockDate}</TableCell>
-                  <TableCell>{row.stackedCoins}</TableCell>
-                  <TableCell>{row.claimedRewards>0?row.claimedRewards:row.canClaimCoin}</TableCell>
-                  <TableCell>{row.claimDate}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-            </Table>
-          </Paper>
-        </Grid>
-      </Grid>
+        <Stacking stackDataV3={stackDataV3} spinnerVisible={spinnerVisible} />
+       </Grid>
     </Container>
   )
 }

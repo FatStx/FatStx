@@ -16,6 +16,39 @@ export default async function processAllXactnWithTransfersApiPages(walletId, yea
 
 }
 
+export async function processXactnWithTransfersApiPagesSinceStartBlock(walletId, startBlock) {
+
+    console.log(Date.now() + `===Process All Api Pages Since Block ${startBlock}===`);
+    let runningJson=[];
+    let apiResult = await processOneXactnWithTransfersApiPage(0, walletId);
+    let isApiError= false;
+    if (apiResult[0] === 200) {
+        let filterResults=filterBlocks(apiResult[1].results,startBlock);
+        runningJson=filterResults[1];
+        if (!filterResults[0]) {
+            let totalTransactions = apiResult[1].total;
+            //Loop Through all results after getting first page
+            for (let i = 50; i <= totalTransactions; i += 50) {
+                apiResult = await processOneXactnWithTransfersApiPage(i, walletId);
+                if (apiResult[0] === 200) {
+                    filterResults=filterBlocks(apiResult[1].results,startBlock);
+                    runningJson = runningJson.concat(filterResults[1]);
+                    if (filterResults[0]) {
+                        break;
+                    }
+                } else {
+                    isApiError=true;
+                    break;
+                }
+            }
+        }
+    } else {
+        isApiError=true;
+    }
+
+    return [isApiError,runningJson];
+}
+
 export async function processXactnWithTransfersApiPagesForDateRange(walletId, startDate,endDate) {
 
     console.log(Date.now() + " ===Process All Api Pages===");
@@ -178,6 +211,27 @@ function filterDates(json,startDate,endDate) {
 
     if (isAfterStartDate) {
         isComplete=false;
+    }
+    return [isComplete,outputArray];
+}
+
+function filterBlocks(json,startBlock) {
+    let outputArray = [];
+    let isComplete=false;
+    let isBeforeStartBlock=false;
+    for (const xactn of json) {
+        let blockHeight= xactn.tx.block_height;
+        let isBeforeStartBlock=parseInt(startBlock)>parseInt(blockHeight);
+        if (!isBeforeStartBlock)
+        {
+            outputArray.push(xactn);
+        } else {
+            break;
+        }
+    }
+
+    if (isBeforeStartBlock) {
+        isComplete=true;
     }
     return [isComplete,outputArray];
 }
