@@ -17,7 +17,7 @@ export default function Stacking({stackDataV3,spinnerVisible}) {
   } else if (typeof stackDataV3[0].round === "undefined") {
     return (
 
-      <div class="no-data-message">{stackDataV3[0].message}</div>
+      <div className="no-data-message">{stackDataV3[0].message}</div>
     );
   }
               

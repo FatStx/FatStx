@@ -3,7 +3,7 @@ import { getLatestBitcoinBlock,getBitcoinBlockTimes} from '../api/MiscApis'
 import { filterStackingResultsForOutput,formatStackingResultsForOutput,createOutputRow} from './StackingSharedBL'
 const FIRST_STACKING_BLOCK = 666050;
 const REWARD_CYCLE_LENGTH = 2100;
-const coinContract ='SP8A9HZ3PKST0S42VM9523Z9NV42SZ026V4K39WH.ccd007-citycoin-stacking'
+//const coinContract ='SP8A9HZ3PKST0S42VM9523Z9NV42SZ026V4K39WH.ccd007-citycoin-stacking'
 
 // async sleep timer
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -83,13 +83,13 @@ function canClaimCoinForCycle(claimable,latestBitcoinBlock,endBlock) {
     }
 }
 
-async function getCurrentRewardCycle(currentBitCoinBlock) {
-    if (!currentBitCoinBlock) {
-        currentBitCoinBlock= await getLatestBitcoinBlock();
-    }
-    const ret = Math.floor((currentBitCoinBlock-FIRST_STACKING_BLOCK)/REWARD_CYCLE_LENGTH)
-    return(ret);
-}
+// async function getCurrentRewardCycle(currentBitCoinBlock) {
+//     if (!currentBitCoinBlock) {
+//         currentBitCoinBlock= await getLatestBitcoinBlock();
+//     }
+//     const ret = Math.floor((currentBitCoinBlock-FIRST_STACKING_BLOCK)/REWARD_CYCLE_LENGTH)
+//     return(ret);
+// }
 
 async function getStartBlockForBitcoinRewardCycle(targetCycle) {
     return (FIRST_STACKING_BLOCK+(REWARD_CYCLE_LENGTH*targetCycle));
@@ -99,70 +99,3 @@ async function getEndBlockForBitcoinRewardCycle(targetCycle) {
     const res= await getStartBlockForBitcoinRewardCycle(targetCycle+1)-1;
     return res;
 }
-
-
-
-function processTransactionForStacking(outputArray,xactn,version) {
-    const functionName=xactn.tx.contract_call===undefined?'':xactn.tx.contract_call.function_name;
-    const blockHeight=xactn.tx.block_height;
-
-    if (functionName==='stack-tokens' || functionName==='stack') {
-        outputArray=processStackTokensTransaction(outputArray,xactn,blockHeight,version);
-    } else if (functionName==="claim-stacking-reward") {
-        outputArray=processClaimTransaction(outputArray,xactn,blockHeight,version);
-    } 
-
-    return outputArray;
-}
-
-//Process a stack-tokens transaction
-function processStackTokensTransaction(outputArray,xactn,blockHeight,version){
-
-    let cycleCount=xactn.tx.contract_call.function_args[1].repr.substring(1);
-    let firstCycleListRow=outputArray.filter(function(item){
-        return (item.startBlock<=blockHeight && item.endBlock>=blockHeight);
-    })[0];
-    
-    if (firstCycleListRow!==undefined) {
-        let firstCycle=firstCycleListRow.round+1;
-        let lastCycle=parseInt(firstCycle)+parseInt(cycleCount)-1;
-        let amount=xactn.tx.contract_call.function_args[0].repr.substring(1);
-        if(!(version === 'v1')){
-            amount=parseFloat(amount)/1000000;
-        }
-
-        console.log(Date.now()+' Stacked ' + amount + ' CityCoins from cycle ' + firstCycle + ' to ' + lastCycle);
-        outputArray=applyStackTokensTransaction(outputArray,amount,firstCycle,lastCycle)
-    }
-    return outputArray;
-}
-
-//Apply stack-tokens transaction to the list
-function applyStackTokensTransaction(outputArray,amount,firstCycle,lastCycle){
-    for (let i = firstCycle; i <=lastCycle ; i++) {
-        outputArray[i].stackedCoins=parseInt(outputArray[i].stackedCoins)+parseInt(amount);
-        outputArray[i].canClaimCoin=
-            i===lastCycle || outputArray[i].canClaimCoin==='STX+Coin'
-                ?'STX+Coin'
-                :'STX Only';
-    }
-    return outputArray;
-}
-
-//Process a claim-stacking-reward transaction, including applying to list
-//Currently only checking STX rewards, not coins being returned
-function processClaimTransaction(outputArray,xactn){
-
-    const rewardsCycle=xactn.tx.contract_call.function_args[0].repr.substring(1);
-    console.log(xactn);
-    const rawAmount=xactn.stx_received;
-
-    const rewardsAmount= parseInt(rawAmount)/1000000;
-            outputArray[rewardsCycle].claimedRewards=rewardsAmount;
-            outputArray[rewardsCycle].claimDate=xactn.tx.burn_block_time_iso;
-            console.log(Date.now()+' Claimed ' + rewardsAmount + 'STX from this cycle');
-
-    return outputArray;
-}
-
-

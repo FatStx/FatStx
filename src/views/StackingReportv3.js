@@ -12,15 +12,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Backdrop from '@mui/material/Backdrop';
-import DotLoader from "react-spinners/DotLoader";
-
-import Title from '../components/Title';
 import Stacking from '../components/Stacking';
 import {checkWallet} from '../api/StxApi'
 import getStackingReportArrayV3 from '../bl/StackingV3BL'
