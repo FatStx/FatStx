@@ -1,5 +1,6 @@
 import { getUserIdForPrincipal,getStackerForUserId} from '../api/CityCoinsProtocolApi'
 import { getLatestBitcoinBlock,getBitcoinBlockTimes} from '../api/MiscApis'
+import { filterStackingResultsForOutput,formatStackingResultsForOutput,createOutputRow} from './StackingSharedBL'
 const FIRST_STACKING_BLOCK = 666050;
 const REWARD_CYCLE_LENGTH = 2100;
 const coinContract ='SP8A9HZ3PKST0S42VM9523Z9NV42SZ026V4K39WH.ccd007-citycoin-stacking'
@@ -11,20 +12,24 @@ export default async function getStackingReportArrayV3(walletId,symbol) {
     let outputArray=[];
     const userId=await getUserIdForPrincipal(walletId);
     await sleep(500);
-    //TODO: Need to communicate that the user has no stacking
-    if (userId === null) return outputArray;
+    if (userId === null) {
+        outputArray.push({message: 'User has never stacked City Coins with the V3 contract'});
+        return outputArray;
+    }
     const latestBitcoinBlock= await getLatestBitcoinBlock();
     if (latestBitcoinBlock === null) {
+        outputArray.push({message: 'Unexpected error trying to obtain latest bitcoin block. Please refresh browser and try again in several minutes'});        
         return outputArray;
     }
 
     let cycle=54;
     var cyclesToCheckTimeStamp = [];
-    while(cycle<65) {
+    while(cycle<100) {
         const stackingInfo=await getStackerForUserId(1,cycle,userId);
         if (stackingInfo === null) break;
-        const startBlock=await getStartBlockForRewardCycle(cycle);
-        const endBlock=await getEndBlockForRewardCycle(cycle);
+        await sleep(500);
+        const startBlock=await getStartBlockForBitcoinRewardCycle(cycle);
+        const endBlock=await getEndBlockForBitcoinRewardCycle(cycle);
         const stackedCoins=parseFloat(stackingInfo.stacked)/1000000;
         const canClaimCoin=canClaimCoinForCycle(stackingInfo.claimable,latestBitcoinBlock,endBlock);
         let endBlockDate="";
@@ -32,18 +37,15 @@ export default async function getStackingReportArrayV3(walletId,symbol) {
         {
             cyclesToCheckTimeStamp.push(endBlock);
         } else {
-            endBlockDate=getFutureBitcoinBlockEndDates(latestBitcoinBlock,endBlock).substring(0, 10);
+            endBlockDate=getFutureBitcoinBlockEndDates(latestBitcoinBlock,endBlock);
         }
-        let outputRow={ round: cycle, 
-            startBlock: startBlock, 
-            endBlock: endBlock, 
-            endBlockDate: endBlockDate,
-            stackedCoins: stackedCoins, 
-            claimedRewards: 0, 
-            claimDate: "", 
-            canClaimCoin: canClaimCoin  };
+        let outputRow=createOutputRow(cycle,startBlock,endBlock,endBlockDate,stackedCoins,0,"",canClaimCoin);
         outputArray.push(outputRow);        
         cycle+=1;
+    }
+    if (outputArray.length <1) {
+        outputArray.push({message: 'User has never stacked this City Coin with the V3 contract'});
+        return outputArray;
     }
 
     let blockTimes=null;
@@ -54,11 +56,12 @@ export default async function getStackingReportArrayV3(walletId,symbol) {
             const rowTimeStampListRow=blockTimes.filter(function(item){
                 return (item.height === arrayRow.endBlock);
             })[0];
-            arrayRow.endBlockDate = rowTimeStampListRow.timestamp.toISOString().substring(0, 10);
+            arrayRow.endBlockDate = rowTimeStampListRow.timestamp.toISOString();
         }
     }
-
-    console.log(outputArray);
+    outputArray = filterStackingResultsForOutput(outputArray);
+    outputArray = formatStackingResultsForOutput(outputArray);
+//    console.log(outputArray);
     return outputArray;
 
 }
@@ -88,14 +91,16 @@ async function getCurrentRewardCycle(currentBitCoinBlock) {
     return(ret);
 }
 
-async function getStartBlockForRewardCycle(targetCycle) {
+async function getStartBlockForBitcoinRewardCycle(targetCycle) {
     return (FIRST_STACKING_BLOCK+(REWARD_CYCLE_LENGTH*targetCycle));
 }
 
-async function getEndBlockForRewardCycle(targetCycle) {
-    const res= await getStartBlockForRewardCycle(targetCycle+1)-1;
+async function getEndBlockForBitcoinRewardCycle(targetCycle) {
+    const res= await getStartBlockForBitcoinRewardCycle(targetCycle+1)-1;
     return res;
 }
+
+
 
 function processTransactionForStacking(outputArray,xactn,version) {
     const functionName=xactn.tx.contract_call===undefined?'':xactn.tx.contract_call.function_name;
@@ -158,24 +163,6 @@ function processClaimTransaction(outputArray,xactn){
             console.log(Date.now()+' Claimed ' + rewardsAmount + 'STX from this cycle');
 
     return outputArray;
-}
-
-function filterStackingResultsForOutput(outputArray) {
-    return outputArray.filter(function(item){return (item.stackedCoins>0);}).sort((a) => parseInt(a.endBlock))
-}
-
-function formatStackingResultsForOutput(outputArray) {
-    for (var stackingRound of outputArray) {
-        if(stackingRound.claimDate!=='')
-        {
-            stackingRound.claimDate=new Date(stackingRound.claimDate).toLocaleString([],{year: "numeric", month: "2-digit", day: "2-digit",hour: "2-digit", minute:"2-digit"});
-        }
-        if(stackingRound.endBlockDate!=='')
-        {
-            stackingRound.endBlockDate=new Date(stackingRound.endBlockDate).toLocaleString([],{year: "numeric", month: "2-digit", day: "2-digit"});
-        }
-    }
-    return outputArray
 }
 
 

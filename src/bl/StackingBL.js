@@ -1,13 +1,7 @@
 import { MIAStackingList } from '../bo/cityarrays/MiaStackingCycles'
 import { NYCStackingList } from '../bo/cityarrays/NycStackingCycles'
 import { getCurrentBlock, getBlockTime} from '../api/StxApi'
-import { getUserIdForPrincipal,getStackerForUserId} from '../api/CityCoinsProtocolApi'
-import { getLatestBitcoinBlock,getBitcoinBlockTimes} from '../api/MiscApis'
-const FIRST_STACKING_BLOCK = 666050;
-const REWARD_CYCLE_LENGTH = 2100;
-
-// async sleep timer
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+import { filterStackingResultsForOutput,formatStackingResultsForOutput} from './StackingSharedBL'
 
 export default async function convertJsonToStackingReportArray(json,symbol,version) {
     let outputArray = getStackingListArray(symbol);
@@ -26,97 +20,6 @@ export default async function convertJsonToStackingReportArray(json,symbol,versi
     return outputArray;
 
 }
-
-export async function getStackingReportArrayV3(walletId,symbol) {
-    let outputArray=[];
-    const userId=await getUserIdForPrincipal(walletId);
-    await sleep(500);
-    //TODO: Need to communicate that the user has no stacking
-    if (userId === null) return outputArray;
-    const latestBitcoinBlock= await getLatestBitcoinBlock();
-    if (latestBitcoinBlock === null) {
-        return outputArray;
-    }
-
-    let cycle=54;
-    var cyclesToCheckTimeStamp = [];
-    while(cycle<65) {
-        const stackingInfo=await getStackerForUserId(1,cycle,userId);
-        if (stackingInfo === null) break;
-        const startBlock=await getStartBlockForRewardCycle(cycle);
-        const endBlock=await getEndBlockForRewardCycle(cycle);
-        const stackedCoins=parseFloat(stackingInfo.stacked)/1000000;
-        const canClaimCoin=canClaimCoinForCycle(stackingInfo.claimable,latestBitcoinBlock,endBlock);
-        let endBlockDate="";
-        if (endBlock<=latestBitcoinBlock)
-        {
-            cyclesToCheckTimeStamp.push(endBlock);
-        } else {
-            endBlockDate=getFutureBitcoinBlockEndDates(latestBitcoinBlock,endBlock).substring(0, 10);
-        }
-        let outputRow={ round: cycle, 
-            startBlock: startBlock, 
-            endBlock: endBlock, 
-            endBlockDate: endBlockDate,
-            stackedCoins: stackedCoins, 
-            claimedRewards: 0, 
-            claimDate: "", 
-            canClaimCoin: canClaimCoin  };
-        outputArray.push(outputRow);        
-        cycle+=1;
-    }
-
-    let blockTimes=null;
-    if (cyclesToCheckTimeStamp.length>0)
-    {
-        blockTimes= await getBitcoinBlockTimes(cyclesToCheckTimeStamp.join(','));
-        for (const arrayRow of outputArray) {
-            const rowTimeStampListRow=blockTimes.filter(function(item){
-                return (item.height === arrayRow.endBlock);
-            })[0];
-            arrayRow.endBlockDate = rowTimeStampListRow.timestamp.toISOString().substring(0, 10);
-        }
-    }
-
-    console.log(outputArray);
-    return outputArray;
-
-}
-
-function getFutureBitcoinBlockEndDates(currentBitCoinBlock,targetBlock) {
-    const currentDate = new Date().toISOString();
-    let minutestoAdd=parseInt(targetBlock-currentBitCoinBlock)*10;
-    let blockTime=new Date((new Date(currentDate)).getTime() + (minutestoAdd* 60 * 1000));
-    return blockTime.toISOString();
-}
-
-function canClaimCoinForCycle(claimable,latestBitcoinBlock,endBlock) {
-    if (latestBitcoinBlock<=endBlock) {
-        return "No";
-    } else if (claimable !== 0) {
-        return "Yes";
-    } else {
-        return "No";
-    }
-}
-
-async function getCurrentRewardCycle(currentBitCoinBlock) {
-    if (!currentBitCoinBlock) {
-        currentBitCoinBlock= await getLatestBitcoinBlock();
-    }
-    const ret = Math.floor((currentBitCoinBlock-FIRST_STACKING_BLOCK)/REWARD_CYCLE_LENGTH)
-    return(ret);
-}
-
-async function getStartBlockForRewardCycle(targetCycle) {
-    return (FIRST_STACKING_BLOCK+(REWARD_CYCLE_LENGTH*targetCycle));
-}
-
-async function getEndBlockForRewardCycle(targetCycle) {
-    const res= await getStartBlockForRewardCycle(targetCycle+1)-1;
-    return res;
-}
-
 
 function getStackingListArray(symbol) {
     let stackingListArray;
@@ -234,23 +137,3 @@ async function populateFutureBlockEndDates(outputArray)
 
     return outputArray;
 }
-
-function filterStackingResultsForOutput(outputArray) {
-    return outputArray.filter(function(item){return (item.stackedCoins>0);}).sort((a) => parseInt(a.endBlock))
-}
-
-function formatStackingResultsForOutput(outputArray) {
-    for (var stackingRound of outputArray) {
-        if(stackingRound.claimDate!=='')
-        {
-            stackingRound.claimDate=new Date(stackingRound.claimDate).toLocaleString([],{year: "numeric", month: "2-digit", day: "2-digit",hour: "2-digit", minute:"2-digit"});
-        }
-        if(stackingRound.endBlockDate!=='')
-        {
-            stackingRound.endBlockDate=new Date(stackingRound.endBlockDate).toLocaleString([],{year: "numeric", month: "2-digit", day: "2-digit"});
-        }
-    }
-    return outputArray
-}
-
-
