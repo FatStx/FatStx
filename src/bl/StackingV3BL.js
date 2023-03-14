@@ -24,11 +24,19 @@ export default async function getStackingReportArrayV3(walletId,symbol) {
     }
 
     let cycle=54;
+    const currentCycle=await getCurrentRewardCycle(latestBitcoinBlock);
     var cyclesToCheckTimeStamp = [];
     while(cycle<100) {
         const stackingInfo=await getStackerForUserId(cityId,cycle,userId);
-        if (stackingInfo === null) break;
-        await sleep(500);
+        if (stackingInfo === null) {
+            if (cycle>currentCycle+1) {
+                break;
+            } else {
+                cycle+=1;
+                continue;
+            }
+        }
+        await sleep(1000);
         const startBlock=await getStartBlockForBitcoinRewardCycle(cycle);
         const endBlock=await getEndBlockForBitcoinRewardCycle(cycle);
         const stackedCoins=parseFloat(stackingInfo.stacked)/1000000;
@@ -84,13 +92,13 @@ function canClaimCoinForCycle(claimable,latestBitcoinBlock,endBlock) {
     }
 }
 
-// async function getCurrentRewardCycle(currentBitCoinBlock) {
-//     if (!currentBitCoinBlock) {
-//         currentBitCoinBlock= await getLatestBitcoinBlock();
-//     }
-//     const ret = Math.floor((currentBitCoinBlock-FIRST_STACKING_BLOCK)/REWARD_CYCLE_LENGTH)
-//     return(ret);
-// }
+async function getCurrentRewardCycle(currentBitCoinBlock) {
+    if (!currentBitCoinBlock) {
+        currentBitCoinBlock= await getLatestBitcoinBlock();
+    }
+    const ret = Math.floor((currentBitCoinBlock-FIRST_STACKING_BLOCK)/REWARD_CYCLE_LENGTH)
+    return(ret);
+}
 
 async function getStartBlockForBitcoinRewardCycle(targetCycle) {
     return (FIRST_STACKING_BLOCK+(REWARD_CYCLE_LENGTH*targetCycle));
