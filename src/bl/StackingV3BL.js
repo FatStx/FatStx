@@ -9,6 +9,7 @@ const REWARD_CYCLE_LENGTH = 2100;
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export default async function getStackingReportArrayV3(walletId,symbol) {
+    const cityId=getcityIdForSymbol(symbol);
     let outputArray=[];
     const userId=await getUserIdForPrincipal(walletId);
     await sleep(500);
@@ -25,7 +26,7 @@ export default async function getStackingReportArrayV3(walletId,symbol) {
     let cycle=54;
     var cyclesToCheckTimeStamp = [];
     while(cycle<100) {
-        const stackingInfo=await getStackerForUserId(1,cycle,userId);
+        const stackingInfo=await getStackerForUserId(cityId,cycle,userId);
         if (stackingInfo === null) break;
         await sleep(500);
         const startBlock=await getStartBlockForBitcoinRewardCycle(cycle);
@@ -98,4 +99,12 @@ async function getStartBlockForBitcoinRewardCycle(targetCycle) {
 async function getEndBlockForBitcoinRewardCycle(targetCycle) {
     const res= await getStartBlockForBitcoinRewardCycle(targetCycle+1)-1;
     return res;
+}
+function getcityIdForSymbol(symbol) {
+    if (symbol === 'MIA') {
+        return 1;
+    } else if (symbol === 'NYC') {
+        return 2;
+    }
+    return 0;
 }
