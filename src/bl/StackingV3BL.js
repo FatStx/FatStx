@@ -14,8 +14,11 @@ export default async function getStackingReportArrayV3(walletId,symbol) {
     const userId=await getUserIdForPrincipal(walletId);
     await sleep(500);
     if (userId === null) {
-        outputArray.push({message: 'User has never stacked City Coins with the V3 contract'});
+        outputArray.push({message: 'Unexpected error trying to obtain City Coins data. Please try again in a few minutes.'});
         return outputArray;
+    } else if (userId === 0) {
+        outputArray.push({message: 'User has never stacked City Coins with the V3 contract'});
+        return outputArray;        
     }
     const latestBitcoinBlock= await getLatestBitcoinBlock();
     if (latestBitcoinBlock === null) {
@@ -24,11 +27,15 @@ export default async function getStackingReportArrayV3(walletId,symbol) {
     }
 
     let cycle=54;
+    let errorFlag=false;
     const currentCycle=await getCurrentRewardCycle(latestBitcoinBlock);
     var cyclesToCheckTimeStamp = [];
     while(cycle<100) {
         const stackingInfo=await getStackerForUserId(cityId,cycle,userId);
         if (stackingInfo === null) {
+            errorFlag=true;
+            break;
+        } else if (stackingInfo.stacked < 1) {
             if (cycle>currentCycle+1) {
                 break;
             } else {
@@ -51,6 +58,10 @@ export default async function getStackingReportArrayV3(walletId,symbol) {
         let outputRow=createOutputRow(cycle,startBlock,endBlock,endBlockDate,stackedCoins,0,"",canClaimCoin);
         outputArray.push(outputRow);        
         cycle+=1;
+    }
+    if (errorFlag) {
+        outputArray.push({message: 'Unexpected error checking stacking cycle data. Please try again in a few minutes.'});
+        return outputArray;        
     }
     if (outputArray.length <1) {
         outputArray.push({message: 'User has never stacked this City Coin with the V3 contract'});
