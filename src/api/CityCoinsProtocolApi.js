@@ -13,7 +13,8 @@ export async function getUserIdForPrincipal(principalId) {
 export async function getStackerForUserId(cityId,cycle,userId) {
     let baseUrl = `https://protocol.citycoins.co/api/ccd007-citycoin-stacking/get-stacker?cityId=${cityId}&cycle=${cycle}&userId=${userId}`
     let ret = await processOneApiPage(baseUrl);
-    if (ret[0] === 200) {
+    if (ret[0] === 200 && ret[1].stacked > 0)
+    {
         return ret[1];
     }
     return null;

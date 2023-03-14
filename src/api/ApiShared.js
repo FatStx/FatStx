@@ -6,7 +6,6 @@ export default async function processOneApiPage(url) {
         {
             console.log("Error Fetching API Information",url);
         });
-        console.log(1);
     let json = null;
     let responseStatus=500;
     if (response !== undefined) {

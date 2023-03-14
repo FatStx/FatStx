@@ -22,7 +22,7 @@ import DotLoader from "react-spinners/DotLoader";
 
 import Title from '../components/Title';
 import {checkWallet} from '../api/StxApi'
-import {getStackingReportArrayV3} from '../bl/StackingBL'
+import getStackingReportArrayV3 from '../bl/StackingV3BL'
 
 export default function StackingReportV3(props) {
 

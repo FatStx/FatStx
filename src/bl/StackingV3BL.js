@@ -1,33 +1,13 @@
-import { MIAStackingList } from '../bo/cityarrays/MiaStackingCycles'
-import { NYCStackingList } from '../bo/cityarrays/NycStackingCycles'
-import { getCurrentBlock, getBlockTime} from '../api/StxApi'
 import { getUserIdForPrincipal,getStackerForUserId} from '../api/CityCoinsProtocolApi'
 import { getLatestBitcoinBlock,getBitcoinBlockTimes} from '../api/MiscApis'
 const FIRST_STACKING_BLOCK = 666050;
 const REWARD_CYCLE_LENGTH = 2100;
+const coinContract ='SP8A9HZ3PKST0S42VM9523Z9NV42SZ026V4K39WH.ccd007-citycoin-stacking'
 
 // async sleep timer
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export default async function convertJsonToStackingReportArray(json,symbol,version) {
-    let outputArray = getStackingListArray(symbol);
-    let coinContract=getCoinSmartContractAddress(symbol,version);
-
-    for (const xactn of json) {
-
-        if (xactn.tx.tx_status === 'success' && xactn.tx.contract_call !== undefined && xactn.tx.contract_call.contract_id===coinContract ) {
-            outputArray = processTransactionForStacking(outputArray, xactn,version);
-        }
-    }
-
-    outputArray = await populateFutureBlockEndDates(outputArray);
-    outputArray = filterStackingResultsForOutput(outputArray);
-    outputArray = formatStackingResultsForOutput(outputArray);
-    return outputArray;
-
-}
-
-export async function getStackingReportArrayV3(walletId,symbol) {
+export default async function getStackingReportArrayV3(walletId,symbol) {
     let outputArray=[];
     const userId=await getUserIdForPrincipal(walletId);
     await sleep(500);
@@ -117,40 +97,6 @@ async function getEndBlockForRewardCycle(targetCycle) {
     return res;
 }
 
-
-function getStackingListArray(symbol) {
-    let stackingListArray;
-    if (symbol==='MIA') {
-        stackingListArray=MIAStackingList.stackingList();
-    } else {
-        stackingListArray=NYCStackingList.stackingList();
-    }    
-
-    return stackingListArray;
-}
-
-function getCoinSmartContractAddress(symbol,version)
-{
-    let coinContract;
-    if (version === 'v3') {
-        coinContract ='SP8A9HZ3PKST0S42VM9523Z9NV42SZ026V4K39WH.ccd007-citycoin-stacking'
-    } else if (symbol==='MIA') {
-
-        if (version==='v2') {
-            coinContract = 'SP1H1733V5MZ3SZ9XRW9FKYGEZT0JDGEB8Y634C7R.miamicoin-core-v2';
-        } else {
-            coinContract = 'SP466FNC0P7JWTNM2R9T199QRZN1MYEDTAR0KP27.miamicoin-core-v1';
-        }
-    } else {
-        if (version==='v2') {
-            coinContract = 'SPSCWDV3RKV5ZRN1FQD84YE1NQFEDJ9R1F4DYQ11.newyorkcitycoin-core-v2';
-        } else {
-            coinContract = 'SP2H8PY27SEZ03MWRKS5XABZYQN17ETGQS3527SA5.newyorkcitycoin-core-v1';
-        }
-    }
-    return coinContract;
-}
-
 function processTransactionForStacking(outputArray,xactn,version) {
     const functionName=xactn.tx.contract_call===undefined?'':xactn.tx.contract_call.function_name;
     const blockHeight=xactn.tx.block_height;
@@ -210,27 +156,6 @@ function processClaimTransaction(outputArray,xactn){
             outputArray[rewardsCycle].claimedRewards=rewardsAmount;
             outputArray[rewardsCycle].claimDate=xactn.tx.burn_block_time_iso;
             console.log(Date.now()+' Claimed ' + rewardsAmount + 'STX from this cycle');
-
-    return outputArray;
-}
-
-//this populates future block end dates, plus any past block end dates which aren't hard coded yet
-async function populateFutureBlockEndDates(outputArray)
-{
-    const currentBlock=await getCurrentBlock();
-    const currentDate = new Date().toISOString();
-    for (const stackingRound of outputArray.filter(function(item){return (item.endBlockDate==='');}).sort((a) => parseInt(a.endBlock))) {
-        if (parseInt(stackingRound.endBlock)>parseInt(currentBlock)) {
-            let minutestoAdd=parseInt(stackingRound.endBlock-currentBlock)*10;
-            let blockTime=new Date((new Date(currentDate)).getTime() + (minutestoAdd* 60 * 1000));
-
-            stackingRound.endBlockDate=blockTime.toISOString();
-        } else {
-            let blockDate=await getBlockTime(stackingRound.endBlock);
-            let blockTime=new Date(blockDate);
-            stackingRound.endBlockDate=blockTime.toISOString();
-        }
-    }
 
     return outputArray;
 }
