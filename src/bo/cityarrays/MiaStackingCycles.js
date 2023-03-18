@@ -37,10 +37,7 @@ export class MIAStackingList
         { round: 31, startBlock: 89597, endBlock: 91696, endBlockDate: "", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
         { round: 32, startBlock: 91697, endBlock: 93796, endBlockDate: "", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
         { round: 33, startBlock: 93797, endBlock: 95896, endBlockDate: "", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
-        { round: 34, startBlock: 95897, endBlock: 96781, endBlockDate: "", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
-        { round: 53, startBlock: 777350, endBlock: 779449, endBlockDate: "", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },
-        { round: 54, startBlock: 779450, endBlock: 781549, endBlockDate: "", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  },                
-        { round: 55, startBlock: 781550, endBlock: 783649, endBlockDate: "", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  }        
+        { round: 34, startBlock: 95897, endBlock: 96781, endBlockDate: "", stackedCoins: 0, claimedRewards: 0, claimDate: "", canClaimCoin: ""  }       
         ]; 
     }
 }

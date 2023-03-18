@@ -10,7 +10,7 @@ export default async function convertJsonToStackingReportArray(json,symbol,versi
     for (const xactn of json) {
 
         if (xactn.tx.tx_status === 'success' && xactn.tx.contract_call !== undefined && xactn.tx.contract_call.contract_id===coinContract ) {
-            outputArray = processTransactionForStacking(outputArray, xactn,version);
+            outputArray = processTransactionForStacking(outputArray, xactn,version,symbol);
         }
     }
 
@@ -54,12 +54,12 @@ function getCoinSmartContractAddress(symbol,version)
     return coinContract;
 }
 
-function processTransactionForStacking(outputArray,xactn,version) {
+function processTransactionForStacking(outputArray,xactn,version,symbol) {
     const functionName=xactn.tx.contract_call===undefined?'':xactn.tx.contract_call.function_name;
     const blockHeight=xactn.tx.block_height;
 
     if (functionName==='stack-tokens' || functionName==='stack') {
-        outputArray=processStackTokensTransaction(outputArray,xactn,blockHeight,version);
+        outputArray=processStackTokensTransaction(outputArray,xactn,blockHeight,version,symbol);
     } else if (functionName==="claim-stacking-reward") {
         outputArray=processClaimTransaction(outputArray,xactn,blockHeight,version);
     } 
@@ -68,7 +68,7 @@ function processTransactionForStacking(outputArray,xactn,version) {
 }
 
 //Process a stack-tokens transaction
-function processStackTokensTransaction(outputArray,xactn,blockHeight,version){
+function processStackTokensTransaction(outputArray,xactn,blockHeight,version,symbol){
 
     let cycleCount=xactn.tx.contract_call.function_args[1].repr.substring(1);
     let firstCycleListRow=outputArray.filter(function(item){
@@ -78,6 +78,8 @@ function processStackTokensTransaction(outputArray,xactn,blockHeight,version){
     if (firstCycleListRow!==undefined) {
         let firstCycle=firstCycleListRow.round+1;
         let lastCycle=parseInt(firstCycle)+parseInt(cycleCount)-1;
+        const lastV2Cycle=symbol ==='MIA'?34:28;
+        lastCycle=lastCycle>lastV2Cycle?lastV2Cycle:lastCycle;
         let amount=xactn.tx.contract_call.function_args[0].repr.substring(1);
         if(!(version === 'v1')){
             amount=parseFloat(amount)/1000000;

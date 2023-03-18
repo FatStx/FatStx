@@ -147,7 +147,6 @@ async function getWalletForBNSName(walletId) {
     console.log(Date.now() + " ===Check BNS Name:" + walletId + "===");
     let url = "https://stacks-node-api.mainnet.stacks.co/v1/names/" + walletId; 
     let ret = await processOneApiPage(url);
-    console.log(ret);
     return ret;
 }
 
