@@ -48,14 +48,7 @@ export default async function getStackingReportArrayV3(walletId,symbol) {
         const endBlock=await getEndBlockForBitcoinRewardCycle(cycle);
         const stackedCoins=parseFloat(stackingInfo.stacked)/1000000;
         const canClaimCoin=canClaimCoinForCycle(stackingInfo.claimable,latestBitcoinBlock,endBlock);
-        let endBlockDate="";
-        if (endBlock<=latestBitcoinBlock)
-        {
-            cyclesToCheckTimeStamp.push(endBlock);
-        } else {
-            endBlockDate=getFutureBitcoinBlockEndDates(latestBitcoinBlock,endBlock);
-        }
-        let outputRow=createOutputRow(cycle,startBlock,endBlock,endBlockDate,stackedCoins,0,"",canClaimCoin);
+        let outputRow=createOutputRow(cycle,startBlock,endBlock,"",stackedCoins,0,"",canClaimCoin);
         outputArray.push(outputRow);        
         cycle+=1;
     }
@@ -67,23 +60,52 @@ export default async function getStackingReportArrayV3(walletId,symbol) {
         outputArray.push({message: 'User has never stacked this City Coin with the V3 contract'});
         return outputArray;
     }
-
-    let blockTimes=null;
-    if (cyclesToCheckTimeStamp.length>0)
-    {
-        blockTimes= await getBitcoinBlockTimes(cyclesToCheckTimeStamp.join(','));
-        for (const arrayRow of outputArray) {
-            const rowTimeStampListRow=blockTimes.filter(function(item){
-                return (item.height === arrayRow.endBlock);
-            })[0];
-            arrayRow.endBlockDate = rowTimeStampListRow.timestamp.toISOString();
-        }
-    }
+    cyclesToCheckTimeStamp=getCyclesToCheckTimeStamp(outputArray,latestBitcoinBlock);
+    outputArray=await applyActualBlockTimes(outputArray,cyclesToCheckTimeStamp);
+    outputArray= applyEstimatedBlockTimes(outputArray,latestBitcoinBlock);
     outputArray = filterStackingResultsForOutput(outputArray);
     outputArray = formatStackingResultsForOutput(outputArray);
 //    console.log(outputArray);
     return outputArray;
 
+}
+
+function getCyclesToCheckTimeStamp(outputArray,latestBitcoinBlock) {
+    let cyclesToCheckTimeStamp = [];    
+    for (const arrayRow of outputArray) {
+        if (arrayRow.endBlock<=latestBitcoinBlock)
+        {
+            cyclesToCheckTimeStamp.push(arrayRow.endBlock);
+        }
+    }
+    return cyclesToCheckTimeStamp;
+}
+
+async function applyActualBlockTimes(outputArray,cyclesToCheckTimeStamp) {
+    if (cyclesToCheckTimeStamp.length>0)
+    {
+        const blockTimes= await getBitcoinBlockTimes(cyclesToCheckTimeStamp.join(','));
+        if (blockTimes !== null) {
+            for (const block of blockTimes) {
+                const targetRow=outputArray.filter(function(item){
+                    return (block.height === item.endBlock);
+                })[0];
+                targetRow.endBlockDate = new Date(block.timestamp*1000).toISOString();
+            }
+        }
+    }
+    return outputArray;
+}
+
+function applyEstimatedBlockTimes(outputArray,latestBitcoinBlock) {
+
+    for (const arrayRow of outputArray) {
+        if (!arrayRow.endBlockDate)
+        {
+            arrayRow.endBlockDate=getFutureBitcoinBlockEndDates(latestBitcoinBlock,arrayRow.endBlock);
+        }
+    }
+    return outputArray;
 }
 
 function getFutureBitcoinBlockEndDates(currentBitCoinBlock,targetBlock) {
