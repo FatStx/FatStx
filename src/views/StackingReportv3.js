@@ -15,6 +15,7 @@ import FormControl from '@mui/material/FormControl';
 import Stacking from '../components/Stacking';
 import {checkWallet} from '../api/StxApi'
 import getStackingReportArrayV3 from '../bl/StackingV3BL'
+import {getCurrentBitcoinBlock} from '../bl/StackingV3BL'
 
 export default function StackingReportV3(props) {
 
@@ -23,7 +24,9 @@ export default function StackingReportV3(props) {
   let walletId = props.walletId
   let setWalletId = props.setWalletId
   let stackDataV3 = props.stackDataV3
+  let latestBitcoinBlock = props.latestBitcoinBlock
   let setStackDataV3 = props.setStackDataV3
+  let setLatestBitcoinBlock = props.setLatestBitcoinBlock
   let coin = props.coin
   let setCoin = props.setCoin
   
@@ -65,9 +68,10 @@ export default function StackingReportV3(props) {
 
       ReactGA.send({ hitType: "pageview", page: "/transactions" });
 
-      let outputArray = await getStackingReportArrayV3(walletId,coin);
+      const latestBitcoinBlock= await getCurrentBitcoinBlock();
+      let outputArray = await getStackingReportArrayV3(walletId,coin,latestBitcoinBlock);
       setStackDataV3(outputArray)
-
+      setLatestBitcoinBlock(latestBitcoinBlock);
       setSpinnerVisible(false)
 
       return;
@@ -130,7 +134,7 @@ export default function StackingReportV3(props) {
               </Grid>
           </Paper>
         </Grid>
-        <Stacking stackDataV3={stackDataV3} spinnerVisible={spinnerVisible} />
+        <Stacking stackDataV3={stackDataV3} currentBitcoinBlock={latestBitcoinBlock} spinnerVisible={spinnerVisible} />
        </Grid>
     </Container>
   )

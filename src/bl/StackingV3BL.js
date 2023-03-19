@@ -8,7 +8,7 @@ const REWARD_CYCLE_LENGTH = 2100;
 // async sleep timer
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-export default async function getStackingReportArrayV3(walletId,symbol) {
+export default async function getStackingReportArrayV3(walletId,symbol,latestBitcoinBlock) {
     const cityId=getcityIdForSymbol(symbol);
     let outputArray=[];
     const userId=await getUserIdForPrincipal(walletId);
@@ -20,7 +20,6 @@ export default async function getStackingReportArrayV3(walletId,symbol) {
         outputArray.push({message: 'User has never stacked City Coins with the V3 contract'});
         return outputArray;        
     }
-    const latestBitcoinBlock= await getLatestBitcoinBlock();
     if (latestBitcoinBlock === null) {
         outputArray.push({message: 'Unexpected error trying to obtain latest bitcoin block. Please refresh browser and try again in several minutes'});        
         return outputArray;
@@ -68,6 +67,11 @@ export default async function getStackingReportArrayV3(walletId,symbol) {
 //    console.log(outputArray);
     return outputArray;
 
+}
+
+export async function getCurrentBitcoinBlock() {
+    const latestBitcoinBlock= await getLatestBitcoinBlock();
+    return latestBitcoinBlock;
 }
 
 function getCyclesToCheckTimeStamp(outputArray,latestBitcoinBlock) {

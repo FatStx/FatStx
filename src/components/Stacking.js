@@ -9,10 +9,10 @@ import Paper from "@mui/material/Paper";
 import Backdrop from '@mui/material/Backdrop';
 import DotLoader from "react-spinners/DotLoader";
 import Title from './Title';
+import StackingInfo from "./StackingInfo";
 
-export default function Stacking({stackDataV3,spinnerVisible}) {
-
-  if (typeof stackDataV3 === "undefined" || stackDataV3.length === 0) {
+export default function Stacking({stackDataV3,currentBitcoinBlock,spinnerVisible}) {
+  if (typeof stackDataV3 === "undefined" || stackDataV3.length === 0 || isNaN(parseInt(currentBitcoinBlock))) {
     return ("");
   } else if (typeof stackDataV3[0].round === "undefined") {
     return (
@@ -29,7 +29,7 @@ return (
             <DotLoader  color="#ffffff" loading={true}  size={120} />
           </Backdrop>
           <Title>Stacking Report (v3)</Title>
-
+          <StackingInfo currentBitcoinBlock={currentBitcoinBlock} />
           <Table size="small">
             <colgroup>
               <col style={{width:'5%'}}/>

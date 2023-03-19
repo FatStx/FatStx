@@ -16,3 +16,7 @@ code {
   margin-left:5%;
   margin-top: 2%;
 }
+
+#bitcoin-block {
+  font-size: .8rem;
+}

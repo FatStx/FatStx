@@ -36,6 +36,7 @@ function Home() {
   const [stackData, setStackData] = useState([]);
   const [stackDataNew, setStackDataNew] = useState([]);
   const [stackDataV3, setStackDataV3] = useState([]);
+  const [latestBitcoinBlock, setLatestBitcoinBlock] = useState([]);
   const [coin, setCoin] = useState('');
   const [year, setYear] = useState('2023');
   const [currency, setCurrency] = useState('USD');
@@ -324,6 +325,8 @@ function Home() {
                       setWalletId = {setWalletId}
                       stackDataV3 = {stackDataV3} 
                       setStackDataV3 = {setStackDataV3}
+                      latestBitcoinBlock = {latestBitcoinBlock}
+                      setLatestBitcoinBlock = {setLatestBitcoinBlock}
                       coin = {coin}
                       setCoin = {setCoin}
                     />
