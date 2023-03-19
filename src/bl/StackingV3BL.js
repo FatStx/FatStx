@@ -116,7 +116,7 @@ function getFutureBitcoinBlockEndDates(currentBitCoinBlock,targetBlock) {
 }
 
 function canClaimCoinForCycle(claimable,latestBitcoinBlock,endBlock) {
-    if (latestBitcoinBlock<=endBlock) {
+    if (latestBitcoinBlock<=endBlock+100) {
         return "No";
     } else if (claimable !== 0) {
         return "Yes";
