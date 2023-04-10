@@ -5,6 +5,7 @@ import { DIKOPrice } from "../bo/coinprices/DikoPrice"
 import { MIAPrice } from "../bo/coinprices/MiaPrice" 
 import { MIAV2Price } from "../bo/coinprices/MiaV2Price" 
 import { NYCV2Price } from "../bo/coinprices/NycV2Price" 
+import { NYCPrice } from "../bo/coinprices/NycPrice" 
 import { XBTCPrice } from "../bo/coinprices/XbtcPrice"
 import { USDAPrice } from "../bo/coinprices/UsdaPrice"
 import { ALEXPrice } from "../bo/coinprices/AlexPrice"
@@ -330,6 +331,8 @@ function getCoinPriceObject(symbol) {
         coinPriceObject=MIAV2Price.miaV2Prices;
     } else if (symbol==='NYCv2') {
         coinPriceObject=NYCV2Price.nycV2Prices;        
+    } else if (symbol==='NYC') {
+        coinPriceObject=NYCPrice.nycPrices;                
     } else if (symbol==='xBTC') {
         coinPriceObject=XBTCPrice.xbtcPrices;
     } else if (symbol==='USDA') {

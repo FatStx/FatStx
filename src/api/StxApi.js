@@ -2,6 +2,7 @@ import { Configuration, BlocksApi } from "@stacks/blockchain-api-client";
 // import { callReadOnlyFunction } from '@stacks/transactions';
 // import { StacksMainnet } from '@stacks/network';
 
+const BASEURL = 'https://api.hiro.so/';
 //Process All API Pages
 export default async function processAllXactnWithTransfersApiPages(walletId, year='All') {
     let startDate = year === 'All'
@@ -115,9 +116,8 @@ export async function getCurrentBlock() {
 
 export async function checkWallet(walletId) {
     //Not calling this one because it is far too slow for some reason
-    //let baseUrl = "https://stacks-node-api.mainnet.stacks.co/v2/accounts/" + walletId;
-    let baseUrl = 'https://stacks-node-api.mainnet.stacks.co/extended/v1/address/' + walletId + '/balances'
-    let ret = await processOneApiPage(baseUrl);
+    let url = `${BASEURL}extended/v1/address/${walletId}/balances`;
+    let ret = await processOneApiPage(url);
     if (ret[0]===200 && ret[1].error === undefined)
     {
         return [true,walletId];
@@ -133,8 +133,8 @@ export async function checkWallet(walletId) {
 }
 
 export async function getBlockTime(blockHeight) {
-    let baseUrl = 'https://stacks-node-api.mainnet.stacks.co/extended/v1/block/by_height/' + blockHeight;
-    let ret = await processOneApiPage(baseUrl);
+    let url = `${BASEURL}extended/v1/block/by_height/${blockHeight}`;
+    let ret = await processOneApiPage(url);
     if (ret[0]===200 && ret[1].burn_block_time_iso !==undefined)
     {
         return ret[1].burn_block_time_iso;
@@ -145,7 +145,7 @@ export async function getBlockTime(blockHeight) {
 
 async function getWalletForBNSName(walletId) {
     console.log(Date.now() + " ===Check BNS Name:" + walletId + "===");
-    let url = "https://stacks-node-api.mainnet.stacks.co/v1/names/" + walletId; 
+    let url = `${BASEURL}v1/names/${walletId}`;    
     let ret = await processOneApiPage(url);
     return ret;
 }
@@ -153,22 +153,8 @@ async function getWalletForBNSName(walletId) {
 //Fully process one 50 xactn call/page from the transactions with transfers API
 async function processOneXactnWithTransfersApiPage(offset, walletId) {
     console.log(Date.now() + " ===Process Api Page,Offset " + offset + "===");
-    let baseUrl = "https://stacks-node-api.mainnet.stacks.co/extended/v1/address/" + walletId + "/transactions_with_transfers?limit=50&unanchored=false&offset="
-    //This is just used for some testing error scenarios
-    // if (offset===0)
-    // {
-    //     baseUrl = "https://stacks-node-api.mainnet.stacks.co/extended/v1/address/" + walletId + "/transactions_with_transfers?limit=50&unanchored=false&offset="
-    // }
-
-    let url = baseUrl + offset;
+    const url = `${BASEURL}extended/v1/address/${walletId}/transactions_with_transfers?limit=50&unanchored=false&offset=${offset}`
     let ret = await processOneApiPage(url);
-    //Commented out because Syvita API missing nft transfer section
-    // if (ret[0] !== 200 )
-    // {
-    //     const altUrl = "https://mainnet.syvita.org/extended/v1/address/" + walletId + "/transactions_with_transfers?limit=50&unanchored=false&offset="        
-    //     url = altUrl + offset;
-    //     ret = await processOneApiPage(url);
-    // }
     return ret;
 }
 
