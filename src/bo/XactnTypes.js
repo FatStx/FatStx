@@ -224,7 +224,9 @@ export class XactnType {
       {id:2200,XactnId:'',XactnType:'', XactnTypeDetail:'Satoshibles',contract:'SP6P4EJF0VG8V0RB3TQQKJBHDQKEF6NVRD1KZE3C.satoshibles',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
       {id:2201,XactnId:'',XactnType:'', XactnTypeDetail:'Satoshibles Monsters',contract:'SP6P4EJF0VG8V0RB3TQQKJBHDQKEF6NVRD1KZE3C.monster-satoshibles',function:'',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
 
-      // Friedger Pools
+      // Pools
       {id:3000,XactnId:'',XactnType:'Stacking Reward', XactnTypeDetail:'Friedger Pool',contract:'',function:'',senderAddress:'SPFP0018FJFD82X3KCKZRGJQZWRCV9793QTGE87M',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:3001,XactnId:'',XactnType:'Stacking Reward', XactnTypeDetail:'Fast Pool',contract:'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.send-many-memo',function:'send-many',senderAddress:'SP21YTSM60CAY6D011EZVEVNKXVW8FVZE198XEFFP',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
+      {id:3002,XactnId:'',XactnType:'Stacking Reward', XactnTypeDetail:'Fast Pool',contract:'SP21YTSM60CAY6D011EZVEVNKXVW8FVZE198XEFFP.fp-payout-v1',function:'distribute-rewards-many',senderAddress:'',recipientAddress:'',inSymbol:'',notInSymbol:'',outSymbol:'',notOutSymbol:''},
     ];
 }
