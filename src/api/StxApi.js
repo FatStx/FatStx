@@ -70,7 +70,10 @@ export async function processXactnWithTransfersApiPagesForDateRange(walletId, st
                     if (filterResults[0]) {
                         break;
                     }
+                } else if  (apiResult[0] === 429) {
+                    await new Promise(resolve => setTimeout(resolve, 31000));
                 } else {
+                    console.log(apiResult[0]);
                     isApiError=true;
                     break;
                 }
