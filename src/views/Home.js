@@ -38,7 +38,7 @@ function Home() {
   const [stackDataV3, setStackDataV3] = useState([]);
   const [latestBitcoinBlock, setLatestBitcoinBlock] = useState([]);
   const [coin, setCoin] = useState('');
-  const [year, setYear] = useState('2023');
+  const [year, setYear] = useState('2024');
   const [currency, setCurrency] = useState('USD');
   const [supportShow, setSupportShow] = useState(null);
   const [textCopiedAlertVisible, setTextCopiedAlertVisible] = useState(false);
