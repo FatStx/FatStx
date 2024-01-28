@@ -16,6 +16,7 @@ import Stacking from '../components/Stacking';
 import {checkWallet} from '../api/StxApi'
 import getStackingReportArrayV3 from '../bl/StackingV3BL'
 import {getCurrentBitcoinBlock} from '../bl/StackingV3BL'
+import { Typography } from "@mui/material";
 
 export default function StackingReportV3(props) {
 
@@ -87,9 +88,11 @@ export default function StackingReportV3(props) {
   return (
     <Container sx={{ mt: 4, mb: 4}}>
       <Grid container spacing={3}>
-
+<Typography sx={{fontWeight: 900}}>
+Stacking V3 is not supported by FatStx. To reliably support it requires either one or two additions to the CityCoins Api, or a more complicated set of logic on fatStx which still may not be as reliable. So there are no plans at the moment to add support.
+</Typography>
         {/* Wallet Input */}
-        <Grid item xs={12} md={12} lg={12}>
+        {/* <Grid item xs={12} md={12} lg={12}>
           <Paper sx={{p: 2}}>
 
               <Grid container alignItems="center" spacing={2}> 
@@ -134,7 +137,7 @@ export default function StackingReportV3(props) {
               </Grid>
           </Paper>
         </Grid>
-        <Stacking stackDataV3={stackDataV3} currentBitcoinBlock={latestBitcoinBlock} spinnerVisible={spinnerVisible} />
+        <Stacking stackDataV3={stackDataV3} currentBitcoinBlock={latestBitcoinBlock} spinnerVisible={spinnerVisible} /> */}
        </Grid>
     </Container>
   )

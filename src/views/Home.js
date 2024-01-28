@@ -199,7 +199,7 @@ function Home() {
                     >
                       Stacking (v3)
                     </Link>                    
-                    <Link
+                    {/* <Link
                       variant="button"
                       color="inherit"
                       underline="hover"
@@ -208,7 +208,7 @@ function Home() {
                       sx={{ my: 1, mx: 1.5 }}
                     >
                       Wenblok
-                    </Link>
+                    </Link> */}
                     <Link
                       variant="button"
                       color="inherit"
