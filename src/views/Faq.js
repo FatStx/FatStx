@@ -120,14 +120,19 @@ export default function Faq() {
                 component={'div'}>
                     The Stacks ecosystem is new enough that aside from the price of STX it can be difficult to determine accurate coin prices.
                     Sourcing of coin prices is likely something which will be changing regularly as more accurate sources become available.
-                    As of February 1, 2023 coin prices were determined as follows:
+                    As of March 15, 2024 coin prices were determined as follows:
 
                     <ul>
+                        <li><strong>EUR: </strong>
+                        <ul>
+                                <li>All prices daily close from either the Exchange rates Data APi, or https://www.wsj.com/market-data/quotes/fx/EURUSD/historical-prices</li>
+                            </ul>                 
+                        </li>                                             
                         <li><strong>STX: </strong>
                         <ul>
                                 <li>Jan 1, 2021 to Feb 28, 2021: CoinGecko daily prices</li>
-                                <li>Mar 1, 2021 to Jan 31, 2023: Binance Historical prices, Hourly median</li>
-                                <li>After Jan 31, 2023: CoinGecko Daily prices  </li>
+                                <li>Mar 1, 2021 to Mar 15, 2024: Binance Historical prices, Hourly median</li>
+                                <li>After Mar 15, 2024: CoinGecko Daily prices  </li>
                             </ul>                 
                         </li>                                   
                         <li><strong>MIA: </strong>
@@ -136,13 +141,13 @@ export default function Faq() {
                                 <li>11/25/21 to 2/25/22: OkCoin Hourly prices</li>
                                 <li>2/26/22 to 05/14/22: CoinGecko daily prices</li>
                                 <li>5/15/22 to 06/30/22: CoinMarketCap daily prices</li>
-                                <li>After  June 30, 2022: Median* Hourly Prices from a combination of ALEX MIA-STX Swaps converted to USD via STX Price and OkCoin Hourly. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
+                                <li>After  June 30, 2022: Median* Hourly Prices from ALEX MIA-STX Swaps converted to USD via STX Price. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
                             </ul>
                         </li>
                         <li><strong>NYC: </strong>
                             <ul>
                                 <li>Nothing from before 6/10/22. It traded on Stackswap for a while but volume was very low and prices were all over the place. There was reliable trading on OkCoin starting in Feb 2022, but that data does not appear to be available any more.</li>
-                                <li>After 06/10/22: Median* Hourly Prices from a combination of ALEX NYC-STX Swaps converted to USD via STX Price and OkCoin Hourly where available. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
+                                <li>After 06/10/22: Median* Hourly Prices from ALEX NYC-STX Swaps converted to USD via STX Pricee. When no prints for an hour, median is taken from longer periods in multiples of an hour</li>
                             </ul>
                         </li>
                         <li><strong>ALEX: </strong>
