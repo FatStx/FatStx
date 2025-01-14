@@ -91,9 +91,7 @@ export default function Faq() {
                 }}>
                     Please raise an issue on <Link href="https://github.com/FatStx/FatStx.github.io/issues">GitHub</Link>.
                     Also, you can often find &nbsp;
-                    <Link href="https://discord.com/users/377856887787356160">@eparrot</Link> and &nbsp;
-                    <Link href="https://discord.com/users/229090169238585345">@foragerr</Link> in the &nbsp;
-                    <Link href="https://discord.gg/syvita">Syvita Guild discord</Link>
+                    <Link href="https://discord.com/users/377856887787356160">@eparrot</Link> in a STX related channel on discord
                 </Typography>
                 </AccordionDetails>
             </Accordion>
