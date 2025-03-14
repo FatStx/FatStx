@@ -28,7 +28,7 @@ jobs:
       - name: build
         run: yarn build
       - name: deploy
-        uses: JamesIves/github-pages-deploy-action@v4.2.2
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
             branch: main
             folder: build
