@@ -30,11 +30,18 @@ export class Token {
       {symbol:'FORCE',apiSymbol:'',contract:'SP2P6KSAJ4JVV8PFSNKJ9BNG5PEPR4RT71VXZHWBK.forcecoin::force',conversionFactor:100,amountDecimals: 3,priceDecimals: 2},
       {symbol:'VIBES',apiSymbol:'',contract:'SP27BB1Y2DGSXZHS7G9YHKTSH6KQ6BD3QG0AN3CR9.vibes-token::vibes-token',conversionFactor:100000000,amountDecimals: 2,priceDecimals: 5},
       {symbol:'xUSD',apiSymbol:'',contract:'SP2TZK01NKDC89J6TA56SA47SDF7RTHYEQ79AAB9A.Wrapped-USD::wrapped-usd',conversionFactor:100000000,amountDecimals: 3,priceDecimals: 3},
+      {symbol:'LEO',apiSymbol:'',contract:'SP1AY6K3PQV5MRT6R4S671NWW2FRVPKM0BR162CT6.leo-token::leo',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 6},
+      {symbol:'stSTX',apiSymbol:'',contract:'SP4SZE494VC2YC5JYG7AYFQ44F5Q4PYV7DVMDPBG.ststx-token::ststx',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 3},
+      {symbol:'LiSTX',apiSymbol:'',contract:'SM26NBC8SFHNW4P1Y4DFH27974P56WN86C92HPEHH.token-lqstx::lqstx',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 3},
+      {symbol:'sBTC',apiSymbol:'',contract:'SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token::sbtc-token',conversionFactor:100000000,amountDecimals: 8,priceDecimals: 2},
+      {symbol:'$B20',apiSymbol:'',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.brc20-db20::brc20-db20',conversionFactor:100000000,amountDecimals: 4,priceDecimals: 6},
+
 
       //Currencies
-      {symbol:'EUR',apiSymbol:'',contract:'',conversionFactor:1000000,amountDecimals: 5,priceDecimals: 6},      
+      {symbol:'EUR',apiSymbol:'',contract:'',conversionFactor:1000000,amountDecimals: 5,priceDecimals: 6},
       //Names
-      {symbol:'BNS Name',apiSymbol:'',contract:'SP000000000000000000002Q6VF78.bns::names',conversionFactor:1,amountDecimals: 0,priceDecimals: 0}
+      {symbol:'BNS Name (v1)',apiSymbol:'',contract:'SP000000000000000000002Q6VF78.bns::names',conversionFactor:1,amountDecimals: 0,priceDecimals: 0},
+      {symbol:'BNS Name',apiSymbol:'',contract:'SP2QEZ06AGJ3RKJPBV14SY1V5BBFNAW33D96YPGZF.BNS-V2::BNS-V2',conversionFactor:1,amountDecimals: 0,priceDecimals: 0}
 
 
     ];
