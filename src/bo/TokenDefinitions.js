@@ -30,11 +30,15 @@ export class Token {
       {symbol:'FORCE',apiSymbol:'',contract:'SP2P6KSAJ4JVV8PFSNKJ9BNG5PEPR4RT71VXZHWBK.forcecoin::force',conversionFactor:100,amountDecimals: 3,priceDecimals: 2},
       {symbol:'VIBES',apiSymbol:'',contract:'SP27BB1Y2DGSXZHS7G9YHKTSH6KQ6BD3QG0AN3CR9.vibes-token::vibes-token',conversionFactor:100000000,amountDecimals: 2,priceDecimals: 5},
       {symbol:'xUSD',apiSymbol:'',contract:'SP2TZK01NKDC89J6TA56SA47SDF7RTHYEQ79AAB9A.Wrapped-USD::wrapped-usd',conversionFactor:100000000,amountDecimals: 3,priceDecimals: 3},
+      {symbol: 'aeUSDC', apiSymbol:'', contract: 'SP3Y2ZSH8P7D50B0VBTSX11S7XSG24M1VB9YFQA4K.token-aeusdc::aeUSDC', conversionFactor:1000000, amountDecimals: 6, priceDecimals: 2},
+      {symbol: 'USDCx', apiSymbol:'', contract: 'SP120SBRBQJ00MCWS7TM5R8WJNTTKD5K0HFRC2CNE.usdcx::usdcx-token', conversionFactor:1000000, amountDecimals: 6, priceDecimals: 2},
       {symbol:'LEO',apiSymbol:'',contract:'SP1AY6K3PQV5MRT6R4S671NWW2FRVPKM0BR162CT6.leo-token::leo',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 6},
       {symbol:'stSTX',apiSymbol:'',contract:'SP4SZE494VC2YC5JYG7AYFQ44F5Q4PYV7DVMDPBG.ststx-token::ststx',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 3},
       {symbol:'LiSTX',apiSymbol:'',contract:'SM26NBC8SFHNW4P1Y4DFH27974P56WN86C92HPEHH.token-lqstx::lqstx',conversionFactor:1000000,amountDecimals: 3,priceDecimals: 3},
       {symbol:'sBTC',apiSymbol:'',contract:'SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token::sbtc-token',conversionFactor:100000000,amountDecimals: 8,priceDecimals: 2},
+      {symbol: 'zsBTC', apiSymbol:'', contract: 'SP2VCQJGH7PHP2DJK7Z0V48AGBHQAW3R3ZW1QF4N.zsbtc-token::zsbtc', conversionFactor:100000000, amountDecimals: 8, priceDecimals: 2},
       {symbol:'$B20',apiSymbol:'',contract:'SP3K8BC0PPEVCV7NZ6QSRWPQ2JE9E5B6N3PA0KBR9.brc20-db20::brc20-db20',conversionFactor:100000000,amountDecimals: 4,priceDecimals: 6},
+
 
 
       //Currencies
