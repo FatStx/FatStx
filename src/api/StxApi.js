@@ -1,8 +1,23 @@
-import { Configuration, BlocksApi } from '@stacks/blockchain-api-client';
+import { createClient } from '@stacks/blockchain-api-client';
 // import { callReadOnlyFunction } from '@stacks/transactions';
 // import { StacksMainnet } from '@stacks/network';
 
-const BASEURL = 'https://api.hiro.so/';
+const BASEURL = import.meta.env.VITE_STX_API_ENDPOINT || 'https://api.hiro.so/';
+
+// create a client (v8 style)
+const client = createClient({
+  baseUrl: BASEURL,
+});
+
+// Optional request hook - set a custom header if provided via env
+client.use({
+  onRequest({ request }) {
+    const customHeader = import.meta.env.VITE_STX_API_CUSTOM_HEADER;
+    if (customHeader) request.headers.set('x-custom-header', customHeader);
+    return request;
+  },
+});
+
 //Process All API Pages
 export default async function processAllXactnWithTransfersApiPages(walletId, year = 'All') {
   let startDate = year === 'All' ? '2021-01-01T00:00:00.000Z' : year + '-01-01T00:00:00.000Z';
@@ -98,23 +113,32 @@ export async function processXactnWithTransfersApiPagesForDateRange(walletId, st
 // }
 
 export async function getCurrentBlock() {
-  var apiConfig = new Configuration({
-    fetchApi: fetch,
-    basePath: import.meta.env.VITE_STX_API_ENDPOINT,
-  });
+  // Try v2 info endpoint first
+  try {
+    const { data } = await client.GET('/v2/info');
+    if (data && data.stacks_tip_height !== undefined) return data.stacks_tip_height;
+  } catch (err) {
+    // ignore and try fallback
+  }
 
-  var blocksApi = new BlocksApi(apiConfig);
-
-  const blockList = await blocksApi.getBlockList({ offset: 0, limit: 1 });
-  const currentBlock = blockList.results[0].height;
-
-  return currentBlock;
+  // Fallback to block list
+  try {
+    const { data } = await client.GET('/extended/v2/blocks/', {
+      params: { query: { offset: 0, limit: 1 } },
+    });
+    const currentBlock = data?.results?.[0]?.height ?? null;
+    return currentBlock;
+  } catch (err) {
+    console.error('getCurrentBlock error', err);
+    return null;
+  }
 }
 
 export async function checkWallet(walletId) {
   //Not calling this one because it is far too slow for some reason
-  let url = `${BASEURL}extended/v1/address/${walletId}/balances`;
-  let ret = await processOneApiPage(url);
+  let ret = await processOneApiPage(`/extended/v1/address/{address}/balances`, {
+    path: { address: walletId },
+  });
   if (ret[0] === 200 && ret[1].error === undefined) {
     return [true, walletId];
   } else {
@@ -128,44 +152,65 @@ export async function checkWallet(walletId) {
 }
 
 export async function getBlockTime(blockHeight) {
-  let url = `${BASEURL}extended/v1/block/by_height/${blockHeight}`;
-  let ret = await processOneApiPage(url);
-  if (ret[0] === 200 && ret[1].burn_block_time_iso !== undefined) {
-    return ret[1].burn_block_time_iso;
-  } else {
+  try {
+    const { data } = await client.GET(`/extended/v1/block/by_height/{height}`, {
+      params: { path: { height: blockHeight } },
+    });
+    return data?.burn_block_time_iso ?? '';
+  } catch (err) {
+    console.log(err);
+    // fallback to generic fetch path
+    const ret = await processOneApiPage(`/extended/v1/block/by_height/{height}`, {
+      path: { height: blockHeight },
+    });
+    if (ret[0] === 200 && ret[1]?.burn_block_time_iso !== undefined) {
+      return ret[1].burn_block_time_iso;
+    }
     return '';
   }
 }
 
-async function getWalletForBNSName(walletId) {
-  console.log(Date.now() + ' ===Check BNS Name:' + walletId + '===');
-  let url = `${BASEURL}v1/names/${walletId}`;
-  let ret = await processOneApiPage(url);
+async function getWalletForBNSName(bnsName) {
+  console.log(Date.now() + ' ===Check BNS Name:' + bnsName + '===');
+  let ret = await processOneApiPage(`/v1/names/{name}`, {
+    path: { name: bnsName },
+  });
   return ret;
 }
 
 //Fully process one 50 xactn call/page from the transactions with transfers API
 async function processOneXactnWithTransfersApiPage(offset, walletId) {
   console.log(Date.now() + ' ===Process Api Page,Offset ' + offset + '===');
-  const url = `${BASEURL}extended/v1/address/${walletId}/transactions_with_transfers?limit=50&unanchored=false&offset=${offset}`;
-  let ret = await processOneApiPage(url);
+  let ret = await processOneApiPage(`/extended/v1/address/{address}/transactions_with_transfers`, {
+    path: { address: walletId },
+    query: {
+      limit: 50,
+      unanchored: false,
+      offset: offset,
+    },
+  });
   return ret;
 }
 
 //Fully process one 50 xactn call/page from the API
-async function processOneApiPage(url) {
-  let response = await fetch(url).catch((error) => {
-    console.log('Error Fetching API Information', url);
-  });
-  let json = null;
-  let responseStatus = 500;
-  if (response !== undefined) {
-    responseStatus = response.status;
-    if (responseStatus === 200) {
-      json = await response.json();
+async function processOneApiPage(path, params = {}) {
+  try {
+    let res;
+    if (Object.keys(params).length) {
+      res = await client.GET(path, { params });
+    } else {
+      res = await client.GET(path);
     }
+
+    // client.GET returns an object with `data` (per v8 usage)
+    const data = res?.data ?? res;
+    return [200, data];
+  } catch (err) {
+    // Try to extract status code if available
+    const status = err?.status ?? err?.response?.status ?? 500;
+    console.error('processOneApiPage error', path, status);
+    return [status, null];
   }
-  return [responseStatus, json];
 }
 
 function filterDates(json, startDate, endDate) {
