@@ -1,0 +1,3 @@
+﻿"currency","burnDate","inSymbol","inAmount","outSymbol","outAmount","xactnFee","inCoinPrice","outCoinPrice","xactnFeeCoinPrice","xactnType","xactnTypeDetail","xactnId","inAmountRaw","outAmountRaw","xactnFeeRaw","sender","recipient","memo","burnDateAltFormat1"
+"EUR","2025-09-17T23:55:28.000Z","STX","2.037","","0","0","N/A","","","Receive","","0xe704321bb2809ba01a7cea56f16b20982b2bcc3fcee2fbfb8df34b10fbcdb764","2036980","0","0","SP19YH4F897N3Q1TG88XTW7H3JH10Y3SQDTB9T3NY","","","09/17/2025 23:55:28"
+"EUR","2025-09-17T13:40:58.000Z","STX","4.447","","0","0","N/A","","","Receive","","0x7f3b61106c873167334fecee70589c56e15d992a50bf681d7f9ab527f44bc042","4446604","0","0","SP19YH4F897N3Q1TG88XTW7H3JH10Y3SQDTB9T3NY","","","09/17/2025 13:40:58"

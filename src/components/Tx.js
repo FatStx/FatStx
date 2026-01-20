@@ -1,53 +1,28 @@
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
-import { Grid } from "@mui/material";
-import Divider from "@mui/material/Divider";
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
+import { Grid } from '@mui/material';
+import Divider from '@mui/material/Divider';
 
 function ellipse(text) {
   if (text && text.length > 10) {
-    return `${text.substring(0, 6)}..${text.substring(
-      text.length - 4,
-      text.length
-    )}`;
+    return `${text.substring(0, 6)}..${text.substring(text.length - 4, text.length)}`;
   } else {
     return text;
   }
 }
 
-export default function Tx({
-  inAmount,
-  inSymbol,
-  outAmount,
-  outSymbol,
-  sender,
-  recipient,
-}) {
+export default function Tx({ inAmount, inSymbol, outAmount, outSymbol, sender, recipient }) {
   let inPanel;
   if (inAmount > 0) {
     inPanel = (
       <Stack direction="column" xs={4}>
-        <Typography
-          fontSize="1.3em"
-          fontWeight="300"
-          align="right"
-          color="success.light"
-        >
+        <Typography fontSize="1.3em" fontWeight="300" align="right" color="success.light">
           {inAmount}
         </Typography>
-        <Typography
-          fontSize="0.8em"
-          fontWeight="900"
-          align="right"
-          color="success.dark"
-        >
+        <Typography fontSize="0.8em" fontWeight="900" align="right" color="success.dark">
           {inSymbol}
         </Typography>
-        <Typography
-          fontSize="0.8em"
-          fontWeight="900"
-          align="right"
-          color="success.dark"
-        >
+        <Typography fontSize="0.8em" fontWeight="900" align="right" color="success.dark">
           {ellipse(sender)}
         </Typography>
       </Stack>
@@ -64,12 +39,7 @@ export default function Tx({
         <Typography fontSize="0.8em" fontWeight="900" color="error.dark">
           {outSymbol}
         </Typography>
-        <Typography
-          fontSize="0.8em"
-          fontWeight="900"
-          align="right"
-          color="error.dark"
-        >
+        <Typography fontSize="0.8em" fontWeight="900" align="right" color="error.dark">
           {ellipse(recipient)}
         </Typography>
       </Stack>
@@ -77,18 +47,12 @@ export default function Tx({
   }
 
   return (
-    <Grid container direction="row" alignItems="center">
-      <Grid item xs>
-        {" "}
-        {inPanel}{" "}
-      </Grid>
+    <Grid container direction="row" alignItems="center" sx={{ width: '100%' }}>
+      <Grid size="grow"> {inPanel} </Grid>
       <Divider orientation="vertical" flexItem>
-        {" "}
+        {' '}
       </Divider>
-      <Grid item xs>
-        {" "}
-        {outPanel}{" "}
-      </Grid>
+      <Grid size="grow"> {outPanel} </Grid>
     </Grid>
   );
 }

@@ -1,0 +1,13 @@
+node_modules/
+build/
+dist/
+.e2e/
+e2e/screenshots/
+e2e/downloads/
+.pnpm-debug.log
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+coverage/
+.vscode/
+.DS_Store

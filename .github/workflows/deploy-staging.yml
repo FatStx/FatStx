@@ -10,11 +10,10 @@ jobs:
   publish-site:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 20
-          registry-url: https://registry.yarnpkg.com/
+          node-version: 24
       - name: setup git config
         run: |
           git config user.name "GitHub Actions Bot"
@@ -22,20 +21,20 @@ jobs:
       - name: Find and Replace homepage in packages.json
         uses: jacobtomlinson/gha-find-replace@v2
         with:
-          find: "[HomePage]"
-          replace: "https://fatstx.github.io/FatStx/"
+          find: '[HomePage]'
+          replace: 'https://fatstx.github.io/FatStx/'
           regex: false
-          include: "package.json"
+          include: 'package.json'
       - name: install packages
         run: yarn install
       - name: build
         run: yarn build
       - name: deploy
-        uses: JamesIves/github-pages-deploy-action@v4.2.2
+        uses: JamesIves/github-pages-deploy-action@v4.8.0
         with:
-            branch: gh-pages
-            folder: build
-            token: ${{ secrets.PAT_GHPAGES_PUBLISH }}
-            repository-name: "FatStx/FatStx"
+          branch: gh-pages
+          folder: build
+          token: ${{ secrets.PAT_GHPAGES_PUBLISH }}
+          repository-name: 'FatStx/FatStx'
         # run: yarn deploy
         # env:  PAT_GHPAGES_PUBLISH: ${{ secrets.PAT_GHPAGES_PUBLISH }}

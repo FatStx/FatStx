@@ -1,5 +1,5 @@
-import ReactGA from "react-ga4";
-import React, { useEffect, useState } from "react";
+import ReactGA from 'react-ga4';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import Container from '@mui/material/Container';
@@ -18,182 +18,201 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Backdrop from '@mui/material/Backdrop';
-import DotLoader from "react-spinners/DotLoader";
+import DotLoader from 'react-spinners/DotLoader';
 
 import Title from '../components/Title';
-import processAllXactnWithTransfersApiPages, { checkWallet } from '../api/StxApi'
-import convertJsonToStackingReportArray from '../bl/StackingBL'
+import processAllXactnWithTransfersApiPages, { checkWallet } from '../api/StxApi';
+import convertJsonToStackingReportArray from '../bl/StackingBL';
 
 export default function StackingReportNew(props) {
+  const { walletInPath } = useParams();
 
-  const {walletInPath} = useParams();
+  let walletId = props.walletId;
+  let setWalletId = props.setWalletId;
+  let stackDataNew = props.stackDataNew;
+  let setStackDataNew = props.setStackDataNew;
+  let coin = props.coin;
+  let setCoin = props.setCoin;
 
-  let walletId = props.walletId
-  let setWalletId = props.setWalletId
-  let stackDataNew = props.stackDataNew
-  let setStackDataNew = props.setStackDataNew
-  let coin = props.coin
-  let setCoin = props.setCoin
-  
-  ReactGA.send({ hitType: "pageview", page: "/stackingnew" });
+  ReactGA.send({ hitType: 'pageview', page: '/stackingnew' });
 
   const [spinnerVisible, setSpinnerVisible] = useState(false);
 
   const handleCoinChange = (event) => {
-      setCoin(event.target.value);
+    setCoin(event.target.value);
   };
 
   const handleWalletIdChange = (event) => {
-      setWalletId(event.target.value)
-  }
-
-  async function handleGoClick() {
-      if (coin === '') 
-      {
-        alert("Please select a coin");
-        return;
-      }
-
-      if (walletId === '') {
-        return;
-      }
-      let checkWalletResults=await checkWallet(walletId);
-
-      if (!checkWalletResults[0])
-      {
-        alert("Please enter a valid wallet address");
-        return;
-      }
-      else
-      {
-        walletId=checkWalletResults[1];
-      }
-
-      setSpinnerVisible(true)
-
-      ReactGA.send({ hitType: "pageview", page: "/transactions" });
-
-      let apiResults = await processAllXactnWithTransfersApiPages(walletId);
-      if (apiResults[0]) {
-        alert("There have been one or more errors connecting to Stacks to obtain your data. Normally this is due to problems with either the network or the APIs. Please try again in a few minutes.");
-      } else {
-        let json=apiResults[1];
-        let outputArray = await convertJsonToStackingReportArray(json,coin,'v2');
-        setStackDataNew(outputArray)
-        console.log(json, outputArray)
-      }
-
-      setSpinnerVisible(false)
-
-      return;
+    setWalletId(event.target.value);
   };
 
-  useEffect(()=> {
-    if (walletInPath !== undefined) {
-      setWalletId(walletInPath)
+  async function handleGoClick() {
+    if (coin === '') {
+      alert('Please select a coin');
+      return;
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [walletInPath])
+
+    if (walletId === '') {
+      return;
+    }
+    let checkWalletResults = await checkWallet(walletId);
+
+    if (!checkWalletResults[0]) {
+      alert('Please enter a valid wallet address');
+      return;
+    } else {
+      walletId = checkWalletResults[1];
+    }
+
+    setSpinnerVisible(true);
+
+    ReactGA.send({ hitType: 'pageview', page: '/transactions' });
+
+    let apiResults = await processAllXactnWithTransfersApiPages(walletId);
+    if (apiResults[0]) {
+      alert(
+        'There have been one or more errors connecting to Stacks to obtain your data. Normally this is due to problems with either the network or the APIs. Please try again in a few minutes.'
+      );
+    } else {
+      let json = apiResults[1];
+      let outputArray = await convertJsonToStackingReportArray(json, coin, 'v2');
+      setStackDataNew(outputArray);
+      console.log(json, outputArray);
+    }
+
+    setSpinnerVisible(false);
+
+    return;
+  }
+
+  useEffect(() => {
+    if (walletInPath !== undefined) {
+      setWalletId(walletInPath);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [walletInPath]);
 
   return (
-    <Container sx={{ mt: 4, mb: 4}}>
-      <Grid container spacing={3}>
-
+    <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
+      <Grid container spacing={3} sx={{ width: '100%' }}>
         {/* Wallet Input */}
-        <Grid item xs={12} md={12} lg={12}>
-          <Paper sx={{p: 2}}>
-
-              <Grid container alignItems="center" spacing={2}> 
-                <Grid item xs={12} s={12} md>
-                  <TextField
-                    fullWidth
-                    component="form"
-                    autoComplete="on"
-                    required
-                    label="Wallet Address"
-                    onChange={ handleWalletIdChange }
-                    value={walletId}
-                  />
-                </Grid>
-
-                <Grid item xs={12} s={12} md={2} >
-                    <FormControl fullWidth>
-                        <InputLabel id="coin-label">Coin</InputLabel>
-                        <Select
-                            labelId="coin-label"
-                            id="coin-select"
-                            value={coin}
-                            label="Coin"
-                            onChange={handleCoinChange}
-                        >
-                            <MenuItem value={'MIA'}>MIA</MenuItem>
-                            <MenuItem value={'NYC'}>NYC</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Grid>
-
-                <Grid item xs={12} sm={12} md={1}>
-                  <Button 
+        <Grid
+          size={{
+            xs: 12,
+            md: 12,
+            lg: 12,
+          }}
+        >
+          <Paper sx={{ p: 2 }}>
+            <Grid container alignItems="center" spacing={2} sx={{ width: '100%' }}>
+              <Grid
+                s={12}
+                size={{
+                  xs: 12,
+                  md: 'grow',
+                }}
+              >
+                <TextField
                   fullWidth
-                    sx={{ float: "right"}} 
-                    variant="contained" 
-                    onClick={ handleGoClick }
-                  >
-                    GO <PlayArrowIcon />
-                  </Button>
-                </Grid>
+                  component="form"
+                  autoComplete="on"
+                  required
+                  label="Wallet Address"
+                  onChange={handleWalletIdChange}
+                  value={walletId}
+                />
               </Grid>
+
+              <Grid
+                s={12}
+                size={{
+                  xs: 12,
+                  md: 2,
+                }}
+              >
+                <FormControl fullWidth>
+                  <InputLabel id="coin-label">Coin</InputLabel>
+                  <Select
+                    labelId="coin-label"
+                    id="coin-select"
+                    value={coin}
+                    label="Coin"
+                    onChange={handleCoinChange}
+                  >
+                    <MenuItem value={'MIA'}>MIA</MenuItem>
+                    <MenuItem value={'NYC'}>NYC</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+
+              <Grid
+                size={{
+                  xs: 12,
+                  sm: 12,
+                  md: 1,
+                }}
+              >
+                <Button
+                  fullWidth
+                  sx={{ float: 'right' }}
+                  variant="contained"
+                  onClick={handleGoClick}
+                >
+                  GO <PlayArrowIcon />
+                </Button>
+              </Grid>
+            </Grid>
           </Paper>
         </Grid>
 
         {/* Transactions*/}
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+            <Backdrop open={spinnerVisible}>
+              <DotLoader color="#ffffff" loading={true} size={120} />
+            </Backdrop>
+            <Title>Stacking Report (v2)</Title>
+            <Table size="small">
+              <colgroup>
+                <col style={{ width: '5%' }} />
+                <col style={{ width: '10%' }} />
+                <col style={{ width: '10%' }} />
+                <col style={{ width: '15%' }} />
+                <col style={{ width: '15%' }} />
+                <col style={{ width: '15%' }} />
+                <col style={{ width: '20%' }} />
+              </colgroup>
 
-          <Backdrop open={spinnerVisible}>
-            <DotLoader  color="#ffffff" loading={true}  size={120} />
-          </Backdrop>
-          <Title>Stacking Report (v2)</Title>
-          <Table size="small">
-
-            <colgroup>
-              <col style={{width:'5%'}}/>
-              <col style={{width:'10%'}}/>
-              <col style={{width:'10%'}}/>
-              <col style={{width:'15%'}}/>
-              <col style={{width:'15%'}}/>
-              <col style={{width:'15%'}}/>
-              <col style={{width:'20%'}}/>
-            </colgroup>
-
-            <TableHead>
-              <TableRow>
-                <TableCell>Cycle</TableCell>
-                <TableCell>Start Block</TableCell>
-                <TableCell>End Block</TableCell>
-                <TableCell>End Block Dt</TableCell>
-                <TableCell>Stacked Amt</TableCell>
-                <TableCell>STX Claimed</TableCell>
-                <TableCell>Claim Date/Time</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {stackDataNew.map((row) => (
-                <TableRow key={row.round}>
-                  <TableCell>{row.round}</TableCell>
-                  <TableCell>{row.startBlock}</TableCell>
-                  <TableCell>{row.endBlock}</TableCell>
-                  <TableCell>{row.endBlockDate}</TableCell>
-                  <TableCell>{row.stackedCoins}</TableCell>
-                  <TableCell>{row.claimedRewards>0?row.claimedRewards:row.canClaimCoin}</TableCell>
-                  <TableCell>{row.claimDate}</TableCell>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Cycle</TableCell>
+                  <TableCell>Start Block</TableCell>
+                  <TableCell>End Block</TableCell>
+                  <TableCell>End Block Dt</TableCell>
+                  <TableCell>Stacked Amt</TableCell>
+                  <TableCell>STX Claimed</TableCell>
+                  <TableCell>Claim Date/Time</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
+              </TableHead>
+              <TableBody>
+                {stackDataNew.map((row) => (
+                  <TableRow key={row.round}>
+                    <TableCell>{row.round}</TableCell>
+                    <TableCell>{row.startBlock}</TableCell>
+                    <TableCell>{row.endBlock}</TableCell>
+                    <TableCell>{row.endBlockDate}</TableCell>
+                    <TableCell>{row.stackedCoins}</TableCell>
+                    <TableCell>
+                      {row.claimedRewards > 0 ? row.claimedRewards : row.canClaimCoin}
+                    </TableCell>
+                    <TableCell>{row.claimDate}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
             </Table>
           </Paper>
         </Grid>
       </Grid>
     </Container>
-  )
+  );
 }

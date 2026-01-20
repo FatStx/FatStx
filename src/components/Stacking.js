@@ -1,44 +1,45 @@
-import React from "react";
+import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Grid from '@mui/material/Grid';
-import Paper from "@mui/material/Paper";
+import Paper from '@mui/material/Paper';
 import Backdrop from '@mui/material/Backdrop';
-import DotLoader from "react-spinners/DotLoader";
+import DotLoader from 'react-spinners/DotLoader';
 import Title from './Title';
-import StackingInfo from "./StackingInfo";
+import StackingInfo from './StackingInfo';
 
-export default function Stacking({stackDataV3,currentBitcoinBlock,spinnerVisible}) {
-  if (typeof stackDataV3 === "undefined" || stackDataV3.length === 0 || isNaN(parseInt(currentBitcoinBlock))) {
-    return ("");
-  } else if (typeof stackDataV3[0].round === "undefined") {
-    return (
-
-      <div className="no-data-message">{stackDataV3[0].message}</div>
-    );
+export default function Stacking({ stackDataV3, currentBitcoinBlock, spinnerVisible }) {
+  if (
+    typeof stackDataV3 === 'undefined' ||
+    stackDataV3.length === 0 ||
+    isNaN(parseInt(currentBitcoinBlock))
+  ) {
+    return '';
+  } else if (typeof stackDataV3[0].round === 'undefined') {
+    return <div className="no-data-message">{stackDataV3[0].message}</div>;
   }
-              
-return (
+
+  return (
     <React.Fragment>
-      <Grid item xs={12}>
+      <Grid size={12}>
         <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
           <Backdrop open={spinnerVisible}>
-            <DotLoader  color="#ffffff" loading={true}  size={120} />
+            <DotLoader color="#ffffff" loading={true} size={120} />
           </Backdrop>
           <Title>Stacking Report (v3)</Title>
           <StackingInfo currentBitcoinBlock={currentBitcoinBlock} />
           <Table size="small">
             <colgroup>
-              <col style={{width:'5%'}}/>
-              <col style={{width:'10%'}}/>
-              <col style={{width:'10%'}}/>
-              <col style={{width:'15%'}}/>
-              <col style={{width:'15%'}}/>
-              <col style={{width:'15%'}}/>
-              <col style={{width:'20%'}}/>
+              <col style={{ width: '5%' }} />
+              <col style={{ width: '10%' }} />
+              <col style={{ width: '10%' }} />
+              <col style={{ width: '15%' }} />
+              <col style={{ width: '15%' }} />
+              <col style={{ width: '15%' }} />
+              <col style={{ width: '20%' }} />
             </colgroup>
 
             <TableHead>
@@ -60,7 +61,9 @@ return (
                   <TableCell>{row.endBlock}</TableCell>
                   <TableCell>{row.endBlockDate}</TableCell>
                   <TableCell>{row.stackedCoins}</TableCell>
-                  <TableCell>{row.claimedRewards>0?row.claimedRewards:row.canClaimCoin}</TableCell>
+                  <TableCell>
+                    {row.claimedRewards > 0 ? row.claimedRewards : row.canClaimCoin}
+                  </TableCell>
                   <TableCell>{row.claimDate}</TableCell>
                 </TableRow>
               ))}

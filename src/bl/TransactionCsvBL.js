@@ -1,6 +1,6 @@
-import { formatDate1} from '../utilities/DateUtilities'
+import { formatDate1 } from '../utilities/DateUtilities';
 //Primary function called by the front end
-export default function convertTxReportArrayToTxCSVArray(rptArray,currency) {
+export default function convertTxReportArrayToTxCSVArray(rptArray, currency) {
   let outputArray = [];
   for (const arrayRow of rptArray) {
     let outputArrayRow = {
@@ -23,7 +23,7 @@ export default function convertTxReportArrayToTxCSVArray(rptArray,currency) {
       sender: arrayRow.sender,
       recipient: arrayRow.recipient,
       memo: arrayRow.memo,
-      burnDateAltFormat1: formatDate1(arrayRow.burnDate)
+      burnDateAltFormat1: formatDate1(arrayRow.burnDate),
     };
     outputArray.push(outputArrayRow);
   }
