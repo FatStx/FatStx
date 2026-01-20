@@ -1,2 +1,2 @@
-const STX='STX';
-const STXConversionFactor=1000000;
+const STX = 'STX';
+const STXConversionFactor = 1000000;

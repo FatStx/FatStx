@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "homepage": "[HomePage]",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
@@ -20,37 +21,39 @@
     "react-dom": "^19.2.3",
     "react-ga4": "^2.1.0",
     "react-router-dom": "^7.12.0",
-    "react-scripts": "5.0.0",
     "react-spinners": "^0.17.0",
     "web-vitals": "^5.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "GENERATE_SOURCEMAP=false react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d build -r \"https://${PAT_GHPAGES_PUBLISH}@github.com/fatstx/FatStx.git\" -b ghpages"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "predeploy": "pnpm build",
+    "deploy": "gh-pages -d build -r \"https://${PAT_GHPAGES_PUBLISH}@github.com/fatstx/FatStx.git\" -b ghpages",
+    "preinstall": "node -e \"const m=Number(process.versions.node.split('.')[0]); if(!(m>=24&&m<25)){console.error('This project requires Node 24.x'); process.exit(1)}\"",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "devDependencies": {
-    "gh-pages": "^6.3.0"
+    "@playwright/test": "^1.49.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "@vitest/ui": "^2.1.8",
+    "gh-pages": "^6.3.0",
+    "jsdom": "^25.0.1",
+    "vite": "^6.0.7",
+    "vitest": "^2.1.8",
+    "prettier": "^3.8.0"
+  },
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "volta": {
+    "node": "24.8.0"
   }
 }

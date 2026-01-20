@@ -1,4 +1,4 @@
-import ReactGA from "react-ga4";
+import ReactGA from 'react-ga4';
 // import React, { useEffect, useState } from "react";
 // import { useParams } from 'react-router-dom';
 
@@ -16,10 +16,9 @@ import Grid from '@mui/material/Grid';
 // import {checkWallet} from '../api/StxApi'
 // import getStackingReportArrayV3 from '../bl/StackingV3BL'
 // import {getCurrentBitcoinBlock} from '../bl/StackingV3BL'
-import { Typography } from "@mui/material";
+import { Typography } from '@mui/material';
 
 export default function StackingReportV3(props) {
-
   // const {walletInPath} = useParams();
 
   // let walletId = props.walletId
@@ -30,8 +29,8 @@ export default function StackingReportV3(props) {
   // let setLatestBitcoinBlock = props.setLatestBitcoinBlock
   // let coin = props.coin
   // let setCoin = props.setCoin
-  
-  ReactGA.send({ hitType: "pageview", page: "/stackingnew" });
+
+  ReactGA.send({ hitType: 'pageview', page: '/stackingnew' });
 
   //const [spinnerVisible, setSpinnerVisible] = useState(false);
 
@@ -44,7 +43,7 @@ export default function StackingReportV3(props) {
   // }
 
   // async function handleGoClick() {
-  //     if (coin === '') 
+  //     if (coin === '')
   //     {
   //       alert("Please select a coin");
   //       return;
@@ -86,59 +85,14 @@ export default function StackingReportV3(props) {
   // }, [walletInPath])
 
   return (
-    <Container sx={{ mt: 4, mb: 4}}>
-      <Grid container spacing={3}>
-<Typography sx={{fontWeight: 900}}>
-Stacking V3 is not supported by FatStx. To reliably support it requires either one or two additions to the CityCoins Api, or a more complicated set of logic on fatStx which still may not be as reliable. So there are no plans at the moment to add support.
-</Typography>
-        {/* Wallet Input */}
-        {/* <Grid item xs={12} md={12} lg={12}>
-          <Paper sx={{p: 2}}>
-
-              <Grid container alignItems="center" spacing={2}> 
-                <Grid item xs={12} s={12} md>
-                  <TextField
-                    fullWidth
-                    component="form"
-                    autoComplete="on"
-                    required
-                    label="Wallet Address"
-                    onChange={ handleWalletIdChange }
-                    value={walletId}
-                  />
-                </Grid>
-
-                <Grid item xs={12} s={12} md={2} >
-                    <FormControl fullWidth>
-                        <InputLabel id="coin-label">Coin</InputLabel>
-                        <Select
-                            labelId="coin-label"
-                            id="coin-select"
-                            value={coin}
-                            label="Coin"
-                            onChange={handleCoinChange}
-                        >
-                            <MenuItem value={'MIA'}>MIA</MenuItem>
-                            <MenuItem value={'NYC'}>NYC</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Grid>
-
-                <Grid item xs={12} sm={12} md={1}>
-                  <Button 
-                  fullWidth
-                    sx={{ float: "right"}} 
-                    variant="contained" 
-                    onClick={ handleGoClick }
-                  >
-                    GO <PlayArrowIcon />
-                  </Button>
-                </Grid>
-              </Grid>
-          </Paper>
-        </Grid>
-        <Stacking stackDataV3={stackDataV3} currentBitcoinBlock={latestBitcoinBlock} spinnerVisible={spinnerVisible} /> */}
-       </Grid>
+    <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
+      <Grid container spacing={3} sx={{ width: '100%' }}>
+        <Typography sx={{ fontWeight: 900 }}>
+          Stacking V3 is not supported by FatStx. To reliably support it requires either one or two
+          additions to the CityCoins Api, or a more complicated set of logic on fatStx which still
+          may not be as reliable. So there are no plans at the moment to add support.
+        </Typography>
+      </Grid>
     </Container>
-  )
+  );
 }

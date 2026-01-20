@@ -4,10 +4,10 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import Home from './views/Home';
 import reportWebVitals from './reportWebVitals';
-import ReactGA from "react-ga4";
+import ReactGA from 'react-ga4';
 
 ReactGA.initialize('G-GDKN4EEKX6');
-ReactGA.send({ hitType: "pageview", page: "/" });
+ReactGA.send({ hitType: 'pageview', page: '/' });
 
 const root = createRoot(document.getElementById('root'));
 root.render(
