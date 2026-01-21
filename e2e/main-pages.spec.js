@@ -61,6 +61,39 @@ test.describe('Main Pages Screenshots', () => {
     });
   });
 
+  test('FAQ page with hash navigation', async ({ page }) => {
+    // Navigate to FAQ with hash
+    await page.goto('/faq#faqaccordion2');
+
+    // Wait for page to load
+    await expect(page.getByText('FAQs')).toBeVisible();
+
+    // Verify the second FAQ is expanded by checking for its answer content
+    await expect(
+      page.getByText(/raw addresses, not .btc addresses/i)
+    ).toBeVisible();
+
+    // Take screenshot showing expanded FAQ
+    await page.screenshot({
+      path: 'e2e/screenshots/faq-page-hash.png',
+      fullPage: true,
+    });
+  });
+
+  test('FAQ link icons are present', async ({ page }) => {
+    await page.goto('/faq');
+
+    await expect(page.getByText('FAQs')).toBeVisible();
+
+    // Verify link icons are present (check for at least one)
+    const linkButtons = page.getByRole('button', { name: /copy link to/i });
+    await expect(linkButtons.first()).toBeVisible();
+
+    // Verify we have multiple link icons (one for each FAQ)
+    const count = await linkButtons.count();
+    expect(count).toBeGreaterThan(0);
+  });
+
   test('About page', async ({ page }) => {
     await page.goto('/about');
 

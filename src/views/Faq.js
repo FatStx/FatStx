@@ -29,11 +29,16 @@ export default function Faq() {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const handleLinkClick = (id) => (event) => {
+  const handleLinkClick = (id) => async (event) => {
     event.stopPropagation(); // Prevent accordion from toggling
     const url = `${window.location.origin}${window.location.pathname}#${id}`;
-    navigator.clipboard.writeText(url);
-    // Optional: You could add a toast notification here
+    try {
+      await navigator.clipboard.writeText(url);
+      // Optional: You could add a toast notification here
+    } catch (err) {
+      console.error('Failed to copy link to clipboard:', err);
+      // Fallback: Could show an alert or notification to the user
+    }
   };
 
   const faq = [
@@ -121,7 +126,7 @@ export default function Faq() {
                 </li>
                 <li>
                   After 06/10/22: Median* Hourly Prices from ALEX NYC-STX Swaps converted to USD
-                  via STX Pricee. When no prints for an hour, median is taken from longer periods
+                  via STX Price. When no prints for an hour, median is taken from longer periods
                   in multiples of an hour
                 </li>
               </ul>
