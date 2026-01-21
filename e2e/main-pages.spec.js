@@ -80,16 +80,26 @@ test.describe('Main Pages Screenshots', () => {
     });
   });
 
-  test('FAQ link icons are present', async ({ page }) => {
+  test('FAQ link icons are present (inside expanded items)', async ({ page }) => {
     await page.goto('/faq');
 
     await expect(page.getByText('FAQs')).toBeVisible();
 
-    // Verify link icons are present (check for at least one)
+    // Expand every accordion so the link icon (now inside AccordionDetails) is visible
+    const summaries = page.locator('[aria-controls^="faqaccordion"]');
+    const summaryCount = await summaries.count();
+    expect(summaryCount).toBeGreaterThan(0);
+
+    for (let i = 0; i < summaryCount; i++) {
+      await summaries.nth(i).click();
+      // small wait to allow animation and rendering
+      await page.waitForTimeout(50);
+    }
+
+    // Now the link buttons should be visible (one per opened accordion)
     const linkButtons = page.getByRole('button', { name: /copy link to/i });
     await expect(linkButtons.first()).toBeVisible();
 
-    // Verify we have multiple link icons (one for each FAQ)
     const count = await linkButtons.count();
     expect(count).toBeGreaterThan(0);
   });

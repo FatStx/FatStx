@@ -17,6 +17,10 @@ import CardContent from '@mui/material/CardContent';
 import CoffeeIcon from '@mui/icons-material/Coffee';
 import Snackbar from '@mui/material/Snackbar';
 import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import MenuIcon from '@mui/icons-material/Menu';
 
 import TxReport from './TxReport';
 import StackingReportV3 from './StackingReportv3';
@@ -41,6 +45,16 @@ function Home() {
   const [currency, setCurrency] = useState('USD');
   const [supportShow, setSupportShow] = useState(null);
   const [textCopiedAlertVisible, setTextCopiedAlertVisible] = useState(false);
+  const [navAnchorEl, setNavAnchorEl] = useState(null);
+
+  const handleNavOpen = (event) => {
+    setNavAnchorEl(event.currentTarget);
+  };
+  const handleNavClose = () => {
+    setNavAnchorEl(null);
+  };
+
+  const navOpen = Boolean(navAnchorEl);
 
   const handleSupportClick = (event) => {
     setSupportShow(event.currentTarget);
@@ -48,6 +62,16 @@ function Home() {
 
   const handleSupportClose = () => {
     setSupportShow(null);
+  };
+
+  // Helper to open the Support popover from the mobile menu;
+  // anchor to the persistent Open Navigation button when available
+  const openSupportFromMenu = (e) => {
+    handleNavClose();
+    setTimeout(() => {
+      const anchor = document.querySelector('[title="Open Navigation"]') ?? e.currentTarget;
+      handleSupportClick({ currentTarget: anchor });
+    }, 150);
   };
 
   const open = Boolean(supportShow);
@@ -76,7 +100,7 @@ function Home() {
           }}
         >
           <AppBar position="absolute">
-            <Toolbar>
+            <Toolbar sx={{ minHeight: { xs: 56, md: 64 } }}>
               <Grid container alignItems="center" sx={{ width: '100%' }}>
                 <Grid
                   size={{
@@ -88,8 +112,21 @@ function Home() {
                 >
                   <Stack
                     direction="row"
-                    justifyContent={{ xs: 'center', sm: 'center', md: 'center', lg: 'flex-start' }}
+                    alignItems="center"
+                    justifyContent={{ xs: 'flex-start', sm: 'center', md: 'center', lg: 'flex-start' }}
+                    sx={{ gap: 1 }}
                   >
+                    {/* Mobile hamburger next to title for thin header */}
+                    <IconButton
+                      color="inherit"
+                      title="Open Navigation"
+                      onClick={handleNavOpen}
+                      size="large"
+                      sx={{ display: { xs: 'inline-flex', md: 'none' } }}
+                    >
+                      <MenuIcon />
+                    </IconButton>
+
                     <Typography
                       component="h1"
                       variant="h6"
@@ -120,14 +157,16 @@ function Home() {
                   }}
                 >
                   <Stack justifyContent="flex-end">
+                    {/* Desktop Support Us button only (hidden on xs) */}
                     <Button
                       color="inherit"
                       endIcon={<FavoriteIcon />}
-                      sx={{ mr: 2 }}
+                      sx={{ mr: 2, display: { xs: 'none', md: 'inline-flex' } }}
                       onClick={handleSupportClick}
                     >
                       Support Us
                     </Button>
+
                     <Popover
                       id={id}
                       open={open}
@@ -142,7 +181,7 @@ function Home() {
                         horizontal: 'center',
                       }}
                     >
-                      <Card sx={{ maxWidth: 395 }}>
+                      <Card sx={{ maxWidth: 'min(95vw, 395px)', maxHeight: '90vh', overflow: 'auto' }}>
                         <CardContent>
                           <Stack direction="row" spacing={2} sx={{ py: 3 }}>
                             <CoffeeIcon sx={{ mt: '5px', color: '#777777' }} />
@@ -180,9 +219,11 @@ function Home() {
                     md: 6,
                   }}
                 >
+                  {/* Desktop links (hidden on xs) */}
                   <Stack
                     direction="row"
                     justifyContent={{ xs: 'center', sm: 'center', md: 'flex-end' }}
+                    sx={{ display: { xs: 'none', md: 'flex' } }}
                   >
                     <Link
                       variant="button"
@@ -224,16 +265,6 @@ function Home() {
                     >
                       Stacking (v3)
                     </Link>
-                    {/* <Link
-                      variant="button"
-                      color="inherit"
-                      underline="hover"
-                      component={RouterLink}
-                      to="/wenblok"
-                      sx={{ my: 1, mx: 1.5 }}
-                    >
-                      Wenblok
-                    </Link> */}
                     <Link
                       variant="button"
                       color="inherit"
@@ -255,12 +286,45 @@ function Home() {
                       About
                     </Link>
                   </Stack>
+
+                  {/* Mobile hamburger (visible on xs/md) */}
+                  <Box sx={{ display: { xs: 'flex', md: 'none' }, justifyContent: 'flex-end' }}>
+                    <Menu
+                      anchorEl={navAnchorEl}
+                      open={navOpen}
+                      onClose={handleNavClose}
+                      anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    >
+                      <MenuItem onClick={openSupportFromMenu}>
+                        <FavoriteIcon sx={{ mr: 1 }} /> Support Us
+                      </MenuItem>
+                      <MenuItem component={RouterLink} to="/transactions" onClick={handleNavClose}>
+                        Transactions
+                      </MenuItem>
+                      <MenuItem component={RouterLink} to="/stacking" onClick={handleNavClose}>
+                        Stacking (v1)
+                      </MenuItem>
+                      <MenuItem component={RouterLink} to="/stackingnew" onClick={handleNavClose}>
+                        Stacking (v2)
+                      </MenuItem>
+                      <MenuItem component={RouterLink} to="/stackingv3" onClick={handleNavClose}>
+                        Stacking (v3)
+                      </MenuItem>
+                      <MenuItem component={RouterLink} to="/faq" onClick={handleNavClose}>
+                        Faq
+                      </MenuItem>
+                      <MenuItem component={RouterLink} to="/about" onClick={handleNavClose}>
+                        About
+                      </MenuItem>
+                    </Menu>
+                  </Box>
                 </Grid>
               </Grid>
             </Toolbar>
           </AppBar>
 
-          <Box sx={{ mt: 20 }}>
+          <Box sx={{ mt: { xs: 8, md: 20 } }}>
             <Routes>
               <Route
                 path="transactions"

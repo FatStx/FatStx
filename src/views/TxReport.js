@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -194,7 +195,12 @@ export default function TxReport(props) {
               <DotLoader color="#ffffff" loading={true} size={120} />
             </Backdrop>
 
-            <Transactions txnData={txnData} name={walletId} currency={currency} />
+            {/* Horizontal scroll wrapper for mobile */}
+            <Box sx={{ width: '100%', overflowX: { xs: 'auto', md: 'visible' } }}>
+              <Box sx={{ minWidth: { xs: '700px', md: 'auto' } }}>
+                <Transactions txnData={txnData} name={walletId} currency={currency} />
+              </Box>
+            </Box>
           </Paper>
         </Grid>
       </Grid>

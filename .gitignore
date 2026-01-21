@@ -11,3 +11,4 @@ packages
 .futdcache.v1
 project-colors.json
 test-results
+playwright-report
