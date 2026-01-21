@@ -1,6 +1,6 @@
 import ReactGA from 'react-ga4';
 import * as React from 'react';
-import { Container, Tooltip } from '@mui/material';
+import { Container, Tooltip, Box } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -13,7 +13,7 @@ import Link from '@mui/material/Link';
 import Title from '../components/Title';
 
 export default function Faq() {
-  ReactGA.send({ hitType: 'pageview', page: '/wenblok' });
+  ReactGA.send({ hitType: 'pageview', page: '/faq' });
 
   const [expanded, setExpanded] = React.useState(false);
 
@@ -237,7 +237,6 @@ export default function Faq() {
       {faq.map((row) => (
         <Accordion
           key={row.id}
-          expanded={expanded === row.id}
           onChange={handleChange(row.id)}
         >
           <AccordionSummary 
@@ -255,31 +254,28 @@ export default function Faq() {
             >
               {row.q}
             </Typography>
-            <Tooltip title="Copy link to this FAQ">
-              <span 
-                onClick={handleLinkClick(row.id)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handleLinkClick(row.id)(e);
-                  }
-                }}
-                role="button"
-                tabIndex={0}
-                aria-label={`Copy link to ${row.q}`}
-                style={{ 
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  marginLeft: '8px'
-                }}
-              >
-                <LinkIcon fontSize="small" />
-              </span>
-            </Tooltip>
           </AccordionSummary>
           <AccordionDetails>
             <Divider />
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 1 }}>
+              <Tooltip title={`Copy a link to ${row.q}`}>
+                <span
+                  onClick={handleLinkClick(row.id)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleLinkClick(row.id)(e);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Copy link to ${row.q}`}
+                  style={{ cursor: 'pointer', display: 'inline-flex', alignItems: 'center' }}
+                >
+                  <LinkIcon fontSize="small" />
+                </span>
+              </Tooltip>
+            </Box>
             <Typography
               sx={{
                 m: '2rem',

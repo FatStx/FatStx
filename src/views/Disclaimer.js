@@ -7,13 +7,14 @@ export default function Disclaimer() {
   ReactGA.send({ hitType: 'pageview', page: '/wenblok' });
 
   return (
-    <Container sx={{ p: '2rem' }}>
-      <Paper sx={{ m: '2rem', p: '2rem' }}>
+    <Container sx={{ p: { xs: 1, sm: 2, md: '2rem' } }}>
+      <Paper sx={{ m: { xs: 1, md: '2rem' }, p: { xs: 1, md: '2rem' } }}>
         <h2>About</h2>
         <Typography
           sx={{
-            m: '2rem',
+            m: { xs: 0, md: '2rem' },
             fontWeight: 'light',
+            lineHeight: 1.5,
           }}
         >
           Originally Built by{' '}
@@ -23,12 +24,13 @@ export default function Disclaimer() {
         </Typography>
       </Paper>
 
-      <Paper sx={{ m: '2rem', p: '2rem' }}>
+      <Paper sx={{ m: { xs: 1, md: '2rem' }, p: { xs: 1, md: '2rem' } }}>
         <h2>Issues, Feedback</h2>
         <Typography
           sx={{
-            m: '2rem',
+            m: { xs: 0, md: '2rem' },
             fontWeight: 'light',
+            lineHeight: 1.5,
           }}
         >
           Please raise an issue on{' '}
@@ -39,12 +41,13 @@ export default function Disclaimer() {
         </Typography>
       </Paper>
 
-      <Paper sx={{ m: '2rem', p: '2rem' }}>
+      <Paper sx={{ m: { xs: 1, md: '2rem' }, p: { xs: 1, md: '2rem' } }}>
         <h2>Disclaimers</h2>
         <Typography
           sx={{
-            m: '2rem',
+            m: { xs: 0, md: '2rem' },
             fontWeight: 'light',
+            lineHeight: 1.5,
           }}
         >
           <h3>Affiliation</h3>
@@ -72,15 +75,16 @@ export default function Disclaimer() {
         </Typography>
       </Paper>
 
-      <Paper sx={{ m: '2rem', p: '2rem' }}>
+      <Paper sx={{ m: { xs: 1, md: '2rem' }, p: { xs: 1, md: '2rem' } }}>
         <h2>License</h2>
         <Typography
           sx={{
-            m: '2rem',
+            m: { xs: 0, md: '2rem' },
             fontWeight: 'light',
+            lineHeight: 1.5,
           }}
         >
-          <h3>Copyright 2023 under an MIT license</h3>
+          <h3>Copyright 2026 under an MIT license</h3>
           <p>
             Permission is hereby granted, free of charge, to any person obtaining a copy of this
             software and associated documentation files (the "Software"), to deal in the Software
