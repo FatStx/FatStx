@@ -15,6 +15,7 @@ import { EURPrice } from '../bo/fiatprices/EurPrice';
 import getPriceFromCoinGecko from '../api/CoinPricesApis';
 import { getCurrencyPriceFromExternalApi } from '../api/CoinPricesApis';
 import * as getXactnType from './XactnTypeBL';
+import { BtcPrice } from '../bo/coinprices/BtcPrice';
 
 //Primary function called by the front end
 export default async function convertJsonToTxReportArray(json, walletId, currency) {
@@ -289,7 +290,7 @@ async function getNftIdentifier(symbol, transferRow) {
   return nftIdentifier;
 }
 
-async function getCoinPrice(symbol, priceDate) {
+export async function getCoinPrice(symbol, priceDate) {
   let price = '';
 
   if (symbol !== '') {
@@ -368,6 +369,10 @@ function getCoinPriceObject(symbol) {
     coinPriceObject = SLIMEPrice.slimePrices;
   } else if (symbol === 'EUR') {
     coinPriceObject = EURPrice.eurPrices;
+  } else if (symbol === 'sBTC') {
+    coinPriceObject = BtcPrice.btcPrices;
+  } else if (symbol === 'zsBTC') {
+    coinPriceObject = BtcPrice.btcPrices;
   }
 
   return coinPriceObject;
@@ -398,27 +403,33 @@ function populateRowId(outputArray) {
   return outputArray;
 }
 
-async function ConvertArrayCurrency(outputArray, currency) {
+export async function ConvertArrayCurrency(outputArray, currency) {
   if (currency !== 'USD') {
     for (const arrayRow of outputArray) {
-      arrayRow.inCoinPrice = await ConvertCurrencyAmount(
-        arrayRow.burnDate,
-        currency,
-        arrayRow.inCoinPrice,
-        arrayRow.inSymbol
-      );
-      arrayRow.outCoinPrice = await ConvertCurrencyAmount(
-        arrayRow.burnDate,
-        currency,
-        arrayRow.outCoinPrice,
-        arrayRow.outSymbol
-      );
-      arrayRow.xactnFeeCoinPrice = await ConvertCurrencyAmount(
-        arrayRow.burnDate,
-        currency,
-        arrayRow.xactnFeeCoinPrice,
-        'STX'
-      );
+      if (arrayRow.inCoinPrice) {
+        arrayRow.inCoinPrice = await ConvertCurrencyAmount(
+          arrayRow.burnDate,
+          currency,
+          arrayRow.inCoinPrice,
+          arrayRow.inSymbol
+        );
+      }
+      if (arrayRow.outCoinPrice) {
+        arrayRow.outCoinPrice = await ConvertCurrencyAmount(
+          arrayRow.burnDate,
+          currency,
+          arrayRow.outCoinPrice,
+          arrayRow.outSymbol
+        );
+      }
+      if (arrayRow.xactnFeeCoinPrice) {
+        arrayRow.xactnFeeCoinPrice = await ConvertCurrencyAmount(
+          arrayRow.burnDate,
+          currency,
+          arrayRow.xactnFeeCoinPrice,
+          'STX'
+        );
+      }
     }
   }
   return outputArray;
