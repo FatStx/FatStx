@@ -304,7 +304,10 @@ export async function getCoinPrice(symbol, priceDate) {
       //There should always be a matching record if the array of historical prices was created correctly
       if (matchingPrice.length > 0) {
         price = matchingPrice[matchingPrice.length - 1].price;
-        let formattedPrice = formatPrice(price, symbol);
+        //Dates more than a day past the end of the historical array have no price yet
+        let lastPriceTime = new Date(coinPriceObject[coinPriceObject.length - 1].date).getTime();
+        let isAfterLastPrice = new Date(priceDate).getTime() > lastPriceTime + 24 * 60 * 60 * 1000;
+        let formattedPrice = isAfterLastPrice ? 'N/A' : formatPrice(price, symbol);
         //If we do not have a valid price in our historical array, call CoinGecko
         if (
           formattedPrice === 'N/A' &&

@@ -292,7 +292,7 @@ export class Token {
     },
     {
       symbol: 'sBTC',
-      apiSymbol: '',
+      apiSymbol: 'bitcoin',
       contract: 'SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token::sbtc-token',
       conversionFactor: 100000000,
       amountDecimals: 8,
@@ -300,7 +300,7 @@ export class Token {
     },
     {
       symbol: 'zsBTC',
-      apiSymbol: '',
+      apiSymbol: 'bitcoin',
       contract: 'SP2VCQJGH7PHP2DJK7Z0V48AGBHQAW3R3ZW1QF4N.zsbtc-token::zsbtc',
       conversionFactor: 100000000,
       amountDecimals: 8,
