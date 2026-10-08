@@ -32,10 +32,10 @@ export async function getCurrencyPriceFromExternalApi(symbol, priceDate) {
   if (new Date(priceDate).getTime() < new Date(2022, 12, 1).getTime()) {
     return price;
   }
-  const baseUrl = 'https://api.exchangerate.host/';
+  const baseUrl = 'https://api.frankfurter.dev/v1/';
   if (symbol !== '') {
     let dateForApi = getDateForCurrencyApi(new Date(priceDate));
-    let url = baseUrl + dateForApi + '/?base=' + symbol + '&symbols=USD';
+    let url = baseUrl + dateForApi + '?base=' + symbol + '&symbols=USD';
     let response = await fetch(url).catch((error) => {
       console.log('Error Fetching Currency API Information');
     });
@@ -65,25 +65,12 @@ function getCoinPriceAPISymbol(symbol) {
   return apiSymbol;
 }
 
+//DD-MM-YYYY
 function getDateForCoinGecko(thisDate) {
-  let workingDate = new Date(thisDate);
-  let returnDate =
-    workingDate.getUTCDate() +
-    '-' +
-    (parseInt(workingDate.getUTCMonth()) + 1) +
-    '-' +
-    workingDate.getUTCFullYear();
-  return returnDate;
+  return getDateForCurrencyApi(thisDate).split('-').reverse().join('-');
 }
 
+//YYYY-MM-DD
 function getDateForCurrencyApi(thisDate) {
-  let workingDate = new Date(thisDate);
-  let monthNumeric = parseInt(workingDate.getUTCMonth()) + 1;
-  let returnDate =
-    workingDate.getUTCFullYear() +
-    '-' +
-    (monthNumeric < 10 ? '0' + monthNumeric.toString() : monthNumeric.toString()) +
-    '-' +
-    workingDate.getUTCDate();
-  return returnDate;
+  return new Date(thisDate).toISOString().substring(0, 10);
 }

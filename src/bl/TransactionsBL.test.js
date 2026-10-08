@@ -144,3 +144,39 @@ describe('ConvertArrayCurrency', () => {
     expect(JSON.stringify(input)).toBe(before);
   });
 });
+
+describe('getCoinPrice', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  test('uses the historical price within the price array', async () => {
+    expect(await TransactionsBL.getCoinPrice('sBTC', '2026-01-19T12:00:00.000Z')).toBe('93752.71');
+  });
+
+  test('fetches the price from CoinGecko for dates after the price array', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      status: 200,
+      json: async () => ({ market_data: { current_price: { usd: 64062.17 } } }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    expect(await TransactionsBL.getCoinPrice('sBTC', '2030-01-05T15:43:11.000Z')).toBe('64062.17');
+    expect(fetchMock).toHaveBeenCalledWith(
+      'https://api.coingecko.com/api/v3/coins/bitcoin/history?localization=false&date=05-01-2030'
+    );
+  });
+
+  test('fetches the EUR rate from Frankfurter for dates after the price array', async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      status: 200,
+      json: async () => ({ rates: { USD: 1.1554 } }),
+    });
+    vi.stubGlobal('fetch', fetchMock);
+
+    expect(await TransactionsBL.getCoinPrice('EUR', '2030-01-05T15:43:11.000Z')).toBe('1.155400');
+    expect(fetchMock).toHaveBeenCalledWith(
+      'https://api.frankfurter.dev/v1/2030-01-05?base=EUR&symbols=USD'
+    );
+  });
+});
